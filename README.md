@@ -1,43 +1,47 @@
-# Astro Starter Kit: Minimal
+# Portfolio V2
+
+Mon portfolio personnel, reconstruit de zéro avec [Astro](https://astro.build). Chaque feature est développée avec [spec-kit](https://github.com/github/spec-kit).
+
+> 🚧 En construction. Avancement : [`ROADMAP.md`](./ROADMAP.md).
+
+## Documents du projet
+
+| Fichier | Rôle |
+|---|---|
+| [`CONTENU.md`](./CONTENU.md) | Le cadrage : finalité, audiences, URL, modèle de contenu, règles d'écriture. La référence de toutes les specs. |
+| [`ROADMAP.md`](./ROADMAP.md) | L'ordre de construction et, pour chaque feature, les blocs à donner à speckit. |
+| `DESIGN.md` | La direction visuelle *(à venir, étape 0)*. |
+| `.specify/memory/constitution.md` | Les principes non négociables, vérifiés à chaque plan *(à venir, étape 0)*. |
+| `specs/NNN-feature/` | Spec, plan et tâches de chaque feature, générés par speckit. |
+
+## Démarrer
+
+Prérequis : Node ≥ 22.
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev       # serveur local sur http://localhost:4321
+npm run build     # build de production dans ./dist/
+npm run preview   # prévisualise le build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Pour un agent : `astro dev --background`, puis `astro dev stop | status | logs` (voir `AGENTS.md`).
 
-## 🚀 Project Structure
+## Workflow
 
-Inside of your Astro project, you'll see the following folders and files:
+Une feature = une branche speckit, fusionnée dans `main` quand elle est finie :
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```
+/speckit.specify → /speckit.clarify → /speckit.plan → /speckit.tasks → /speckit.implement
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Les blocs « Spec » et « Plan » de chaque feature sont dans `ROADMAP.md`.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Conventions
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- **Code, chemins, URL et noms de champs en anglais ; prose dans la langue du contenu.**
+- **Français par défaut, anglais sous `/en`**, avec les mêmes chemins. Le blog reste en français.
+- **Le contenu est de la donnée** (`src/content/`, `src/data/`) : ajouter un projet = un fichier
+  `.md`, zéro ligne de code.
+- **On n'efface pas, on archive** : `status: brouillon | publie | archive`.
+- Commits conventionnels (`feat`, `fix`, `content`, `chore`, `docs`, `perf`, `a11y`, `ci`).
