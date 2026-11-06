@@ -51,9 +51,9 @@ Pour chaque feature, dans l'ordre :
 ## Étape 0 — Avant la première feature *(hors speckit)*
 
 - [x] **Cadrage du contenu** — `CONTENU.md`.
-- [ ] **Installer speckit** *(~15 min)*
+- [x] **Installer speckit** *(~15 min)*
   ```
-  uvx --from git+https://github.com/github/spec-kit.git specify init --here --ai claude
+  specify init --here --integration claude
   ```
   Commit : `chore: initialisation de speckit`
 - [ ] **Direction visuelle** *(~1 h 30)* — `DESIGN.md` : palette (hex, clair + sombre), deux
