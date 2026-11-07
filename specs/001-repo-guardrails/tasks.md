@@ -69,7 +69,7 @@ format error (naming the file) and on an injected type error (naming file and li
 
 ## Phase 4: User Story 2 — Bloquer automatiquement le code non conforme sur GitHub (Priority: P2)
 
-**Goal**: every push and every PR to `main` runs `npm ci → npm run check → npm run build`; any
+**Goal**: every PR to `main` and every push to `main` runs `npm ci → npm run check → npm run build`; any
 failure makes the status red.
 
 **Independent Test**: quickstart §2 — PR green when clean; red on a format error, a type error
@@ -77,7 +77,7 @@ and a build-only error.
 
 ### Implementation for User Story 2
 
-- [x] T012 [US2] Create `.github/workflows/ci.yml` per contracts/ci.md: `name: CI`; `on: push` (all branches) and `pull_request` (branches: `main`); `permissions: contents: read`; `concurrency: { group: ci-${{ github.ref }}, cancel-in-progress: true }`; one job `check-and-build` on `ubuntu-latest` with steps `actions/checkout` → `actions/setup-node` (`node-version-file: .nvmrc`, `cache: npm`) → `npm ci` → `npm run check` → `npm run build`. Use the latest major tag of each action at implementation time (check their GitHub releases) (FR-009, FR-010, FR-011)
+- [x] T012 [US2] Create `.github/workflows/ci.yml` per contracts/ci.md: `name: CI`; `on: push` (branches: `main`) and `pull_request` (branches: `main`); `permissions: contents: read`; `concurrency: { group: ci-${{ github.ref }}, cancel-in-progress: true }`; one job `check-and-build` on `ubuntu-latest` with steps `actions/checkout` → `actions/setup-node` (`node-version-file: .nvmrc`, `cache: npm`) → `npm ci` → `npm run check` → `npm run build`. Use the latest major tag of each action at implementation time (check their GitHub releases) (FR-009, FR-010, FR-011)
 - [x] T013 [US2] Run `npm run format` then `npm run check` so the new workflow file is itself formatted
 - [x] T014 [US2] Push the branch `001-repo-guardrails` and open a PR to `main` (ask the user before pushing); confirm the `CI / check-and-build` check is green in < 5 min (SC-004)
 - [x] T015 [US2] Validate quickstart §2 scenarios 2–4 on the PR with throw-away commits (format error, type error, `throw new Error('boom');` in the frontmatter of `src/pages/index.astro`): each turns the check red; revert them so the PR ends green (SC-002)

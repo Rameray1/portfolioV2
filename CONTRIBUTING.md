@@ -46,7 +46,7 @@ formatage, `npm run format` corrige ; une erreur de type indique le fichier et l
 
 ## Intégration continue
 
-À chaque push (toutes branches) et à chaque pull request vers `main`, GitHub Actions
+À chaque pull request vers `main` (et à chaque push sur `main`, merges compris), GitHub Actions
 ([`.github/workflows/ci.yml`](./.github/workflows/ci.yml)) exécute `npm ci`, `npm run check`
 puis `npm run build`. Un échec passe le check `CI / check-and-build` au rouge.
 

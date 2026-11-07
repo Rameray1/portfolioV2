@@ -49,7 +49,7 @@ commande de formatage corrige le premier cas ; une fois tout corrigé, la vérif
 
 ### User Story 2 - Bloquer automatiquement le code non conforme sur GitHub (Priority: P2)
 
-À chaque push et à chaque pull request, GitHub exécute la vérification puis le build. Si l'un
+À chaque pull request vers `main` (et à chaque push sur `main`), GitHub exécute la vérification puis le build. Si l'un
 échoue, la PR est marquée en échec (rouge) et le mainteneur voit pourquoi ; sinon elle est
 marquée en succès (vert).
 
@@ -67,7 +67,7 @@ rouge ; pousser la correction : il passe au vert.
    **Then** la PR affiche un statut d'échec et le journal indique l'étape et le fichier fautifs.
 3. **Given** un code qui passe la vérification mais casse le build, **When** il est poussé,
    **Then** le statut est en échec.
-4. **Given** un push direct sur une branche (y compris `main`), **When** il arrive sur GitHub,
+4. **Given** un push sur `main` (merge ou push direct), **When** il arrive sur GitHub,
    **Then** la même vérification et le même build s'exécutent.
 
 ---
@@ -110,6 +110,8 @@ en local, puis `CONTRIBUTING.md` pour faire passer la vérification, sans autre 
 - Premier passage du formatage sur le dépôt existant : il peut reformater des fichiers déjà
   présents ; ce changement est isolé dans un commit dédié.
 - Échec du build en CI alors que la vérification passe : le statut reste en échec.
+- Une branche poussée sans PR n'est pas vérifiée par la CI : toute feature passe par une PR
+  vers `main`, et un double déclenchement (push + PR) sur le même commit n'apporterait rien.
 - Éditeurs différents : les réglages de base (indentation, fin de ligne, encodage) sont
   partagés pour que le code écrit par l'éditeur soit déjà proche du format attendu.
 
@@ -133,8 +135,8 @@ en local, puis `CONTRIBUTING.md` pour faire passer la vérification, sans autre 
   son utilisateur.
 - **FR-008**: Les fichiers générés, les dépendances installées et l'outillage tiers (`.specify/`,
   `.claude/`) MUST être exclus du formatage et de la vérification.
-- **FR-009**: À chaque push sur n'importe quelle branche et à chaque pull request vers `main`,
-  GitHub MUST exécuter, sur une installation propre des dépendances, la vérification puis le
+- **FR-009**: À chaque pull request vers `main` (ouverture et chaque mise à jour) et à chaque
+  push sur `main`, GitHub MUST exécuter, sur une installation propre des dépendances, la vérification puis le
   build.
 - **FR-010**: Si la vérification ou le build échoue, le statut de la PR / du commit MUST être en
   échec ; s'ils réussissent tous deux, il MUST être en succès.

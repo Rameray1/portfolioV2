@@ -24,8 +24,8 @@ currently building Java/Spring and Angular applications at Astrée Software.
   reviewed spec before any code exists, a [constitution](./.specify/memory/constitution.md)
   sets rules the agent cannot override, and every change goes through a draft PR that I
   review and merge myself.
-- **Guarded by CI.** Every push runs formatting, type checks (`astro check`) and a production
-  build on GitHub Actions.
+- **Guarded by CI.** Every pull request and every push to `main` runs formatting, type checks
+  (`astro check`) and a production build on GitHub Actions.
 - **Kept simple.** KISS and YAGNI: nothing gets built "just in case".
 
 ## Run it locally

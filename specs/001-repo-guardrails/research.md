@@ -66,8 +66,8 @@ Versions checked on the npm registry on 2026-11-07.
 
 - **Decision**: GitHub Actions, `.github/workflows/ci.yml`, one job on `ubuntu-latest`:
   checkout → setup-node (`node-version-file: .nvmrc`, `cache: npm`) → `npm ci` →
-  `npm run check` → `npm run build`. Triggers: `push` (all branches) and `pull_request`
-  (to `main`). `concurrency` cancels superseded runs on the same ref.
+  `npm run check` → `npm run build`. Triggers: `push` (to `main`) and `pull_request`
+  (to `main`); a push on a feature branch is covered by its PR, so it does not run twice. `concurrency` cancels superseded runs on the same ref.
 - **Rationale**: steps run in order and a failing step fails the job, so the PR status is red
   (FR-010). `npm ci` gives a clean install from the lockfile (FR-009). `cache: npm` keeps a run
   well under the 5-minute target (SC-004). Use the latest major tags of `actions/checkout` and

@@ -6,7 +6,7 @@ File: `.github/workflows/ci.yml` · Workflow name: `CI` · Job name: `check-and-
 
 | Event          | Scope            |
 | -------------- | ---------------- |
-| `push`         | every branch     |
+| `push`         | `main` only      |
 | `pull_request` | targeting `main` |
 
 `concurrency: ci-${{ github.ref }}` with `cancel-in-progress: true`.
