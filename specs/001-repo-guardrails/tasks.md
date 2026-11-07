@@ -38,8 +38,8 @@ phase (plan, Constitution Check VIII).
 
 **⚠️ CRITICAL**: US1 and US2 cannot start before this phase is done.
 
-- [ ] T004 Install dev dependencies with `npm install --save-dev prettier@^3.9 prettier-plugin-astro@^1.1 @astrojs/check@^0.9 typescript@^6` — `typescript` MUST stay `^6` because `@astrojs/check@0.9` requires the peer `typescript ^5.0.0 || ^6.0.0` (research R2); updates `package.json` and `package-lock.json`. Verify `npm ls typescript` shows no peer error.
-- [ ] T005 Confirm `tsconfig.json` still extends `astro/tsconfigs/strict` and leave it unchanged (FR-003, research R2)
+- [x] T004 Install dev dependencies with `npm install --save-dev prettier@^3.9 prettier-plugin-astro@^1.1 @astrojs/check@^0.9 typescript@^6` — `typescript` MUST stay `^6` because `@astrojs/check@0.9` requires the peer `typescript ^5.0.0 || ^6.0.0` (research R2); updates `package.json` and `package-lock.json`. Verify `npm ls typescript` shows no peer error.
+- [x] T005 Confirm `tsconfig.json` still extends `astro/tsconfigs/strict` and leave it unchanged (FR-003, research R2)
 
 **Checkpoint**: dependencies installed, `npm run build` still passes.
 
@@ -56,9 +56,9 @@ format error (naming the file) and on an injected type error (naming file and li
 
 ### Implementation for User Story 1
 
-- [ ] T006 [P] [US1] Create `.prettierrc` (JSON): `{ "plugins": ["prettier-plugin-astro"], "singleQuote": true, "overrides": [{ "files": "*.astro", "options": { "parser": "astro" } }] }` — no other option, Prettier defaults otherwise (FR-001, research R6)
-- [ ] T007 [P] [US1] Create `.prettierignore` listing `dist/`, `.astro/`, `node_modules/`, `package-lock.json`, `.specify/`, `.claude/`, `.impeccable/` (FR-008, research R6)
-- [ ] T008 [US1] Add to `scripts` in `package.json`: `"format": "prettier --write ."` and `"check": "prettier --check . && astro check"`; keep `dev`, `build`, `preview`, `astro` unchanged (FR-002, FR-005, FR-007, contracts/commands.md)
+- [x] T006 [P] [US1] Create `.prettierrc` (JSON): `{ "plugins": ["prettier-plugin-astro"], "singleQuote": true, "overrides": [{ "files": "*.astro", "options": { "parser": "astro" } }] }` — no other option, Prettier defaults otherwise (FR-001, research R6)
+- [x] T007 [P] [US1] Create `.prettierignore` listing `dist/`, `.astro/`, `node_modules/`, `package-lock.json`, `.specify/`, `.claude/`, `.impeccable/` (FR-008, research R6)
+- [x] T008 [US1] Add to `scripts` in `package.json`: `"format": "prettier --write ."` and `"check": "prettier --check . && astro check"`; keep `dev`, `build`, `preview`, `astro` unchanged (FR-002, FR-005, FR-007, contracts/commands.md)
 - [ ] T009 [US1] Run `npm run format` on the existing repository, then review `git diff` on every Markdown file (`*.md`, `specs/**`): tables, code blocks and lists must keep their meaning; if a file is garbled, add that single file to `.prettierignore` and restore it with `git checkout -- <file>` (spec edge case). Commit this reformat alone: `chore: format codebase with prettier`
 - [ ] T010 [US1] Run `npm run check && npm run build` and fix any error until both exit 0 (FR-014, SC-001); fix type errors in source rather than loosening `tsconfig.json`
 - [ ] T011 [US1] Validate quickstart §1: inject a format error, then a type error (`const n: number = 'x';` in the frontmatter of `src/pages/index.astro`), confirm the failure output of contracts/commands.md, revert both; measure `time npm run check` < 30 s (SC-003)
