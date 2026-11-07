@@ -12,7 +12,8 @@ repository configuration files; each one has a single responsibility.
 | `tsconfig.json`            | Type strictness (FR-003)             | `astro check`                               | Extends `astro/tsconfigs/strict` (already the case)  |
 | `package.json` `scripts`   | Command surface (FR-001, 002, 007)   | npm, CI                                     | See [contracts/commands.md](./contracts/commands.md) |
 | `.github/workflows/ci.yml` | Automated gate (FR-009, 010)         | GitHub Actions                              | See [contracts/ci.md](./contracts/ci.md)             |
-| `README.md`                | Onboarding (FR-013)                  | Humans                                      | Sections listed in the commands contract             |
+| `README.md`                | Onboarding (FR-013)                  | Humans                                      | Pitch, how it's built, run locally                   |
+| `CONTRIBUTING.md`          | Maintenance guide (FR-013)           | Maintainer, contributors                    | Sections listed in the commands contract             |
 
 ## State: CI run
 

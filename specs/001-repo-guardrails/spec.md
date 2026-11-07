@@ -74,24 +74,26 @@ rouge ; pousser la correction : il passe au vert.
 
 ### User Story 3 - Démarrer le projet grâce au README (Priority: P3)
 
-Une personne qui découvre le dépôt (ou le mainteneur dans un an) lit le README et sait
-installer les dépendances, lancer le site en local, connaître les commandes disponibles et
-suivre le workflow speckit pour ajouter une feature.
+Une personne qui découvre le dépôt (recruteur, lead technique) lit le README, en anglais, et
+comprend ce qu'est le projet, comment il est construit et comment le lancer en local. Le
+mainteneur (ou un contributeur) trouve dans `CONTRIBUTING.md` les commandes disponibles, la
+CI et le workflow speckit pour ajouter une feature.
 
 **Why this priority**: utile mais sans effet sur la qualité du code ; le README existe déjà en
 partie et doit simplement refléter les nouvelles commandes.
 
 **Independent Test**: sur une machine propre, suivre uniquement le README jusqu'à voir le site
-en local et faire passer la vérification, sans autre source.
+en local, puis `CONTRIBUTING.md` pour faire passer la vérification, sans autre source.
 
 **Acceptance Scenarios**:
 
 1. **Given** un clone frais, **When** le lecteur suit la section d'installation, **Then** il
    obtient le site en local sans consulter d'autre document.
-2. **Given** le README, **When** le lecteur cherche les commandes, **Then** il trouve formatage,
-   vérification, build, serveur de développement et prévisualisation, chacune avec son rôle.
-3. **Given** le README, **When** le lecteur veut ajouter une feature, **Then** il trouve l'ordre
-   des étapes speckit et où trouver les blocs à fournir.
+2. **Given** `CONTRIBUTING.md` (lié depuis le README), **When** le lecteur cherche les
+   commandes, **Then** il trouve formatage, vérification, build, serveur de développement et
+   prévisualisation, chacune avec son rôle.
+3. **Given** `CONTRIBUTING.md`, **When** le lecteur veut ajouter une feature, **Then** il trouve
+   l'ordre des étapes speckit et où trouver les blocs à fournir.
 
 ---
 
@@ -140,8 +142,10 @@ en local et faire passer la vérification, sans autre source.
   fois en local et en CI.
 - **FR-012**: Les réglages d'éditeur de base (indentation, fins de ligne, encodage, ligne
   finale) MUST être partagés dans le dépôt.
-- **FR-013**: Le README MUST expliquer : prérequis, installation, lancement en local, la liste
-  des commandes disponibles avec leur rôle, et le workflow speckit.
+- **FR-013**: Le README (en anglais, pour les visiteurs) MUST présenter le projet, ses choix
+  techniques, les prérequis et le lancement en local, et renvoyer vers `CONTRIBUTING.md`.
+  `CONTRIBUTING.md` (en français) MUST expliquer la liste des commandes disponibles avec leur
+  rôle, la CI et le workflow speckit.
 - **FR-014**: Après la mise en place, le dépôt existant MUST passer la vérification et le build
   sans erreur.
 - **FR-015**: Le déploiement et la vérification des liens morts MUST rester hors de cette
@@ -174,7 +178,7 @@ en local et faire passer la vérification, sans autre source.
   document de cadrage, ce fichier serait exclu explicitement plutôt que de changer la règle.
 - La protection de branche (rendre le statut obligatoire pour fusionner) est un réglage GitHub
   fait à la main par le mainteneur ; la feature se limite à produire le statut et à documenter
-  ce réglage dans le README.
+  ce réglage dans `CONTRIBUTING.md`.
 - Pas de crochet automatique avant commit : la vérification locale reste une commande à lancer,
   et la CI sert de filet (YAGNI).
 - Dépendances : étape 0 terminée (constitution, `DESIGN.md`) ; aucune autre feature requise.
