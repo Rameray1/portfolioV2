@@ -26,9 +26,9 @@ phase (plan, Constitution Check VIII).
 
 **Purpose**: shared repository settings, no dependency installed yet.
 
-- [ ] T001 [P] Create `.nvmrc` containing the single line `22` (single Node version source, FR-011, research R5)
-- [ ] T002 [P] Create `.editorconfig` with `root = true`; `[*]`: `charset = utf-8`, `end_of_line = lf`, `indent_style = space`, `indent_size = 2`, `insert_final_newline = true`, `trim_trailing_whitespace = true`; `[*.md]`: `trim_trailing_whitespace = false` (FR-012, research R4)
-- [ ] T003 [P] Add `"esbenp.prettier-vscode"` to the `recommendations` array of `.vscode/extensions.json` (keep `astro-build.astro-vscode`)
+- [x] T001 [P] Create `.nvmrc` containing the single line `22` (single Node version source, FR-011, research R5)
+- [x] T002 [P] Create `.editorconfig` with `root = true`; `[*]`: `charset = utf-8`, `end_of_line = lf`, `indent_style = space`, `indent_size = 2`, `insert_final_newline = true`, `trim_trailing_whitespace = true`; `[*.md]`: `trim_trailing_whitespace = false` (FR-012, research R4)
+- [x] T003 [P] Add `"esbenp.prettier-vscode"` to the `recommendations` array of `.vscode/extensions.json` (keep `astro-build.astro-vscode`)
 
 ---
 
