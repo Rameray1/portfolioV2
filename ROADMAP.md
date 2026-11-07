@@ -5,15 +5,15 @@ d'un commit par jour. Le cadrage (quoi raconter, à qui, quelles URL, quelles do
 [`CONTENU.md`](./CONTENU.md) ; ce fichier dit **dans quel ordre** construire et **quoi donner
 à speckit** pour chaque feature.
 
-| | |
-|---|---|
-| Features speckit | 12 (`F01` → `F12`) |
-| Portfolio complet | après `F09` |
+|                     |                                               |
+| ------------------- | --------------------------------------------- |
+| Features speckit    | 12 (`F01` → `F12`)                            |
+| Portfolio complet   | après `F09`                                   |
 | Tâches hors speckit | étape 0, mise en ligne, contenu (`C1` → `C8`) |
-| Rythme | 1 commit / jour · 6 à 8 semaines |
-| Mise en ligne | après F04 (en `noindex` jusqu'à C3) |
-| Site | 100 % statique, aucun serveur |
-| Remplace | `../Portfolio` (Vue 3) |
+| Rythme              | 1 commit / jour · 6 à 8 semaines              |
+| Mise en ligne       | après F04 (en `noindex` jusqu'à C3)           |
+| Site                | 100 % statique, aucun serveur                 |
+| Remplace            | `../Portfolio` (Vue 3)                        |
 
 ---
 
@@ -54,28 +54,29 @@ Pour chaque feature, dans l'ordre :
 
 ---
 
-## Étape 0 — Avant la première feature *(hors speckit)*
+## Étape 0 — Avant la première feature _(hors speckit)_
 
 - [x] **Cadrage du contenu** — `CONTENU.md`.
 - [x] **Installer speckit** — `specify init --here --integration claude`.
 - [x] **Constitution** — `.specify/memory/constitution.md` (v1.0.0).
-  Commit : `docs: constitution speckit`
-- [x] **Direction visuelle** *(~1 h 30, avec `/impeccable`)* — `DESIGN.md` : palette (hex,
-  clair + sombre), deux polices au plus, échelle typographique, espacements, grille, rayons,
-  3 à 5 sites de référence. Prévoir les états : bandeau de disponibilité, image de partage par
-  défaut. Toutes les features visuelles s'y réfèrent. Commit : `docs: direction visuelle`
+      Commit : `docs: constitution speckit`
+- [x] **Direction visuelle** _(~1 h 30, avec `/impeccable`)_ — `DESIGN.md` : palette (hex,
+      clair + sombre), deux polices au plus, échelle typographique, espacements, grille, rayons,
+      3 à 5 sites de référence. Prévoir les états : bandeau de disponibilité, image de partage par
+      défaut. Toutes les features visuelles s'y réfèrent. Commit : `docs: direction visuelle`
 
 ---
 
 ## Phase 1 — Socle
 
-### F01 · Outillage et garde-fous *(~1 séance)*
+### F01 · Outillage et garde-fous _(~1 séance)_
 
 Avant tout composant : formatage, types stricts et CI. `/speckit-implement` pourra ainsi
 vérifier chaque tâche, et `main` ne peut plus casser.
 **Dépend de** : étape 0.
 
 **Spec**
+
 ```
 Mettre en place les garde-fous du dépôt pour que tout code ajouté ensuite soit formaté, typé et vérifié automatiquement.
 - Une commande formate tout le projet ; une commande vérifie le formatage et les types ; le build reste la commande existante.
@@ -83,18 +84,21 @@ Mettre en place les garde-fous du dépôt pour que tout code ajouté ensuite soi
 - Le README explique comment installer et lancer le projet, les commandes disponibles et le workflow speckit.
 Hors périmètre : déploiement, vérification des liens morts (F12).
 ```
+
 **Plan**
+
 ```
 Prettier + prettier-plugin-astro, .prettierrc, .editorconfig, .nvmrc (Node 22). tsconfig étendu de astro/tsconfigs/strict. @astrojs/check. Scripts package.json : format, check (prettier --check + astro check). Pas d'ESLint : astro check et TypeScript strict suffisent pour ce projet. GitHub Actions .github/workflows/ci.yml : npm ci, npm run check, npm run build.
 ```
 
-### F02 · Socle visuel et gabarit *(~3 séances)*
+### F02 · Socle visuel et gabarit _(~3 séances)_
 
 Les jetons de design, le thème clair/sombre et le squelette commun : en-tête, navigation,
 pied de page.
 **Dépend de** : F01, `DESIGN.md`.
 
 **Spec**
+
 ```
 Toutes les pages partagent un gabarit commun : en-tête avec navigation, contenu, pied de page.
 - L'apparence suit DESIGN.md : couleurs, typographie, espacements et rayons sont des jetons réutilisables ; aucune valeur visuelle en dur ailleurs.
@@ -106,18 +110,21 @@ Toutes les pages partagent un gabarit commun : en-tête avec navigation, contenu
 - Chaque page fournit son titre et sa description au gabarit.
 - Une page d'accueil provisoire utilise le gabarit pour démontrer le tout.
 ```
+
 **Plan**
+
 ```
 src/styles/global.css : bloc :root de jetons (--color-*, --space-*, --font-*, --radius-*), redéfinis sous @media (prefers-color-scheme: dark) ; color-scheme: light dark ; reset minimal ; importé une seule fois par le layout. Pas de bouton de thème, donc aucun script. Polices auto-hébergées dans src/assets/fonts (@font-face, font-display: swap, preload de la graisse principale). src/layouts/BaseLayout.astro (props title, description ; <slot />). Header.astro, Navigation.astro, Footer.astro appelés uniquement depuis BaseLayout. src/data/nav.ts typé. Mobile : si la nav tient sur une ou deux lignes, pas de menu replié ; sinon popover HTML natif (popover + popovertarget), sans JavaScript. Styles scopés dans chaque composant.
 ```
 
-### F03 · Site bilingue *(~3 séances)*
+### F03 · Site bilingue _(~3 séances)_
 
 Tôt dans la roadmap : l'audience n°1 est anglophone, et en posant l'i18n maintenant, chaque
 feature suivante naît bilingue au lieu d'être reprise à la fin.
 **Dépend de** : F02.
 
 **Spec**
+
 ```
 Le site existe en français (par défaut, sans préfixe) et en anglais sous /en, avec les mêmes chemins (/projects ↔ /en/projects).
 - Tous les libellés d'interface (navigation, boutons, pied de page) viennent d'un dictionnaire FR/EN. Une clé absente dans une langue fait échouer la vérification du projet.
@@ -126,16 +133,19 @@ Le site existe en français (par défaut, sans préfixe) et en anglais sous /en,
 - Le blog n'a pas de version anglaise : dans la navigation anglaise, le lien Blog pointe vers /blog avec la mention (FR) (CONTENU.md §5).
 - Les libellés posés en F02 sont convertis. Une page d'accueil anglaise provisoire existe.
 ```
+
 **Plan**
+
 ```
 Bloc i18n dans astro.config.mjs (defaultLocale 'fr', locales ['fr','en'], prefixDefaultLocale false). src/i18n/ui.ts : dictionnaire fr typé, en déclaré du même type (une clé manquante = erreur TypeScript). Helpers useTranslations(locale) et localizePath(path, locale). Astro.currentLocale. LangSwitcher.astro dans Header (simple lien, aucun JS). Pattern de pages : le corps d'une page vit dans un composant src/views/XxxView.astro qui reçoit la locale ; src/pages/xxx.astro et src/pages/en/xxx.astro ne sont que des coquilles qui le rendent (pas de markup dupliqué).
 ```
 
-### F04 · SEO et pages système *(~2 séances)*
+### F04 · SEO et pages système _(~2 séances)_
 
 **Dépend de** : F03.
 
 **Spec**
+
 ```
 Chaque page est correctement présentée aux moteurs et aux réseaux, depuis un seul endroit.
 - Chaque page expose titre, description, URL canonique, aperçu de partage (Open Graph) et liens alternatifs vers son autre langue.
@@ -145,27 +155,30 @@ Chaque page est correctement présentée aux moteurs et aux réseaux, depuis un 
 - Une page 404 utile (liens vers accueil, projets, email) existe en FR et EN.
 - Favicon et une image de partage par défaut, selon DESIGN.md.
 ```
+
 **Plan**
+
 ```
 src/components/Seo.astro (props title, description, image, noindex, alternates) appelé par BaseLayout ; canonique via Astro.site + Astro.url ; renseigner `site` dans astro.config.mjs. Réglage global via variable d'environnement PUBLIC_NOINDEX. robots.txt généré par un endpoint statique src/pages/robots.txt.ts qui lit ce réglage. @astrojs/sitemap avec option i18n et filter des pages noindex. JSON-LD Person via <script type="application/ld+json" set:html={JSON.stringify(data)} />. src/pages/404.astro. Favicon SVG + image OG par défaut dans public/. Pas de manifeste web (le site n'est pas une PWA).
 ```
 
-### 🚀 Mise en ligne *(hors speckit · ~1 h)*
+### 🚀 Mise en ligne _(hors speckit · ~1 h)_
 
 - [ ] Brancher le dépôt sur un hébergeur statique (Netlify, Vercel ou Cloudflare Pages) :
-  build `npm run build`, dossier `dist/`. Activer les aperçus par branche.
+      build `npm run build`, dossier `dist/`. Activer les aperçus par branche.
 - [ ] `PUBLIC_NOINDEX=true` en production jusqu'à C3.
-  Commit : `ci: premiere mise en ligne`
+      Commit : `ci: premiere mise en ligne`
 
 ---
 
 ## Phase 2 — Pages et projets
 
-### F05 · Accueil et À propos *(~3 séances)*
+### F05 · Accueil et À propos _(~3 séances)_
 
 **Dépend de** : F04.
 
 **Spec**
+
 ```
 Accueil et page À propos, en FR et EN, pilotés par les leviers de campagne (CONTENU.md §3 et §7).
 - Accueil : phrase d'identité, bandeau de disponibilité (ce que je cherche, à partir de quand, où — masquable), deux appels à l'action, et un emplacement pour les projets mis en avant (rempli en F06).
@@ -174,17 +187,20 @@ Accueil et page À propos, en FR et EN, pilotés par les leviers de campagne (CO
 - À propos : récit en trois paragraphes, photo optimisée, ce que je cherche. Le texte vit dans des fichiers de contenu, pas dans le composant.
 - Les textes définitifs sont rédigés hors speckit (C1) ; des textes provisoires clairement marqués suffisent.
 ```
+
 **Plan**
+
 ```
 src/data/campaign.ts typé (valeurs { fr, en }, availability.visible, ctas[]). Composants Hero.astro, AvailabilityBanner.astro, CtaGroup.astro. Vues HomeView.astro et AboutView.astro (pattern F03). Prose d'À propos en Markdown par langue (src/content/pages/{fr,en}/about.md, collection `pages`). Photo dans src/assets/, rendue avec <Image> d'astro:assets.
 ```
 
-### F06 · Projets *(~4 séances)*
+### F06 · Projets _(~4 séances)_
 
 Le cœur du portfolio : les projets deviennent des données typées, avec une page chacun.
 **Dépend de** : F05.
 
 **Spec**
+
 ```
 Les projets sont du contenu typé (CONTENU.md §6), affichés en liste et en pages de détail, en FR et EN.
 User stories :
@@ -195,29 +211,32 @@ User stories :
 - P2 — La version anglaise d'un projet ne contient que la prose ; dates, technologies, liens et visuel viennent de la version française. Si elle manque, /en/projects/<slug> affiche la version française avec la mention « disponible en français uniquement ».
 Exigences : une fiche incomplète ou invalide fait échouer le build ; les visuels sont optimisés, sans décalage de mise en page ; l'accueil reste < 200 ko. Fournir deux fiches d'exemple (dont un brouillon) ; le vrai contenu est rédigé hors speckit (C2, C3).
 ```
+
 **Plan**
+
 ```
 src/content.config.ts : collection projects, loader glob() sur src/content/projects/{fr,en}/, schéma zod (fr : title, year, summary, tech, links, cover via image(), featured, draft ; en : title, summary). src/lib/projects.ts : getProjects(locale, { featured }) qui exclut les drafts en production, fusionne métadonnées FR + prose EN par slug, avec repli FR. ProjectCard.astro, ProjectsView.astro, src/pages/projects/[slug].astro (getStaticPaths + render(entry)) et équivalent sous src/pages/en/. Technologies affichées en badges (texte, sans lien). <Image> d'astro:assets (AVIF/WebP, width/height, lazy).
 ```
 
-### ✍️ C1 – C3 · Contenu *(hors speckit)*
+### ✍️ C1 – C3 · Contenu _(hors speckit)_
 
 - [ ] **C1 · Textes accueil et À propos** — FR, selon §3 et §9. `content: accueil et a propos`
 - [ ] **C2 · Fiches projets** — choisir 3 à 10 projets selon `CONTENU.md` §8. Une fiche par
-  séance. `content: fiche <projet>`
+      séance. `content: fiche <projet>`
 - [ ] **C3 · Étude de cas d'entreprise** — **anonymisée** (CONTENU.md §8). La fiche la
-  plus travaillée. Puis **lever `PUBLIC_NOINDEX`** : le site a enfin de quoi être trouvé.
-  `content: etude de cas de l'alternance`
+      plus travaillée. Puis **lever `PUBLIC_NOINDEX`** : le site a enfin de quoi être trouvé.
+      `content: etude de cas de l'alternance`
 
 ---
 
 ## Phase 3 — Parcours, compétences, CV
 
-### F07 · Parcours *(~2 séances)*
+### F07 · Parcours _(~2 séances)_
 
 **Dépend de** : F03.
 
 **Spec**
+
 ```
 /background (et /en/background) présente formations et expériences sur une seule frise chronologique, du plus récent au plus ancien, lisible sur mobile.
 - Chaque entrée : période, intitulé, lieu, description. Une expérience ajoute technologies et réalisations.
@@ -225,16 +244,19 @@ src/content.config.ts : collection projects, loader glob() sur src/content/proje
 - Les données vivent dans deux fichiers (expériences, formations) de même forme, réutilisés par le CV (F09). La prose y existe en FR et EN.
 - Quelques entrées d'exemple suffisent ; les textes définitifs sont rédigés hors speckit (C4).
 ```
+
 **Plan**
+
 ```
 Collections experience et education dans content.config.ts, loader file() sur src/data/experience.yaml et education.yaml ; champs de prose { fr, en }. Timeline.astro générique (ne connaît pas le type d'entrée). BackgroundView.astro : deux getCollection, fusion, tri par start décroissant. Dates formatées par Intl.DateTimeFormat selon la locale (src/lib/dates.ts).
 ```
 
-### F08 · Compétences *(~2 séances)*
+### F08 · Compétences _(~2 séances)_
 
 **Dépend de** : F06.
 
 **Spec**
+
 ```
 /skills (et /en/skills) regroupe les compétences par domaine. Objectif : aucune compétence déclarative.
 - Chaque compétence affiche son niveau (compréhensible sans couleur et par un lecteur d'écran), depuis quand, et des liens vers les projets publiés qui la prouvent.
@@ -242,16 +264,19 @@ Collections experience et education dans content.config.ts, loader file() sur sr
 - Les données vivent dans un fichier unique, réutilisé par le CV (F09).
 - L'échelle de niveau est à définir lors de la clarification.
 ```
+
 **Plan**
+
 ```
 Collection skills, loader file() sur src/data/skills.yaml, champ projects: z.array(reference('projects')).min(1). SkillGroup.astro. Regroupement par domaine dans le frontmatter de la vue (build-time, aucun JS client).
 ```
 
-### F09 · CV en ligne et impression *(~2 séances)*
+### F09 · CV en ligne et impression _(~2 séances)_
 
 **Dépend de** : F05, F07, F08.
 
 **Spec**
+
 ```
 /cv et /en/cv affichent un CV construit uniquement à partir des données existantes (campagne, expériences, formations, compétences, projets mis en avant) : aucune information n'est saisie deux fois.
 - Imprimé depuis le navigateur, il tient sur une page A4 propre : sans navigation, en thème clair, liens lisibles (URL visibles).
@@ -259,17 +284,19 @@ Collection skills, loader file() sur src/data/skills.yaml, champ projects: z.arr
 - Un PDF téléchargeable FR et EN est disponible depuis la page.
 - Le levier « CV » de la campagne pointe désormais vers /cv.
 ```
+
 **Plan**
+
 ```
 CvView.astro réutilisant src/lib/* (projets, dates) et les collections experience, education, skills. Bloc @media print dans son <style> (@page A4, masquage Header/Footer, a[href]::after). PDF exporté à la main depuis le navigateur (Imprimer → PDF) dans public/cv-fr.pdf et public/cv-en.pdf, à refaire quand les données changent. Pas de script de génération.
 ```
 
-### ✍️ C4 – C5 · Contenu *(hors speckit)*
+### ✍️ C4 – C5 · Contenu _(hors speckit)_
 
 - [ ] **C4 · Données parcours et compétences** — entrées YAML réelles, 100 % des compétences
-  avec une preuve. `content: parcours et competences`
+      avec une preuve. `content: parcours et competences`
 - [ ] **C5 · Version anglaise** — accueil, À propos, parcours, compétences, CV, puis les fiches
-  projets (réécrites, pas traduites). Une page par séance. `content(i18n): <page> en anglais`
+      projets (réécrites, pas traduites). Une page par séance. `content(i18n): <page> en anglais`
 
 > ✅ **Ici, le portfolio est complet.** La suite l'enrichit, elle n'est pas nécessaire pour
 > postuler.
@@ -278,11 +305,12 @@ CvView.astro réutilisant src/lib/* (projets, dates) et les collections experien
 
 ## Phase 4 — Blog
 
-### F10 · Blog *(~3 séances)*
+### F10 · Blog _(~3 séances)_
 
 **Dépend de** : F04.
 
 **Spec**
+
 ```
 Un blog en français (non traduit), qui fait vivre le site entre deux projets.
 - Chaque article : titre, description, date, brouillon ou publié (même cycle de vie que les projets, CONTENU.md §7).
@@ -292,46 +320,52 @@ Un blog en français (non traduit), qui fait vivre le site entre deux projets.
 - Un article d'exemple démontre le tout ; les vrais articles sont rédigés hors speckit (C6).
 Hors périmètre : pagination, tags, sommaire, articles liés (à ajouter quand il y aura assez d'articles).
 ```
+
 **Plan**
+
 ```
 Collection blog (glob sur src/content/blog/*.md, schéma CONTENU.md §6). src/pages/blog/index.astro et src/pages/blog/[slug].astro + PostLayout.astro. Coloration Shiki intégrée à Astro avec deux thèmes (markdown.shikiConfig.themes { light, dark }) basculés par prefers-color-scheme. src/pages/rss.xml.js avec @astrojs/rss. <link rel="alternate" type="application/rss+xml"> dans BaseLayout. Markdown simple, pas de MDX.
 ```
 
-### ✍️ C6 · Deux premiers articles *(hors speckit)*
+### ✍️ C6 · Deux premiers articles _(hors speckit)_
 
 - [ ] Par exemple « De Vue à Astro, ce qui change » ou le récit d'un problème technique.
-  `content: premier article`
+      `content: premier article`
 
 ---
 
 ## Phase 5 — Finitions
 
-### F11 · Transitions et micro-animations *(~1 séance)*
+### F11 · Transitions et micro-animations _(~1 séance)_
 
 **Dépend de** : F06 (et F10 s'il est fait avant).
 
 **Spec**
+
 ```
 - Navigation fluide entre les pages : transitions animées.
 - États de survol et de focus soignés ; apparitions discrètes là où elles aident la lecture.
 - Tout mouvement est désactivé si l'utilisateur demande moins d'animations.
 - Aucun JavaScript ajouté : sans support du navigateur, le site fonctionne à l'identique, sans animation.
 ```
+
 **Plan**
+
 ```
 View transitions natives entre documents en CSS (@view-transition { navigation: auto; }), view-transition-name sur l'en-tête. Animations CSS uniquement (transitions, et animation-timeline: view() en amélioration progressive pour les apparitions). Tout sous @media (prefers-reduced-motion: no-preference). Pas de ClientRouter, pas d'IntersectionObserver.
 ```
 
-### ✍️ C7 · Domaine *(hors speckit · ~1 h)*
+### ✍️ C7 · Domaine _(hors speckit · ~1 h)_
 
 - [ ] Nom de domaine + HTTPS chez l'hébergeur, mise à jour de `site` dans `astro.config.mjs`.
-  `ci: nom de domaine`
+      `ci: nom de domaine`
 
-### F12 · Qualité et exploitation *(~3 séances)*
+### F12 · Qualité et exploitation _(~3 séances)_
 
 **Dépend de** : C7 et toutes les features visuelles.
 
 **Spec**
+
 ```
 Le site atteint les cibles de CONTENU.md §10 et reste propre dans le temps.
 - La CI échoue si un lien interne ou externe du site généré est mort.
@@ -340,18 +374,20 @@ Le site atteint les cibles de CONTENU.md §10 et reste propre dans le temps.
 - En-têtes de sécurité de base appliqués par l'hébergeur.
 - Audit unique : Lighthouse ≥ 95 performance et 100 accessibilité, bonnes pratiques et SEO sur l'accueil, une page projet, un article et /en, en mobile ; navigation au clavier, contrastes AA dans les deux thèmes, hiérarchie de titres, textes alternatifs. Les écarts trouvés sont corrigés.
 ```
+
 **Plan**
+
 ```
 lychee (action GitHub) sur dist/ dans ci.yml, exclusions documentées. Bloc redirects d'astro.config.mjs. Analytics sans cookie (Plausible, Umami ou Cloudflare Web Analytics) : un seul <script> dans BaseLayout, justifié dans le plan. En-têtes via public/_headers (ou la config de l'hébergeur) : X-Content-Type-Options, Referrer-Policy, frame-ancestors. Audit manuel avec Lighthouse et axe DevTools, corrections par composant. Pas de Lighthouse CI ni de CSP à hash.
 ```
 
-### ✍️ C8 · Clôture *(hors speckit)*
+### ✍️ C8 · Clôture _(hors speckit)_
 
 - [ ] **Relecture générale** — tout relu à voix haute, mots bannis traqués (§9), descriptions
-  SEO vérifiées une par une. `content: relecture generale`
+      SEO vérifiées une par une. `content: relecture generale`
 - [ ] **Clôture du chantier** — README final (architecture, comment ajouter / retirer un
-  contenu, workflow speckit), archivage de `../Portfolio`, article bilan.
-  `docs: readme final et archivage`
+      contenu, workflow speckit), archivage de `../Portfolio`, article bilan.
+      `docs: readme final et archivage`
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-description: "Task list for F01 · Outillage et garde-fous du dépôt"
+description: 'Task list for F01 · Outillage et garde-fous du dépôt'
 ---
 
 # Tasks: Outillage et garde-fous du dépôt
@@ -8,7 +8,7 @@ description: "Task list for F01 · Outillage et garde-fous du dépôt"
 
 **Prerequisites**: plan.md, spec.md, research.md, data-model.md, contracts/, quickstart.md
 
-**Tests**: no automated test suite (not requested; the feature *is* the verification). Each story
+**Tests**: no automated test suite (not requested; the feature _is_ the verification). Each story
 ends with a manual validation task taken from [quickstart.md](./quickstart.md).
 
 **Organization**: tasks grouped by user story. Not a visual feature: no Impeccable audit/polish
@@ -59,9 +59,9 @@ format error (naming the file) and on an injected type error (naming file and li
 - [x] T006 [P] [US1] Create `.prettierrc` (JSON): `{ "plugins": ["prettier-plugin-astro"], "singleQuote": true, "overrides": [{ "files": "*.astro", "options": { "parser": "astro" } }] }` — no other option, Prettier defaults otherwise (FR-001, research R6)
 - [x] T007 [P] [US1] Create `.prettierignore` listing `dist/`, `.astro/`, `node_modules/`, `package-lock.json`, `.specify/`, `.claude/`, `.impeccable/` (FR-008, research R6)
 - [x] T008 [US1] Add to `scripts` in `package.json`: `"format": "prettier --write ."` and `"check": "prettier --check . && astro check"`; keep `dev`, `build`, `preview`, `astro` unchanged (FR-002, FR-005, FR-007, contracts/commands.md)
-- [ ] T009 [US1] Run `npm run format` on the existing repository, then review `git diff` on every Markdown file (`*.md`, `specs/**`): tables, code blocks and lists must keep their meaning; if a file is garbled, add that single file to `.prettierignore` and restore it with `git checkout -- <file>` (spec edge case). Commit this reformat alone: `chore: format codebase with prettier`
-- [ ] T010 [US1] Run `npm run check && npm run build` and fix any error until both exit 0 (FR-014, SC-001); fix type errors in source rather than loosening `tsconfig.json`
-- [ ] T011 [US1] Validate quickstart §1: inject a format error, then a type error (`const n: number = 'x';` in the frontmatter of `src/pages/index.astro`), confirm the failure output of contracts/commands.md, revert both; measure `time npm run check` < 30 s (SC-003)
+- [x] T009 [US1] Run `npm run format` on the existing repository, then review `git diff` on every Markdown file (`*.md`, `specs/**`): tables, code blocks and lists must keep their meaning; if a file is garbled, add that single file to `.prettierignore` and restore it with `git checkout -- <file>` (spec edge case). Commit this reformat alone: `chore: format codebase with prettier`
+- [x] T010 [US1] Run `npm run check && npm run build` and fix any error until both exit 0 (FR-014, SC-001); fix type errors in source rather than loosening `tsconfig.json`
+- [x] T011 [US1] Validate quickstart §1: inject a format error, then a type error (`const n: number = 'x';` in the frontmatter of `src/pages/index.astro`), confirm the failure output of contracts/commands.md, revert both; measure `time npm run check` < 30 s (SC-003)
 
 **Checkpoint**: US1 is fully usable locally — the MVP.
 
@@ -150,4 +150,4 @@ T001 T002 T003 ──► T004 ─► T005
 4. Suggested commits: `chore: add editor and node version settings` (T001–T003),
    `chore: add prettier and astro check` (T004–T008), `chore: format codebase with prettier`
    (T009), `ci: add check and build workflow` (T012–T013), `docs: document setup, commands and
-   speckit workflow` (T016–T017).
+speckit workflow` (T016–T017).

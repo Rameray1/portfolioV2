@@ -12,7 +12,7 @@ la constitution speckit en dérive (§1, §5, §7, §9), et chaque `/speckit-spe
 métier. J'y ajoute, modifie et retire du contenu sans toucher au code, et il accueille des
 rubriques pas encore prévues (notes, veille, conférences…). C'est lui qui dicte l'architecture.
 
-**La campagne en cours — trouver un stage** (horizon ~6 mois). C'est un *réglage*, pas la
+**La campagne en cours — trouver un stage** (horizon ~6 mois). C'est un _réglage_, pas la
 finalité : il doit se changer en quelques minutes quand l'objectif deviendra « premier emploi »
 ou « freelance ».
 
@@ -31,7 +31,7 @@ Hiérarchie actuelle (portée par la campagne, elle bougera) :
 
 1. **Recruteur international (anglophone)** — filtre en 60 s : qui, quelle stack, quel niveau,
    disponible quand, mobile où, comment me joindre. → **l'anglais n'est pas un bonus.**
-2. **Lead technique** — ouvre *un* projet, puis le GitHub.
+2. **Lead technique** — ouvre _un_ projet, puis le GitHub.
 3. **Recruteur FR** — réseau, école.
 4. **Moi** — publier un changement en 10 minutes.
 
@@ -52,12 +52,12 @@ disponibilité.
 Une affirmation sans page qui la prouve est supprimée. Les projets changent avec le temps, les
 promesses restent : chaque promesse doit avoir **au moins une page publiée** qui la prouve.
 
-| Promesse | Type de preuve |
-|---|---|
-| Je livre du logiciel métier en équipe | une étude de cas d'entreprise (anonymisée) |
-| Je résous des problèmes techniques non triviaux | un projet raconté par le problème et le choix fait |
-| Je construis et tiens un site propre | ce portfolio : Astro, specs, CI, Lighthouse |
-| Mes compétences ne sont pas déclaratives | chaque compétence pointe vers ses projets (`/skills`) |
+| Promesse                                        | Type de preuve                                        |
+| ----------------------------------------------- | ----------------------------------------------------- |
+| Je livre du logiciel métier en équipe           | une étude de cas d'entreprise (anonymisée)            |
+| Je résous des problèmes techniques non triviaux | un projet raconté par le problème et le choix fait    |
+| Je construis et tiens un site propre            | ce portfolio : Astro, specs, CI, Lighthouse           |
+| Mes compétences ne sont pas déclaratives        | chaque compétence pointe vers ses projets (`/skills`) |
 
 ## 5. Arborescence et conventions
 
@@ -91,16 +91,16 @@ promesses restent : chaque promesse doit avoir **au moins une page publiée** qu
 Noms de champs en anglais. Une donnée non textuelle (date, stack, liens, image) n'existe qu'une
 fois ; seule la prose existe par langue.
 
-| Collection | Source | Champs |
-|---|---|---|
-| `projects` | `src/content/projects/fr/<slug>.md` | `title, year, summary, tech[], links{code,demo,video}, cover, featured, draft` + récit |
-| `projects` (EN) | `src/content/projects/en/<slug>.md` (même slug) | `title, summary` + récit — le reste vient de la version FR |
-| `experience` | `src/data/experience.yaml` | `start, end?, title, place, detail` + `tech[], highlights[]` (prose `{ fr, en }`) |
-| `education` | `src/data/education.yaml` | `start, end?, title, place, detail` (même forme que `experience`) |
-| `skills` | `src/data/skills.yaml` | `name, domain, level, since, projects[]` (au moins une référence vers `projects`) |
-| `blog` | `src/content/blog/<slug>.md` | `title, description, date, draft` + article |
-| campagne | `src/data/campaign.ts` | les 5 leviers (§7), bilingues |
-| navigation | `src/data/nav.ts` | rubriques de la nav |
+| Collection      | Source                                          | Champs                                                                                 |
+| --------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `projects`      | `src/content/projects/fr/<slug>.md`             | `title, year, summary, tech[], links{code,demo,video}, cover, featured, draft` + récit |
+| `projects` (EN) | `src/content/projects/en/<slug>.md` (même slug) | `title, summary` + récit — le reste vient de la version FR                             |
+| `experience`    | `src/data/experience.yaml`                      | `start, end?, title, place, detail` + `tech[], highlights[]` (prose `{ fr, en }`)      |
+| `education`     | `src/data/education.yaml`                       | `start, end?, title, place, detail` (même forme que `experience`)                      |
+| `skills`        | `src/data/skills.yaml`                          | `name, domain, level, since, projects[]` (au moins une référence vers `projects`)      |
+| `blog`          | `src/content/blog/<slug>.md`                    | `title, description, date, draft` + article                                            |
+| campagne        | `src/data/campaign.ts`                          | les 5 leviers (§7), bilingues                                                          |
+| navigation      | `src/data/nav.ts`                               | rubriques de la nav                                                                    |
 
 Le récit d'un projet suit toujours : **contexte · problème · ce que j'ai fait · stack et
 pourquoi · résultat · ce que j'en ai appris.**
@@ -151,17 +151,17 @@ Changer d'objectif = modifier ces cinq points, aucune page à réécrire.
 
 ## 10. Critères de réussite
 
-| Critère | Cible |
-|---|---|
-| Ajouter un projet | 1 fichier `.md`, 0 ligne de code |
-| Retirer un projet | 1 fichier supprimé + 1 redirection |
-| CV ↔ site | une seule source |
-| Pages indexables | `title` / `description` uniques à 100 % |
-| Poids de l'accueil (transféré) | < 200 ko |
-| Lighthouse perf / a11y / bonnes pratiques / SEO | ≥ 95 / 100 / 100 / 100 |
-| JS envoyé au navigateur | 0 ko par défaut, sauf amélioration justifiée |
-| Serveur | aucun : site 100 % statique |
-| Compétences avec preuve | 100 % (vérifié au build) |
-| Liens morts | 0, vérifié en CI |
-| Version anglaise | miroir complet (hors blog) |
-| Commits | 100 % conventionnels |
+| Critère                                         | Cible                                        |
+| ----------------------------------------------- | -------------------------------------------- |
+| Ajouter un projet                               | 1 fichier `.md`, 0 ligne de code             |
+| Retirer un projet                               | 1 fichier supprimé + 1 redirection           |
+| CV ↔ site                                       | une seule source                             |
+| Pages indexables                                | `title` / `description` uniques à 100 %      |
+| Poids de l'accueil (transféré)                  | < 200 ko                                     |
+| Lighthouse perf / a11y / bonnes pratiques / SEO | ≥ 95 / 100 / 100 / 100                       |
+| JS envoyé au navigateur                         | 0 ko par défaut, sauf amélioration justifiée |
+| Serveur                                         | aucun : site 100 % statique                  |
+| Compétences avec preuve                         | 100 % (vérifié au build)                     |
+| Liens morts                                     | 0, vérifié en CI                             |
+| Version anglaise                                | miroir complet (hors blog)                   |
+| Commits                                         | 100 % conventionnels                         |

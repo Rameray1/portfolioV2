@@ -7,12 +7,13 @@
 **Status**: Draft
 
 **Input**: User description: "Mettre en place les garde-fous du dépôt pour que tout code ajouté ensuite soit formaté, typé et vérifié automatiquement.
+
 - Une commande formate tout le projet ; une commande vérifie le formatage et les types ; le build reste la commande existante.
 - À chaque push et chaque pull request sur GitHub, vérification et build sont exécutés ; un échec marque la PR en rouge.
 - Le README explique comment installer et lancer le projet, les commandes disponibles et le workflow speckit.
-Hors périmètre : déploiement, vérification des liens morts (F12)."
+  Hors périmètre : déploiement, vérification des liens morts (F12)."
 
-## User Scenarios & Testing *(mandatory)*
+## User Scenarios & Testing _(mandatory)_
 
 Acteurs : le **mainteneur** (seul développeur du site) et l'**agent** qui implémente les tâches
 speckit. Tous deux ajoutent du code et doivent savoir, sans effort, s'il est conforme.
@@ -110,7 +111,7 @@ en local et faire passer la vérification, sans autre source.
 - Éditeurs différents : les réglages de base (indentation, fin de ligne, encodage) sont
   partagés pour que le code écrit par l'éditeur soit déjà proche du format attendu.
 
-## Requirements *(mandatory)*
+## Requirements _(mandatory)_
 
 ### Functional Requirements
 
@@ -146,7 +147,7 @@ en local et faire passer la vérification, sans autre source.
 - **FR-015**: Le déploiement et la vérification des liens morts MUST rester hors de cette
   feature (prévus plus tard, F12).
 
-## Success Criteria *(mandatory)*
+## Success Criteria _(mandatory)_
 
 ### Measurable Outcomes
 

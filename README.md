@@ -6,13 +6,13 @@ Mon portfolio personnel, reconstruit de zéro avec [Astro](https://astro.build).
 
 ## Documents du projet
 
-| Fichier | Rôle |
-|---|---|
-| [`CONTENU.md`](./CONTENU.md) | Le cadrage : finalité, audiences, URL, modèle de contenu, règles d'écriture. La référence de toutes les specs. |
-| [`ROADMAP.md`](./ROADMAP.md) | L'ordre de construction et, pour chaque feature, les blocs à donner à speckit. |
-| `DESIGN.md` | La direction visuelle *(à venir, étape 0)*. |
-| `.specify/memory/constitution.md` | Les principes non négociables, vérifiés à chaque plan. |
-| `specs/NNN-feature/` | Spec, plan et tâches de chaque feature, générés par speckit. |
+| Fichier                           | Rôle                                                                                                           |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| [`CONTENU.md`](./CONTENU.md)      | Le cadrage : finalité, audiences, URL, modèle de contenu, règles d'écriture. La référence de toutes les specs. |
+| [`ROADMAP.md`](./ROADMAP.md)      | L'ordre de construction et, pour chaque feature, les blocs à donner à speckit.                                 |
+| `DESIGN.md`                       | La direction visuelle _(à venir, étape 0)_.                                                                    |
+| `.specify/memory/constitution.md` | Les principes non négociables, vérifiés à chaque plan.                                                         |
+| `specs/NNN-feature/`              | Spec, plan et tâches de chaque feature, générés par speckit.                                                   |
 
 ## Démarrer
 

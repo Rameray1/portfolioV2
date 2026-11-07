@@ -2,13 +2,13 @@
 
 The command surface of the repository after F01. The README lists exactly these.
 
-| Command | Does | Modifies files | Exit code |
-|---|---|---|---|
-| `npm run format` | `prettier --write .` | Yes (formats) | 0 unless Prettier crashes |
-| `npm run check` | `prettier --check . && astro check` | No (FR-005) | 0 if formatted **and** no type error; non-zero otherwise |
-| `npm run build` | `astro build` (unchanged, FR-007) | Writes `dist/` | 0 on success |
-| `npm run dev` | `astro dev` (unchanged) | No | — |
-| `npm run preview` | `astro preview` (unchanged) | No | — |
+| Command           | Does                                | Modifies files | Exit code                                                |
+| ----------------- | ----------------------------------- | -------------- | -------------------------------------------------------- |
+| `npm run format`  | `prettier --write .`                | Yes (formats)  | 0 unless Prettier crashes                                |
+| `npm run check`   | `prettier --check . && astro check` | No (FR-005)    | 0 if formatted **and** no type error; non-zero otherwise |
+| `npm run build`   | `astro build` (unchanged, FR-007)   | Writes `dist/` | 0 on success                                             |
+| `npm run dev`     | `astro dev` (unchanged)             | No             | —                                                        |
+| `npm run preview` | `astro preview` (unchanged)         | No             | —                                                        |
 
 ## Failure output (FR-006)
 

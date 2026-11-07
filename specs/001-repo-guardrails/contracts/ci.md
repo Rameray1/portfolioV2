@@ -4,9 +4,9 @@ File: `.github/workflows/ci.yml` · Workflow name: `CI` · Job name: `check-and-
 
 ## Triggers (FR-009)
 
-| Event | Scope |
-|---|---|
-| `push` | every branch |
+| Event          | Scope            |
+| -------------- | ---------------- |
+| `push`         | every branch     |
 | `pull_request` | targeting `main` |
 
 `concurrency: ci-${{ github.ref }}` with `cancel-in-progress: true`.

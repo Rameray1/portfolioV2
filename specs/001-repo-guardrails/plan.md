@@ -21,7 +21,7 @@ README updated with install, commands and the speckit workflow. No ESLint, no pr
 
 **Storage**: N/A
 
-**Testing**: no test framework; the feature *is* the verification. Validation by the scenarios of
+**Testing**: no test framework; the feature _is_ the verification. Validation by the scenarios of
 [quickstart.md](./quickstart.md) (injected format / type / build errors).
 
 **Target Platform**: developer machine (macOS) and GitHub Actions `ubuntu-latest`
@@ -38,28 +38,28 @@ README updated with install, commands and the speckit workflow. No ESLint, no pr
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+_GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
-| # | Principle | Status | Notes |
-|---|---|---|---|
-| I | Simplicité (KISS/YAGNI) | ✅ Pass | 4 dev dependencies, each justified below; ESLint, husky/lint-staged, branch-protection automation rejected (R3, R7, R8). |
-| II | Statique, zéro JS client | ✅ Pass | Dev tooling only; no `<script>`, no adapter, `dist/` unchanged. |
-| III | Contenu = donnée typée | N/A | No content in this feature. Strict types prepare the schemas of F03+. |
-| IV | Une source par information | ✅ Pass | Node version lives in `.nvmrc` only (CI reads it); `engines` is a floor, not a second source (R5). Formatting rules in `.prettierrc` only. |
-| V | Leviers de campagne | N/A | — |
-| VI | Bilingue par dictionnaire | N/A | No UI text. README stays French (project prose). |
-| VII | Accessibilité et performance | N/A | No page change. |
-| VIII | Styles par jetons | N/A | No style. Not a visual feature: no Impeccable audit/polish phase needed. |
-| IX | Conventions et qualité | ✅ Pass | This feature *creates* `npm run check` and the CI required by IX. Config files and scripts named in English. Commits: `chore` (tooling), `ci` (workflow), `docs` (README); the initial reformat is `chore: format codebase with prettier`. |
+| #    | Principle                    | Status  | Notes                                                                                                                                                                                                                                      |
+| ---- | ---------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| I    | Simplicité (KISS/YAGNI)      | ✅ Pass | 4 dev dependencies, each justified below; ESLint, husky/lint-staged, branch-protection automation rejected (R3, R7, R8).                                                                                                                   |
+| II   | Statique, zéro JS client     | ✅ Pass | Dev tooling only; no `<script>`, no adapter, `dist/` unchanged.                                                                                                                                                                            |
+| III  | Contenu = donnée typée       | N/A     | No content in this feature. Strict types prepare the schemas of F03+.                                                                                                                                                                      |
+| IV   | Une source par information   | ✅ Pass | Node version lives in `.nvmrc` only (CI reads it); `engines` is a floor, not a second source (R5). Formatting rules in `.prettierrc` only.                                                                                                 |
+| V    | Leviers de campagne          | N/A     | —                                                                                                                                                                                                                                          |
+| VI   | Bilingue par dictionnaire    | N/A     | No UI text. README stays French (project prose).                                                                                                                                                                                           |
+| VII  | Accessibilité et performance | N/A     | No page change.                                                                                                                                                                                                                            |
+| VIII | Styles par jetons            | N/A     | No style. Not a visual feature: no Impeccable audit/polish phase needed.                                                                                                                                                                   |
+| IX   | Conventions et qualité       | ✅ Pass | This feature _creates_ `npm run check` and the CI required by IX. Config files and scripts named in English. Commits: `chore` (tooling), `ci` (workflow), `docs` (README); the initial reformat is `chore: format codebase with prettier`. |
 
 **Dependency justification (principle I)**
 
-| Package | Need | Weight | Native alternative rejected |
-|---|---|---|---|
-| `prettier` | FR-001/002 formatting | dev only | No native formatter in Astro/Node |
-| `prettier-plugin-astro` | Format `.astro` files | dev only | Prettier alone cannot parse `.astro` |
-| `@astrojs/check` | FR-002/003 type check of `.astro` | dev only | `tsc` does not read `.astro` files |
-| `typescript` | Peer of `@astrojs/check` | dev only | Required by the checker |
+| Package                 | Need                              | Weight   | Native alternative rejected          |
+| ----------------------- | --------------------------------- | -------- | ------------------------------------ |
+| `prettier`              | FR-001/002 formatting             | dev only | No native formatter in Astro/Node    |
+| `prettier-plugin-astro` | Format `.astro` files             | dev only | Prettier alone cannot parse `.astro` |
+| `@astrojs/check`        | FR-002/003 type check of `.astro` | dev only | `tsc` does not read `.astro` files   |
+| `typescript`            | Peer of `@astrojs/check`          | dev only | Required by the checker              |
 
 **Post-design re-check**: ✅ unchanged after Phase 1 — no new dependency or abstraction
 introduced by the contracts.
