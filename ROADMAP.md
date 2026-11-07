@@ -60,7 +60,7 @@ Pour chaque feature, dans l'ordre :
 - [x] **Installer speckit** — `specify init --here --integration claude`.
 - [x] **Constitution** — `.specify/memory/constitution.md` (v1.0.0).
   Commit : `docs: constitution speckit`
-- [ ] **Direction visuelle** *(~1 h 30, avec `/impeccable`)* — `DESIGN.md` : palette (hex,
+- [x] **Direction visuelle** *(~1 h 30, avec `/impeccable`)* — `DESIGN.md` : palette (hex,
   clair + sombre), deux polices au plus, échelle typographique, espacements, grille, rayons,
   3 à 5 sites de référence. Prévoir les états : bandeau de disponibilité, image de partage par
   défaut. Toutes les features visuelles s'y réfèrent. Commit : `docs: direction visuelle`

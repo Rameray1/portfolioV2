@@ -1,0 +1,500 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-07T00:00:00Z",
+  "title": "Design System: Ramazan Kus — portfolio",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Papier",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#141414",
+          "#2b2a27",
+          "#45433f",
+          "#625f59",
+          "#85827b",
+          "#aaa69d",
+          "#dcd9d2",
+          "#ffffff"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Encre",
+        "canonical": "#141414",
+        "tonalRamp": [
+          "#141414",
+          "#2b2a27",
+          "#45433f",
+          "#625f59",
+          "#85827b",
+          "#aaa69d",
+          "#dcd9d2",
+          "#f1efea"
+        ]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Encre atténuée",
+        "canonical": "#57554f",
+        "tonalRamp": [
+          "#1c1b19",
+          "#2f2e2a",
+          "#45433f",
+          "#57554f",
+          "#75726b",
+          "#9a968e",
+          "#c4c0b8",
+          "#ebe9e4"
+        ]
+      },
+      "rule-soft": {
+        "role": "neutral",
+        "displayName": "Filet doux",
+        "canonical": "#dcd9d2",
+        "tonalRamp": [
+          "#2a2925",
+          "#45433f",
+          "#625f59",
+          "#85827b",
+          "#aaa69d",
+          "#c9c6be",
+          "#dcd9d2",
+          "#f1efea"
+        ]
+      },
+      "mark": {
+        "role": "primary",
+        "displayName": "Rouge du commentateur",
+        "canonical": "#c8102e",
+        "tonalRamp": [
+          "#3d0510",
+          "#600a19",
+          "#8a0d22",
+          "#c8102e",
+          "#e2334d",
+          "#ff5a6a",
+          "#ff9aa4",
+          "#ffe0e3"
+        ]
+      },
+      "mark-on-invert": {
+        "role": "primary",
+        "displayName": "Rouge sur ligne inversée",
+        "canonical": "#ff5a6a",
+        "tonalRamp": [
+          "#3d0510",
+          "#600a19",
+          "#8a0d22",
+          "#c8102e",
+          "#e2334d",
+          "#ff5a6a",
+          "#ff9aa4",
+          "#ffe0e3"
+        ]
+      },
+      "square-light": {
+        "role": "neutral",
+        "displayName": "Case claire",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#2a2925",
+          "#45433f",
+          "#625f59",
+          "#85827b",
+          "#b3afa5",
+          "#c9c6be",
+          "#e6e3dc",
+          "#ffffff"
+        ]
+      },
+      "square-dark": {
+        "role": "neutral",
+        "displayName": "Case sombre, gris pierre",
+        "canonical": "#c9c6be",
+        "tonalRamp": [
+          "#2a2925",
+          "#45433f",
+          "#625f59",
+          "#85827b",
+          "#b3afa5",
+          "#c9c6be",
+          "#e6e3dc",
+          "#ffffff"
+        ]
+      },
+      "paper-dark": {
+        "role": "neutral",
+        "displayName": "Papier, négatif (noir chaud)",
+        "canonical": "#161513",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#161513",
+          "#24221f",
+          "#36342f",
+          "#4d4a44",
+          "#6e6a62",
+          "#aaa69d",
+          "#f1efea"
+        ]
+      },
+      "ink-dark": {
+        "role": "neutral",
+        "displayName": "Encre, négatif",
+        "canonical": "#f1efea",
+        "tonalRamp": [
+          "#161513",
+          "#36342f",
+          "#57554f",
+          "#7a776f",
+          "#aaa69d",
+          "#cfccc4",
+          "#e6e3dc",
+          "#f1efea"
+        ]
+      },
+      "ink-muted-dark": {
+        "role": "neutral",
+        "displayName": "Encre atténuée, négatif",
+        "canonical": "#aaa69d",
+        "tonalRamp": [
+          "#24221f",
+          "#36342f",
+          "#57554f",
+          "#7a776f",
+          "#aaa69d",
+          "#c4c0b8",
+          "#dcd9d2",
+          "#f1efea"
+        ]
+      },
+      "rule-soft-dark": {
+        "role": "neutral",
+        "displayName": "Filet doux, négatif",
+        "canonical": "#36342f",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#161513",
+          "#24221f",
+          "#36342f",
+          "#4d4a44",
+          "#6e6a62",
+          "#aaa69d",
+          "#f1efea"
+        ]
+      },
+      "mark-dark": {
+        "role": "primary",
+        "displayName": "Rouge du commentateur, négatif",
+        "canonical": "#ff5a6a",
+        "tonalRamp": [
+          "#3d0510",
+          "#600a19",
+          "#8a0d22",
+          "#c8102e",
+          "#e2334d",
+          "#ff5a6a",
+          "#ff9aa4",
+          "#ffe0e3"
+        ]
+      },
+      "mark-on-invert-dark": {
+        "role": "primary",
+        "displayName": "Rouge sur ligne inversée, négatif",
+        "canonical": "#c8102e",
+        "tonalRamp": [
+          "#3d0510",
+          "#600a19",
+          "#8a0d22",
+          "#c8102e",
+          "#e2334d",
+          "#ff5a6a",
+          "#ff9aa4",
+          "#ffe0e3"
+        ]
+      },
+      "square-light-dark": {
+        "role": "neutral",
+        "displayName": "Case claire, planche tonale",
+        "canonical": "#e6e3dc",
+        "tonalRamp": [
+          "#2a2925",
+          "#45433f",
+          "#625f59",
+          "#85827b",
+          "#b3afa5",
+          "#c9c6be",
+          "#e6e3dc",
+          "#ffffff"
+        ]
+      },
+      "square-dark-dark": {
+        "role": "neutral",
+        "displayName": "Case sombre, planche tonale",
+        "canonical": "#b3afa5",
+        "tonalRamp": [
+          "#2a2925",
+          "#45433f",
+          "#625f59",
+          "#85827b",
+          "#b3afa5",
+          "#c9c6be",
+          "#e6e3dc",
+          "#ffffff"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Le nom, sur l'accueil uniquement."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Titre d'une page projet (mode lecture)."
+      },
+      "section-title": {
+        "displayName": "Section title",
+        "purpose": "Titres de section en tête de grille (Parcours)."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Pitch de l'accueil, résumé d'un projet ; 34–40ch."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Titre d'un coup, intertitres du récit, coup clé."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Texte courant, mesure 68ch, chiffres tabulaires."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "En-têtes de liste et de tableau, notation, titre du bandeau ; la navigation en 400/600."
+      },
+      "meta": {
+        "displayName": "Meta",
+        "purpose": "Légende des symboles, libellés PGN, coordonnées du diagramme."
+      },
+      "eval": {
+        "displayName": "Eval",
+        "purpose": "Symbole d'évaluation rouge, en marge ou en fin de ligne."
+      }
+    },
+    "shadows": [
+      {
+        "name": "square-lit",
+        "value": "inset 0 0 0 4px var(--color-mark)",
+        "purpose": "Liseré rouge qui allume une case du diagramme au survol du coup correspondant. Marquage, pas élévation ; aucune autre ombre."
+      }
+    ],
+    "focus": [
+      {
+        "name": "focus-ring",
+        "value": "outline: 2px solid var(--color-mark); outline-offset: 3px",
+        "purpose": "Anneau de focus global ; décalage 0 sur les lignes de coups inversées."
+      }
+    ],
+    "rules": [
+      {
+        "name": "rule-heavy",
+        "value": "2px solid var(--color-rule)",
+        "purpose": "Ouvre chaque partie : nav, nom, en-têtes de liste/tableau, sections, pied de page."
+      },
+      {
+        "name": "rule-thin",
+        "value": "1px solid var(--color-rule-soft)",
+        "purpose": "Sépare coups et lignes de tableau ; 1px encre pour la légende et le coup clé."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Inversion des boutons et des lignes, allumage des cases."
+      },
+      {
+        "name": "duration",
+        "value": "160ms",
+        "purpose": "Durée unique des transitions d'état ; annulée sous prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "home-single-column",
+        "value": "56rem"
+      },
+      {
+        "name": "project-compact",
+        "value": "40rem"
+      }
+    ],
+    "layout": {
+      "pageMax": "80rem",
+      "gutter": "clamp(1rem, 0.5rem + 2.5vw, 4.5rem)",
+      "measure": "68ch",
+      "fontStretch": {
+        "display": "72%",
+        "text": "100%"
+      }
+    },
+    "assets": [
+      {
+        "name": "Archivo variable",
+        "source": "@fontsource-variable/archivo 5.2.6",
+        "licence": "OFL",
+        "note": "wdth 62–125, wght 100–900, sous-ensemble latin, 90 KB, woff2 préchargé"
+      },
+      {
+        "name": "Pièces cburnett",
+        "source": "lichess-org/lila",
+        "licence": "GPL / BSD / GFDL (triple licence)",
+        "note": "SVG, inchangées dans les deux thèmes"
+      }
+    ],
+    "plannedStates": [
+      {
+        "name": "og-default",
+        "status": "à construire en F04",
+        "spec": "1200×630, papier, nom en Display, filet 2px, ligne d'en-tête, pitch en Lead ; un seul élément rouge au plus."
+      },
+      {
+        "name": "favicon",
+        "status": "à construire en F04",
+        "spec": "SVG carré, « ! » rouge en Archivo 800/72 % vectorisé sur papier ; bascule sombre par prefers-color-scheme."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Bouton plein",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Action principale (Télécharger le CV) : rectangle d'encre, s'inverse au survol.",
+      "html": "<a class=\"ds-btn ds-btn-primary\" href=\"#\">Télécharger le CV</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: var(--space-2, 0.5rem); min-height: 3rem; padding: var(--space-3, 0.75rem) var(--space-5, 1.5rem); border: 2px solid var(--color-ink, #141414); border-radius: 0; font-family: var(--font-sans, Archivo, sans-serif); font-weight: 700; font-size: var(--text-base, 1.125rem); text-decoration: none; transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1), color 160ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-primary { background: var(--color-ink, #141414); color: var(--color-paper, #ffffff); } .ds-btn-primary:hover { background: var(--color-paper, #ffffff); color: var(--color-ink, #141414); } .ds-btn:focus-visible { outline: 2px solid var(--color-mark, #c8102e); outline-offset: 3px; }"
+    },
+    {
+      "name": "Bouton contour",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Action secondaire (M'écrire) : contour d'encre, se remplit au survol.",
+      "html": "<a class=\"ds-btn ds-btn-secondary\" href=\"#\">M'écrire</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; min-height: 3rem; padding: var(--space-3, 0.75rem) var(--space-5, 1.5rem); border: 2px solid var(--color-ink, #141414); border-radius: 0; font-family: var(--font-sans, Archivo, sans-serif); font-weight: 700; font-size: var(--text-base, 1.125rem); text-decoration: none; transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1), color 160ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-secondary { background: transparent; color: var(--color-ink, #141414); } .ds-btn-secondary:hover { background: var(--color-ink, #141414); color: var(--color-paper, #ffffff); } .ds-btn:focus-visible { outline: 2px solid var(--color-mark, #c8102e); outline-offset: 3px; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link-current",
+      "description": "Barre de tête sur filet de 2 px ; page courante en rouge soulignée.",
+      "html": "<header class=\"ds-masthead\"><a class=\"ds-brand\" href=\"#\">Ramazan Kus</a><nav><ul class=\"ds-nav\"><li><a href=\"#\" aria-current=\"page\">Accueil</a></li><li><a href=\"#\">Projets</a></li><li><a href=\"#\">Parcours</a></li><li><a href=\"#\">Blog</a></li><li><a class=\"ds-lang\" href=\"#\" lang=\"en\">EN</a></li></ul></nav></header>",
+      "css": ".ds-masthead { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem 2rem; padding-block: 1.5rem; border-bottom: 2px solid var(--color-rule, #141414); font-family: var(--font-sans, Archivo, sans-serif); color: var(--color-ink, #141414); } .ds-brand { font-weight: 700; font-size: 1.125rem; color: inherit; text-decoration: none; letter-spacing: 0.01em; } .ds-nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; list-style: none; padding: 0; margin: 0; } .ds-nav a { color: inherit; text-decoration: none; font-size: 0.9375rem; padding-block: 0.25rem; } .ds-nav a:hover { text-decoration: underline; text-decoration-thickness: 2px; } .ds-nav a:focus-visible { outline: 2px solid var(--color-mark, #c8102e); outline-offset: 3px; } .ds-nav a[aria-current=\"page\"] { color: var(--color-mark, #c8102e); font-weight: 600; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.35em; } .ds-lang { font-weight: 600; }"
+    },
+    {
+      "name": "Coup (liste des parties)",
+      "kind": "custom",
+      "refersTo": "move-row",
+      "description": "Signature : année + notation, titre + coup clé, symbole rouge ; la ligne s'inverse au survol.",
+      "html": "<ol class=\"ds-moves\"><li><a href=\"#\"><span class=\"ds-year\">2026<span class=\"ds-notation\">1.e4</span></span><span><span class=\"ds-title\">Étude de cas d'exemple : logiciel métier</span><span class=\"ds-choice\">Coup clé : découper le traitement nocturne en lots</span></span><span class=\"ds-eval\" aria-hidden=\"true\">!</span></a></li><li><a href=\"#\"><span class=\"ds-year\">2025<span class=\"ds-notation\">2.Cf3</span></span><span><span class=\"ds-title\">Projet d'exemple B</span><span class=\"ds-choice\">Coup clé : une seule source de données</span></span><span class=\"ds-eval\" aria-hidden=\"true\">!?</span></a></li></ol>",
+      "css": ".ds-moves { list-style: none; padding: 0; margin: 0; border-top: 2px solid var(--color-rule, #141414); font-family: var(--font-sans, Archivo, sans-serif); font-variant-numeric: tabular-nums; } .ds-moves li { border-bottom: 1px solid var(--color-rule-soft, #dcd9d2); } .ds-moves a { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr) 2.5rem; gap: 1rem; align-items: baseline; padding: 0.75rem 0.5rem; color: var(--color-ink, #141414); text-decoration: none; transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1), color 160ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-year, .ds-choice { color: var(--color-ink-muted, #57554f); font-size: 0.9375rem; } .ds-notation { display: block; font-weight: 700; color: var(--color-ink, #141414); } .ds-title { display: block; font-weight: 700; font-size: 1.375rem; line-height: 1.3; } .ds-choice { display: block; margin-top: 0.25rem; } .ds-eval { color: var(--color-mark, #c8102e); font-weight: 800; font-stretch: 72%; font-size: 2.25rem; line-height: 1; text-align: right; } .ds-moves a:hover, .ds-moves a:focus-visible { background: var(--color-invert-bg, #141414); color: var(--color-invert-ink, #ffffff); outline: none; } .ds-moves a:hover .ds-year, .ds-moves a:hover .ds-choice, .ds-moves a:hover .ds-notation, .ds-moves a:focus-visible .ds-year, .ds-moves a:focus-visible .ds-choice, .ds-moves a:focus-visible .ds-notation { color: inherit; } .ds-moves a:hover .ds-eval, .ds-moves a:focus-visible .ds-eval { color: var(--color-mark-on-invert, #ff5a6a); }"
+    },
+    {
+      "name": "Bandeau de disponibilité",
+      "kind": "custom",
+      "refersTo": "availability-banner",
+      "description": "Légende du diagramme : carré du trait rouge, statut en gras, date et lieu.",
+      "html": "<p class=\"ds-caption\"><span class=\"ds-trait\" aria-hidden=\"true\"></span><span><strong>Disponible pour un stage</strong>Dès avril 2027, en France et en Europe</span></p>",
+      "css": ".ds-caption { display: flex; align-items: baseline; gap: 0.75rem; max-width: 30rem; padding-top: 0.75rem; border-top: 1px solid var(--color-rule, #141414); font-family: var(--font-sans, Archivo, sans-serif); font-size: 0.9375rem; line-height: 1.3; color: var(--color-ink, #141414); margin: 0; } .ds-trait { flex: none; width: 0.75rem; height: 0.75rem; background: var(--color-mark, #c8102e); transform: translateY(0.05rem); } .ds-caption strong { display: block; font-weight: 700; }"
+    },
+    {
+      "name": "Puce de stack",
+      "kind": "chip",
+      "refersTo": "stack-chip",
+      "description": "Technologies d'un projet : contour d'encre 1 px, angles droits, statique.",
+      "html": "<ul class=\"ds-stack\"><li>Java 21</li><li>Spring Batch</li><li>PostgreSQL</li><li>Angular</li></ul>",
+      "css": ".ds-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; margin: 0; font-family: var(--font-sans, Archivo, sans-serif); } .ds-stack li { border: 1px solid var(--color-rule, #141414); padding: 0.25rem 0.75rem; font-size: 0.9375rem; color: var(--color-ink, #141414); }"
+    },
+    {
+      "name": "En-tête PGN",
+      "kind": "card",
+      "description": "Métadonnées d'un projet en quatre colonnes entre filet épais et filet fin.",
+      "html": "<dl class=\"ds-pgn\"><div><dt>Année</dt><dd>2026</dd></div><div><dt>Contexte</dt><dd>Alternance</dd></div><div><dt>Rôle</dt><dd>Back-end et mise en production</dd></div><div><dt>Liens</dt><dd>Code privé (anonymisé)</dd></div></dl>",
+      "css": ".ds-pgn { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; border-top: 2px solid var(--color-rule, #141414); border-bottom: 1px solid var(--color-rule, #141414); font-family: var(--font-sans, Archivo, sans-serif); color: var(--color-ink, #141414); font-variant-numeric: tabular-nums; } .ds-pgn div { padding: 0.75rem 1rem 0.75rem 0; } .ds-pgn dt { font-size: 0.8125rem; color: var(--color-ink-muted, #57554f); } .ds-pgn dd { margin: 0; font-weight: 600; }"
+    },
+    {
+      "name": "Lien de texte",
+      "kind": "custom",
+      "description": "Lien courant : soulignement 1 px, 2 px au survol, anneau de focus rouge.",
+      "html": "<p class=\"ds-p\">Voir <a class=\"ds-link\" href=\"#\">tout le parcours</a>.</p>",
+      "css": ".ds-p { font-family: var(--font-sans, Archivo, sans-serif); font-size: 1.125rem; line-height: 1.55; color: var(--color-ink, #141414); } .ds-link { color: inherit; text-decoration-line: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; } .ds-link:hover { text-decoration-thickness: 2px; } .ds-link:focus-visible { outline: 2px solid var(--color-mark, #c8102e); outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "La partie annotée",
+    "overview": "**Creative North Star: \"La partie annotée\"**\n\nLe portfolio se lit comme un livre de parties commentées, dans l'esprit de Chess Informator. Chaque projet est une partie. On la raconte par son coup critique (le problème) et par le choix fait, et un symbole d'évaluation rouge la note. La page est un papier blanc pur, imprimé en encre presque noire. Un seul rouge, celui du commentateur, porte le jugement. Le diagramme d'échiquier est une planche imprimée en gris pierre. Des filets épais ouvrent chaque partie, des filets fins séparent les coups.\n\nLa densité est celle d'un livre de référence : des colonnes de texte serrées, une notation et des métadonnées en chiffres tabulaires, aucune décoration qui ne porte une information. La hiérarchie vient d'une seule famille grotesque à axe de chasse : étroite et très grasse pour les noms et les titres, normale pour le texte. Le thème sombre imprime le même livre en négatif, encre claire sur noir chaud. Le diagramme y reste une planche tonale, jamais un échiquier d'écran.\n\nRefus confirmé par la direction : le hero centré suivi d'une rangée de cartes projets, typique du portfolio de développeur.",
+    "keyCharacteristics": [
+      "Papier blanc, encre `#141414`, un seul rouge de commentateur.",
+      "Une famille (Archivo) sur deux chasses : 72 % pour l'affichage, 100 % pour le texte.",
+      "Chiffres tabulaires partout, notation d'échecs et en-têtes de type PGN.",
+      "Filets de 2 px sous les en-têtes, filets fins de 1 px entre les lignes.",
+      "Zéro rayon, zéro ombre portée. Au survol, la ligne s'inverse.",
+      "Signature : le symbole d'évaluation rouge. Au survol d'un coup, sa case s'allume sur le diagramme, en CSS seul."
+    ],
+    "rules": [
+      {
+        "name": "The Commentator's Red Rule",
+        "body": "Le rouge est réservé par principe au jugement et à l'état : symboles d'évaluation, marqueur de trait ou de disponibilité, page courante, case allumée, focus, sélection. Jamais sur un bouton, jamais en fond de survol, jamais pour décorer. Le test : si l'élément rouge ne note, ne signale ou ne localise rien, il passe en encre.",
+        "section": "colors"
+      },
+      {
+        "name": "The Printed Negative Rule",
+        "body": "Le thème sombre est le même livre imprimé en négatif : les jetons s'échangent, la composition ne bouge pas. Il suit `prefers-color-scheme`, et `[data-theme]` peut le forcer. Le diagramme reste une planche tonale claire, jamais inversée.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Family, Two Widths Rule",
+        "body": "Une seule famille, Archivo. Le contraste vient de la chasse et de la graisse (72 %/800 contre 100 %/400), jamais d'une seconde police. Rien ne passe en capitales espacées.",
+        "section": "typography"
+      },
+      {
+        "name": "The Typesetter's Rule",
+        "body": "Le français est composé à la française : espace fine insécable (U+202F) avant `:` et `;`, tirets demi-cadratin dans les périodes (`2022 – 2025`), `text-wrap: balance` sur les titres et `pretty` sur les paragraphes.",
+        "section": "typography"
+      },
+      {
+        "name": "The Rule-Line Rule",
+        "body": "Un filet épais de 2 px (`--rule-heavy`, encre) ouvre chaque partie : sous la barre de navigation, sous le nom, sous un en-tête de liste ou de tableau, au-dessus d'une section et du pied de page. Un filet de 1 px en `rule-soft` sépare les coups et les lignes. La structure se lit par ces filets, pas par des boîtes.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat Page Rule",
+        "body": "Rien ne flotte au-dessus du papier. Pour signaler un état, on inverse ou on souligne, on ne soulève pas.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Zero Radius Rule",
+        "body": "Aucun rayon, nulle part. Un coin arrondi sortirait la page du livre.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "**Do** réserver le rouge (`mark`) aux symboles d'évaluation, au trait et à la disponibilité, à la page courante, à la case allumée, au focus et à la sélection.",
+      "**Do** inverser la ligne au survol (encre pleine, texte papier) et passer alors le symbole en `mark-on-invert`.",
+      "**Do** ouvrir chaque partie par un filet de 2 px et séparer les lignes par un filet de 1 px en `rule-soft`.",
+      "**Do** composer l'affichage en Archivo 800 à 72 % de chasse et le texte en Archivo à 100 %, chiffres tabulaires.",
+      "**Do** placer une espace fine insécable (U+202F) avant `:` et `;` en français.",
+      "**Do** garder le diagramme en planche tonale dans le thème sombre (`#e6e3dc` / `#b3afa5`).",
+      "**Do** prendre chaque valeur dans les jetons de `src/styles/global.css` (constitution, principe VIII)."
+    ],
+    "donts": [
+      "**Don't** mettre du rouge sur un bouton ou en fond de survol.",
+      "**Don't** arrondir un coin : le rayon vaut 0 partout.",
+      "**Don't** ajouter d'ombre portée ni de surface flottante. La seule ombre admise est le liseré intérieur de la case allumée.",
+      "**Don't** introduire une seconde famille de caractères ni des capitales espacées.",
+      "**Don't** composer un hero centré suivi d'une rangée de cartes projets.",
+      "**Don't** inverser les couleurs du diagramme en sombre ni le peindre aux couleurs d'un échiquier d'écran."
+    ]
+  }
+}

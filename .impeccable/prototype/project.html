@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Étude de cas d'exemple : logiciel métier — Ramazan Kus</title>
+<meta name="description" content="Étude de cas anonymisée : découper un traitement nocturne en lots Spring Batch dans un logiciel métier.">
+<link rel="preload" href="assets/fonts/archivo-wdth-wght.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .game { padding-block: var(--space-8) var(--space-9); }
+  .back { font-size: var(--text-sm); }
+  .game h1 { margin-top: var(--space-5); font-size: clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem); line-height: 0.98; font-weight: 800; font-stretch: var(--stretch-display); letter-spacing: -0.02em; max-width: 18ch; }
+  .summary { margin-top: var(--space-5); font-size: var(--text-xl); line-height: var(--leading-snug); max-width: 40ch; }
+
+  /* En-tête de partie : les métadonnées comme un en-tête PGN */
+  .pgn { margin-top: var(--space-6); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: var(--rule-heavy) solid var(--color-rule); border-bottom: var(--rule-thin) solid var(--color-rule); }
+  .pgn div { padding: var(--space-3) var(--space-4) var(--space-3) 0; }
+  .pgn dt { font-size: var(--text-xs); color: var(--color-ink-muted); }
+  .pgn dd { font-weight: 600; }
+
+  /* Récit commenté : colonne de symboles en marge */
+  .annotated { margin-top: var(--space-8); display: grid; grid-template-columns: 3rem minmax(0, var(--measure)); column-gap: var(--space-5); }
+  .annotated h2 { grid-column: 2; font-size: var(--text-lg); font-weight: 700; margin-top: var(--space-7); }
+  .annotated h2:first-child { margin-top: 0; }
+  .annotated p { grid-column: 2; margin-top: var(--space-3); }
+  .annotated .mark { grid-column: 1; justify-self: end; font-size: var(--text-2xl); line-height: 1; margin-top: var(--space-7); }
+  .annotated .keymove { grid-column: 2; margin-top: var(--space-4); padding: var(--space-4) 0; border-block: var(--rule-thin) solid var(--color-rule); font-size: var(--text-lg); font-weight: 600; line-height: var(--leading-snug); }
+  .stack { grid-column: 2; display: flex; flex-wrap: wrap; gap: var(--space-2); list-style: none; padding: 0; margin-top: var(--space-3); }
+  .stack li { border: var(--rule-thin) solid var(--color-rule); padding: var(--space-1) var(--space-3); font-size: var(--text-sm); }
+  footer { border-top: var(--rule-heavy) solid var(--color-rule); }
+  footer .wrap { padding-block: var(--space-6); font-size: var(--text-sm); color: var(--color-ink-muted); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+  @media (max-width: 40rem) {
+    .pgn { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .annotated { grid-template-columns: 1.75rem minmax(0, 1fr); column-gap: var(--space-3); }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="masthead">
+  <div class="wrap">
+    <a class="brand" href="index.html">Ramazan Kus</a>
+    <nav class="nav" aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="project.html" aria-current="page">Projets</a></li>
+        <li><a href="index.html#parcours">Parcours</a></li>
+        <li><a href="#">Compétences</a></li>
+        <li><a href="#">CV</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a class="lang" href="#" hreflang="en" lang="en">EN</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="contenu" class="wrap game">
+  <a class="back" href="index.html">Tous les projets</a>
+  <h1>Étude de cas d'exemple : logiciel métier</h1>
+  <p class="summary">Un traitement nocturne dépassait sa fenêtre de [durée]. Je l'ai découpé en lots Spring Batch reprenables.</p>
+
+  <dl class="pgn">
+    <div><dt>Année</dt><dd>2026</dd></div>
+    <div><dt>Contexte</dt><dd>Alternance, équipe de [n]</dd></div>
+    <div><dt>Rôle</dt><dd>Back-end et mise en production</dd></div>
+    <div><dt>Liens</dt><dd>Code privé (anonymisé)</dd></div>
+  </dl>
+
+  <article class="annotated">
+    <h2>Contexte</h2>
+    <p>Texte d'exemple. Un logiciel métier Java/Spring sert [n] sites ; chaque nuit, un traitement recalcule [n] dossiers.</p>
+
+    <h2>Le problème</h2>
+    <p>Texte d'exemple. En [année], le volume a augmenté de [n] % : le traitement débordait sur l'ouverture des agences, et un échec obligeait à tout relancer.</p>
+
+    <span class="mark eval" aria-hidden="true">!</span>
+    <h2>Ce que j'ai fait</h2>
+    <p class="keymove"><span class="sr">Coup clé : </span>Découper le traitement en lots de [n] dossiers avec Spring Batch, reprenables après un échec.</p>
+    <p>Texte d'exemple. J'ai écrit les lecteurs et les processeurs, ajouté un tableau de suivi des lots, puis déployé en deux étapes avec l'équipe d'exploitation.</p>
+
+    <h2>Stack et pourquoi</h2>
+    <ul class="stack"><li>Java 21</li><li>Spring Batch</li><li>PostgreSQL</li><li>Angular</li></ul>
+    <p>Texte d'exemple. Spring Batch était déjà dans le socle de l'équipe : aucune nouvelle dépendance à faire valider.</p>
+
+    <h2>Résultat</h2>
+    <p>Texte d'exemple. Le traitement passe de [durée] à [durée], et une reprise ne relance plus que le lot en échec.</p>
+
+    <h2>Ce que j'en ai appris</h2>
+    <p>Texte d'exemple. Mesurer avant d'optimiser : le premier profilage a montré que [n] % du temps partait dans une seule requête.</p>
+  </article>
+</main>
+
+<footer><div class="wrap">Prototype de direction : contenu d'exemple, chiffres à remplacer.</div></footer>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ramazan Kus — élève ingénieur logiciel, Java/Spring et Angular</title>
+<meta name="description" content="Élève ingénieur à IMT Mines Alès, en alternance chez Astrée Software : applications Java/Spring et Angular, du modèle de données à la mise en production.">
+<link rel="preload" href="assets/fonts/archivo-wdth-wght.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* Accueil */
+  .opening { display: grid; grid-template-columns: minmax(0, 1fr) minmax(18rem, 30rem); gap: var(--space-7) var(--space-8); padding-block: var(--space-8) var(--space-9); align-items: start; }
+  .name { font-size: var(--text-display); line-height: var(--leading-tight); font-weight: 800; font-stretch: var(--stretch-display); letter-spacing: -0.02em; }
+  .header-line { margin-top: var(--space-4); padding-top: var(--space-3); border-top: var(--rule-heavy) solid var(--color-rule); font-size: var(--text-sm); color: var(--color-ink-muted); display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-6); }
+  .pitch { margin-top: var(--space-6); font-size: var(--text-xl); line-height: var(--leading-snug); max-width: 34ch; }
+  .opening .actions { margin-top: var(--space-6); }
+
+  .moves { margin-top: var(--space-8); }
+  .moves h2 { font-size: var(--text-sm); font-weight: 700; padding-bottom: var(--space-2); border-bottom: var(--rule-heavy) solid var(--color-rule); }
+  .moves ol { list-style: none; padding: 0; }
+  .move { border-bottom: var(--rule-thin) solid var(--color-rule-soft); }
+  .move a {
+    display: grid; grid-template-columns: 4.5rem minmax(0, 1fr) 2.5rem; gap: var(--space-4); align-items: baseline;
+    padding: var(--space-3) var(--space-2); text-decoration: none;
+    transition: background-color var(--duration) var(--ease-out), color var(--duration) var(--ease-out);
+  }
+  .move .year { color: var(--color-ink-muted); font-size: var(--text-sm); }
+  .move .notation { display: block; font-weight: 700; color: var(--color-ink); font-size: var(--text-sm); }
+  .move .title { font-weight: 700; font-size: var(--text-lg); line-height: var(--leading-snug); display: block; }
+  .move .choice { display: block; color: var(--color-ink-muted); font-size: var(--text-sm); margin-top: var(--space-1); }
+  .move .eval { font-size: var(--text-2xl); line-height: 1; text-align: right; }
+  .move a:hover, .move a:focus-visible { background: var(--color-invert-bg); color: var(--color-invert-ink); outline-offset: 0; }
+  .move a:hover .year, .move a:hover .choice, .move a:hover .notation, .move a:focus-visible .year, .move a:focus-visible .choice, .move a:focus-visible .notation { color: inherit; }
+  .move a:hover .eval, .move a:focus-visible .eval { color: var(--color-mark-on-invert); }
+  .legend { margin-top: var(--space-3); font-size: var(--text-xs); color: var(--color-ink-muted); display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-5); }
+  .legend .eval { font-size: var(--text-sm); margin-right: var(--space-1); }
+
+  /* Signature : le coup survolé s'allume sur le diagramme */
+  .opening:has([data-move="e4"]:is(:hover, :focus-visible)) .sq[data-sq="e4"]::after,
+  .opening:has([data-move="f3"]:is(:hover, :focus-visible)) .sq[data-sq="f3"]::after,
+  .opening:has([data-move="c4"]:is(:hover, :focus-visible)) .sq[data-sq="c4"]::after { box-shadow: inset 0 0 0 4px var(--color-mark); }
+
+  .side { position: sticky; top: var(--space-6); }
+
+  /* Parcours : grille de tournoi */
+  .crosstable { padding-block: var(--space-8) var(--space-9); border-top: var(--rule-heavy) solid var(--color-rule); }
+  .crosstable h2 { font-size: var(--text-2xl); font-weight: 800; font-stretch: var(--stretch-display); line-height: 1.1; margin-bottom: var(--space-5); }
+  table { width: 100%; border-collapse: collapse; font-size: var(--text-base); }
+  th { text-align: left; font-weight: 700; font-size: var(--text-sm); padding: var(--space-2) var(--space-4) var(--space-2) 0; border-bottom: var(--rule-heavy) solid var(--color-rule); }
+  td { padding: var(--space-3) var(--space-4) var(--space-3) 0; border-bottom: var(--rule-thin) solid var(--color-rule-soft); vertical-align: baseline; }
+  td:first-child { color: var(--color-ink-muted); white-space: nowrap; font-size: var(--text-sm); }
+  .more { margin-top: var(--space-5); font-weight: 600; }
+
+  footer { border-top: var(--rule-heavy) solid var(--color-rule); }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-4); padding-block: var(--space-6); font-size: var(--text-sm); }
+  footer ul { display: flex; flex-wrap: wrap; gap: var(--space-5); list-style: none; padding: 0; }
+  .note { color: var(--color-ink-muted); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+  @media (max-width: 56rem) {
+    .opening { grid-template-columns: 1fr; padding-block: var(--space-6) var(--space-8); }
+    .side { position: static; order: 2; }
+    .diagram { max-width: 22rem; }
+    .moves { order: 3; margin-top: 0; }
+    .opening > .lead { display: contents; }
+    .lead-top { order: 1; }
+    .move a { grid-template-columns: 3.25rem minmax(0, 1fr) 2rem; gap: var(--space-3); }
+    th:nth-child(3) { display: none; }
+    table, thead, tbody { display: block; }
+    thead tr { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); column-gap: var(--space-4); border-bottom: var(--rule-heavy) solid var(--color-rule); }
+    thead th { border: 0; }
+    tbody tr { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); column-gap: var(--space-4); border-bottom: var(--rule-thin) solid var(--color-rule-soft); padding-block: var(--space-3); }
+    tbody td { border: 0; padding: 0; }
+    tbody td:nth-child(3) { grid-column: 2; color: var(--color-ink-muted); font-size: var(--text-sm); }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="masthead">
+  <div class="wrap">
+    <a class="brand" href="index.html">Ramazan Kus</a>
+    <nav class="nav" aria-label="Navigation principale">
+      <ul>
+        <li><a href="index.html" aria-current="page">Accueil</a></li>
+        <li><a href="project.html">Projets</a></li>
+        <li><a href="#parcours">Parcours</a></li>
+        <li><a href="#">Compétences</a></li>
+        <li><a href="#">CV</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a class="lang" href="#" hreflang="en" lang="en">EN</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="contenu">
+  <section class="wrap opening" aria-labelledby="nom">
+    <div class="lead">
+      <div class="lead-top">
+        <h1 class="name" id="nom">Ramazan Kus</h1>
+        <p class="header-line"><span>Astrée Software</span><span>IMT Mines Alès</span><span>Java, Spring, Angular</span></p>
+        <p class="pitch">Élève ingénieur en alternance chez Astrée Software, je développe des applications Java/Spring et Angular, du modèle de données à la mise en production.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#">Télécharger le CV <span class="sr">(PDF)</span></a>
+          <a class="btn btn-secondary" href="mailto:contact@example.com">M'écrire</a>
+        </div>
+      </div>
+
+      <div class="moves">
+        <h2>Trois parties choisies</h2>
+        <ol>
+          <li class="move"><a href="project.html" data-move="e4"><span class="year">2026<span class="notation">1.e4</span></span><span><span class="title">Étude de cas d'exemple : logiciel métier</span><span class="choice">Coup clé : découper le traitement nocturne en lots Spring Batch</span></span><span class="eval" aria-hidden="true">!</span><span class="sr">, coup clé</span></a></li>
+          <li class="move"><a href="project.html" data-move="f3"><span class="year">2025<span class="notation">2.Cf3</span></span><span><span class="title">Projet d'exemple B</span><span class="choice">Coup clé : une seule source de données pour trois écrans</span></span><span class="eval" aria-hidden="true">!?</span><span class="sr">, pari réfléchi</span></a></li>
+          <li class="move"><a href="project.html" data-move="c4"><span class="year">2024<span class="notation">3.Fc4</span></span><span><span class="title">Projet d'exemple C</span><span class="choice">Coup clé : des signals Angular plutôt qu'un store global</span></span><span class="eval" aria-hidden="true">!</span><span class="sr">, coup clé</span></a></li>
+        </ol>
+        <p class="legend"><span><span class="eval" aria-hidden="true">!</span>coup clé</span><span><span class="eval" aria-hidden="true">!?</span>pari réfléchi</span></p>
+      </div>
+    </div>
+
+    <aside class="side" aria-label="Disponibilité">
+      <figure class="diagram">
+        <div class="board-frame">
+          <div class="ranks" aria-hidden="true"><span>8</span><span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span></div>
+          <div class="board" role="img" aria-label="Diagramme : partie italienne après 1.e4 e5 2.Cf3 Cc6 3.Fc4 Fc5">
+<div class="sq" data-sq="a8"><img src="assets/pieces/bR.svg" alt="" width="45" height="45"></div>
+<div class="sq d" data-sq="b8"></div>
+<div class="sq" data-sq="c8"><img src="assets/pieces/bB.svg" alt="" width="45" height="45"></div>
+<div class="sq d" data-sq="d8"><img src="assets/pieces/bQ.svg" alt="" width="45" height="45"></div>
+<div class="sq" data-sq="e8"><img src="assets/pieces/bK.svg" alt="" width="45" height="45"></div>
+<div class="sq d" data-sq="f8"></div>
+<div class="sq" data-sq="g8"><img src="assets/pieces/bN.svg" alt="" width="45" height="45"></div>
+<div class="sq d" data-sq="h8"><img src="assets/pieces/bR.svg" alt="" width="45" height="45"></div>
+<div class="sq d" data-sq="a7"><img src="assets/pieces/bP.svg" alt="" width="45" height="45"></div>
+<div class="sq" data-sq="b7"><img src="assets/pieces/bP.svg" alt="" width="45" height="45"></div>
+<div class="sq d" data-sq="c7"><img src="assets/pieces/bP.svg" alt="" width="45" height="45"></div>
+<div class="sq" data-sq="d7"><img src="assets/pieces/bP.svg" alt="" width="45" height="45"></div>
+<div class="sq d" data-sq="e7"></div>
+<div class="sq" data-sq="f7"><img src="assets/pieces/bP.svg" alt="" width="45" height="45"></div>
+<div class="sq d" data-sq="g7"><img src="assets/pieces/bP.svg" alt="" width="45" height="45"></div>
+<div class="sq" data-sq="h7"><img src="assets/pieces/bP.svg" alt="" width="45" height="45"></div>
+<div class="sq" data-sq="a6"></div>
+<div class="sq d" data-sq="b6"></div>
+<div class="sq" data-sq="c6"><img src="assets/pieces/bN.svg" alt="" width="45" height="45"></div>
+<div class="sq d" data-sq="d6"></div>
+<div class="sq" data-sq="e6"></div>
+<div class="sq d" data-sq="f6"></div>
+<div class="sq" data-sq="g6"></div>
+<div class="sq d" data-sq="h6"></div>
+<div class="sq d" data-sq="a5"></div>
+<div class="sq" data-sq="b5"></div>
+<div class="sq d" data-sq="c5"><img src="assets/pieces/bB.svg" alt="" width="45" height="45"></div>
+<div class="sq" data-sq="d5"></div>
+<div class="sq d" data-sq="e5"><img src="assets/pieces/bP.svg" alt="" width="45" height="45"></div>
+<div class="sq" data-sq="f5"></div>
+<div class="sq d" data-sq="g5"></div>
+<div class="sq" data-sq="h5"></div>
+<div class="sq" data-sq="a4"></div>
+<div class="sq d" data-sq="b4"></div>
+<div class="sq" data-sq="c4"><img src="assets/pieces/wB.svg" alt="" width="45" height="45"></div>
+<div class="sq d" data-sq="d4"></div>
+<div class="sq" data-sq="e4"><img src="assets/pieces/wP.svg" alt="" width="45" height="45"></div>
+<div class="sq d" data-sq="f4"></div>
+<div class="sq" data-sq="g4"></div>
+<div class="sq d" data-sq="h4"></div>
+<div class="sq d" data-sq="a3"></div>
+<div class="sq" data-sq="b3"></div>
+<div class="sq d" data-sq="c3"></div>
+<div class="sq" data-sq="d3"></div>
+<div class="sq d" data-sq="e3"></div>
+<div class="sq" data-sq="f3"><img src="assets/pieces/wN.svg" alt="" width="45" height="45"></div>
+<div class="sq d" data-sq="g3"></div>
+<div class="sq" data-sq="h3"></div>
+<div class="sq" data-sq="a2"><img src="assets/pieces/wP.svg" alt="" width="45" height="45"></div>
+<div class="sq d" data-sq="b2"><img src="assets/pieces/wP.svg" alt="" width="45" height="45"></div>
+<div class="sq" data-sq="c2"><img src="assets/pieces/wP.svg" alt="" width="45" height="45"></div>
+<div class="sq d" data-sq="d2"><img src="assets/pieces/wP.svg" alt="" width="45" height="45"></div>
+<div class="sq" data-sq="e2"></div>
+<div class="sq d" data-sq="f2"><img src="assets/pieces/wP.svg" alt="" width="45" height="45"></div>
+<div class="sq" data-sq="g2"><img src="assets/pieces/wP.svg" alt="" width="45" height="45"></div>
+<div class="sq d" data-sq="h2"><img src="assets/pieces/wP.svg" alt="" width="45" height="45"></div>
+<div class="sq d" data-sq="a1"><img src="assets/pieces/wR.svg" alt="" width="45" height="45"></div>
+<div class="sq" data-sq="b1"><img src="assets/pieces/wN.svg" alt="" width="45" height="45"></div>
+<div class="sq d" data-sq="c1"><img src="assets/pieces/wB.svg" alt="" width="45" height="45"></div>
+<div class="sq" data-sq="d1"><img src="assets/pieces/wQ.svg" alt="" width="45" height="45"></div>
+<div class="sq d" data-sq="e1"><img src="assets/pieces/wK.svg" alt="" width="45" height="45"></div>
+<div class="sq" data-sq="f1"></div>
+<div class="sq d" data-sq="g1"></div>
+<div class="sq" data-sq="h1"><img src="assets/pieces/wR.svg" alt="" width="45" height="45"></div>
+          </div>
+          <div class="files" aria-hidden="true"><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span></div>
+        </div>
+        <figcaption class="caption"><span class="trait" aria-hidden="true"></span><span><strong>Disponible pour un stage</strong>Dès avril 2027, en France et en Europe</span></figcaption>
+      </figure>
+    </aside>
+  </section>
+
+  <section class="crosstable" id="parcours" aria-labelledby="parcours-titre">
+    <div class="wrap">
+      <h2 id="parcours-titre">Parcours</h2>
+      <table>
+        <thead><tr><th scope="col">Période</th><th scope="col">Rôle</th><th scope="col">Lieu</th></tr></thead>
+        <tbody>
+          <tr><td>2025 – aujourd'hui</td><td>Développeur en alternance, Java/Spring et Angular</td><td>Astrée Software</td></tr>
+          <tr><td>2025 – aujourd'hui</td><td>Cycle ingénieur, génie logiciel</td><td>IMT Mines Alès</td></tr>
+          <tr><td>2022 – 2025</td><td>BUT Informatique</td><td>IUT (exemple)</td></tr>
+        </tbody>
+      </table>
+      <p class="more"><a href="#">Tout le parcours</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <ul>
+      <li><a href="mailto:contact@example.com">Email</a></li>
+      <li><a href="#">GitHub</a></li>
+      <li><a href="#">LinkedIn</a></li>
+    </ul>
+    <p class="note">Prototype de direction : projets, dates et lieux d'exemple.</p>
+  </div>
+</footer>
+</body>
+</html>
