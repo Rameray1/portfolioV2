@@ -96,9 +96,9 @@ speckit workflow.
 
 ### Implementation for User Story 3
 
-- [ ] T016 [US3] Update `README.md` (French, keep existing sections "Documents du projet" and "Conventions"): **Prérequis** (Node 22, `nvm use` reads `.nvmrc`); **Installation** (`npm install`); **Commandes** table with `dev`, `build`, `preview`, `format`, `check` and their role (contracts/commands.md); **Avant de committer** (`npm run check && npm run build`); **CI** (what runs on push/PR, and how to make the `CI / check-and-build` check required on `main` in GitHub → Settings → Branches, research R8); **Workflow speckit** (the `/speckit-specify → clarify → plan → tasks → implement` chain, blocks in `ROADMAP.md`) (FR-013)
-- [ ] T017 [P] [US3] In `AGENTS.md`, section "Before committing", remove the parenthesis "(`npm run check` is added by F01; until then, `npm run build` only.)"
-- [ ] T018 [US3] Validate quickstart §3: clone the branch into the scratchpad, follow only `README.md` up to `npm run dev` and `npm run check`; fix the README for any missing step (SC-005)
+- [x] T016 [US3] Update `README.md` (French, keep existing sections "Documents du projet" and "Conventions"): **Prérequis** (Node 22, `nvm use` reads `.nvmrc`); **Installation** (`npm install`); **Commandes** table with `dev`, `build`, `preview`, `format`, `check` and their role (contracts/commands.md); **Avant de committer** (`npm run check && npm run build`); **CI** (what runs on push/PR, and how to make the `CI / check-and-build` check required on `main` in GitHub → Settings → Branches, research R8); **Workflow speckit** (the `/speckit-specify → clarify → plan → tasks → implement` chain, blocks in `ROADMAP.md`) (FR-013)
+- [x] T017 [P] [US3] In `AGENTS.md`, section "Before committing", remove the parenthesis "(`npm run check` is added by F01; until then, `npm run build` only.)"
+- [x] T018 [US3] Validate quickstart §3: clone the branch into the scratchpad, follow only `README.md` up to `npm run dev` and `npm run check`; fix the README for any missing step (SC-005)
 
 **Checkpoint**: all three stories done.
 
@@ -106,8 +106,8 @@ speckit workflow.
 
 ## Phase 6: Polish & Cross-Cutting Concerns
 
-- [ ] T019 Run `npm run check && npm run build` one last time on the whole branch
-- [ ] T020 Check with `git log main..HEAD --oneline` that every commit of the branch is a conventional commit (`chore`, `ci`, `docs`) written in English
+- [x] T019 Run `npm run check && npm run build` one last time on the whole branch
+- [x] T020 Check with `git log main..HEAD --oneline` that every commit of the branch is a conventional commit (`chore`, `ci`, `docs`) written in English
 
 ---
 

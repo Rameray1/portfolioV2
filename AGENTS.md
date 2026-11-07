@@ -29,8 +29,7 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 
 ## Before committing
 
-- `npm run check && npm run build` must pass. (`npm run check` is added by F01; until then,
-  `npm run build` only.)
+- `npm run check && npm run build` must pass (`npm run format` fixes formatting).
 - Conventional commits only: `feat`, `fix`, `content`, `chore`, `docs`, `perf`, `a11y`, `ci`.
 
 ## Documentation
