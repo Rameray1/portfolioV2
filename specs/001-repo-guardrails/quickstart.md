@@ -36,9 +36,9 @@ Revert the change. Measure `time npm run check`: under 30 s (SC-003).
 4. Push a commit that breaks only the build (e.g. `throw new Error('boom');` in the frontmatter
    of `index.astro`, which type-checks fine) → red although `check` passes. Revert (SC-002).
 
-## 3. README (User Story 3)
+## 3. README and CONTRIBUTING (User Story 3)
 
-In a fresh clone, follow only `README.md`: install, `npm run dev`, open the site, run
-`npm run check`. Everything works without another document (SC-005).
+In a fresh clone, follow only `README.md`: install, `npm run dev`, open the site (SC-005). Then
+follow `CONTRIBUTING.md` to run `npm run check`. Nothing else is needed.
 
 Contracts: [commands](./contracts/commands.md) · [CI](./contracts/ci.md).

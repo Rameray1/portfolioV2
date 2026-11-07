@@ -9,8 +9,10 @@
 Add the repository's guardrails before any component exists: Prettier (with the Astro plugin)
 for formatting, `astro check` on the existing strict `tsconfig` for types, two npm scripts
 (`format`, `check`) next to the unchanged `build`, shared editor settings and a Node version
-file, a GitHub Actions workflow that runs `npm ci → check → build` on every push and PR, and a
-README updated with install, commands and the speckit workflow. No ESLint, no pre-commit hook.
+file, a GitHub Actions workflow that runs `npm ci → check → build` on every PR and every push
+to `main`, an English README for visitors (pitch, how it's built, run locally) and a French
+`CONTRIBUTING.md` for maintenance (commands, CI, speckit workflow). No ESLint, no pre-commit
+hook.
 
 ## Technical Context
 
@@ -93,7 +95,8 @@ specs/001-repo-guardrails/
 package.json               # scripts format + check, devDependencies
 package-lock.json          # updated by npm install
 tsconfig.json              # unchanged (already extends astro/tsconfigs/strict)
-README.md                  # updated — FR-013
+README.md                  # rewritten in English for visitors — FR-013
+CONTRIBUTING.md            # new, French: commands, CI, speckit workflow — FR-013
 .vscode/extensions.json    # add esbenp.prettier-vscode recommendation
 src/pages/index.astro      # possibly reformatted by the first `npm run format`
 AGENTS.md                  # drop the "until F01" note once `npm run check` exists
@@ -112,8 +115,10 @@ initial reformat. The first `npm run format` over the existing files goes in its
    file in `.prettierignore` only if it is garbled. Commit separately.
 4. Make `npm run check && npm run build` pass locally.
 5. Add `.github/workflows/ci.yml` per [contracts/ci.md](./contracts/ci.md).
-6. Update README (sections: prérequis, installation, commandes, workflow speckit, protection de
-   branche), `.vscode/extensions.json`, and the "until F01" mentions in `AGENTS.md`.
+6. Rewrite `README.md` in English for visitors (pitch, how it's built, run locally, links) and
+   create `CONTRIBUTING.md` in French (prérequis, installation, commandes, CI et protection de
+   branche, workflow speckit, conventions); update `.vscode/extensions.json` and the
+   "until F01" mentions in `AGENTS.md`.
 7. Validate with [quickstart.md](./quickstart.md), including the three red-PR scenarios.
 
 ## Complexity Tracking

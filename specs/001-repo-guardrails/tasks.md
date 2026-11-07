@@ -69,8 +69,8 @@ format error (naming the file) and on an injected type error (naming file and li
 
 ## Phase 4: User Story 2 — Bloquer automatiquement le code non conforme sur GitHub (Priority: P2)
 
-**Goal**: every PR to `main` and every push to `main` runs `npm ci → npm run check → npm run build`; any
-failure makes the status red.
+**Goal**: every PR to `main` and every push to `main` runs `npm ci → npm run check →
+npm run build`; any failure makes the status red.
 
 **Independent Test**: quickstart §2 — PR green when clean; red on a format error, a type error
 and a build-only error.
@@ -88,17 +88,17 @@ and a build-only error.
 
 ## Phase 5: User Story 3 — Démarrer le projet grâce au README (Priority: P3)
 
-**Goal**: the README alone lets a newcomer install, run and check the project and follow the
-speckit workflow.
+**Goal**: the README alone lets a newcomer install and run the project; `CONTRIBUTING.md` lets
+them check it and follow the speckit workflow.
 
-**Independent Test**: quickstart §3 — fresh clone, only the README, site running and
-`npm run check` passing.
+**Independent Test**: quickstart §3 — fresh clone, the README alone gets the site running, then
+`CONTRIBUTING.md` gets `npm run check` passing.
 
 ### Implementation for User Story 3
 
-- [x] T016 [US3] Update `README.md` (French, keep existing sections "Documents du projet" and "Conventions"): **Prérequis** (Node 22, `nvm use` reads `.nvmrc`); **Installation** (`npm install`); **Commandes** table with `dev`, `build`, `preview`, `format`, `check` and their role (contracts/commands.md); **Avant de committer** (`npm run check && npm run build`); **CI** (what runs on push/PR, and how to make the `CI / check-and-build` check required on `main` in GitHub → Settings → Branches, research R8); **Workflow speckit** (the `/speckit-specify → clarify → plan → tasks → implement` chain, blocks in `ROADMAP.md`) (FR-013)
+- [x] T016 [US3] Rewrite `README.md` in English for visitors: pitch, CI badge, **How it's built**, **Run it locally** (Node 22 from `.nvmrc`, clone, `npm install`, `npm run dev`), **Learn more** (links to `CONTRIBUTING.md`, `CONTENU.md`, `DESIGN.md`). Create `CONTRIBUTING.md` in French: **Documents du projet**; **Prérequis** (`nvm use` reads `.nvmrc`); **Installation**; **Commandes** table with `dev`, `build`, `preview`, `format`, `check` and their role (contracts/commands.md); **Avant chaque commit** (`npm run check && npm run build`); **Intégration continue** (what runs on push/PR, and the ruleset that makes the `CI / check-and-build` check required on `main`, research R8); **Workflow speckit** (the `/speckit-specify → clarify → plan → tasks → implement` chain, blocks in `ROADMAP.md`); **Conventions** (FR-013)
 - [x] T017 [P] [US3] In `AGENTS.md`, section "Before committing", remove the parenthesis "(`npm run check` is added by F01; until then, `npm run build` only.)"
-- [x] T018 [US3] Validate quickstart §3: clone the branch into the scratchpad, follow only `README.md` up to `npm run dev` and `npm run check`; fix the README for any missing step (SC-005)
+- [x] T018 [US3] Validate quickstart §3: clone the branch into the scratchpad, follow only `README.md` up to `npm run dev`, then `CONTRIBUTING.md` up to `npm run check`; fix either document for any missing step (SC-005)
 
 **Checkpoint**: all three stories done.
 
@@ -117,7 +117,7 @@ speckit workflow.
 - **Foundational (T004–T005)**: after Setup; blocks US1 and US2.
 - **US1 (T006–T011)**: after T004. T006 ∥ T007, then T008 → T009 → T010 → T011.
 - **US2 (T012–T015)**: needs the `check` script from T008 and a green repo (T010). T012 → T013 → T014 → T015.
-- **US3 (T016–T018)**: README content depends on the final command list (T008) and CI behaviour (T012); T017 is independent and can run any time.
+- **US3 (T016–T018)**: README and CONTRIBUTING content depends on the final command list (T008) and CI behaviour (T012); T017 is independent and can run any time.
 - **Polish (T019–T020)**: after all stories.
 
 ```text
@@ -139,7 +139,7 @@ T001 T002 T003 ──► T004 ─► T005
 
 - **Setup**: T001, T002 and T003 together (three different files).
 - **US1**: T006 (`.prettierrc`) together with T007 (`.prettierignore`).
-- **US3**: T017 (`AGENTS.md`) alongside T016 (`README.md`).
+- **US3**: T017 (`AGENTS.md`) alongside T016 (`README.md`, `CONTRIBUTING.md`).
 
 ## Implementation Strategy
 

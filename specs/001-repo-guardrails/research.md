@@ -47,7 +47,7 @@ Versions checked on the npm registry on 2026-11-07.
 - **Rationale**: one file used by nvm/fnm/Volta-compatible tools locally and by CI (FR-011).
   Major only (`22`) so that CI gets security patches without commits.
 - **Note**: the local machine currently runs Node 24; that satisfies `engines` but differs from
-  CI. The README tells contributors to run `nvm use`.
+  CI. `CONTRIBUTING.md` tells contributors to run `nvm use`.
 
 ## R6 · Prettier configuration
 
@@ -66,8 +66,9 @@ Versions checked on the npm registry on 2026-11-07.
 
 - **Decision**: GitHub Actions, `.github/workflows/ci.yml`, one job on `ubuntu-latest`:
   checkout → setup-node (`node-version-file: .nvmrc`, `cache: npm`) → `npm ci` →
-  `npm run check` → `npm run build`. Triggers: `push` (to `main`) and `pull_request`
-  (to `main`); a push on a feature branch is covered by its PR, so it does not run twice. `concurrency` cancels superseded runs on the same ref.
+  `npm run check` → `npm run build`. Triggers: `push` (to `main`) and `pull_request` (to
+  `main`); a push on a feature branch is covered by its PR, so it does not run twice.
+  `concurrency` cancels superseded runs on the same ref.
 - **Rationale**: steps run in order and a failing step fails the job, so the PR status is red
   (FR-010). `npm ci` gives a clean install from the lockfile (FR-009). `cache: npm` keeps a run
   well under the 5-minute target (SC-004). Use the latest major tags of `actions/checkout` and
@@ -78,6 +79,7 @@ Versions checked on the npm registry on 2026-11-07.
 
 ## R8 · Branch protection
 
-- **Decision**: not automated. README documents how to mark the `CI` check as required on `main`
-  in GitHub settings.
+- **Decision**: not automated. `main` is protected by a repository ruleset set up by hand in
+  GitHub settings (PR required, `check-and-build` required and up to date, squash merge only,
+  no deletion or force push, no bypass); `CONTRIBUTING.md` describes it.
 - **Rationale**: a one-time manual setting; automating it would need an API token (YAGNI).

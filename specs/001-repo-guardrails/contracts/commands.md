@@ -1,6 +1,6 @@
 # Contract: npm commands
 
-The command surface of the repository after F01. The README lists exactly these.
+The command surface of the repository after F01. `CONTRIBUTING.md` lists exactly these.
 
 | Command           | Does                                | Modifies files | Exit code                                                |
 | ----------------- | ----------------------------------- | -------------- | -------------------------------------------------------- |

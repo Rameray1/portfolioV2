@@ -50,9 +50,13 @@ formatage, `npm run format` corrige ; une erreur de type indique le fichier et l
 ([`.github/workflows/ci.yml`](./.github/workflows/ci.yml)) exécute `npm ci`, `npm run check`
 puis `npm run build`. Un échec passe le check `CI / check-and-build` au rouge.
 
-Pour interdire la fusion d'une PR rouge (réglage manuel, une fois) : GitHub → **Settings** →
-**Branches** → règle de protection sur `main` → cocher _Require status checks to pass before
-merging_ et sélectionner `check-and-build`.
+`main` est protégée par le ruleset `main` (GitHub → **Settings** → **Rules** → **Rulesets**),
+sans contournement possible :
+
+- passage obligatoire par une PR (aucune approbation requise, conversations résolues) ;
+- check `check-and-build` vert et branche à jour avec `main` avant de fusionner ;
+- fusion en _squash_ uniquement ;
+- suppression et force push interdits.
 
 ## Workflow speckit
 

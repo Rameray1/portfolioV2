@@ -49,9 +49,9 @@ commande de formatage corrige le premier cas ; une fois tout corrigé, la vérif
 
 ### User Story 2 - Bloquer automatiquement le code non conforme sur GitHub (Priority: P2)
 
-À chaque pull request vers `main` (et à chaque push sur `main`), GitHub exécute la vérification puis le build. Si l'un
-échoue, la PR est marquée en échec (rouge) et le mainteneur voit pourquoi ; sinon elle est
-marquée en succès (vert).
+À chaque pull request vers `main` (et à chaque push sur `main`), GitHub exécute la vérification
+puis le build. Si l'un échoue, la PR est marquée en échec (rouge) et le mainteneur voit
+pourquoi ; sinon elle est marquée en succès (vert).
 
 **Why this priority**: protège `main` même quand la vérification locale a été oubliée. Dépend
 des commandes de la story 1.
@@ -136,8 +136,8 @@ en local, puis `CONTRIBUTING.md` pour faire passer la vérification, sans autre 
 - **FR-008**: Les fichiers générés, les dépendances installées et l'outillage tiers (`.specify/`,
   `.claude/`) MUST être exclus du formatage et de la vérification.
 - **FR-009**: À chaque pull request vers `main` (ouverture et chaque mise à jour) et à chaque
-  push sur `main`, GitHub MUST exécuter, sur une installation propre des dépendances, la vérification puis le
-  build.
+  push sur `main`, GitHub MUST exécuter, sur une installation propre des dépendances, la
+  vérification puis le build.
 - **FR-010**: Si la vérification ou le build échoue, le statut de la PR / du commit MUST être en
   échec ; s'ils réussissent tous deux, il MUST être en succès.
 - **FR-011**: La version de Node attendue MUST être déclarée à un seul endroit, utilisé à la
