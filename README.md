@@ -11,7 +11,7 @@ Mon portfolio personnel, reconstruit de zéro avec [Astro](https://astro.build).
 | [`CONTENU.md`](./CONTENU.md) | Le cadrage : finalité, audiences, URL, modèle de contenu, règles d'écriture. La référence de toutes les specs. |
 | [`ROADMAP.md`](./ROADMAP.md) | L'ordre de construction et, pour chaque feature, les blocs à donner à speckit. |
 | `DESIGN.md` | La direction visuelle *(à venir, étape 0)*. |
-| `.specify/memory/constitution.md` | Les principes non négociables, vérifiés à chaque plan *(à venir, étape 0)*. |
+| `.specify/memory/constitution.md` | Les principes non négociables, vérifiés à chaque plan. |
 | `specs/NNN-feature/` | Spec, plan et tâches de chaque feature, générés par speckit. |
 
 ## Démarrer
@@ -32,7 +32,7 @@ Pour un agent : `astro dev --background`, puis `astro dev stop | status | logs` 
 Une feature = une branche speckit, fusionnée dans `main` quand elle est finie :
 
 ```
-/speckit.specify → /speckit.clarify → /speckit.plan → /speckit.tasks → /speckit.implement
+/speckit-specify → /speckit-clarify → /speckit-plan → /speckit-tasks → /speckit-implement
 ```
 
 Les blocs « Spec » et « Plan » de chaque feature sont dans `ROADMAP.md`.
@@ -43,5 +43,7 @@ Les blocs « Spec » et « Plan » de chaque feature sont dans `ROADMAP.md`.
 - **Français par défaut, anglais sous `/en`**, avec les mêmes chemins. Le blog reste en français.
 - **Le contenu est de la donnée** (`src/content/`, `src/data/`) : ajouter un projet = un fichier
   `.md`, zéro ligne de code.
-- **On n'efface pas, on archive** : `status: brouillon | publie | archive`.
+- **Site 100 % statique**, zéro JavaScript client par défaut. KISS / YAGNI : rien « au cas où ».
+- **Brouillon** : `draft: true`. **Retirer** un contenu : supprimer le fichier + une redirection
+  dans `astro.config.mjs`.
 - Commits conventionnels (`feat`, `fix`, `content`, `chore`, `docs`, `perf`, `a11y`, `ci`).
