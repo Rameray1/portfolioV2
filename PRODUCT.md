@@ -13,7 +13,7 @@ Hiérarchie actuelle, portée par la campagne de stage (elle bougera ; voir `CON
 1. **Recruteur international (anglophone)** : il trie en 60 secondes. Il cherche qui, quelle
    stack, quel niveau, disponible quand, mobile où, comment joindre. L'anglais est une
    exigence, pas un bonus.
-2. **Lead technique** : il ouvre *un* projet, puis le GitHub. Il juge sur la preuve.
+2. **Lead technique** : il ouvre _un_ projet, puis le GitHub. Il juge sur la preuve.
 3. **Recruteur FR** : il vient du réseau ou de l'école.
 4. **Le propriétaire (Ramazan Kus)** : il publie un changement en 10 minutes, sans toucher au
    code.
