@@ -46,9 +46,12 @@ const items = nav.map((item) => {
     padding-block: var(--space-1);
     font-size: var(--text-sm);
     text-decoration: none;
+    /* même position de trait au survol et pour la rubrique courante */
+    text-underline-offset: var(--underline-offset-current);
   }
 
-  a:hover {
+  a:hover,
+  a[aria-current] {
     text-decoration-line: underline;
     text-decoration-thickness: var(--rule-heavy);
   }
@@ -56,8 +59,5 @@ const items = nav.map((item) => {
   a[aria-current] {
     color: var(--color-mark);
     font-weight: var(--weight-semibold);
-    text-decoration-line: underline;
-    text-decoration-thickness: var(--rule-heavy);
-    text-underline-offset: var(--underline-offset-current);
   }
 </style>

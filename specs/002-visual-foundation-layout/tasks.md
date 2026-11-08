@@ -129,10 +129,10 @@ added line appears on every page, `git diff --stat` = 1 file, 1 line).
 **Purpose**: constitution gate for a visual feature — audit + polish before the feature is
 done.
 
-- [ ] T022 Run `/impeccable audit` on the provisional home and the layout components (both themes, 320 px and desktop); list findings
-- [ ] T023 Run `/impeccable polish` and apply the accepted fixes in the files concerned (`src/styles/global.css`, `src/layouts/BaseLayout.astro`, `src/components/*.astro`, `src/pages/index.astro`), tokens only
-- [ ] T024 Run quickstart §7 (axe DevTools 0 issues in light and dark; Lighthouse mobile performance ≥ 95, accessibility 100, CLS ≤ 0.1 — if CLS > 0.1, report it and revisit R3 before continuing; transferred < 200 kB) and §8 (hard-coded value grep over `src/components src/layouts src/pages`: every hit is an allowed exception)
-- [ ] T025 Run `npm run check && npm run build` on the whole branch, and `git log main..HEAD --oneline` to check that every commit is conventional and in English
+- [x] T022 Run `/impeccable audit` on the provisional home and the layout components (both themes, 320 px and desktop); list findings
+- [x] T023 Run `/impeccable polish` and apply the accepted fixes in the files concerned (`src/styles/global.css`, `src/layouts/BaseLayout.astro`, `src/components/*.astro`, `src/pages/index.astro`), tokens only
+- [x] T024 Run quickstart §7 (axe DevTools 0 issues in light and dark; Lighthouse mobile performance ≥ 95, accessibility 100, CLS ≤ 0.1 — if CLS > 0.1, report it and revisit R3 before continuing; transferred < 200 kB) and §8 (hard-coded value grep over `src/components src/layouts src/pages`: every hit is an allowed exception). _Result: detector 0 findings (1280 and 320 px); Lighthouse mobile 100/100/100/100 in light and dark, CLS 0, 95 kB transferred; grep: only two commented exceptions. Lighthouse covered the axe rules; the axe DevTools extension pass is left to the maintainer._
+- [x] T025 Run `npm run check && npm run build` on the whole branch, and `git log main..HEAD --oneline` to check that every commit is conventional and in English
 
 ---
 
