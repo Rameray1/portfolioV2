@@ -1,3 +1,6 @@
+// Rubriques de la navigation, une entrée par rubrique ; l'ordre du tableau est l'ordre affiché.
+// `href` commence par `/`. Une page placée sous ce chemin (`/projects/x`) signale la rubrique
+// comme courante. Les libellés passeront par le dictionnaire i18n en F03.
 export interface NavItem {
   label: string;
   href: `/${string}`;

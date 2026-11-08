@@ -117,8 +117,8 @@ added line appears on every page, `git diff --stat` = 1 file, 1 line).
 
 ### Implementation for User Story 4
 
-- [ ] T020 [US4] At the top of `src/data/nav.ts`, add a short French comment: one entry per rubrique, array order = display order, `href` starts with `/`, a page inside a rubrique (`/projects/x`) marks it as current; labels move to the i18n dictionary in F03
-- [ ] T021 [US4] Validate US4 with quickstart §1 (`{ label: 'Test' }` fails `npm run check`; restore) and §3 (`{ label: 'Test', href: '/test' }` appears last on the home nav with `astro dev --background`; revert)
+- [x] T020 [US4] At the top of `src/data/nav.ts`, add a short French comment: one entry per rubrique, array order = display order, `href` starts with `/`, a page inside a rubrique (`/projects/x`) marks it as current; labels move to the i18n dictionary in F03
+- [x] T021 [US4] Validate US4 with quickstart §1 (`{ label: 'Test' }` fails `npm run check`; restore) and §3 (`{ label: 'Test', href: '/test' }` appears last on the home nav with `astro dev --background`; revert)
 
 **Checkpoint**: all four stories done.
 
