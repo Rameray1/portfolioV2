@@ -55,6 +55,8 @@ constitution fixe ce qui est non négociable et que chaque `/speckit-plan` doit 
 
 - Français par défaut, anglais sous `/en`, avec les mêmes chemins. Le blog reste en français.
 - Aucun libellé d'interface en dur : tout texte d'UI MUST passer par le dictionnaire i18n.
+  La règle s'applique à partir de F03, qui crée le dictionnaire et convertit les libellés posés
+  en F02 ; avant F03, les libellés sont des littéraux français regroupés en peu d'endroits.
 - L'anglais est réécrit, pas traduit (`CONTENU.md` §9).
 
 ### VII. Accessibilité et performance
@@ -117,4 +119,4 @@ constitution fixe ce qui est non négociable et que chaque `/speckit-plan` doit 
 - Conformité : `/speckit-plan` et `/speckit-analyze` vérifient chaque feature contre ces
   principes ; une exception non justifiée bloque la feature.
 
-**Version**: 1.0.0 | **Ratified**: 2026-11-07 | **Last Amended**: 2026-11-07
+**Version**: 1.0.1 | **Ratified**: 2026-11-07 | **Last Amended**: 2026-11-08
