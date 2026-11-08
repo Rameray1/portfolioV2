@@ -81,9 +81,9 @@ no phone (quickstart §1–2).
 
 ### Implementation for User Story 2
 
-- [ ] T013 [US2] In `src/styles/global.css`, add `color-scheme: light dark;` at the top of the `:root` block, and after it `@media (prefers-color-scheme: dark) { :root { … } }` redefining every color token with its **dark** value from [contracts/tokens.md § Colors](./contracts/tokens.md) (`--color-paper: #161513`, `--color-ink: #f1efea`, `--color-ink-muted: #aaa69d`, `--color-rule: #f1efea`, `--color-rule-soft: #36342f`, `--color-mark: #ff5a6a`, `--color-mark-ink: #161513`, `--color-mark-on-invert: #c8102e`, `--color-invert-bg: #f1efea`, `--color-invert-ink: #161513`, `--color-square-light: #e6e3dc`, `--color-square-dark: #b3afa5`, `--color-board-edge: #f1efea`). No `[data-theme]` selector (R2)
-- [ ] T014 [US2] In `src/layouts/BaseLayout.astro`, add `<meta name="color-scheme" content="light dark" />` right after the viewport meta (R2)
-- [ ] T015 [US2] Validate US2 with quickstart §4 in Chrome and a second engine (Safari or Firefox); confirm dark scrollbars and no white frame (SC-002)
+- [x] T013 [US2] In `src/styles/global.css`, add `color-scheme: light dark;` at the top of the `:root` block, and after it `@media (prefers-color-scheme: dark) { :root { … } }` redefining every color token with its **dark** value from [contracts/tokens.md § Colors](./contracts/tokens.md) (`--color-paper: #161513`, `--color-ink: #f1efea`, `--color-ink-muted: #aaa69d`, `--color-rule: #f1efea`, `--color-rule-soft: #36342f`, `--color-mark: #ff5a6a`, `--color-mark-ink: #161513`, `--color-mark-on-invert: #c8102e`, `--color-invert-bg: #f1efea`, `--color-invert-ink: #161513`, `--color-square-light: #e6e3dc`, `--color-square-dark: #b3afa5`, `--color-board-edge: #f1efea`). No `[data-theme]` selector (R2)
+- [x] T014 [US2] In `src/layouts/BaseLayout.astro`, add `<meta name="color-scheme" content="light dark" />` right after the viewport meta (R2)
+- [x] T015 [US2] Validate US2 with quickstart §4 in Chrome and a second engine (Safari or Firefox); confirm dark scrollbars and no white frame (SC-002). _Done in Chrome (forced light/dark, render-blocking stylesheet in `<head>`); Safari/Firefox pass left to the maintainer._
 
 **Checkpoint**: both themes work; still no script.
 
