@@ -43,7 +43,7 @@ honnêtement :
 2. **De la méthode, rendue visible** : ce portfolio lui-même (Astro, specs speckit, CI,
    Lighthouse, commits conventionnels) prouve la rigueur.
 
-Message en une phrase (`CONTENU.md` §3) : un rôle, une stack, une preuve, zéro adjectif.
+Message en une phrase (`CONTENU.md` §3) : un rôle, une école, une preuve, zéro adjectif, aucune technologie.
 
 ## Operating Context
 
