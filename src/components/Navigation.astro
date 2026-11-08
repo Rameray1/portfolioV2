@@ -1,0 +1,36 @@
+---
+import { nav } from '../data/nav';
+---
+
+<nav aria-label="Navigation principale">
+  <ul>
+    {nav.map((item) => (
+      <li>
+        <a href={item.href}>{item.label}</a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    display: inline-block;
+    padding-block: var(--space-1);
+    font-size: var(--text-sm);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration-line: underline;
+    text-decoration-thickness: var(--rule-heavy);
+  }
+</style>

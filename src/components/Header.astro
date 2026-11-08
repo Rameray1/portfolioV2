@@ -1,0 +1,41 @@
+---
+import { site } from '../data/site';
+import Navigation from './Navigation.astro';
+---
+
+<header>
+  <div class="bar">
+    <a class="name" href="/">
+      {site.name}
+    </a>
+    <Navigation />
+  </div>
+</header>
+
+<style>
+  header {
+    border-bottom: var(--rule-heavy) solid var(--color-rule);
+  }
+
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-6);
+    max-width: var(--page-max);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+    padding-block: var(--space-5);
+  }
+
+  .name {
+    font-size: var(--text-base);
+    font-weight: var(--weight-bold);
+    text-decoration: none;
+  }
+
+  .name:hover {
+    text-decoration-line: underline;
+  }
+</style>
