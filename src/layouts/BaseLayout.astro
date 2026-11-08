@@ -33,6 +33,9 @@ const documentTitle = title === site.name ? title : `${title} · ${site.name}`;
     <link rel="icon" href="/favicon.ico" />
   </head>
   <body>
+    <a class="skip-link" href="#content">
+      Aller au contenu
+    </a>
     <Header />
     <main id="content" tabindex="-1">
       <slot />
@@ -42,6 +45,23 @@ const documentTitle = title === site.name ? title : `${title} · ${site.name}`;
 </html>
 
 <style>
+  .skip-link {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    z-index: 1; /* au-dessus de l'en-tête, seul élément superposé du site */
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-ink);
+    color: var(--color-paper);
+    text-decoration: none;
+    /* hors de l'écran au repos, au-dessus de top */
+    transform: translateY(-200%);
+  }
+
+  .skip-link:focus {
+    transform: none;
+  }
+
   main {
     max-width: var(--page-max);
     margin-inline: auto;

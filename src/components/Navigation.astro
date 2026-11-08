@@ -1,12 +1,31 @@
 ---
 import { nav } from '../data/nav';
+
+// Rubrique courante, calculée au build : la page elle-même ("page")
+// ou une page placée sous son chemin ("true"), barre oblique finale ignorée.
+const strip = (path: string) =>
+  path.length > 1 ? path.replace(/\/+$/, '') : path;
+const current = strip(Astro.url.pathname);
+
+const items = nav.map((item) => {
+  const href = strip(item.href);
+  const ariaCurrent =
+    current === href
+      ? ('page' as const)
+      : current.startsWith(`${href}/`)
+        ? ('true' as const)
+        : undefined;
+  return { ...item, ariaCurrent };
+});
 ---
 
 <nav aria-label="Navigation principale">
   <ul>
-    {nav.map((item) => (
+    {items.map((item) => (
       <li>
-        <a href={item.href}>{item.label}</a>
+        <a href={item.href} aria-current={item.ariaCurrent}>
+          {item.label}
+        </a>
       </li>
     ))}
   </ul>
@@ -32,5 +51,13 @@ import { nav } from '../data/nav';
   a:hover {
     text-decoration-line: underline;
     text-decoration-thickness: var(--rule-heavy);
+  }
+
+  a[aria-current] {
+    color: var(--color-mark);
+    font-weight: var(--weight-semibold);
+    text-decoration-line: underline;
+    text-decoration-thickness: var(--rule-heavy);
+    text-underline-offset: var(--underline-offset-current);
   }
 </style>

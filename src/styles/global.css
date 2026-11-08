@@ -150,6 +150,11 @@ a:hover {
   text-decoration-thickness: var(--rule-heavy);
 }
 
+:focus-visible {
+  outline: var(--focus-width) solid var(--color-mark);
+  outline-offset: var(--focus-offset);
+}
+
 ::selection {
   background: var(--color-mark);
   color: var(--color-mark-ink);
