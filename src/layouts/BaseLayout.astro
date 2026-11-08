@@ -1,0 +1,75 @@
+---
+import '../styles/global.css';
+import fontUrl from '../assets/fonts/archivo-wdth-wght.woff2?url';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const documentTitle = title === site.name ? title : `${title} · ${site.name}`;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>{documentTitle}</title>
+    <meta name="description" content={description} />
+    <link
+      rel="preload"
+      href={fontUrl}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">
+      Aller au contenu
+    </a>
+    <Header />
+    <main id="content" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    z-index: 1; /* au-dessus de l'en-tête, seul élément superposé du site */
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-ink);
+    color: var(--color-paper);
+    text-decoration: none;
+    /* hors de l'écran au repos, au-dessus de top */
+    transform: translateY(-200%);
+  }
+
+  .skip-link:focus {
+    transform: none;
+  }
+
+  main {
+    max-width: var(--page-max);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+    padding-block: var(--space-8);
+  }
+
+  main:focus {
+    outline: none;
+  }
+</style>

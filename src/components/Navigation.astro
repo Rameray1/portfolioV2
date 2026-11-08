@@ -1,0 +1,63 @@
+---
+import { nav } from '../data/nav';
+
+// Rubrique courante, calculée au build : la page elle-même ("page")
+// ou une page placée sous son chemin ("true"), barre oblique finale ignorée.
+const strip = (path: string) =>
+  path.length > 1 ? path.replace(/\/+$/, '') : path;
+const current = strip(Astro.url.pathname);
+
+const items = nav.map((item) => {
+  const href = strip(item.href);
+  const ariaCurrent =
+    current === href
+      ? ('page' as const)
+      : current.startsWith(`${href}/`)
+        ? ('true' as const)
+        : undefined;
+  return { ...item, ariaCurrent };
+});
+---
+
+<nav aria-label="Navigation principale">
+  <ul>
+    {items.map((item) => (
+      <li>
+        <a href={item.href} aria-current={item.ariaCurrent}>
+          {item.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    display: inline-block;
+    padding-block: var(--space-1);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    /* même position de trait au survol et pour la rubrique courante */
+    text-underline-offset: var(--underline-offset-current);
+  }
+
+  a:hover,
+  a[aria-current] {
+    text-decoration-line: underline;
+    text-decoration-thickness: var(--rule-heavy);
+  }
+
+  a[aria-current] {
+    color: var(--color-mark);
+    font-weight: var(--weight-semibold);
+  }
+</style>

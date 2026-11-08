@@ -174,12 +174,14 @@ Une encre et un papier, plus un rouge rare qui ne parle que pour le commentateur
 
 **The Commentator's Red Rule.** Le rouge est réservé par principe au jugement et à l'état : symboles d'évaluation, marqueur de trait ou de disponibilité, page courante, case allumée, focus, sélection. Jamais sur un bouton, jamais en fond de survol, jamais pour décorer. Le test : si l'élément rouge ne note, ne signale ou ne localise rien, il passe en encre.
 
-**The Printed Negative Rule.** Le thème sombre est le même livre imprimé en négatif : les jetons s'échangent, la composition ne bouge pas. Il suit `prefers-color-scheme`, et `[data-theme]` peut le forcer. Le diagramme reste une planche tonale claire, jamais inversée.
+**The Printed Negative Rule.** Le thème sombre est le même livre imprimé en négatif : les jetons s'échangent, la composition ne bouge pas. Il suit uniquement `prefers-color-scheme`, sans script ni attribut ; un forçage par `[data-theme]` n'arrivera qu'avec un bouton de thème (réserve de `ROADMAP.md`). Le diagramme reste une planche tonale claire, jamais inversée.
 
 ## Typography
 
-**Display Font:** Archivo, variable (`wdth` 62–125, `wght` 100–900), auto-hébergée depuis `@fontsource-variable/archivo` 5.2.6, sous-ensemble latin, licence OFL (repli : Helvetica Neue, Arial, sans-serif)
+**Display Font:** Archivo, variable (`wdth` 62–125, `wght` 100–900), un seul fichier woff2 auto-hébergé dans `src/assets/fonts/` (tiré de `@fontsource-variable/archivo` 5.2.6, sous-ensemble latin, licence OFL jointe), préchargé, `font-display: swap` (repli : Helvetica Neue, Arial, sans-serif)
 **Body Font:** Archivo, même fichier, chasse normale (100 %)
+
+Les graisses passent par des jetons : `--weight-regular` (400), `--weight-semibold` (600), `--weight-bold` (700), `--weight-black` (800).
 
 **Character:** Une grotesque de livre technique. Étroite et très grasse (`font-stretch: 72%`, 800), elle donne le nom et les titres de partie. En chasse normale, elle se lit pour le récit. Les chiffres sont tabulaires (`font-variant-numeric: tabular-nums` sur `body`), comme une notation imprimée.
 
@@ -224,7 +226,7 @@ Le système est plat, comme une page imprimée. Aucune ombre portée, aucun flou
 
 ## Shapes
 
-Toutes les formes sont des angles droits (`--radius: 0`). Les boutons, les puces de stack, le diagramme et le carré du trait sont des rectangles nets. Les bordures sont des filets d'encre de 1 ou 2 px. Les liens sont soulignés à 1 px (décalage 0.2em) et passent à 2 px au survol.
+Toutes les formes sont des angles droits (`--radius: 0`). Les boutons, les puces de stack, le diagramme et le carré du trait sont des rectangles nets. Les bordures sont des filets d'encre de 1 ou 2 px. Les liens sont soulignés à 1 px (décalage `--underline-offset`, 0.2em) et passent à 2 px au survol.
 
 ### Named Rules
 
@@ -249,7 +251,8 @@ Des rectangles d'encre, francs et sans rayon.
 ### Navigation
 
 - **Style :** barre de tête sur filet de 2 px. Le nom (700, `--text-base`) à gauche, les rubriques (`--text-sm`, sans soulignement) et `EN` (600) à droite.
-- **States :** au survol, soulignement de 2 px. La page courante (`aria-current="page"`) est rouge, en 600, soulignée à 2 px avec un décalage de 0.35em.
+- **States :** au survol, soulignement de 2 px. La page courante (`aria-current="page"`, ou `"true"` sur une page placée sous la rubrique) est rouge, en 600, soulignée à 2 px. Survol et page courante partagent le même décalage (`--underline-offset-current`, 0.35em), pour que le trait ne saute pas d'un lien à l'autre.
+- **Source :** les rubriques viennent de `src/data/nav.ts`, une entrée par rubrique.
 - **Mobile :** la liste passe à la ligne sous le nom, sans menu ni JavaScript.
 
 ### Liste des coups (signature)

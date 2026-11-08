@@ -1,16 +1,31 @@
 ---
+// Accueil provisoire : démontre le gabarit (F02). Remplacé par le vrai accueil en F05.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const pitch =
+  'Élève ingénieur à IMT Mines Alès, en alternance chez Astrée Software, je développe des applications métier, du modèle de données à la mise en production.';
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>Astro</h1>
-  </body>
-</html>
+<BaseLayout title={site.name} description={pitch}>
+  <h1>{site.name}</h1>
+  <p>{pitch}</p>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin: 0 0 var(--space-5);
+    font-size: var(--text-display);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  p {
+    max-width: 40ch; /* mesure du pitch (DESIGN.md, Lead : 34–40ch), propre à cette page */
+    margin: 0;
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+  }
+</style>
