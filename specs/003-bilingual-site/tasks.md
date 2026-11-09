@@ -99,8 +99,8 @@ French-only page; round trip for a page in both languages).
 
 ### Implementation for User Story 3
 
-- [ ] T016 [US3] In `src/components/Navigation.astro`, for an item with `frenchOnly` on a page whose `locale !== 'fr'` (R7, FR-013): link text `` `${t(item.key)} ${t('nav.frenchMark')}` ``, `hreflang="fr"`, `aria-label={\`${t(item.key)} ${t('nav.frenchMark')}, ${t('nav.inFrench')}\`}`(visible text kept in the accessible name, WCAG 2.5.3). On French pages, no mark, no`hreflang`, no `aria-label` (output identical to F02)
-- [ ] T017 [US3] Validate US3 with quickstart §2 (Blog markup on `/en/` and `/`; `grep -rn 'href="/en/blog' dist` → nothing, SC-006)
+- [x] T016 [US3] In `src/components/Navigation.astro`, for an item with `frenchOnly` on a page whose `locale !== 'fr'` (R7, FR-013): link text `` `${t(item.key)} ${t('nav.frenchMark')}` ``, `hreflang="fr"`, `aria-label={\`${t(item.key)} ${t('nav.frenchMark')}, ${t('nav.inFrench')}\`}`(visible text kept in the accessible name, WCAG 2.5.3). On French pages, no mark, no`hreflang`, no `aria-label` (output identical to F02)
+- [x] T017 [US3] Validate US3 with quickstart §2 (Blog markup on `/en/` and `/`; `grep -rn 'href="/en/blog' dist` → nothing, SC-006)
 
 **Checkpoint**: navigation complete in both languages.
 

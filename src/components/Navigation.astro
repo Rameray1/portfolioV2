@@ -21,7 +21,19 @@ const items = nav.map((item) => {
       : current.startsWith(`${path}/`)
         ? ('true' as const)
         : undefined;
-  return { label: t(item.key), href, ariaCurrent };
+  // Rubrique sans version dans cette langue : mention (FR), langue de la cible annoncée.
+  // Espace insécable entre le libellé et la mention, pour qu'ils ne se séparent jamais.
+  const marked = frenchOnly && locale !== 'fr';
+  const label = marked
+    ? `${t(item.key)}\u00a0${t('nav.frenchMark')}`
+    : t(item.key);
+  return {
+    label,
+    href,
+    ariaCurrent,
+    hreflang: marked ? ('fr' as const) : undefined,
+    ariaLabel: marked ? `${label}, ${t('nav.inFrench')}` : undefined,
+  };
 });
 ---
 
@@ -29,7 +41,12 @@ const items = nav.map((item) => {
   <ul>
     {items.map((item) => (
       <li>
-        <a href={item.href} aria-current={item.ariaCurrent}>
+        <a
+          href={item.href}
+          aria-current={item.ariaCurrent}
+          hreflang={item.hreflang}
+          aria-label={item.ariaLabel}
+        >
           {item.label}
         </a>
       </li>
