@@ -1,3 +1,6 @@
+// Libellés d'interface FR/EN. Ajouter un libellé = une clé dans `fr` et la même dans `en` ;
+// `npm run check` échoue si l'une des deux manque. Aucun libellé en dur dans un composant.
+
 // Langues du site. Reprises dans astro.config.mjs (bloc i18n) : les changer ensemble.
 export const locales = ['fr', 'en'] as const;
 export type Locale = (typeof locales)[number];
