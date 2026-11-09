@@ -1,0 +1,22 @@
+---
+import { site } from '../data/site';
+import { getLocale, localizePath } from '../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+
+const data = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: new URL(localizePath('/', locale), Astro.site).href,
+  jobTitle: site.person.jobTitle[locale],
+  affiliation: { '@type': 'CollegeOrUniversity', name: site.person.school },
+  worksFor: { '@type': 'Organization', name: site.person.employer },
+  sameAs: [site.contact.github, site.contact.linkedin],
+};
+
+// `<` échappé : aucune valeur ne peut fermer la balise script.
+const json = JSON.stringify(data).replace(/</g, '\\u003c');
+---
+
+<script type="application/ld+json" set:html={json} />
