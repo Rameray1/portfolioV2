@@ -64,7 +64,9 @@ constitution fixe ce qui est non négociable et que chaque `/speckit-plan` doit 
 - WCAG 2.2 niveau AA sur toutes les pages, dans les deux thèmes.
 - Lighthouse mobile : ≥ 95 performance, 100 accessibilité, bonnes pratiques et SEO.
 - Accueil < 200 ko transférés.
-- Chaque page indexable a un `title` et une `description` uniques.
+- Chaque page indexable a un `title` et une `description` uniques parmi les pages de sa
+  langue. Une page et sa traduction peuvent partager leur titre (un nom propre, par exemple) :
+  leurs liens alternatifs les relient (F04).
 - Tout mouvement MUST être désactivé sous `prefers-reduced-motion: reduce`.
 
 ### VIII. Styles par jetons et direction visuelle
@@ -119,4 +121,4 @@ constitution fixe ce qui est non négociable et que chaque `/speckit-plan` doit 
 - Conformité : `/speckit-plan` et `/speckit-analyze` vérifient chaque feature contre ces
   principes ; une exception non justifiée bloque la feature.
 
-**Version**: 1.0.1 | **Ratified**: 2026-11-07 | **Last Amended**: 2026-11-08
+**Version**: 1.0.2 | **Ratified**: 2026-11-07 | **Last Amended**: 2026-11-09

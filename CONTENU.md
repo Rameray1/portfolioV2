@@ -152,17 +152,17 @@ Changer d'objectif = modifier ces cinq points, aucune page à réécrire.
 
 ## 10. Critères de réussite
 
-| Critère                                         | Cible                                        |
-| ----------------------------------------------- | -------------------------------------------- |
-| Ajouter un projet                               | 1 fichier `.md`, 0 ligne de code             |
-| Retirer un projet                               | 1 fichier supprimé + 1 redirection           |
-| CV ↔ site                                       | une seule source                             |
-| Pages indexables                                | `title` / `description` uniques à 100 %      |
-| Poids de l'accueil (transféré)                  | < 200 ko                                     |
-| Lighthouse perf / a11y / bonnes pratiques / SEO | ≥ 95 / 100 / 100 / 100                       |
-| JS envoyé au navigateur                         | 0 ko par défaut, sauf amélioration justifiée |
-| Serveur                                         | aucun : site 100 % statique                  |
-| Compétences avec preuve                         | 100 % (vérifié au build)                     |
-| Liens morts                                     | 0, vérifié en CI                             |
-| Version anglaise                                | miroir complet (hors blog)                   |
-| Commits                                         | 100 % conventionnels                         |
+| Critère                                         | Cible                                               |
+| ----------------------------------------------- | --------------------------------------------------- |
+| Ajouter un projet                               | 1 fichier `.md`, 0 ligne de code                    |
+| Retirer un projet                               | 1 fichier supprimé + 1 redirection                  |
+| CV ↔ site                                       | une seule source                                    |
+| Pages indexables                                | `title` / `description` uniques à 100 %, par langue |
+| Poids de l'accueil (transféré)                  | < 200 ko                                            |
+| Lighthouse perf / a11y / bonnes pratiques / SEO | ≥ 95 / 100 / 100 / 100                              |
+| JS envoyé au navigateur                         | 0 ko par défaut, sauf amélioration justifiée        |
+| Serveur                                         | aucun : site 100 % statique                         |
+| Compétences avec preuve                         | 100 % (vérifié au build)                            |
+| Liens morts                                     | 0, vérifié en CI                                    |
+| Version anglaise                                | miroir complet (hors blog)                          |
+| Commits                                         | 100 % conventionnels                                |
