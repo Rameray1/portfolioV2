@@ -223,6 +223,11 @@ src/content.config.ts : collection projects, loader glob() sur src/content/proje
 - [ ] **C1 · Textes accueil et À propos** — FR, selon §3 et §9. `content: accueil et a propos`
 - [ ] **C2 · Fiches projets** — choisir 3 à 10 projets selon `CONTENU.md` §8. Une fiche par
       séance. `content: fiche <projet>`
+- [ ] **C2b · Position du diagramme** — une fois les projets mis en avant choisis : la position
+      finale et le coup signature `!!` dans `src/data/diagram.ts` (de préférence une partie
+      célèbre, peu de pièces, case d'arrivée loin du bord droit), et un `move` jouable dans
+      cette position pour chaque projet mis en avant. À faire avant F11.
+      `content: position du diagramme`
 - [ ] **C3 · Étude de cas d'entreprise** — **anonymisée** (CONTENU.md §8). La fiche la
       plus travaillée. Puis **lever `PUBLIC_NOINDEX`** : le site a enfin de quoi être trouvé.
       `content: etude de cas de l'alternance`
@@ -338,7 +343,7 @@ Collection blog (glob sur src/content/blog/*.md, schéma CONTENU.md §6). src/pa
 
 ### F11 · Transitions et micro-animations _(~2 séances)_
 
-**Dépend de** : F06 (et F10 s'il est fait avant).
+**Dépend de** : F06 et C2b (et F10 s'il est fait avant).
 
 **Spec**
 
