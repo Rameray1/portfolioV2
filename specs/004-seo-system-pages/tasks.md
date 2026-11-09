@@ -104,9 +104,9 @@ home.
 
 ### Implementation for User Story 3
 
-- [ ] T020 [US3] Create `src/pages/robots.txt.ts` per [contracts/seo.md § robots.txt.ts](./contracts/seo.md) and research R13: `export const GET: APIRoute` returning `new Response(body, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } })`; `PUBLIC_NOINDEX` true → `User-agent: *\nDisallow: /\n`; false → `User-agent: *\nAllow: /\n\nSitemap: ${new URL('sitemap-index.xml', site)}\n` (`site` from the endpoint context)
-- [ ] T021 [US3] Validate quickstart §3: `PUBLIC_NOINDEX=true npm run build` → every `dist/**/*.html` has `noindex, nofollow` (the `grep -L` prints nothing), `dist/robots.txt` disallows all; plain `npm run build` → `Allow: /` + `Sitemap:` line; `PUBLIC_NOINDEX=maybe npm run build` fails (quickstart §1)
-- [ ] T022 [P] [US3] In `ROADMAP.md` « Mise en ligne », add three checklist items: replace the placeholder `site` in `astro.config.mjs` by the real domain; add the host's rule so `/en/*` gets `en/404.html` with a 404 status (Netlify `public/_redirects`: `/en/* /en/404.html 404`; Cloudflare Pages: nothing; Vercel: a rewrite), research R7; check the large preview of `/` and `/en/` in LinkedIn Post Inspector (SC-007, quickstart §9)
+- [x] T020 [US3] Create `src/pages/robots.txt.ts` per [contracts/seo.md § robots.txt.ts](./contracts/seo.md) and research R13: `export const GET: APIRoute` returning `new Response(body, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } })`; `PUBLIC_NOINDEX` true → `User-agent: *\nDisallow: /\n`; false → `User-agent: *\nAllow: /\n\nSitemap: ${new URL('sitemap-index.xml', site)}\n` (`site` from the endpoint context)
+- [x] T021 [US3] Validate quickstart §3: `PUBLIC_NOINDEX=true npm run build` → every `dist/**/*.html` has `noindex, nofollow` (the `grep -L` prints nothing), `dist/robots.txt` disallows all; plain `npm run build` → `Allow: /` + `Sitemap:` line; `PUBLIC_NOINDEX=maybe npm run build` fails (quickstart §1)
+- [x] T022 [P] [US3] In `ROADMAP.md` « Mise en ligne », add three checklist items: replace the placeholder `site` in `astro.config.mjs` by the real domain; add the host's rule so `/en/*` gets `en/404.html` with a 404 status (Netlify `public/_redirects`: `/en/* /en/404.html 404`; Cloudflare Pages: nothing; Vercel: a rewrite), research R7; check the large preview of `/` and `/en/` in LinkedIn Post Inspector (SC-007, quickstart §9)
 
 **Checkpoint**: US3 done — commit `feat: add global noindex switch and robots.txt`.
 
