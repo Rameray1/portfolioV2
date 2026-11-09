@@ -191,7 +191,7 @@ Accueil et page À propos, en FR et EN, pilotés par les leviers de campagne (CO
 **Plan**
 
 ```
-src/data/campaign.ts typé (valeurs { fr, en }, availability.visible, ctas[]). Composants Hero.astro, AvailabilityBanner.astro, CtaGroup.astro. Vues HomeView.astro et AboutView.astro (pattern F03). Prose d'À propos en Markdown par langue (src/content/pages/{fr,en}/about.md, collection `pages`). Photo dans src/assets/, rendue avec <Image> d'astro:assets.
+src/data/campaign.ts typé (valeurs { fr, en }, availability.visible, ctas[]). Composants Hero.astro, AvailabilityBanner.astro, CtaGroup.astro. Vues HomeView.astro et AboutView.astro (pattern F03). Prose d'À propos en Markdown par langue (src/content/pages/{fr,en}/about.md, collection `pages`). Photo dans src/assets/, rendue avec <Image> d'astro:assets. Diagram.astro : grille CSS de 64 cases, chaque pièce est un SVG séparé placé par sa case (custom properties --file / --rank), position et coup signature dans src/data/diagram.ts. Le diagramme est ainsi prêt pour les animations de F11, sans les construire ici.
 ```
 
 ### F06 · Projets _(~4 séances)_
@@ -215,7 +215,7 @@ Exigences : une fiche incomplète ou invalide fait échouer le build ; les visue
 **Plan**
 
 ```
-src/content.config.ts : collection projects, loader glob() sur src/content/projects/{fr,en}/, schéma zod (fr : title, year, summary, tech, links, cover via image(), featured, draft ; en : title, summary). src/lib/projects.ts : getProjects(locale, { featured }) qui exclut les drafts en production, fusionne métadonnées FR + prose EN par slug, avec repli FR. ProjectCard.astro, ProjectsView.astro, src/pages/projects/[slug].astro (getStaticPaths + render(entry)) et équivalent sous src/pages/en/. Technologies affichées en badges (texte, sans lien). <Image> d'astro:assets (AVIF/WebP, width/height, lazy).
+src/content.config.ts : collection projects, loader glob() sur src/content/projects/{fr,en}/, schéma zod (fr : title, year, summary, tech, links, cover via image(), featured, draft, eval ('!' | '!!' | '!?'), move { from, to } en cases du diagramme, requis si featured ; en : title, summary). src/lib/projects.ts : getProjects(locale, { featured }) qui exclut les drafts en production, fusionne métadonnées FR + prose EN par slug, avec repli FR. ProjectCard.astro, ProjectsView.astro, src/pages/projects/[slug].astro (getStaticPaths + render(entry)) et équivalent sous src/pages/en/. Technologies affichées en badges (texte, sans lien). <Image> d'astro:assets (AVIF/WebP, width/height, lazy).
 ```
 
 ### ✍️ C1 – C3 · Contenu _(hors speckit)_
@@ -336,23 +336,27 @@ Collection blog (glob sur src/content/blog/*.md, schéma CONTENU.md §6). src/pa
 
 ## Phase 5 — Finitions
 
-### F11 · Transitions et micro-animations _(~1 séance)_
+### F11 · Transitions et micro-animations _(~2 séances)_
 
 **Dépend de** : F06 (et F10 s'il est fait avant).
 
 **Spec**
 
 ```
-- Navigation fluide entre les pages : transitions animées.
-- États de survol et de focus soignés ; apparitions discrètes là où elles aident la lecture.
-- Tout mouvement est désactivé si l'utilisateur demande moins d'animations.
+Les quatre effets de DESIGN.md (section Motion), et rien d'autre :
+- Accueil : une pièce du diagramme joue le coup signature, puis le symbole !! se pose en bleu à côté. Une seule fois.
+- Survol d'un projet mis en avant : ses cases de départ et d'arrivée se marquent sur le diagramme.
+- Ouverture d'un projet : son titre passe de la liste à la page projet par une transition fluide ; l'en-tête reste fixe.
+- Page projet : le symbole d'évaluation se pose après la transition, jamais pendant.
+- Le bleu du !! s'ajoute aux jetons de couleur, en clair et en sombre, contrastes vérifiés.
+- Tout mouvement est désactivé si l'utilisateur demande moins d'animations : la page s'affiche dans son état final.
 - Aucun JavaScript ajouté : sans support du navigateur, le site fonctionne à l'identique, sans animation.
 ```
 
 **Plan**
 
 ```
-View transitions natives entre documents en CSS (@view-transition { navigation: auto; }), view-transition-name sur l'en-tête. Animations CSS uniquement (transitions, et animation-timeline: view() en amélioration progressive pour les apparitions). Tout sous @media (prefers-reduced-motion: no-preference). Pas de ClientRouter, pas d'IntersectionObserver.
+Jetons dans global.css : --color-brilliant / --color-brilliant-on-invert (clair et sombre), --duration-page, --duration-move, --duration-stamp. View transitions natives entre documents (@view-transition { navigation: auto; }), view-transition-name: site-header sur l'en-tête et project-<slug> sur les titres (liste et page). Coup signature : @keyframes sur la pièce, de la case de départ (--file / --rank) vers la position du HTML ; au chargement au-dessus de 56rem, animation-timeline: view() en dessous, dans @supports. Marquage du coup au survol : :has() sur la liste, box-shadow inset sur les cases move.from / move.to. Symbole de la page projet : animation-delay égal à --duration-page. Tous les mouvements sous @media (prefers-reduced-motion: no-preference). Pas de ClientRouter, pas d'IntersectionObserver.
 ```
 
 ### ✍️ C7 · Domaine _(hors speckit · ~1 h)_

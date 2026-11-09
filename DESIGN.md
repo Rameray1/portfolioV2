@@ -8,6 +8,8 @@ colors:
   rule-soft: '#dcd9d2'
   mark: '#c8102e'
   mark-on-invert: '#ff5a6a'
+  brilliant: '#0077b6'
+  brilliant-on-invert: '#5cc8ff'
   square-light: '#ffffff'
   square-dark: '#c9c6be'
   paper-dark: '#161513'
@@ -16,6 +18,8 @@ colors:
   rule-soft-dark: '#36342f'
   mark-dark: '#ff5a6a'
   mark-on-invert-dark: '#c8102e'
+  brilliant-dark: '#5cc8ff'
+  brilliant-on-invert-dark: '#0077b6'
   square-light-dark: '#e6e3dc'
   square-dark-dark: '#b3afa5'
 typography:
@@ -122,6 +126,11 @@ components:
     typography: '{typography.eval}'
   eval-symbol-on-invert:
     textColor: '{colors.mark-on-invert}'
+  eval-symbol-brilliant:
+    textColor: '{colors.brilliant}'
+    typography: '{typography.eval}'
+  eval-symbol-brilliant-on-invert:
+    textColor: '{colors.brilliant-on-invert}'
   stack-chip:
     backgroundColor: '{colors.paper}'
     textColor: '{colors.ink}'
@@ -138,7 +147,7 @@ components:
 
 **Creative North Star: "La partie annotée"**
 
-Le portfolio se lit comme un livre de parties commentées, dans l'esprit de Chess Informator. Chaque projet est une partie. On la raconte par son coup critique (le problème) et par le choix fait, et un symbole d'évaluation rouge la note. La page est un papier blanc pur, imprimé en encre presque noire. Un seul rouge, celui du commentateur, porte le jugement. Le diagramme d'échiquier est une planche imprimée en gris pierre. Des filets épais ouvrent chaque partie, des filets fins séparent les coups.
+Le portfolio se lit comme un livre de parties commentées, dans l'esprit de Chess Informator. Chaque projet est une partie. On la raconte par son coup critique (le problème) et par le choix fait, et un symbole d'évaluation rouge la note. La page est un papier blanc pur, imprimé en encre presque noire. Un seul rouge, celui du commentateur, porte le jugement. Un bleu ciel, plus rare encore, ne marque que le coup brillant (`!!`), comme le veut la convention des sites d'échecs. Le diagramme d'échiquier est une planche imprimée en gris pierre. Des filets épais ouvrent chaque partie, des filets fins séparent les coups.
 
 La densité est celle d'un livre de référence : des colonnes de texte serrées, une notation et des métadonnées en chiffres tabulaires, aucune décoration qui ne porte une information. La hiérarchie vient d'une seule famille grotesque à axe de chasse : étroite et très grasse pour les noms et les titres, normale pour le texte. Le thème sombre imprime le même livre en négatif, encre claire sur noir chaud. Le diagramme y reste une planche tonale, jamais un échiquier d'écran.
 
@@ -152,6 +161,8 @@ Refus confirmé par la direction : le hero centré suivi d'une rangée de cartes
 - Filets de 2 px sous les en-têtes, filets fins de 1 px entre les lignes.
 - Zéro rayon, zéro ombre portée. Au survol, la ligne s'inverse.
 - Signature : le symbole d'évaluation rouge. Au survol d'un coup, sa case s'allume sur le diagramme, en CSS seul.
+- Un seul bleu, réservé au coup brillant `!!`.
+- Le mouvement imite le commentateur : un coup joué, puis noté. Une fois, jamais en boucle, en CSS seul (voir Motion).
 
 ## Colors
 
@@ -161,6 +172,12 @@ Une encre et un papier, plus un rouge rare qui ne parle que pour le commentateur
 
 - **Rouge du commentateur** (`mark`; sombre : `mark-dark`) : symboles d'évaluation (`!`, `!?`), marqueur de trait et de disponibilité (le carré plein du bandeau), page courante de la navigation, case allumée sur le diagramme au survol d'un coup. Il sert aussi l'état système : anneau de focus (`2px`, décalage `3px`) et sélection de texte (texte `paper` sur fond rouge).
 - **Rouge sur ligne inversée** (`mark-on-invert`; sombre : `mark-on-invert-dark`) : le symbole d'évaluation quand sa ligne est inversée au survol ou au focus. Les deux rouges échangent leurs rôles entre clair et sombre, et chacun garde au moins 4,5:1 sur son fond.
+
+### Accent
+
+- **Bleu du coup brillant** (`brilliant`; sombre : `brilliant-dark`) : le symbole `!!` et rien d'autre, dans la liste des coups, dans sa légende, sur le diagramme et dans la marge d'une page projet. Sur papier blanc, il s'imprime en bleu profond (`#0077b6`, 4,87:1) : le bleu ciel pur ne tient pas le contraste sur blanc. En sombre, il devient le vrai bleu ciel (`#5cc8ff`, 9,7:1).
+- **Bleu sur ligne inversée** (`brilliant-on-invert`; sombre : `brilliant-on-invert-dark`) : le `!!` quand sa ligne est inversée. Comme les deux rouges, les deux bleus échangent leurs rôles entre clair et sombre. Sur la ligne inversée du thème sombre, le bleu profond tombe à 4,24:1 : c'est admis, car le symbole y est toujours en grand texte (seuil 3:1).
+- Jetons à ajouter dans `src/styles/global.css` en F11 (`--color-brilliant`, `--color-brilliant-on-invert`).
 
 ### Neutral
 
@@ -173,6 +190,8 @@ Une encre et un papier, plus un rouge rare qui ne parle que pour le commentateur
 ### Named Rules
 
 **The Commentator's Red Rule.** Le rouge est réservé par principe au jugement et à l'état : symboles d'évaluation, marqueur de trait ou de disponibilité, page courante, case allumée, focus, sélection. Jamais sur un bouton, jamais en fond de survol, jamais pour décorer. Le test : si l'élément rouge ne note, ne signale ou ne localise rien, il passe en encre.
+
+**The Brilliant Blue Rule.** Le bleu n'existe que pour `!!`. Pas de lien bleu, pas de focus bleu, pas de case bleue. Si le symbole n'est pas `!!`, il est rouge. Un projet `!!` est rare : au plus un parmi les coups mis en avant, sinon le bleu perd son sens.
 
 **The Printed Negative Rule.** Le thème sombre est le même livre imprimé en négatif : les jetons s'échangent, la composition ne bouge pas. Il suit uniquement `prefers-color-scheme`, sans script ni attribut ; un forçage par `[data-theme]` n'arrivera qu'avec un bouton de thème (réserve de `ROADMAP.md`). Le diagramme reste une planche tonale claire, jamais inversée.
 
@@ -218,7 +237,7 @@ Une page de livre centrée : conteneur de `--page-max` (80rem), gouttière fluid
 
 ## Elevation & Depth
 
-Le système est plat, comme une page imprimée. Aucune ombre portée, aucun flou, aucune superposition de surfaces. La profondeur vient des filets et d'un seul effet d'état, l'inversion : la ligne survolée passe en encre pleine, son texte en papier. La seule ombre du code est un `box-shadow: inset 0 0 0 4px` rouge qui allume une case du diagramme au survol. C'est un liseré de marquage, pas une élévation.
+Le système est plat, comme une page imprimée. Aucune ombre portée, aucun flou, aucune superposition de surfaces. La profondeur vient des filets et d'un seul effet d'état, l'inversion : la ligne survolée passe en encre pleine, son texte en papier. Les seules ombres du code sont des `box-shadow: inset` rouges qui marquent le coup sur le diagramme au survol : 4 px sur la case d'arrivée, 2 px sur la case de départ. Ce sont des liserés de marquage, pas une élévation.
 
 ### Named Rules
 
@@ -231,6 +250,27 @@ Toutes les formes sont des angles droits (`--radius: 0`). Les boutons, les puces
 ### Named Rules
 
 **The Zero Radius Rule.** Aucun rayon, nulle part. Un coin arrondi sortirait la page du livre.
+
+## Motion
+
+Le mouvement imite le geste du commentateur : on joue le coup, puis on le note. Rien ne bouge en boucle, rien ne bouge pour remplir. Tout est en CSS, sans JavaScript. Ces effets sont à construire en F11.
+
+**Jetons.** `--duration` (160 ms, états de survol et de focus, déjà livré), `--duration-page` (280 ms, transition de page), `--duration-move` (600 ms, trajet d'une pièce), `--duration-stamp` (240 ms, pose d'un symbole), `--ease-out` (déjà livré). Sous `prefers-reduced-motion: reduce`, toutes les durées valent 0.
+
+### Les quatre effets
+
+1. **Le coup joué (accueil, signature).** Une seule pièce du diagramme glisse de sa case de départ à sa case d'arrivée (`--duration-move`, `--ease-out`). Puis le symbole `!!` se pose en bleu à côté de la case d'arrivée : fondu et échelle de 1.15 à 1 (`--duration-stamp`), comme un tampon. Sur grand écran, où le diagramme est visible dès l'arrivée, l'animation part au chargement (décalage de 400 ms). Sous `56rem`, où le diagramme est sous le pitch, elle suit son entrée à l'écran (`animation-timeline: view()`, dans `@supports`). Le coup se joue une fois et reste sur la case d'arrivée.
+2. **Le dernier coup (survol d'une ligne).** Au survol ou au focus d'une ligne de la liste des coups, la case d'arrivée s'allume d'un liseré rouge de 4 px (déjà décrit) et la case de départ d'un liseré rouge de 2 px, comme le dernier coup sur un échiquier en ligne. Changement de couleur en `--duration`, sans déplacement : il reste actif sous `prefers-reduced-motion`.
+3. **La partie qu'on ouvre (transition de page).** View transitions natives entre documents (`@view-transition { navigation: auto; }`). Le titre d'une ligne de la liste et le titre de la page projet partagent un `view-transition-name` par projet (`project-<slug>`) : le titre se déplace et grandit jusqu'à sa place. L'en-tête du site reste fixe (`view-transition-name: site-header`). Le reste de la page passe en fondu, en `--duration-page`.
+4. **La note du commentateur (page projet).** Le symbole d'évaluation du projet, dans la marge, se pose comme le tampon de l'effet 1, mais en simple fondu, sans échelle : il doit rester plus discret que la signature. Il arrive après la transition de page (décalage égal à `--duration-page`), jamais pendant. En rouge, ou en bleu si le projet est `!!`.
+
+### Named Rules
+
+**The Move-Then-Note Rule.** Le symbole suit toujours le coup ou la transition, jamais en même temps. Deux mouvements ne se chevauchent pas.
+
+**The One Move Rule.** Un seul mouvement par écran, joué une seule fois. Pas de boucle, pas d'apparition au défilement sur chaque section, pas de parallaxe, pas de pièce qui suit le curseur.
+
+**The Final State Rule.** L'état final est l'état du HTML. L'animation part de la case de départ et finit sur la position écrite dans la page. Sans prise en charge du navigateur, ou sous `prefers-reduced-motion: reduce`, la page s'affiche directement dans cet état final : la pièce sur sa case, le symbole visible.
 
 ## Components
 
@@ -257,11 +297,11 @@ Des rectangles d'encre, francs et sans rayon.
 
 ### Liste des coups (signature)
 
-Chaque projet mis en avant est un coup numéroté. La colonne de gauche donne l'année en encre atténuée et la notation en 700 (`1.e4`). Au centre, le titre en Title et le coup clé en encre atténuée (« Coup clé : … »). À droite, le symbole d'évaluation en rouge. Toute la ligne est un lien. Au survol ou au focus, elle s'inverse (`--color-invert-bg` / `--color-invert-ink`), le texte atténué hérite de la couleur et le symbole passe en `mark-on-invert`. Avec `:has()`, la case du diagramme qui correspond au coup s'allume d'un liseré rouge de 4 px. Une légende en Meta explique les symboles utilisés (`!` coup clé, `!?` pari réfléchi). Leur sens définitif est fixé en F06.
+Chaque projet mis en avant est un coup numéroté. La colonne de gauche donne l'année en encre atténuée et la notation en 700 (`1.e4`). Au centre, le titre en Title et le coup clé en encre atténuée (« Coup clé : … »). À droite, le symbole d'évaluation en rouge. Toute la ligne est un lien. Au survol ou au focus, elle s'inverse (`--color-invert-bg` / `--color-invert-ink`), le texte atténué hérite de la couleur et le symbole passe en `mark-on-invert`. Avec `:has()`, la case du diagramme qui correspond au coup s'allume d'un liseré rouge de 4 px. Une légende en Meta explique les symboles utilisés (`!` coup clé, `!?` pari réfléchi, `!!` coup brillant, en bleu). Leur sens définitif est fixé en F06. Le diagramme marque le coup du projet survolé (case de départ et case d'arrivée, voir Motion, effet 2).
 
 ### Diagramme et bandeau de disponibilité
 
-Le diagramme est une planche imprimée de 30rem max (22rem sur mobile) : bord d'encre de 2 px, cases en gris pierre, coordonnées en Meta atténuée, pièces cburnett en SVG (lichess-org/lila, triple licence GPL/BSD/GFDL). Sa légende est le bandeau de disponibilité : un filet fin au-dessus, un carré plein rouge de 0.75rem (le trait), le statut en 700 (« Disponible pour un stage »), puis la date et le lieu. Le contenu du bandeau vient des données de campagne.
+Le diagramme est une planche imprimée de 30rem max (22rem sur mobile) : bord d'encre de 2 px, cases en gris pierre, coordonnées en Meta atténuée, pièces cburnett en SVG (lichess-org/lila, triple licence GPL/BSD/GFDL). Chaque pièce est un élément séparé, placé par sa case, pour qu'on puisse la déplacer d'une case à l'autre en CSS (Motion, effet 1). Sa légende est le bandeau de disponibilité : un filet fin au-dessus, un carré plein rouge de 0.75rem (le trait), le statut en 700 (« Disponible pour un stage »), puis la date et le lieu. Le contenu du bandeau vient des données de campagne.
 
 ### Tableau du parcours
 
@@ -287,6 +327,8 @@ Ces deux états découlent du monde construit mais n'existent pas encore.
 - **Do** ouvrir chaque partie par un filet de 2 px et séparer les lignes par un filet de 1 px en `rule-soft`.
 - **Do** composer l'affichage en Archivo 800 à 72 % de chasse et le texte en Archivo à 100 %, chiffres tabulaires.
 - **Do** placer une espace fine insécable (U+202F) avant `:` et `;` en français.
+- **Do** réserver le bleu (`brilliant`) au seul symbole `!!`.
+- **Do** jouer le coup, puis poser le symbole, une seule fois, et afficher l'état final sous `prefers-reduced-motion`.
 - **Do** garder le diagramme en planche tonale dans le thème sombre (`#e6e3dc` / `#b3afa5`).
 - **Do** prendre chaque valeur dans les jetons de `src/styles/global.css` (constitution, principe VIII).
 
@@ -297,6 +339,8 @@ Ces deux états découlent du monde construit mais n'existent pas encore.
 - **Don't** ajouter d'ombre portée ni de surface flottante. La seule ombre admise est le liseré intérieur de la case allumée.
 - **Don't** introduire une seconde famille de caractères ni des capitales espacées.
 - **Don't** composer un hero centré suivi d'une rangée de cartes projets.
+- **Don't** utiliser le bleu pour un lien, un focus, une case ou une décoration.
+- **Don't** animer en boucle, au défilement de chaque section, ni deux mouvements en même temps.
 - **Don't** inverser les couleurs du diagramme en sombre ni le peindre aux couleurs d'un échiquier d'écran.
 
 ## Références
@@ -305,4 +349,5 @@ Le monde vient de l'imprimé, pas du web.
 
 - **Chess Informator** (Šahovski informator) : symboles d'évaluation, diagrammes, notation compacte. C'est la référence du monde.
 - **Les livres de parties commentées**, par exemple _Mes 60 meilleures parties_ de Bobby Fischer : une partie par chapitre, le récit autour du coup critique, les en-têtes de partie.
-- **lichess.org** : référence de qualité d'exécution seulement, pour la netteté du diagramme et le jeu de pièces cburnett, repris tel quel.
+- **lichess.org** : référence de qualité d'exécution seulement, pour la netteté du diagramme et le jeu de pièces cburnett, repris tel quel. Le marquage du dernier coup (case de départ et case d'arrivée) vient aussi de là.
+- **chess.com** : la convention du coup brillant `!!` en bleu, et rien d'autre.
