@@ -1,5 +1,9 @@
 ---
 import { nav } from '../data/nav';
+import { getLocale, localizePath, useTranslations } from '../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
 
 // Rubrique courante, calculée au build : la page elle-même ("page")
 // ou une page placée sous son chemin ("true"), barre oblique finale ignorée.
@@ -8,22 +12,40 @@ const strip = (path: string) =>
 const current = strip(Astro.url.pathname);
 
 const items = nav.map((item) => {
-  const href = strip(item.href);
+  const frenchOnly = 'frenchOnly' in item && item.frenchOnly;
+  const href = frenchOnly ? item.href : localizePath(item.href, locale);
+  const path = strip(href);
   const ariaCurrent =
-    current === href
+    current === path
       ? ('page' as const)
-      : current.startsWith(`${href}/`)
+      : current.startsWith(`${path}/`)
         ? ('true' as const)
         : undefined;
-  return { ...item, ariaCurrent };
+  // Insécable : la mention ne passe jamais seule à la ligne.
+  const marked = frenchOnly && locale !== 'fr';
+  const label = marked
+    ? `${t(item.key)}\u00a0${t('nav.frenchMark')}`
+    : t(item.key);
+  return {
+    label,
+    href,
+    ariaCurrent,
+    hreflang: marked ? ('fr' as const) : undefined,
+    ariaLabel: marked ? `${label}, ${t('nav.inFrench')}` : undefined,
+  };
 });
 ---
 
-<nav aria-label="Navigation principale">
+<nav aria-label={t('nav.label')}>
   <ul>
     {items.map((item) => (
       <li>
-        <a href={item.href} aria-current={item.ariaCurrent}>
+        <a
+          href={item.href}
+          aria-current={item.ariaCurrent}
+          hreflang={item.hreflang}
+          aria-label={item.ariaLabel}
+        >
           {item.label}
         </a>
       </li>

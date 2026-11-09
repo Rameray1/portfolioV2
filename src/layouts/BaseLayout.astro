@@ -4,6 +4,7 @@ import fontUrl from '../assets/fonts/archivo-wdth-wght.woff2?url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
+import { getLocale, useTranslations } from '../i18n/utils';
 
 interface Props {
   title: string;
@@ -12,10 +13,12 @@ interface Props {
 
 const { title, description } = Astro.props;
 const documentTitle = title === site.name ? title : `${title} · ${site.name}`;
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
 ---
 
 <!doctype html>
-<html lang="fr">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -34,7 +37,7 @@ const documentTitle = title === site.name ? title : `${title} · ${site.name}`;
   </head>
   <body>
     <a class="skip-link" href="#content">
-      Aller au contenu
+      {t('skipLink')}
     </a>
     <Header />
     <main id="content" tabindex="-1">

@@ -1,14 +1,23 @@
 ---
 import { site } from '../data/site';
 import Navigation from './Navigation.astro';
+import LangSwitcher from './LangSwitcher.astro';
+import { getLocale, localizePath } from '../i18n/utils';
+
+const home = localizePath('/', getLocale(Astro.currentLocale));
 ---
 
 <header>
   <div class="bar">
-    <a class="name" href="/">
+    <a class="name" href={home}>
       {site.name}
     </a>
-    <Navigation />
+    <div class="nav">
+      <Navigation />
+    </div>
+    <div class="lang">
+      <LangSwitcher />
+    </div>
   </div>
 </header>
 
@@ -18,10 +27,12 @@ import Navigation from './Navigation.astro';
   }
 
   .bar {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'name lang'
+      'nav nav';
     align-items: baseline;
-    justify-content: space-between;
     gap: var(--space-2) var(--space-6);
     max-width: var(--page-max);
     margin-inline: auto;
@@ -29,7 +40,28 @@ import Navigation from './Navigation.astro';
     padding-block: var(--space-5);
   }
 
+  .nav {
+    grid-area: nav;
+  }
+
+  .lang {
+    grid-area: lang;
+  }
+
+  @media (min-width: 48rem) {
+    .bar {
+      grid-template-columns: auto 1fr auto;
+      grid-template-areas: 'name nav lang';
+    }
+
+    .nav {
+      justify-self: end;
+    }
+  }
+
   .name {
+    grid-area: name;
+    justify-self: start;
     font-size: var(--text-base);
     font-weight: var(--weight-bold);
     text-decoration: none;

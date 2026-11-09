@@ -1,10 +1,13 @@
 ---
 import { site } from '../data/site';
+import { getLocale, useTranslations } from '../i18n/utils';
+
+const t = useTranslations(getLocale(Astro.currentLocale));
 
 const links = [
-  { label: 'Email', href: `mailto:${site.contact.email}` },
-  { label: 'GitHub', href: site.contact.github },
-  { label: 'LinkedIn', href: site.contact.linkedin },
+  { label: t('footer.email'), href: `mailto:${site.contact.email}` },
+  { label: t('footer.github'), href: site.contact.github },
+  { label: t('footer.linkedin'), href: site.contact.linkedin },
 ];
 ---
 
