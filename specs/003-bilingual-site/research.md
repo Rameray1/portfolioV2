@@ -80,8 +80,9 @@ other)` if that route exists, else the other locale's home (FR-008).
 
 - **Decision**: one link in the header, after the navigation (`DESIGN.md` › Navigation: « les
   rubriques … et `EN` (600) à droite »). Visible text `EN` on French pages, `FR` on English
-  pages; `aria-label` with the full language name in that language (`English`, `Français`),
-  which contains the visible text (WCAG 2.5.3); `lang` and `hreflang` set to the target
+  pages; `aria-label` = visible text + full language name in that language (`EN, English`,
+  `FR, Français`), so the visible text is a whole word of the accessible name (WCAG 2.5.3;
+  `English` alone failed Lighthouse's label-content-name-mismatch check at implementation); `lang` and `hreflang` set to the target
   locale (FR-009). Same type size, underline and focus as nav links, weight 600.
 - **Rationale**: plain `<a>`, no JS (principle II); `DESIGN.md` already fixes its look.
 - **Alternatives**: `<select>` (needs JS to navigate); listing both languages with the current

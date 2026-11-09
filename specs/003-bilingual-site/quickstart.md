@@ -29,8 +29,8 @@ grep -rn 'href="/en/blog' dist || echo "no link to /en/blog"
 
 - `dist/index.html` → `lang="fr"`; `dist/en/index.html` → `lang="en"` (FR-003, SC-001).
 - 0 `<script>` in both (SC-008). No `/en/blog` page or link (FR-004, SC-006).
-- `/`: switcher `<a href="/en/" hreflang="en" lang="en" aria-label="English">EN</a>`.
-- `/en/`: switcher `href="/"`, `lang="fr"`, `aria-label="Français"`, text `FR`.
+- `/`: switcher `<a href="/en/" hreflang="en" lang="en" aria-label="EN, English">EN</a>`.
+- `/en/`: switcher `href="/"`, `lang="fr"`, `aria-label="FR, Français"`, text `FR`.
 - `/en/`: nav hrefs `/en/about`, `/en/projects/`, `/en/background`, `/en/skills`, `/en/cv`,
   and Blog → `/blog/` with ` (FR)`, `hreflang="fr"`, `aria-label="Blog (FR), in French"`.
 - `/en/`: name link → `/en/`; skip link "Skip to content"; nav `aria-label="Main navigation"`.
@@ -55,7 +55,7 @@ with `astro dev --background` and compare every cell with the table, including `
 
 - Keyboard on `/` and `/en/`: Tab order skip link → name → rubriques → switcher → content →
   footer; focus ring visible on the switcher.
-- VoiceOver on the switcher of `/`: reads "English, link" with an English voice; on Blog in
+- VoiceOver on the switcher of `/`: reads "EN, English, link" with an English voice; on Blog in
   `/en/`: "Blog (FR), in French, link".
 - 320 px and 200 % zoom, both locales, both themes: header wraps without horizontal scroll
   (FR-010).

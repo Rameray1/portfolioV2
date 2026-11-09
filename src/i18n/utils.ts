@@ -19,3 +19,29 @@ export function localizePath(path: string, locale: Locale): `/${string}` {
   if (locale === 'fr') return bare;
   return bare === '/' ? '/en/' : `/en${bare}`;
 }
+
+const strip = (path: string) =>
+  path.length > 1 ? path.replace(/\/+$/, '') : path;
+
+// Routes statiques générées, lues depuis les fichiers de src/pages (sans barre finale).
+// Les routes dynamiques ([slug].astro) n'y figurent pas : F06 déclarera leurs chemins traduits.
+const routes = new Set(
+  Object.keys(import.meta.glob('/src/pages/**/*.astro'))
+    .filter((file) => !file.includes('['))
+    .map((file) =>
+      strip(
+        file
+          .replace(/^\/src\/pages/, '')
+          .replace(/\.astro$/, '')
+          .replace(/\/index$/, '') || '/',
+      ),
+    ),
+);
+
+// Cible du sélecteur depuis une page en `locale` : la même page dans l'autre langue si elle
+// est générée, sinon l'accueil de l'autre langue.
+export function switchPath(pathname: string, locale: Locale): `/${string}` {
+  const other: Locale = locale === 'fr' ? 'en' : 'fr';
+  const target = localizePath(pathname, other);
+  return routes.has(strip(target)) ? target : localizePath('/', other);
+}

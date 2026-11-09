@@ -1,0 +1,35 @@
+---
+// Lien vers la même page dans l'autre langue (ou son accueil), calculé au build, sans script.
+// Le nom accessible commence par le texte visible (« EN, English ») : WCAG 2.5.3.
+import { getLocale, switchPath, useTranslations } from '../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const other = locale === 'fr' ? 'en' : 'fr';
+const t = useTranslations(locale);
+---
+
+<a
+  href={switchPath(Astro.url.pathname, locale)}
+  hreflang={other}
+  lang={other}
+  aria-label={`${t('langSwitch.short')}, ${t('langSwitch.label')}`}
+>
+  {t('langSwitch.short')}
+</a>
+
+<style>
+  a {
+    display: inline-block;
+    padding-block: var(--space-1);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-decoration: none;
+    /* même trait que les rubriques (Navigation.astro) */
+    text-underline-offset: var(--underline-offset-current);
+  }
+
+  a:hover {
+    text-decoration-line: underline;
+    text-decoration-thickness: var(--rule-heavy);
+  }
+</style>
