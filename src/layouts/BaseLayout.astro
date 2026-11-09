@@ -3,16 +3,16 @@ import '../styles/global.css';
 import fontUrl from '../assets/fonts/archivo-wdth-wght.woff2?url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { site } from '../data/site';
+import Seo from '../components/Seo.astro';
 import { getLocale, useTranslations } from '../i18n/utils';
 
 interface Props {
   title: string;
   description: string;
+  image?: { src: `/${string}`; alt: string };
 }
 
-const { title, description } = Astro.props;
-const documentTitle = title === site.name ? title : `${title} · ${site.name}`;
+const { title, description, image } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 ---
@@ -23,8 +23,7 @@ const t = useTranslations(locale);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
-    <title>{documentTitle}</title>
-    <meta name="description" content={description} />
+    <Seo title={title} description={description} image={image} />
     <link
       rel="preload"
       href={fontUrl}
@@ -32,8 +31,9 @@ const t = useTranslations(locale);
       type="font/woff2"
       crossorigin
     />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <slot name="head" />
   </head>
   <body>
     <a class="skip-link" href="#content">

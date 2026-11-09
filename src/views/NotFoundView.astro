@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+import { getLocale, localizePath, useTranslations } from '../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+const exits = [
+  { label: t('notFound.home'), href: localizePath('/', locale) },
+  { label: t('notFound.projects'), href: localizePath('/projects/', locale) },
+  { label: t('notFound.email'), href: `mailto:${site.contact.email}` },
+];
+---
+
+<BaseLayout title={t('notFound.title')} description={t('notFound.description')}>
+  <div class="note">
+    <span class="eval" aria-hidden="true">
+      ??
+    </span>
+    <div>
+      <h1>{t('notFound.title')}</h1>
+      <p>{t('notFound.lead')}</p>
+      <ul>
+        {exits.map((exit) => (
+          <li>
+            <a href={exit.href}>{exit.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .note {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    column-gap: var(--space-2);
+    max-width: var(--measure);
+  }
+
+  .eval {
+    color: var(--color-mark);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: var(--leading-tight);
+  }
+
+  h1 {
+    margin: 0 0 var(--space-5);
+    font-size: var(--text-headline);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  p {
+    margin: 0 0 var(--space-7);
+    color: var(--color-ink-muted);
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: var(--rule-heavy) solid var(--color-rule);
+  }
+
+  li {
+    border-bottom: var(--rule-thin) solid var(--color-rule-soft);
+  }
+
+  a {
+    display: block;
+    padding: var(--space-3) var(--space-2);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-snug);
+    text-decoration: none;
+    transition:
+      background-color var(--duration) var(--ease-out),
+      color var(--duration) var(--ease-out);
+  }
+
+  a:hover,
+  a:focus-visible {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  @media (max-width: 40rem) {
+    .note {
+      grid-template-columns: 1.75rem minmax(0, 1fr);
+    }
+  }
+</style>

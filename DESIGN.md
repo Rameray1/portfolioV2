@@ -175,7 +175,7 @@ Une encre et un papier, plus un rouge rare qui ne parle que pour le commentateur
 
 ### Accent
 
-- **Bleu du coup brillant** (`brilliant`; sombre : `brilliant-dark`) : le symbole `!!` et rien d'autre, dans la liste des coups, dans sa légende, sur le diagramme et dans la marge d'une page projet. Sur papier blanc, il s'imprime en bleu profond (`#0077b6`, 4,87:1) : le bleu ciel pur ne tient pas le contraste sur blanc. En sombre, il devient le vrai bleu ciel (`#5cc8ff`, 9,7:1).
+- **Bleu du coup brillant** (`brilliant`; sombre : `brilliant-dark`) : le symbole `!!` et rien d'autre, dans la liste des coups, dans sa légende, sur le diagramme, dans la marge d'une page projet et dans le favicon. Sur papier blanc, il s'imprime en bleu profond (`#0077b6`, 4,87:1) : le bleu ciel pur ne tient pas le contraste sur blanc. En sombre, il devient le vrai bleu ciel (`#5cc8ff`, 9,7:1).
 - **Bleu sur ligne inversée** (`brilliant-on-invert`; sombre : `brilliant-on-invert-dark`) : le `!!` quand sa ligne est inversée. Comme les deux rouges, les deux bleus échangent leurs rôles entre clair et sombre. Sur la ligne inversée du thème sombre, le bleu profond tombe à 4,24:1 : c'est admis, car le symbole y est toujours en grand texte (seuil 3:1).
 - Jetons à ajouter dans `src/styles/global.css` en F11 (`--color-brilliant`, `--color-brilliant-on-invert`).
 
@@ -316,7 +316,7 @@ Les métadonnées forment une liste de définitions sur quatre colonnes : libell
 Ces deux états découlent du monde construit mais n'existent pas encore.
 
 - **Image de partage par défaut (Open Graph), à construire en F04.** Format 1200 × 630, fond papier, composition de l'ouverture : le nom en Display (800, 72 %), un filet d'encre de 2 px, la ligne d'en-tête de partie en encre atténuée, puis le pitch en Lead (c'est le texte prévu par `CONTENU.md` §3). Un seul élément rouge au plus, un symbole d'évaluation ou le carré du trait. Le diagramme est facultatif, à droite, en planche gris pierre. Pas de rayon, pas d'ombre. Une version par langue si le pitch diffère.
-- **Favicon, à construire en F04.** SVG carré, angles droits, le symbole `!` en rouge du commentateur, dessiné en Archivo 800 à 72 % et vectorisé (aucune police chargée), sur fond papier. Il s'adapte au thème par `prefers-color-scheme` dans le SVG (fond `paper-dark`, rouge `mark-dark`).
+- **Favicon, livré en F04.** SVG carré, angles droits, le symbole `!!` du coup brillant en bleu (`brilliant`), dessiné en Archivo 800 à 72 % et vectorisé (aucune police chargée), sur fond papier. Il s'adapte au thème par `prefers-color-scheme` dans le SVG (fond `paper-dark`, bleu ciel `brilliant-dark`). C'est le seul `!!` hors des projets : il signe le site, il ne note pas un coup.
 
 ## Do's and Don'ts
 

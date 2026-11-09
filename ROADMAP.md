@@ -167,6 +167,12 @@ src/components/Seo.astro (props title, description, image, noindex, alternates) 
 - [ ] Brancher le dépôt sur un hébergeur statique (Netlify, Vercel ou Cloudflare Pages) :
       build `npm run build`, dossier `dist/`. Activer les aperçus par branche.
 - [ ] `PUBLIC_NOINDEX=true` en production jusqu'à C3.
+- [x] Remplacer l'adresse provisoire `site` (`https://ramazankus.example`) de
+      `astro.config.mjs` par le vrai domaine (`https://ramazankus.dev`).
+- [ ] Servir la 404 anglaise (`dist/en/404/index.html`) avec un statut 404 sous `/en/*` :
+      Netlify, `/en/* /en/404/ 404` dans `public/_redirects` ; Vercel, une réécriture ;
+      Cloudflare Pages, déplacer le fichier en `en/404.html` après le build.
+- [ ] Vérifier l'aperçu grand format de `/` et `/en/` dans LinkedIn Post Inspector.
       Commit : `ci: premiere mise en ligne`
 
 ---

@@ -19,6 +19,10 @@ export function localizePath(path: string, locale: Locale): `/${string}` {
 const strip = (path: string) =>
   path.length > 1 ? path.replace(/\/+$/, '') : path;
 
+export function isStatusPage(pathname: string): boolean {
+  return /^(\/en)?\/404$/.test(strip(pathname));
+}
+
 // Routes dynamiques ([slug]) non listées : à traiter en F06.
 const routes = new Set(
   Object.keys(import.meta.glob('/src/pages/**/*.astro'))
@@ -30,11 +34,22 @@ const routes = new Set(
           .replace(/\.astro$/, '')
           .replace(/\/index$/, '') || '/',
       ),
-    ),
+    )
+    .filter((path) => !isStatusPage(path)),
 );
 
+const otherLocale = (locale: Locale): Locale => (locale === 'fr' ? 'en' : 'fr');
+
+export function alternatePath(
+  pathname: string,
+  locale: Locale,
+): `/${string}` | undefined {
+  const target = localizePath(pathname, otherLocale(locale));
+  return routes.has(strip(target)) ? target : undefined;
+}
+
 export function switchPath(pathname: string, locale: Locale): `/${string}` {
-  const other: Locale = locale === 'fr' ? 'en' : 'fr';
-  const target = localizePath(pathname, other);
-  return routes.has(strip(target)) ? target : localizePath('/', other);
+  return (
+    alternatePath(pathname, locale) ?? localizePath('/', otherLocale(locale))
+  );
 }

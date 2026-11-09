@@ -1,6 +1,7 @@
 ---
 // Provisoire : remplacé en F05 (pitch dans src/data/campaign.ts).
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PersonSchema from '../components/PersonSchema.astro';
 import { site } from '../data/site';
 import { getLocale } from '../i18n/utils';
 import type { Locale } from '../i18n/ui';
@@ -14,6 +15,7 @@ const pitch = {
 ---
 
 <BaseLayout title={site.name} description={pitch[locale]}>
+  <PersonSchema slot="head" />
   <h1>{site.name}</h1>
   <p>{pitch[locale]}</p>
 </BaseLayout>

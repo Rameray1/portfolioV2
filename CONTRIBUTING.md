@@ -81,6 +81,10 @@ la CI est verte :
 - **Le contenu est de la donnée** (`src/content/`, `src/data/`) : ajouter un projet = un fichier
   `.md`, zéro ligne de code.
 - **Site 100 % statique**, zéro JavaScript client par défaut. KISS / YAGNI : rien « au cas où ».
+- **SEO** : une page passe `title` et `description` à `BaseLayout` ; canonique, aperçu de
+  partage, liens alternatifs et plan du site en découlent. `image` est optionnelle. Page non
+  indexable : son chemin dans `src/data/seo.ts`. Site entier : `PUBLIC_NOINDEX=true` chez
+  l'hébergeur.
 - **Brouillon** : `draft: true`. **Retirer** un contenu : supprimer le fichier + une redirection
   dans `astro.config.mjs`.
 - Commits conventionnels (`feat`, `fix`, `content`, `chore`, `docs`, `perf`, `a11y`, `ci`).

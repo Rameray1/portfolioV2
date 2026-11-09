@@ -1,11 +1,29 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
+import { isNoindexPath } from './src/data/seo.ts';
 
 export default defineConfig({
-  // À garder aligné sur `locales` et `defaultLocale` de src/i18n/ui.ts.
+  site: 'https://ramazankus.dev',
+  // À garder aligné sur `locales` et `defaultLocale` de src/i18n/ui.ts (et sur le sitemap).
   i18n: {
     locales: ['fr', 'en'],
     defaultLocale: 'fr',
     routing: { prefixDefaultLocale: false },
+  },
+  integrations: [
+    sitemap({
+      i18n: { defaultLocale: 'fr', locales: { fr: 'fr', en: 'en' } },
+      filter: (page) => !isNoindexPath(new URL(page).pathname),
+    }),
+  ],
+  env: {
+    schema: {
+      PUBLIC_NOINDEX: envField.boolean({
+        context: 'client',
+        access: 'public',
+        default: false,
+      }),
+    },
   },
 });
