@@ -21,8 +21,7 @@ const items = nav.map((item) => {
       : current.startsWith(`${path}/`)
         ? ('true' as const)
         : undefined;
-  // Rubrique sans version dans cette langue : mention (FR), langue de la cible annoncée.
-  // Espace insécable entre le libellé et la mention, pour qu'ils ne se séparent jamais.
+  // Insécable : la mention ne passe jamais seule à la ligne.
   const marked = frenchOnly && locale !== 'fr';
   const label = marked
     ? `${t(item.key)}\u00a0${t('nav.frenchMark')}`
