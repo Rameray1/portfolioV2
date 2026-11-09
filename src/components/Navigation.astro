@@ -5,8 +5,6 @@ import { getLocale, localizePath, useTranslations } from '../i18n/utils';
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 
-// Rubrique courante, calculée au build : la page elle-même ("page")
-// ou une page placée sous son chemin ("true"), barre oblique finale ignorée.
 const strip = (path: string) =>
   path.length > 1 ? path.replace(/\/+$/, '') : path;
 const current = strip(Astro.url.pathname);
@@ -68,7 +66,6 @@ const items = nav.map((item) => {
     padding-block: var(--space-1);
     font-size: var(--text-sm);
     text-decoration: none;
-    /* même position de trait au survol et pour la rubrique courante */
     text-underline-offset: var(--underline-offset-current);
   }
 
