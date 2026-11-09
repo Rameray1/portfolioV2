@@ -96,15 +96,18 @@ All Technical Context items were known after reading the code and the `@astrojs/
 
 - **Decision**: `src/views/NotFoundView.astro` + shells `src/pages/404.astro` and
   `src/pages/en/404.astro` (F03 page pattern). Build output `dist/404.html` and
-  `dist/en/404.html`. `Seo` treats `/404` and `/en/404` as status pages: always `noindex`, and
+  `dist/en/404/index.html`: Astro only writes the root 404 as `404.html` (checked at
+  implementation; `404.html.astro` gives `en/404.html/index.html`, a post-build rename would be
+  extra code for one host). `Seo` treats `/404` and `/en/404` as status pages: always `noindex`, and
   **no** canonical, `og:url` or `hreflang` (spec FR-003 amended accordingly).
 - **Rationale**: a 404 is served at whatever URL was requested; a canonical pointing to
   `/404/` would be false, and Google treats a noindex page with a canonical as mixed signals.
   Links: home and projects via `localizePath`, email from `site.contact.email` (principle IV).
-- **Hosting**: Cloudflare Pages serves the nearest `404.html` up the tree natively; Netlify
-  needs `/en/* /en/404.html 404` in `public/_redirects`; Vercel needs a rewrite. The host is
-  chosen at go-live, so this file is written then, not now (YAGNI). Locally, `astro preview`
-  serves only the root 404: the English one is checked by opening `/en/404.html`.
+- **Hosting**: Netlify needs `/en/* /en/404/ 404` in `public/_redirects`; Vercel needs a
+  rewrite to `/en/404/` with status 404; Cloudflare Pages only looks for a file named
+  `404.html`, so it would need the file moved to `en/404.html` after the build. The host is
+  chosen at go-live, so this is done then, not now (YAGNI). Locally, `astro preview` serves
+  only the root 404: the English one is checked by opening `/en/404/`.
 
 ## R8 — Open Graph tags
 

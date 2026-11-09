@@ -50,7 +50,7 @@ Read by `Seo.astro` and by the sitemap `filter` in `astro.config.mjs`: one list,
 
 ## Status pages
 
-`/404` and `/en/404` (build: `404.html`, `en/404.html`). Always `noindex`; no canonical, no
+`/404` and `/en/404` (build: `404.html`, `en/404/index.html`). Always `noindex`; no canonical, no
 alternates; excluded from the sitemap (built into `@astrojs/sitemap`) and from the `routes`
 set used by the switcher and alternates.
 

@@ -9,7 +9,7 @@ npm run check && npm run build
 ```
 
 Expected: both pass. `dist/` contains `robots.txt`, `sitemap-index.xml`, `sitemap-0.xml`,
-`404.html`, `en/404.html`, `og/default-fr.png`, `og/default-en.png`, `favicon.svg`,
+`404.html`, `en/404/index.html`, `og/default-fr.png`, `og/default-en.png`, `favicon.svg`,
 `favicon.ico`.
 
 Failure cases (revert after each):
@@ -28,7 +28,7 @@ Expected: matches [contracts/seo.md](./contracts/seo.md) — canonical `/` and `
 `hreflang` fr / en / x-default on both, absolute `og:image` per locale, no `robots` tag
 (SC-001, SC-002).
 
-On `dist/404.html` and `dist/en/404.html`: `robots` `noindex`, no canonical, no `hreflang`
+On `dist/404.html` and `dist/en/404/index.html`: `robots` `noindex`, no canonical, no `hreflang`
 (FR-015, R7). Header switcher on each 404 points to the other home.
 
 ## 3. Global switch
@@ -84,7 +84,7 @@ astro preview --background   # or npm run preview
 ```
 
 - `/does-not-exist` → French 404 with links `/`, `/projects/`, `mailto:` (US4 #1).
-- `/en/404.html` → English 404 with `/en/`, `/en/projects/`, `mailto:` (US4 #2; `astro
+- `/en/404/` → English 404 with `/en/`, `/en/projects/`, `mailto:` (US4 #2; `astro
 preview` serves only the root 404, research R7).
 - Keyboard: Tab reaches each link with the site focus ring; VoiceOver reads the `<h1>`
   first. axe on both 404 pages, light and dark theme: 0 error (SC-010). 0 `<script>` other

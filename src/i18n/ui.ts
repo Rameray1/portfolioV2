@@ -20,6 +20,13 @@ export const fr = {
   'footer.linkedin': 'LinkedIn',
   'langSwitch.short': 'EN',
   'langSwitch.label': 'English',
+  'notFound.title': 'Page introuvable',
+  'notFound.description':
+    'Erreur 404 : cette adresse ne mène à aucune page du portfolio de Ramazan Kus.',
+  'notFound.lead': 'Erreur 404 : cette adresse ne mène à aucune page.',
+  'notFound.home': 'Accueil',
+  'notFound.projects': 'Projets',
+  'notFound.email': 'M’écrire',
   'seo.ogImageAlt':
     'Ramazan Kus, élève ingénieur à IMT Mines Alès en alternance chez Astrée Software',
 } satisfies Record<string, string>;
@@ -42,6 +49,13 @@ export const en: Record<UiKey, string> = {
   'footer.linkedin': 'LinkedIn',
   'langSwitch.short': 'FR',
   'langSwitch.label': 'Français',
+  'notFound.title': 'Page not found',
+  'notFound.description':
+    'Error 404: this address leads to no page of Ramazan Kus’s portfolio.',
+  'notFound.lead': 'Error 404: this address leads to no page.',
+  'notFound.home': 'Home',
+  'notFound.projects': 'Projects',
+  'notFound.email': 'Email me',
   'seo.ogImageAlt':
     'Ramazan Kus, engineering student at IMT Mines Alès and apprentice at Astrée Software',
 };

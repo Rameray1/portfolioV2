@@ -106,7 +106,7 @@ home.
 
 - [x] T020 [US3] Create `src/pages/robots.txt.ts` per [contracts/seo.md § robots.txt.ts](./contracts/seo.md) and research R13: `export const GET: APIRoute` returning `new Response(body, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } })`; `PUBLIC_NOINDEX` true → `User-agent: *\nDisallow: /\n`; false → `User-agent: *\nAllow: /\n\nSitemap: ${new URL('sitemap-index.xml', site)}\n` (`site` from the endpoint context)
 - [x] T021 [US3] Validate quickstart §3: `PUBLIC_NOINDEX=true npm run build` → every `dist/**/*.html` has `noindex, nofollow` (the `grep -L` prints nothing), `dist/robots.txt` disallows all; plain `npm run build` → `Allow: /` + `Sitemap:` line; `PUBLIC_NOINDEX=maybe npm run build` fails (quickstart §1)
-- [x] T022 [P] [US3] In `ROADMAP.md` « Mise en ligne », add three checklist items: replace the placeholder `site` in `astro.config.mjs` by the real domain; add the host's rule so `/en/*` gets `en/404.html` with a 404 status (Netlify `public/_redirects`: `/en/* /en/404.html 404`; Cloudflare Pages: nothing; Vercel: a rewrite), research R7; check the large preview of `/` and `/en/` in LinkedIn Post Inspector (SC-007, quickstart §9)
+- [x] T022 [P] [US3] In `ROADMAP.md` « Mise en ligne », add three checklist items: replace the placeholder `site` in `astro.config.mjs` by the real domain; add the host's rule so `/en/*` gets the English 404 with a 404 status (Netlify `public/_redirects`: `/en/* /en/404/ 404`; Vercel: a rewrite; Cloudflare Pages: move the file to `en/404.html` after the build), research R7; check the large preview of `/` and `/en/` in LinkedIn Post Inspector (SC-007, quickstart §9)
 
 **Checkpoint**: US3 done — commit `feat: add global noindex switch and robots.txt`.
 
@@ -120,10 +120,10 @@ home.
 
 ### Implementation for User Story 4
 
-- [ ] T023 [P] [US4] In `src/i18n/ui.ts`, add to `fr` and `en` the keys of data-model § Dictionary additions: `notFound.title`, `notFound.description`, `notFound.lead` (one sentence, `CONTENU.md` §9: carries a number, e.g. the 404), `notFound.home`, `notFound.projects`, `notFound.email`. French title and description must differ from every other French page's, same in English (constitution VII). English rewritten, not translated; get the copy approved by the maintainer
-- [ ] T024 [US4] Load `impeccable`. Create `src/views/NotFoundView.astro`: `<BaseLayout title={t('notFound.title')} description={t('notFound.description')}>`, an `<h1>`, one `<p>` with `notFound.lead`, and a `<ul>` of three links in the page locale: `localizePath('/', locale)`, `localizePath('/projects/', locale)`, `mailto:${site.contact.email}` (FR-014). Scoped styles, tokens only, composition per `DESIGN.md` (shaped with Impeccable; no new colour, no script)
-- [ ] T025 [P] [US4] Create shells `src/pages/404.astro` and `src/pages/en/404.astro`, each only `<NotFoundView />` (F03 page pattern)
-- [ ] T026 [US4] Validate quickstart §7 and §2 (404 part): `dist/404.html` and `dist/en/404.html` have `robots` `noindex`, no canonical, no `hreflang`, no `og:url`; the header switcher on each points to the other home; links correct in both locales; keyboard reaches each link with the focus ring; neither 404 is in `dist/sitemap-0.xml`
+- [x] T023 [P] [US4] In `src/i18n/ui.ts`, add to `fr` and `en` the keys of data-model § Dictionary additions: `notFound.title`, `notFound.description`, `notFound.lead` (one sentence, `CONTENU.md` §9: carries a number, e.g. the 404), `notFound.home`, `notFound.projects`, `notFound.email`. French title and description must differ from every other French page's, same in English (constitution VII). English rewritten, not translated; get the copy approved by the maintainer
+- [x] T024 [US4] Load `impeccable`. Create `src/views/NotFoundView.astro`: `<BaseLayout title={t('notFound.title')} description={t('notFound.description')}>`, an `<h1>`, one `<p>` with `notFound.lead`, and a `<ul>` of three links in the page locale: `localizePath('/', locale)`, `localizePath('/projects/', locale)`, `mailto:${site.contact.email}` (FR-014). Scoped styles, tokens only, composition per `DESIGN.md` (shaped with Impeccable; no new colour, no script)
+- [x] T025 [P] [US4] Create shells `src/pages/404.astro` and `src/pages/en/404.astro`, each only `<NotFoundView />` (F03 page pattern)
+- [x] T026 [US4] Validate quickstart §7 and §2 (404 part): `dist/404.html` and `dist/en/404/index.html` have `robots` `noindex`, no canonical, no `hreflang`, no `og:url`; the header switcher on each points to the other home; links correct in both locales; keyboard reaches each link with the focus ring; neither 404 is in `dist/sitemap-0.xml`
 
 **Checkpoint**: US4 done — commit `feat: add bilingual 404 page`.
 
@@ -149,7 +149,7 @@ home.
 **Purpose**: constitution gate for a visual feature — audit + polish before the feature is
 done.
 
-- [ ] T029 Run `/impeccable audit` on `/404.html`, `/en/404.html` (both themes, 320 px and desktop), the two share images and the favicon; list findings
+- [ ] T029 Run `/impeccable audit` on `/404.html`, `/en/404/` (both themes, 320 px and desktop), the two share images and the favicon; list findings
 - [ ] T030 Run `/impeccable polish` and apply the accepted fixes in the files concerned (`src/views/NotFoundView.astro`, `scripts/og-image.html` then re-render T011, `public/favicon.svg` / `.ico`), tokens only in CSS
 - [ ] T031 Run quickstart §7 (accessibility) and §8: axe 0 errors on both 404 pages in light and dark (SC-010); 320 px and 200 % zoom without horizontal scroll; Lighthouse mobile on `/` and `/en/` with the switch off: SEO 100, accessibility 100, performance ≥ 95, < 200 kB transferred (SC-008, SC-011). If the only SEO finding is the canonical pointing to the placeholder domain instead of `localhost`, note it in the task and re-measure SC-008 after go-live (quickstart §9); `grep -rl '<script' dist --include='*.html'` lists only the two homes (JSON-LD). VoiceOver may be left to the maintainer; say so in the task note
 - [ ] T032 Run `npm run check && npm run build` on the whole branch; read the markup of each new or changed component for literal UI text (constitution VI); `git log main..HEAD --oneline` → every commit conventional and in English
