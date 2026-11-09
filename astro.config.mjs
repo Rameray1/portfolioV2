@@ -4,8 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import { isNoindexPath } from './src/data/seo.ts';
 
 export default defineConfig({
-  // Adresse provisoire : à remplacer par le vrai domaine à la mise en ligne.
-  site: 'https://ramazankus.example',
+  site: 'https://ramazankus.dev',
   // À garder aligné sur `locales` et `defaultLocale` de src/i18n/ui.ts (et sur le sitemap).
   i18n: {
     locales: ['fr', 'en'],
