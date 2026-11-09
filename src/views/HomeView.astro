@@ -1,0 +1,39 @@
+---
+// Accueil provisoire : démontre le gabarit dans les deux langues. Remplacé par le vrai
+// accueil en F05, où le pitch passera dans src/data/campaign.ts.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+import { getLocale } from '../i18n/utils';
+import type { Locale } from '../i18n/ui';
+
+const locale = getLocale(Astro.currentLocale);
+
+// L'anglais est réécrit, pas traduit (CONTENU.md §9).
+const pitch = {
+  fr: 'Élève ingénieur à IMT Mines Alès, en alternance chez Astrée Software, je développe des applications métier, du modèle de données à la mise en production.',
+  en: 'Engineering student at IMT Mines Alès and apprentice developer at Astrée Software. I build business applications, from the data model to production.',
+} satisfies Record<Locale, string>;
+---
+
+<BaseLayout title={site.name} description={pitch[locale]}>
+  <h1>{site.name}</h1>
+  <p>{pitch[locale]}</p>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin: 0 0 var(--space-5);
+    font-size: var(--text-display);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  p {
+    max-width: 40ch; /* mesure du pitch (DESIGN.md, Lead : 34–40ch), propre à cette page */
+    margin: 0;
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+  }
+</style>

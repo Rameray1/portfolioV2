@@ -1,11 +1,14 @@
 ---
 import { site } from '../data/site';
 import Navigation from './Navigation.astro';
+import { getLocale, localizePath } from '../i18n/utils';
+
+const home = localizePath('/', getLocale(Astro.currentLocale));
 ---
 
 <header>
   <div class="bar">
-    <a class="name" href="/">
+    <a class="name" href={home}>
       {site.name}
     </a>
     <Navigation />
