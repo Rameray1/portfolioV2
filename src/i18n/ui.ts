@@ -20,6 +20,8 @@ export const fr = {
   'footer.linkedin': 'LinkedIn',
   'langSwitch.short': 'EN',
   'langSwitch.label': 'English',
+  'seo.ogImageAlt':
+    'Ramazan Kus, élève ingénieur à IMT Mines Alès en alternance chez Astrée Software',
 } satisfies Record<string, string>;
 
 export type UiKey = keyof typeof fr;
@@ -40,4 +42,6 @@ export const en: Record<UiKey, string> = {
   'footer.linkedin': 'LinkedIn',
   'langSwitch.short': 'FR',
   'langSwitch.label': 'Français',
+  'seo.ogImageAlt':
+    'Ramazan Kus, engineering student at IMT Mines Alès and apprentice at Astrée Software',
 };

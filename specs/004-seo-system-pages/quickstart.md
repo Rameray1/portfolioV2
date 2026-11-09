@@ -74,7 +74,7 @@ Expected: two 1200 × 630 PNGs, each < 100 kB, matching `DESIGN.md` (at most one
 no radius, no shadow); text readable at 400 px wide (spec edge case).
 
 Favicon: open `dist/favicon.svg` in the browser with the system in light, then dark mode;
-the `!` is red on paper, then on dark paper. `astro preview` and load `/favicon.ico` → icon,
+the `!!` is deep blue on paper, then sky blue on dark paper. `astro preview` and load `/favicon.ico` → icon,
 not a 404.
 
 ## 7. 404 in both languages

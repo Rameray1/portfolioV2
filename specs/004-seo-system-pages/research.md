@@ -134,13 +134,15 @@ All Technical Context items were known after reading the code and the `@astrojs/
   font pipeline for an image that changes a few times a year); SVG `og:image` (not supported
   by LinkedIn and most previewers).
 
-## R10 — Favicon: `!` glyph extracted from Archivo, theme-aware SVG + 32 px ICO
+## R10 — Favicon: `!!` glyphs extracted from Archivo, theme-aware SVG + 32 px ICO
 
 - **Decision**: extract the `exclam` glyph from Archivo at `wght=800`, `wdth=72` as an SVG
   path (fontTools `varLib.instancer` + `SVGPathPen`, run once in a throw-away Python venv
   with `brotli` to read the woff2; not a project dependency). `public/favicon.svg`: square,
-  no radius, `paper` background, `mark` glyph; an inner `<style>` with
-  `@media (prefers-color-scheme: dark)` switches to `paper-dark` / `mark-dark` (FR-016).
+  no radius, `paper` background, two `exclam` glyphs (one advance apart) in `brilliant`; an inner
+  `<style>` with `@media (prefers-color-scheme: dark)` switches to `paper-dark` /
+  `brilliant-dark` (FR-016). Changed from a red `!` at the maintainer's request after review:
+  `!!` in blue follows the chess.com convention; their badge artwork is not reused.
   `public/favicon.ico`: 32 × 32 rendering of the light version (Pillow). Both replace the
   Astro default files. `BaseLayout` links: `<link rel="icon" href="/favicon.ico"
 sizes="32x32">` then `<link rel="icon" href="/favicon.svg" type="image/svg+xml">`.

@@ -261,7 +261,7 @@ toutes ses balises de présentation sont présentes et justes ; oublier la descr
 **Identité visuelle**
 
 - **FR-016**: Le site MUST avoir un favicon conforme à `DESIGN.md` (« Favicon, à construire en
-  F04 ») : carré, angles droits, le symbole `!` en rouge du commentateur sur fond papier,
+  F04 ») : carré, angles droits, le symbole `!!` du coup brillant en bleu sur fond papier,
   vectorisé, qui suit le thème clair ou sombre du système. Il remplace le favicon actuel, et un
   format de repli MUST exister pour les navigateurs qui ne lisent pas le format vectoriel.
 - **FR-017**: Le site MUST avoir une image de partage par défaut par langue, conforme à

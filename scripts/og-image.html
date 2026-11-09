@@ -1,0 +1,100 @@
+<!doctype html>
+<!--
+  Valeurs copiées de DESIGN.md : ce fichier n'est pas publié et ne lit pas les jetons.
+  Tailles agrandies pour un aperçu réduit à ~500 px.
+-->
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Image de partage</title>
+    <style>
+      @font-face {
+        font-family: 'Archivo';
+        src: url('../src/assets/fonts/archivo-wdth-wght.woff2') format('woff2');
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: #ffffff;
+        color: #141414;
+        font-family: 'Archivo', sans-serif;
+      }
+
+      section {
+        box-sizing: border-box;
+        width: 1200px;
+        height: 630px;
+        padding: 72px 88px 80px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      section:not(:target) {
+        display: none;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 152px;
+        font-weight: 800;
+        font-stretch: 72%;
+        line-height: 0.92;
+        letter-spacing: -0.02em;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin: 32px 0 0;
+        padding-top: 24px;
+        border-top: 2px solid #141414;
+        color: #57554f;
+        font-size: 28px;
+        font-weight: 400;
+      }
+
+      .header::before {
+        content: '';
+        width: 20px;
+        height: 20px;
+        background: #c8102e;
+      }
+
+      p {
+        max-width: 40ch;
+        margin: auto 0 0;
+        font-size: 42px;
+        font-weight: 400;
+        line-height: 1.22;
+        text-wrap: pretty;
+      }
+    </style>
+  </head>
+  <body>
+    <section id="fr" lang="fr">
+      <h1>Ramazan Kus</h1>
+      <div class="header">Portfolio · Projets commentés</div>
+      <p>
+        Élève ingénieur à IMT Mines Alès, en alternance chez Astrée Software, je
+        développe des applications métier, du modèle de données à la mise en
+        production.
+      </p>
+    </section>
+    <section id="en" lang="en">
+      <h1>Ramazan Kus</h1>
+      <div class="header">Portfolio · Annotated projects</div>
+      <p>
+        Engineering student at IMT Mines Alès and apprentice developer at Astrée
+        Software. I build business applications, from the data model to
+        production.
+      </p>
+    </section>
+  </body>
+</html>
