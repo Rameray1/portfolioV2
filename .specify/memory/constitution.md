@@ -70,6 +70,16 @@ constitution fixe ce qui est non négociable et que chaque `/speckit-plan` doit 
   langue. Une page et sa traduction peuvent partager leur titre (un nom propre, par exemple) :
   leurs liens alternatifs les relient (F04).
 - Tout mouvement MUST être désactivé sous `prefers-reduced-motion: reduce`.
+- Chaque page MUST être composée pour le mobile (320 à 430 px) et pour le bureau
+  (≥ 1280 px) : une mise en page pensée pour chaque taille, pas seulement l'absence de
+  débordement. Aucun élément commun (en-tête, pied de page) n'occupe une part disproportionnée
+  du premier écran mobile.
+- La revue design de chaque feature visuelle (principe VIII) MUST inclure des captures à
+  375 px et à 1280 px, dans les deux thèmes, et vérifier aussi les éléments communs sur les
+  pages touchées.
+
+*Raison* : le recruteur lit souvent sur mobile (`PRODUCT.md`) ; un défaut mobile d'un élément
+commun pèse sur toutes les pages.
 
 ### VIII. Styles par jetons et direction visuelle
 
@@ -123,4 +133,4 @@ constitution fixe ce qui est non négociable et que chaque `/speckit-plan` doit 
 - Conformité : `/speckit-plan` et `/speckit-analyze` vérifient chaque feature contre ces
   principes ; une exception non justifiée bloque la feature.
 
-**Version**: 1.0.3 | **Ratified**: 2026-11-07 | **Last Amended**: 2026-11-11
+**Version**: 1.1.0 | **Ratified**: 2026-11-07 | **Last Amended**: 2026-11-11
