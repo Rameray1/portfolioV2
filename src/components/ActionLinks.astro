@@ -1,0 +1,72 @@
+---
+import { campaign } from '../data/campaign';
+import { getLocale, useTranslations } from '../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+const actions = campaign.actions.map((action) => {
+  const href =
+    typeof action.href === 'string' ? action.href : action.href[locale];
+  return { label: action.label[locale], href, pdf: href.endsWith('.pdf') };
+});
+---
+
+<div class="actions">
+  {actions.map((action, index) => (
+    <a
+      class:list={['button', index === 0 ? 'primary' : 'secondary']}
+      href={action.href}
+    >
+      {action.label}
+      {action.pdf && <span class="visually-hidden"> {t('action.pdf')}</span>}
+    </a>
+  ))}
+</div>
+
+<style>
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  /* Hauteur minimale 3rem : valeur de DESIGN.md (Buttons). */
+  .button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 3rem;
+    padding: var(--space-3) var(--space-5);
+    border: var(--rule-heavy) solid var(--color-ink);
+    border-radius: var(--radius);
+    font-size: var(--text-base);
+    font-weight: var(--weight-bold);
+    text-decoration: none;
+    transition:
+      background-color var(--duration) var(--ease-out),
+      color var(--duration) var(--ease-out);
+  }
+
+  .primary,
+  .secondary:hover,
+  .secondary:focus-visible {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .secondary,
+  .primary:hover,
+  .primary:focus-visible {
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+</style>

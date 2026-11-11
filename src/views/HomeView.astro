@@ -1,28 +1,55 @@
 ---
-// Provisoire : remplacé en F05 (pitch dans src/data/campaign.ts).
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PersonSchema from '../components/PersonSchema.astro';
+import ActionLinks from '../components/ActionLinks.astro';
+import Availability from '../components/Availability.astro';
+import Diagram from '../components/Diagram.astro';
+import { campaign } from '../data/campaign';
+import { diagram } from '../data/diagram';
 import { site } from '../data/site';
-import { getLocale } from '../i18n/utils';
-import type { Locale } from '../i18n/ui';
+import { getLocale, useTranslations } from '../i18n/utils';
 
 const locale = getLocale(Astro.currentLocale);
-
-const pitch = {
-  fr: 'Élève ingénieur à IMT Mines Alès, en alternance chez Astrée Software, je développe des applications métier, du modèle de données à la mise en production.',
-  en: 'Engineering student at IMT Mines Alès and apprentice developer at Astrée Software. I build business applications, from the data model to production.',
-} satisfies Record<Locale, string>;
+const t = useTranslations(locale);
+const pitch = campaign.pitch[locale];
 ---
 
-<BaseLayout title={site.name} description={pitch[locale]}>
+<BaseLayout title={site.name} description={pitch}>
   <PersonSchema slot="head" />
-  <h1>{site.name}</h1>
-  <p>{pitch[locale]}</p>
+  <section class="opening" aria-labelledby="name">
+    <div class="lead">
+      <h1 id="name">{site.name}</h1>
+      <p class="header-line">
+        <span>{site.person.employer}</span>
+        <span>{site.person.school}</span>
+      </p>
+      <p class="pitch">{pitch}</p>
+      <ActionLinks />
+    </div>
+    <aside class="side" aria-label={t('availability.label')}>
+      <figure>
+        <Diagram fen={diagram.fen} label={diagram.alt[locale]} />
+        {campaign.availability.visible && (
+          <figcaption>
+            <Availability />
+          </figcaption>
+        )}
+      </figure>
+    </aside>
+  </section>
 </BaseLayout>
 
 <style>
+  /* Colonne du diagramme : 18rem à 30rem (DESIGN.md, Layout). */
+  .opening {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 30rem);
+    gap: var(--space-7) var(--space-8);
+    align-items: start;
+  }
+
   h1 {
-    margin: 0 0 var(--space-5);
+    margin: 0;
     font-size: var(--text-display);
     font-weight: var(--weight-black);
     font-stretch: var(--stretch-display);
@@ -30,10 +57,48 @@ const pitch = {
     letter-spacing: var(--tracking-tight);
   }
 
-  p {
-    max-width: 40ch;
-    margin: 0;
+  .header-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-6);
+    margin: var(--space-4) 0 0;
+    padding-top: var(--space-3);
+    border-top: var(--rule-heavy) solid var(--color-rule);
+    font-size: var(--text-sm);
+    color: var(--color-ink-muted);
+  }
+
+  .pitch {
+    max-width: 34ch;
+    margin: var(--space-6) 0;
     font-size: var(--text-xl);
     line-height: var(--leading-snug);
+  }
+
+  .side {
+    position: sticky;
+    top: var(--space-6);
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  figcaption {
+    margin-top: var(--space-4);
+    padding-top: var(--space-3);
+    border-top: var(--rule-thin) solid var(--color-rule);
+  }
+
+  /* Une colonne sous 56rem ; diagramme réduit à 22rem (DESIGN.md, Responsive). */
+  @media (max-width: 56rem) {
+    .opening {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .side {
+      position: static;
+      max-width: 22rem;
+    }
   }
 </style>
