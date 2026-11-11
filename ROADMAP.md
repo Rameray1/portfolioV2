@@ -197,7 +197,7 @@ Accueil et page À propos, en FR et EN, pilotés par les leviers de campagne (CO
 **Plan**
 
 ```
-src/data/campaign.ts typé (valeurs { fr, en }, availability.visible, ctas[]). Composants Hero.astro, AvailabilityBanner.astro, CtaGroup.astro. Vues HomeView.astro et AboutView.astro (pattern F03). Prose d'À propos en Markdown par langue (src/content/pages/{fr,en}/about.md, collection `pages`). Photo dans src/assets/, rendue avec <Image> d'astro:assets. Diagram.astro : grille CSS de 64 cases, chaque pièce est un SVG séparé placé par sa case (custom properties --file / --rank), position dans src/data/diagram.ts (provisoire jusqu'à C2b). Le diagramme est ainsi prêt pour les animations de F11, sans les construire ici.
+src/data/campaign.ts typé (valeurs { fr, en }, availability.visible, actions: exactement 2). Composants Availability.astro (bandeau de l'accueil et « ce que je cherche » d'À propos), ActionLinks.astro ; l'ouverture vit dans HomeView, sans composant Hero. Vues HomeView.astro et AboutView.astro (pattern F03). Prose d'À propos en Markdown par langue (src/content/pages/{fr,en}/about.md, collection `pages`). Photo dans src/assets/, rendue avec <Picture> d'astro:assets (AVIF + WebP, < 50 ko). Diagram.astro : grille CSS de 64 cases, chaque pièce est un SVG séparé placé par sa case (custom properties --file / --rank), position en FEN dans src/data/diagram.ts (provisoire jusqu'à C2b). Le diagramme est ainsi prêt pour les animations de F11, sans les construire ici.
 ```
 
 ### F06 · Projets _(~4 séances)_

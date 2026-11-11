@@ -18,6 +18,9 @@
   --color-rule-soft: #dcd9d2;
   --color-mark: #c8102e;
   --color-mark-ink: #ffffff;
+  --color-square-light: #ffffff;
+  --color-square-dark: #c9c6be;
+  --color-board-edge: var(--color-ink);
 
   /* Typographie */
   --font-sans: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
@@ -81,6 +84,9 @@
     --color-rule-soft: #36342f;
     --color-mark: #ff5a6a;
     --color-mark-ink: #161513;
+    /* La planche reste claire et tonale en sombre (DESIGN.md, Printed Negative Rule). */
+    --color-square-light: #e6e3dc;
+    --color-square-dark: #b3afa5;
   }
 }
 

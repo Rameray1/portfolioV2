@@ -85,6 +85,11 @@ la CI est verte :
   partage, liens alternatifs et plan du site en découlent. `image` est optionnelle. Page non
   indexable : son chemin dans `src/data/seo.ts`. Site entier : `PUBLIC_NOINDEX=true` chez
   l'hébergeur.
+- **Campagne** : changer d'objectif = modifier `src/data/campaign.ts` seulement (phrase
+  d'identité, disponibilité avec `visible` pour la masquer, les deux actions). Un CV par
+  langue = `href: { fr, en }` ; le CV passe alors en première action (bouton plein), l'email en
+  seconde. Les projets mis en avant restent le drapeau `featured` de chaque projet (F06). La
+  position du diagramme est une FEN dans `src/data/diagram.ts`.
 - **Brouillon** : `draft: true`. **Retirer** un contenu : supprimer le fichier + une redirection
   dans `astro.config.mjs`.
 - Commits conventionnels (`feat`, `fix`, `content`, `chore`, `docs`, `perf`, `a11y`, `ci`).

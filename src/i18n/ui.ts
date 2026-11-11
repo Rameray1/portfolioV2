@@ -29,6 +29,10 @@ export const fr = {
   'notFound.email': 'M’écrire',
   'seo.ogImageAlt':
     'Ramazan Kus, élève ingénieur à IMT Mines Alès en alternance chez Astrée Software',
+  'availability.label': 'Disponibilité',
+  'availability.from': 'Dès',
+  'about.seeking': 'Ce que je cherche',
+  'action.pdf': '(PDF)',
 } satisfies Record<string, string>;
 
 export type UiKey = keyof typeof fr;
@@ -58,4 +62,8 @@ export const en: Record<UiKey, string> = {
   'notFound.email': 'Email me',
   'seo.ogImageAlt':
     'Ramazan Kus, engineering student at IMT Mines Alès and apprentice at Astrée Software',
+  'availability.label': 'Availability',
+  'availability.from': 'From',
+  'about.seeking': 'What I’m looking for',
+  'action.pdf': '(PDF)',
 };

@@ -1,0 +1,43 @@
+---
+import { campaign, formatStart } from '../data/campaign';
+import { getLocale, useTranslations } from '../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const { visible, status, start, place } = campaign.availability;
+---
+
+{visible && (
+  <p class="availability">
+    <span class="trait" aria-hidden="true" />
+    <span>
+      <strong>{status[locale]}</strong>
+      {t('availability.from')} {formatStart(start, locale)}, {place[locale]}
+    </span>
+  </p>
+)}
+
+<style>
+  .availability {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+  }
+
+  /* Le trait de DESIGN.md : carré plein de 0.75rem. */
+  .trait {
+    flex: none;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: var(--color-mark);
+    transform: translateY(0.05rem);
+  }
+
+  strong {
+    display: block;
+    font-weight: var(--weight-bold);
+  }
+</style>
