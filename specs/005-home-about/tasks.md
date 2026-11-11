@@ -36,8 +36,8 @@ before any task that touches UI** (AGENTS.md), respect `DESIGN.md`, the tokens o
 
 **Purpose**: commit the design docs and align the constitution before code.
 
-- [ ] T001 On branch `005-home-about`, run `npx prettier --check specs/005-home-about` and commit `specs/005-home-about/` and `.specify/feature.json` as `docs(specs): F05 specification, plan and tasks`
-- [ ] T002 Run `/speckit-constitution` to amend principle V of `.specify/memory/constitution.md` (PATCH → v1.0.3, research R10): the levers live in data — `src/data/campaign.ts` for the pitch, the availability banner, the two actions and the CV; the `featured` flag of each project for the featured selection (3 at most, F06). Update the version line (`Last Amended: 2026-11-11`). Commit alone: `docs: amend constitution to v1.0.3`
+- [x] T001 On branch `005-home-about`, run `npx prettier --check specs/005-home-about` and commit `specs/005-home-about/` and `.specify/feature.json` as `docs(specs): F05 specification, plan and tasks`
+- [x] T002 Run `/speckit-constitution` to amend principle V of `.specify/memory/constitution.md` (PATCH → v1.0.3, research R10): the levers live in data — `src/data/campaign.ts` for the pitch, the availability banner, the two actions and the CV; the `featured` flag of each project for the featured selection (3 at most, F06). Update the version line (`Last Amended: 2026-11-11`). Commit alone: `docs: amend constitution to v1.0.3`
 
 ---
 

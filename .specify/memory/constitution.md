@@ -46,8 +46,10 @@ constitution fixe ce qui est non négociable et que chaque `/speckit-plan` doit 
 
 ### V. Les leviers de campagne sont des données
 
-- Les 5 leviers de `CONTENU.md` §7 (pitch, bandeau de disponibilité, projets mis en avant,
-  appels à l'action, CV) MUST vivre dans `src/data/campaign.ts`, jamais dans un composant.
+- Les 5 leviers de `CONTENU.md` §7 MUST vivre en données, jamais dans un composant :
+  `src/data/campaign.ts` pour le pitch, le bandeau de disponibilité, les deux appels à
+  l'action et le CV ; le drapeau `featured` de chaque projet pour la sélection des projets
+  mis en avant (3 au plus, F06).
 
 *Raison* : changer d'objectif de recherche = modifier un fichier, aucune page à réécrire.
 
@@ -121,4 +123,4 @@ constitution fixe ce qui est non négociable et que chaque `/speckit-plan` doit 
 - Conformité : `/speckit-plan` et `/speckit-analyze` vérifient chaque feature contre ces
   principes ; une exception non justifiée bloque la feature.
 
-**Version**: 1.0.2 | **Ratified**: 2026-11-07 | **Last Amended**: 2026-11-09
+**Version**: 1.0.3 | **Ratified**: 2026-11-07 | **Last Amended**: 2026-11-11
