@@ -1,0 +1,112 @@
+---
+import { Picture } from 'astro:assets';
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Availability from '../components/Availability.astro';
+import portrait from '../assets/about/portrait.jpg';
+import { campaign } from '../data/campaign';
+import { getLocale, useTranslations } from '../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+const entry = await getEntry('pages', `${locale}/about`);
+if (!entry) {
+  throw new Error(`src/content/pages/${locale}/about.md manquant`);
+}
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  <article class="about">
+    <h1>{entry.data.title}</h1>
+    <Picture
+      class="photo"
+      src={portrait}
+      alt={entry.data.photoAlt}
+      formats={['avif', 'webp']}
+      fallbackFormat="webp"
+      widths={[320, 640]}
+      sizes="20rem"
+      quality={60}
+      loading="eager"
+    />
+    <div class="text">
+      <div class="story">
+        <Content />
+      </div>
+      {campaign.availability.visible && (
+        <section class="seeking" aria-labelledby="seeking">
+          <h2 id="seeking">{t('about.seeking')}</h2>
+          <Availability />
+        </section>
+      )}
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  /* Photo plafonnée à 20rem partout : `sizes="20rem"` reste exact (FR-013a). */
+  .about {
+    display: grid;
+    grid-template-columns: 20rem minmax(0, var(--measure));
+    grid-template-areas:
+      'title title'
+      'photo text';
+    gap: var(--space-6) var(--space-8);
+    align-items: start;
+  }
+
+  h1 {
+    grid-area: title;
+    margin: 0;
+    padding-bottom: var(--space-4);
+    border-bottom: var(--rule-heavy) solid var(--color-rule);
+    font-size: var(--text-headline);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .about :global(.photo) {
+    grid-area: photo;
+    display: block;
+    width: 100%;
+    max-width: 20rem;
+    height: auto;
+  }
+
+  .text {
+    grid-area: text;
+  }
+
+  .story :global(p) {
+    margin: 0 0 var(--space-4);
+  }
+
+  .story :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .seeking {
+    margin-top: var(--space-7);
+    padding-top: var(--space-5);
+    border-top: var(--rule-heavy) solid var(--color-rule);
+  }
+
+  h2 {
+    margin: 0 0 var(--space-4);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: 1.1;
+  }
+
+  @media (max-width: 56rem) {
+    .about {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: 'title' 'photo' 'text';
+    }
+  }
+</style>
