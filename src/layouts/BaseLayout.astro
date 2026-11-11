@@ -68,7 +68,13 @@ const t = useTranslations(locale);
     max-width: var(--page-max);
     margin-inline: auto;
     padding-inline: var(--gutter);
-    padding-block: var(--space-8);
+    padding-block: var(--space-6) var(--space-8);
+  }
+
+  @media (min-width: 48rem) {
+    main {
+      padding-block: var(--space-8);
+    }
   }
 
   main:focus {

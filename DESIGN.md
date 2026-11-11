@@ -293,7 +293,7 @@ Des rectangles d'encre, francs et sans rayon.
 - **Style :** barre de tête sur filet de 2 px. Le nom (700, `--text-base`) à gauche, les rubriques (`--text-sm`, sans soulignement) et `EN` (600) à droite.
 - **States :** au survol, soulignement de 2 px. La page courante (`aria-current="page"`, ou `"true"` sur une page placée sous la rubrique) est rouge, en 600, soulignée à 2 px. Survol et page courante partagent le même décalage (`--underline-offset-current`, 0.35em), pour que le trait ne saute pas d'un lien à l'autre.
 - **Source :** les rubriques viennent de `src/data/nav.ts`, une entrée par rubrique.
-- **Mobile :** la liste passe à la ligne sous le nom, sans menu ni JavaScript.
+- **Mobile :** sous 48rem, une seule ligne : le nom, « Menu » (600, `--text-sm`, chevron dessiné en CSS) et la langue. « Menu » est un `<details>` natif, sans JavaScript : il déplie les rubriques sous la barre, une par ligne entre filets doux, cibles de 44 px, et pousse le contenu sans le recouvrir. Au-delà de 48rem, la liste reste en ligne et « Menu » disparaît.
 
 ### Liste des coups (signature)
 

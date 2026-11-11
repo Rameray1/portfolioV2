@@ -7,6 +7,7 @@ export const defaultLocale: Locale = 'fr';
 export const fr = {
   skipLink: 'Aller au contenu',
   'nav.label': 'Navigation principale',
+  'nav.menu': 'Menu',
   'nav.about': 'À propos',
   'nav.projects': 'Projets',
   'nav.background': 'Parcours',
@@ -40,6 +41,7 @@ export type UiKey = keyof typeof fr;
 export const en: Record<UiKey, string> = {
   skipLink: 'Skip to content',
   'nav.label': 'Main navigation',
+  'nav.menu': 'Menu',
   'nav.about': 'About',
   'nav.projects': 'Projects',
   'nav.background': 'Background',
