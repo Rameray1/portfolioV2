@@ -164,15 +164,15 @@ src/components/Seo.astro (props title, description, image, noindex, alternates) 
 
 ### 🚀 Mise en ligne _(hors speckit · ~1 h)_
 
-- [ ] Brancher le dépôt sur un hébergeur statique (Netlify, Vercel ou Cloudflare Pages) :
+- [x] Brancher le dépôt sur un hébergeur statique (Netlify, Vercel ou Cloudflare Pages) :
       build `npm run build`, dossier `dist/`. Activer les aperçus par branche.
-- [ ] `PUBLIC_NOINDEX=true` en production jusqu'à C3.
+- [x] `PUBLIC_NOINDEX=true` en production jusqu'à C3.
 - [x] Remplacer l'adresse provisoire `site` (`https://ramazankus.example`) de
       `astro.config.mjs` par le vrai domaine (`https://ramazankus.dev`).
 - [x] Servir la 404 anglaise (`dist/en/404/index.html`) avec un statut 404 sous `/en/*` :
       hébergeur retenu, Vercel ; route `routes` dans `vercel.json` (la 404 française,
       `dist/404.html`, est servie d'office).
-- [ ] Vérifier l'aperçu grand format de `/` et `/en/` dans LinkedIn Post Inspector.
+- [x] Vérifier l'aperçu grand format de `/` et `/en/` dans LinkedIn Post Inspector.
       Commit : `ci: premiere mise en ligne`
 
 ---
