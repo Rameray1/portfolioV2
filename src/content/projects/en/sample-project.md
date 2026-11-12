@@ -17,6 +17,8 @@ coverAlt: '[draft] Grey sample image, 1600 by 900 pixels'
 
 [draft] I split the site into 12 features and gave each one to Claude Code through Spec Kit, in 4 steps: specification, plan, tasks, code. I review each of the 4 steps before starting the next.
 
+![[draft] Diagram of the 4 steps: specification, plan, tasks, code](../../../assets/projects/sample-project-workflow.png '[draft] The 4 Spec Kit steps, each reviewed before the next one starts.')
+
 > ! [draft] A constitution of 9 principles, including "static site" and "zero client JavaScript", is checked against every plan.
 
 ## Stack and why

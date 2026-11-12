@@ -95,7 +95,8 @@ la CI est verte :
   anglaise `src/content/projects/en/<slug>.md` ne porte que la prose et peut venir plus tard :
   d'ici là, `/en/projects/<slug>` affiche le français. `featured: true` (trois au plus, avec
   son `move`) met le projet sur l'accueil. Dans le récit, `> ! texte` isole une phrase comme
-  note du commentateur, avec son symbole dans la marge (`CONTENU.md` §6).
+  note du commentateur, avec son symbole dans la marge ; `![alt](image "Légende")` ajoute une
+  image de preuve légendée (`CONTENU.md` §6).
 - **Brouillon** : `draft: true`. **Retirer** un contenu : supprimer le fichier + une redirection
   dans `astro.config.mjs`.
 - Commits conventionnels (`feat`, `fix`, `content`, `chore`, `docs`, `perf`, `a11y`, `ci`).

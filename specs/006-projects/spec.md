@@ -408,7 +408,9 @@ est en français.
 - **FR-029a**: Dans le récit, une citation Markdown MUST s'afficher comme une note du
   commentateur, isolée entre deux filets fins. Si elle commence par `!`, `!?` ou `!!`, ce
   symbole MUST se placer dans la marge (à droite de la note sous 40rem), avec son sens pour
-  les lecteurs d'écran. Chaque intertitre du récit s'ouvre par un filet doux.
+  les lecteurs d'écran. Chaque intertitre du récit s'ouvre par un filet doux. Une image seule
+  dans son paragraphe, avec un titre, MUST s'afficher comme une figure légendée, optimisée et
+  sans décalage de mise en page ; une à trois par fiche, le visuel restant unique.
 - **FR-029b**: La page projet MUST finir par les liens présents du projet, la partie suivante
   (une ligne de la liste des coups, sans légende) quand au moins deux projets sont publiés, et
   le lien vers tous les projets.

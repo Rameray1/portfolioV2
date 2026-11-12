@@ -2,7 +2,7 @@
 import { defineConfig, envField } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { satteri } from '@astrojs/markdown-satteri';
-import { noteAnnotations } from './src/lib/note-annotations.ts';
+import { projectMarkdown } from './src/lib/project-markdown.ts';
 import { isNoindexPath, isUntranslatedProjectPath } from './src/data/seo.ts';
 
 export default defineConfig({
@@ -13,7 +13,7 @@ export default defineConfig({
     defaultLocale: 'fr',
     routing: { prefixDefaultLocale: false },
   },
-  markdown: { processor: satteri({ hastPlugins: [noteAnnotations] }) },
+  markdown: { processor: satteri({ hastPlugins: [projectMarkdown] }) },
   integrations: [
     sitemap({
       i18n: { defaultLocale: 'fr', locales: { fr: 'fr', en: 'en' } },

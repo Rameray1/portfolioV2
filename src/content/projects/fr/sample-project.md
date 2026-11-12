@@ -34,6 +34,8 @@ move:
 
 [provisoire] J'ai découpé le site en 12 features et confié chacune à Claude Code avec Spec Kit, en 4 étapes : spécification, plan, tâches, code. Je relis chacune des 4 étapes avant de lancer la suivante.
 
+![[provisoire] Schéma des 4 étapes : spécification, plan, tâches, code](../../../assets/projects/sample-project-workflow.png '[provisoire] Les 4 étapes de Spec Kit, relues une à une avant de passer à la suivante.')
+
 > ! [provisoire] Une constitution de 9 principes, dont « site statique » et « zéro JavaScript client », est vérifiée à chaque plan.
 
 ## Stack et pourquoi

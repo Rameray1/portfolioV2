@@ -117,6 +117,12 @@ la décision et sur le résultat chiffré. Une note ajoute un fait (un chiffre, 
 décision) et ne répète ni le paragraphe ni le coup clé. Le `!!` reste réservé au coup clé :
 jamais dans une note.
 
+Le visuel (`cover`) est unique et facultatif : il situe le projet. Les preuves en image (un
+schéma, une capture avant / après, un graphique) vont dans le récit, à côté de ce qu'elles
+prouvent : une à trois par fiche, avec une légende en titre de l'image
+(`![texte alternatif](../../../assets/projects/<fichier> "Légende")`). Le fichier image
+n'existe qu'une fois ; chaque langue écrit son texte alternatif et sa légende. Pas de galerie.
+
 ## 7. Cycle de vie du contenu
 
 **Ajouter** — 1 fichier `.md` (ou 1 entrée YAML) + 1 image dans `src/assets/`. Zéro ligne de

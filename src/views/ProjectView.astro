@@ -267,6 +267,23 @@ const notices = [
     margin: var(--space-3) 0 0;
   }
 
+  /* Image de preuve du récit, à la largeur de la mesure, légendée comme une figure de livre. */
+  .story :global(figure) {
+    margin: var(--space-6) 0 0;
+  }
+
+  .story :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  .story :global(figcaption) {
+    margin-top: var(--space-2);
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+    color: var(--color-ink-muted);
+  }
+
   /* Note du commentateur (`> …` dans la fiche) : isolée entre deux filets, comme le coup
      clé ; son symbole éventuel se place dans la marge. */
   .story :global(.note) {

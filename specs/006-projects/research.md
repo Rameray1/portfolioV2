@@ -183,7 +183,7 @@ each entry below records one design decision.
 - **Decision**: a Markdown blockquote in a project file becomes a commentator note
   (`div.note`, between thin rules). A note starting with `!`, `!?` or `!!` gets that symbol in
   the margin and a visually hidden meaning from the dictionary. Done by one HTML plugin,
-  `src/lib/note-annotations.ts`, passed to Astro's default Markdown processor (Sätteri) in
+  `src/lib/project-markdown.ts`, passed to Astro's default Markdown processor (Sätteri) in
   `astro.config.mjs`; the plugin only touches files under `src/content/projects/`.
 - **Rationale**: the critique scored the narrative as six identical blocks with an empty
   margin. A blockquote is plain Markdown the author already knows, and it needs no new field.
@@ -192,3 +192,8 @@ each entry below records one design decision.
 - **Alternatives**: `markdown.remarkPlugins` (needs `@astrojs/markdown-remark`, a second
   Markdown stack); CSS only on `blockquote` (no blue for `!!`, no accessible meaning); a
   frontmatter field per section (sections are not named in data).
+- **Addendum (evidence images)**: an image alone in its paragraph with a title
+  (`![alt](src "Caption")`) becomes a `figure` with that title as `figcaption`, in the same
+  plugin. Astro already optimizes images written in Markdown (WebP, width and height set), so no
+  other code is needed. One cover stays the rule; evidence images go in the narrative, one to
+  three per file. No gallery: it would need client JavaScript (principle II).
