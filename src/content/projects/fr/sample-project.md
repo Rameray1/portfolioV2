@@ -10,7 +10,7 @@ tech:
   - Spec Kit
 eval: '!!'
 links:
-  code: https://github.com/Rameray1
+  code: https://github.com/Rameray1/portfolioV2
 cover: ../../../assets/projects/sample-project.png
 coverAlt: '[provisoire] Image d’exemple grise de 1600 par 900 pixels'
 featured: true
