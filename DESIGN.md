@@ -229,7 +229,7 @@ Une page de livre centrée : conteneur de `--page-max` (80rem), gouttière fluid
 - **Accueil (ouverture).** Deux colonnes : texte `minmax(0, 1fr)`, diagramme `minmax(18rem, 30rem)`, écart `--space-7` / `--space-8`. Le diagramme est collant (`top: --space-6`). Dessous, le nom, la ligne d'en-tête de partie sur filet de 2 px, le pitch, les deux actions côte à côte, puis la liste des coups.
 - **Liste des coups.** Grille à trois colonnes : année + notation (4.5rem), titre + coup clé, symbole d'évaluation aligné à droite (2.5rem), sur ligne de base commune.
 - **Page projet (lecture).** Lien retour, titre, résumé. Un en-tête PGN de quatre colonnes entre un filet épais et un filet fin. Puis le récit commenté : une colonne de symboles en marge (3rem), puis le texte à la mesure.
-- **Responsive.** Sous `56rem`, l'accueil passe à une colonne dans cet ordre : nom, pitch et actions, puis le diagramme réduit (22rem max), puis les coups. Le tableau du parcours s'empile : la période à gauche (8.5rem), le rôle à droite, le lieu sous le rôle en encre atténuée. Sous `40rem`, l'en-tête PGN passe à deux colonnes et la marge des symboles à 1.75rem.
+- **Responsive.** Sous `56rem`, l'accueil passe à une colonne dans cet ordre : nom (le filet de 2 px reste, la ligne d'en-tête de partie disparaît : le pitch dit déjà l'école et l'employeur), pitch et actions, puis le bandeau de disponibilité sur son filet fin (il quitte la légende pour rester dans le premier écran), puis le diagramme réduit (22rem max), sans légende, puis les coups. Le tableau du parcours s'empile : la période à gauche (8.5rem), le rôle à droite, le lieu sous le rôle en encre atténuée. Sous `40rem`, l'en-tête PGN passe à deux colonnes et la marge des symboles à 1.75rem.
 
 ### Named Rules
 
@@ -293,7 +293,7 @@ Des rectangles d'encre, francs et sans rayon.
 - **Style :** barre de tête sur filet de 2 px. Le nom (700, `--text-base`) à gauche, les rubriques (`--text-sm`, sans soulignement) et `EN` (600) à droite.
 - **States :** au survol, soulignement de 2 px. La page courante (`aria-current="page"`, ou `"true"` sur une page placée sous la rubrique) est rouge, en 600, soulignée à 2 px. Survol et page courante partagent le même décalage (`--underline-offset-current`, 0.35em), pour que le trait ne saute pas d'un lien à l'autre.
 - **Source :** les rubriques viennent de `src/data/nav.ts`, une entrée par rubrique.
-- **Mobile :** la liste passe à la ligne sous le nom, sans menu ni JavaScript.
+- **Mobile :** sous 48rem, une seule ligne : le nom, « Menu » (600, `--text-sm`, chevron dessiné en CSS) et la langue. « Menu » est un `<details>` natif, sans JavaScript : il déplie les rubriques sous la barre, une par ligne entre filets doux, cibles de 44 px, et pousse le contenu sans le recouvrir. Au-delà de 48rem, la liste reste en ligne et « Menu » disparaît.
 
 ### Liste des coups (signature)
 

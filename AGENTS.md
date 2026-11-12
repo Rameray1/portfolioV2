@@ -53,5 +53,8 @@ Consult these guides before working on related tasks:
   mentionne pas le skill.
 - Fin de chaque feature visuelle : `/impeccable audit`, puis `/impeccable polish`, avant de
   considérer la feature terminée (constitution, principe IX).
+- Toute vérification visuelle se fait à 375 px et à 1280 px, en clair et en sombre, en-tête
+  et pied de page compris (constitution, principe VII). Chrome headless impose une largeur
+  minimale de fenêtre : capturer le mobile dans une `<iframe>` de 375 px.
 - Un seul skill de design actif : ne pas utiliser `frontend-design` ni un autre skill
   d'esthétique en parallèle d'`impeccable`.

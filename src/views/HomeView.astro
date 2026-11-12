@@ -25,6 +25,11 @@ const pitch = campaign.pitch[locale];
       </p>
       <p class="pitch">{pitch}</p>
       <ActionLinks />
+      {campaign.availability.visible && (
+        <div class="availability-early">
+          <Availability />
+        </div>
+      )}
     </div>
     <aside class="side" aria-label={t('availability.label')}>
       <figure>
@@ -84,16 +89,39 @@ const pitch = campaign.pitch[locale];
     margin: 0;
   }
 
-  figcaption {
+  figcaption,
+  .availability-early {
     margin-top: var(--space-4);
     padding-top: var(--space-3);
     border-top: var(--rule-thin) solid var(--color-rule);
   }
 
-  /* Une colonne sous 56rem ; diagramme réduit à 22rem (DESIGN.md, Responsive). */
+  .availability-early {
+    display: none;
+  }
+
+  /* Une colonne sous 56rem (DESIGN.md, Responsive) : la disponibilité monte sous les
+     actions pour rester dans le premier écran ; le diagramme suit, sans légende. */
   @media (max-width: 56rem) {
     .opening {
       grid-template-columns: minmax(0, 1fr);
+    }
+
+    .header-line {
+      padding-top: 0;
+    }
+
+    .header-line span {
+      display: none;
+    }
+
+    .availability-early {
+      display: block;
+      margin-top: var(--space-6);
+    }
+
+    figcaption {
+      display: none;
     }
 
     .side {
