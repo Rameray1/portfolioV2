@@ -30,7 +30,11 @@ const meanings = {
     font-weight: var(--weight-black);
     font-stretch: var(--stretch-display);
     line-height: 1;
-    color: var(--eval-color, var(--color-mark));
+    color: var(--eval-color, var(--color-interesting));
+  }
+
+  [data-eval='!'] .symbol {
+    color: var(--eval-color-great, var(--color-great));
   }
 
   [data-eval='!!'] .symbol {

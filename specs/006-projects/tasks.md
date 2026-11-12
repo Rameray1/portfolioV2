@@ -179,6 +179,18 @@ engines there.
 
 ---
 
+## Phase 10: Critique follow-up (page projet)
+
+**Purpose**: the three P1 issues of the Impeccable critique of 2026-11-12 (20/28).
+
+- [x] T032 Story rhythm in `src/views/ProjectView.astro`: thin `rule-soft` rule above each `h2`, `h2` in the display stretch at `--text-xl`; draft and French-only notices merged into one line; the links entry of the header no longer pushed to the far right
+- [x] T033 Commentator notes (research R15): `src/lib/note-annotations.ts`, wired in `astro.config.mjs` through `satteri({ hastPlugins })`, `@astrojs/markdown-satteri` declared at 0.4.5; note and margin-symbol styles in `ProjectView.astro` (symbol to the right under 40rem); notes added to the sample narratives
+- [x] T034 Page ending: links again, « Partie suivante » as one move-list row (`ProjectList` gains `legend`), « Tous les projets »; `projectPaths` passes `next`; `projects.link.code` becomes « Code source » / « Source code », new key `projects.next`
+- [x] T035 Captures at 375 and 1280 px, light and dark; Lighthouse 100 / 100 / 100 / 100 and CLS 0 on both sample pages. The detector still flags `line-length` on story paragraphs: it comes from the 68ch `--measure` token, a design-system decision left open
+- [x] T036 Wide screens: above 64rem, `ProjectView` becomes two columns, the header list in a sticky right column (16–20rem) with stacked entries; single column below
+- [x] T037 `!` in dark blue like chess.com: tokens `--color-great` / `--color-great-on-invert` (light #2a5384 / #749bbf, swapped in dark; contrasts 6.2:1 or more), used by `EvalMark`, inverted rows and margin notes; `!?` stays red; DESIGN.md colour rules updated
+- [x] T038 `!?` in Lichess pink-violet instead of red (red reads as a bad move): tokens `--color-interesting` / `--color-interesting-on-invert` (light #a3289a / #ea45d8, swapped in dark; contrasts 5.49:1 or more) replace `--color-mark-on-invert`; red stays for state and the 404 `??`
+
 ## Dependencies & Execution Order
 
 - **Setup (T001)**: first.

@@ -49,6 +49,22 @@ User stories :
 - Q: Un brouillon doit-il déjà être une fiche complète ? → A: oui pour les champs : une fiche
   en brouillon passe la même validation qu'une fiche publiée. Seul son récit peut être vide.
 
+### Session 2026-11-12 (après la critique de la page projet)
+
+- Q: Le récit de la page projet se lit comme six blocs identiques ; comment lui donner du
+  rythme sans changer la règle des six parties ? → A: chaque partie s'ouvre par un filet doux
+  et un intertitre en chasse étroite, et la fiche peut isoler une phrase comme note du
+  commentateur (une citation Markdown `> …`). Une note qui commence par `!`, `!?` ou `!!` porte
+  ce symbole dans la marge. Pas de nouveau champ.
+- Q: Comment finit la page ? → A: par les liens du projet, la partie suivante (le projet plus
+  ancien, le dernier renvoyant au premier) et le lien vers tous les projets. Le lien « Code »
+  devient « Code source ».
+- Q: Rôle et taille d'équipe dans l'en-tête ? → A: non : les projets sont presque tous
+  personnels.
+- Q: Sur grand écran, la page reste dans la moitié gauche ; comment occuper la largeur ? → A:
+  au-dessus de 64rem, l'en-tête de partie (année, technologies, liens) passe dans une colonne
+  de droite collante, comme le diagramme de l'accueil ; le récit garde sa mesure à gauche.
+
 ## User Scenarios & Testing _(mandatory)_
 
 Acteurs : le **recruteur** (international anglophone d'abord, puis francophone), le **lead
@@ -301,9 +317,11 @@ est en français.
 - **FR-005**: Le symbole d'évaluation MUST être l'un de `!` (bon coup), `!?` (pari réfléchi)
   ou `!!` (coup brillant) ; exactement un par projet. La légende de `DESIGN.md` devient
   définitive avec ces trois sens. Partout où il apparaît (liste, accueil, légende, page
-  projet), `!!` MUST s'afficher dans le bleu du coup brillant et les deux autres symboles dans
-  le rouge du commentateur, en clair et en sombre, y compris sur une ligne inversée
-  (`DESIGN.md`, Accent). Les jetons bleus sont ajoutés par F06.
+  projet), chaque symbole MUST s'afficher dans sa couleur, comme sur les sites d'échecs : `!`
+  en bleu foncé (chess.com), `!!` en bleu ciel, `!?` en rose-violet (Lichess, chess.com n'en
+  ayant pas), en clair et en sombre, y compris sur une ligne inversée (`DESIGN.md`, Accent).
+  Le rouge, qui évoque un mauvais coup, ne note aucun projet. Les jetons sont ajoutés par
+  F06.
 - **FR-006**: Le build MUST échouer, en désignant la fiche en cause, quand : un champ
   obligatoire manque ; une valeur est invalide (année, symbole, lien, case) ; un visuel est
   introuvable ou sans texte alternatif dans une langue publiée ; le récit d'une fiche publiée
@@ -387,6 +405,13 @@ est en français.
 - **FR-028**: Tous les libellés d'interface ajoutés (titres de liste, légende, libellés des
   métadonnées et des liens, mentions de repli et de brouillon, message de liste vide, lien de
   retour) MUST passer par le dictionnaire FR/EN (constitution, principe VI).
+- **FR-029a**: Dans le récit, une citation Markdown MUST s'afficher comme une note du
+  commentateur, isolée entre deux filets fins. Si elle commence par `!`, `!?` ou `!!`, ce
+  symbole MUST se placer dans la marge (à droite de la note sous 40rem), avec son sens pour
+  les lecteurs d'écran. Chaque intertitre du récit s'ouvre par un filet doux.
+- **FR-029b**: La page projet MUST finir par les liens présents du projet, la partie suivante
+  (une ligne de la liste des coups, sans légende) quand au moins deux projets sont publiés, et
+  le lien vers tous les projets.
 - **FR-029**: La feature MUST fournir deux fiches d'exemple : une publiée, mise en avant, avec
   sa version anglaise, un visuel et le symbole `!!` (pour vérifier le bleu) ; une en
   brouillon, sans version anglaise. Leurs textes

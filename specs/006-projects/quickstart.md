@@ -95,7 +95,7 @@ Scratch: delete `src/content/projects/en/sample-project.md` (and nothing else), 
 
 - Lighthouse mobile on the list, the sample page and the home, both languages, with
   `PUBLIC_NOINDEX` off: ≥ 95 / 100 / 100 / 100.
-- axe: 0 violation, both themes. Contrast of blue and red symbols, normal and inverted.
+- axe: 0 violation, both themes. Contrast of the three symbol colours (dark blue, pink-violet, sky blue), normal and inverted.
 - Captures at 375 px and 1280 px, light and dark, header and footer included, for the list,
   the project page (translated and fallback) and the home.
 - `grep -rn "\[provisoire\]\|\[draft\]" src/content/projects` lists every sample text.

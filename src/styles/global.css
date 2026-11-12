@@ -23,7 +23,10 @@
   --color-board-edge: var(--color-ink);
   --color-invert-bg: var(--color-ink);
   --color-invert-ink: var(--color-paper);
-  --color-mark-on-invert: #ff5a6a;
+  --color-interesting: #a3289a;
+  --color-interesting-on-invert: #ea45d8;
+  --color-great: #2a5384;
+  --color-great-on-invert: #749bbf;
   --color-brilliant: #0077b6;
   --color-brilliant-on-invert: #5cc8ff;
 
@@ -89,7 +92,10 @@
     --color-rule-soft: #36342f;
     --color-mark: #ff5a6a;
     --color-mark-ink: #161513;
-    --color-mark-on-invert: #c8102e;
+    --color-interesting: #ea45d8;
+    --color-interesting-on-invert: #a3289a;
+    --color-great: #749bbf;
+    --color-great-on-invert: #2a5384;
     --color-brilliant: #5cc8ff;
     --color-brilliant-on-invert: #0077b6;
     /* La planche reste claire et tonale en sombre (DESIGN.md, Printed Negative Rule). */

@@ -6,9 +6,10 @@ import { getLocale, localizePath, useTranslations } from '../i18n/utils';
 interface Props {
   projects: Project[];
   detail?: boolean;
+  legend?: boolean;
 }
 
-const { projects, detail = false } = Astro.props;
+const { projects, detail = false, legend = true } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 
@@ -64,13 +65,15 @@ const symbols = (['!', '!?', '!!'] satisfies Eval[]).filter((symbol) =>
         );
       })}
     </ol>
-    <ul class="legend" aria-label={t('projects.legend')}>
-      {symbols.map((symbol) => (
-        <li>
-          <EvalMark eval={symbol} legend />
-        </li>
-      ))}
-    </ul>
+    {legend && (
+      <ul class="legend" aria-label={t('projects.legend')}>
+        {symbols.map((symbol) => (
+          <li>
+            <EvalMark eval={symbol} legend />
+          </li>
+        ))}
+      </ul>
+    )}
   </>
 )}
 
@@ -103,13 +106,14 @@ const symbols = (['!', '!?', '!!'] satisfies Eval[]).filter((symbol) =>
       color var(--duration) var(--ease-out);
   }
 
-  /* Ligne inversée : EvalMark lit ces deux propriétés pour son symbole. */
+  /* Ligne inversée : EvalMark lit ces propriétés pour la couleur de son symbole. */
   a:hover,
   a:focus-visible {
     background: var(--color-invert-bg);
     color: var(--color-invert-ink);
     outline-offset: 0;
-    --eval-color: var(--color-mark-on-invert);
+    --eval-color: var(--color-interesting-on-invert);
+    --eval-color-great: var(--color-great-on-invert);
     --eval-color-brilliant: var(--color-brilliant-on-invert);
   }
 

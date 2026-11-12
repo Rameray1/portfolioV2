@@ -4,9 +4,10 @@ import { projectPaths, type Project } from '../../lib/projects';
 
 interface Props {
   project: Project;
+  next?: Project;
 }
 
 export const getStaticPaths = () => projectPaths('fr');
 ---
 
-<ProjectView project={Astro.props.project} />
+<ProjectView project={Astro.props.project} next={Astro.props.next} />

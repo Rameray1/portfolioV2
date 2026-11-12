@@ -177,3 +177,18 @@ each entry below records one design decision.
   legend final) and `ROADMAP.md` (F11 loses the blue-token line). No constitution change.
 - **Rationale**: the spec now contradicts these three documents (Governance: « aligné,
   jamais ignoré »).
+
+## R15 — Commentator notes in the narrative (after the critique)
+
+- **Decision**: a Markdown blockquote in a project file becomes a commentator note
+  (`div.note`, between thin rules). A note starting with `!`, `!?` or `!!` gets that symbol in
+  the margin and a visually hidden meaning from the dictionary. Done by one HTML plugin,
+  `src/lib/note-annotations.ts`, passed to Astro's default Markdown processor (Sätteri) in
+  `astro.config.mjs`; the plugin only touches files under `src/content/projects/`.
+- **Rationale**: the critique scored the narrative as six identical blocks with an empty
+  margin. A blockquote is plain Markdown the author already knows, and it needs no new field.
+  `@astrojs/markdown-satteri` is declared because the config imports it; it is the version
+  Astro already installs.
+- **Alternatives**: `markdown.remarkPlugins` (needs `@astrojs/markdown-remark`, a second
+  Markdown stack); CSS only on `blockquote` (no blue for `!!`, no accessible meaning); a
+  frontmatter field per section (sections are not named in data).

@@ -125,9 +125,17 @@ export async function featuredProjects(locale: Locale): Promise<Project[]> {
   return (await getProjects(locale)).filter((project) => project.featured);
 }
 
+// La partie suivante est le projet plus ancien ; le dernier renvoie au premier.
 export async function projectPaths(locale: Locale) {
-  return (await getProjects(locale)).map((project) => ({
+  const projects = await getProjects(locale);
+  return projects.map((project, index) => ({
     params: { slug: project.slug },
-    props: { project },
+    props: {
+      project,
+      next:
+        projects.length > 1
+          ? projects[(index + 1) % projects.length]
+          : undefined,
+    },
   }));
 }

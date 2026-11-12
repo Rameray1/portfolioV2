@@ -110,6 +110,13 @@ pourquoi · résultat · ce que j'en ai appris.**
 symbole d'évaluation : `!` bon coup, `!?` pari réfléchi, `!!` coup brillant. `move` est le coup
 du projet sur le diagramme de l'accueil, obligatoire s'il est `featured`.
 
+Dans le récit, une citation Markdown (`> …`) devient une note du commentateur : la phrase à
+retenir d'une partie (le problème, une décision, le résultat chiffré). Si elle commence par
+`!` ou `!?`, ce symbole la note dans la marge. Une ou deux notes par fiche, de préférence sur
+la décision et sur le résultat chiffré. Une note ajoute un fait (un chiffre, une techno, une
+décision) et ne répète ni le paragraphe ni le coup clé. Le `!!` reste réservé au coup clé :
+jamais dans une note.
+
 ## 7. Cycle de vie du contenu
 
 **Ajouter** — 1 fichier `.md` (ou 1 entrée YAML) + 1 image dans `src/assets/`. Zéro ligne de
