@@ -62,12 +62,12 @@ interface Project {
   featured: boolean;
   draft: boolean; // true only in dev
   move?: { from: string; to: string; notation: string }; // notation of the page language
-  // prose of the page language, or French when `untranslated`
+  // prose of the page language, or French on an English page when `untranslated`
   title: string;
   summary: string;
   keyMove: string;
   coverAlt?: string;
-  untranslated: boolean; // English page without an English file
+  untranslated: boolean; // no English file, in both languages
   entry: CollectionEntry<'projects'> | CollectionEntry<'projectsEn'>; // body to render
 }
 
@@ -77,7 +77,8 @@ projectPaths(locale)                         // getStaticPaths result: params.sl
 ```
 
 - Order: `year` descending, then French title (`localeCompare('fr')`), in both languages.
-- `untranslated` is always `false` for `locale === 'fr'`.
+- `untranslated` has the same value in both languages: the French page uses it to drop its
+  `hreflang` pair, the English page to show the fallback.
 
 ## States of a project
 

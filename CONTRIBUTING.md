@@ -90,6 +90,11 @@ la CI est verte :
   langue = `href: { fr, en }` ; le CV passe alors en première action (bouton plein), l'email en
   seconde. Les projets mis en avant restent le drapeau `featured` de chaque projet (F06). La
   position du diagramme est une FEN dans `src/data/diagram.ts`.
+- **Projet** : ajouter un projet = une fiche `src/content/projects/fr/<slug>.md` (champs de
+  `CONTENU.md` §6) et, s'il a un visuel, une image dans `src/assets/projects/`. La version
+  anglaise `src/content/projects/en/<slug>.md` ne porte que la prose et peut venir plus tard :
+  d'ici là, `/en/projects/<slug>` affiche le français. `featured: true` (trois au plus, avec
+  son `move`) met le projet sur l'accueil.
 - **Brouillon** : `draft: true`. **Retirer** un contenu : supprimer le fichier + une redirection
   dans `astro.config.mjs`.
 - Commits conventionnels (`feat`, `fix`, `content`, `chore`, `docs`, `perf`, `a11y`, `ci`).

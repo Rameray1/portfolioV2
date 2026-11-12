@@ -177,7 +177,7 @@ Une encre et un papier, plus un rouge rare qui ne parle que pour le commentateur
 
 - **Bleu du coup brillant** (`brilliant`; sombre : `brilliant-dark`) : le symbole `!!` et rien d'autre, dans la liste des coups, dans sa légende, sur le diagramme, dans la marge d'une page projet et dans le favicon. Sur papier blanc, il s'imprime en bleu profond (`#0077b6`, 4,87:1) : le bleu ciel pur ne tient pas le contraste sur blanc. En sombre, il devient le vrai bleu ciel (`#5cc8ff`, 9,7:1).
 - **Bleu sur ligne inversée** (`brilliant-on-invert`; sombre : `brilliant-on-invert-dark`) : le `!!` quand sa ligne est inversée. Comme les deux rouges, les deux bleus échangent leurs rôles entre clair et sombre. Sur la ligne inversée du thème sombre, le bleu profond tombe à 4,24:1 : c'est admis, car le symbole y est toujours en grand texte (seuil 3:1).
-- Jetons à ajouter dans `src/styles/global.css` en F11 (`--color-brilliant`, `--color-brilliant-on-invert`).
+- Jetons livrés en F06 dans `src/styles/global.css` (`--color-brilliant`, `--color-brilliant-on-invert`).
 
 ### Neutral
 
@@ -212,7 +212,7 @@ Les graisses passent par des jetons : `--weight-regular` (400), `--weight-semibo
 - **Lead** (400, `--text-xl` 22 → 28 px, interligne 1.3, 34–40ch) : pitch de l'accueil, résumé d'un projet.
 - **Title** (700, `--text-lg` 22 px, interligne 1.3) : titre d'un coup dans la liste, intertitres du récit, ligne du coup clé (600).
 - **Body** (400, `--text-base` 18 px, interligne 1.55, mesure `--measure` 68ch) : texte courant.
-- **Label** (700, `--text-sm` 15 px) : en-tête de liste (« Trois parties choisies »), en-têtes de tableau, notation (`1.e4`), titre du bandeau de disponibilité. La navigation utilise la même taille en 400, et 600 pour la page courante.
+- **Label** (700, `--text-sm` 15 px) : en-tête de liste (« Parties choisies »), en-têtes de tableau, notation (`1.e4`), titre du bandeau de disponibilité. La navigation utilise la même taille en 400, et 600 pour la page courante.
 - **Meta** (400, `--text-xs` 13 px) : légende des symboles, libellés PGN, coordonnées du diagramme.
 - **Eval** (800, 72 %, `--text-2xl`, interligne 1, rouge) : le symbole d'évaluation dans la marge. En légende, il descend à `--text-sm`.
 
@@ -228,8 +228,8 @@ Une page de livre centrée : conteneur de `--page-max` (80rem), gouttière fluid
 
 - **Accueil (ouverture).** Deux colonnes : texte `minmax(0, 1fr)`, diagramme `minmax(18rem, 30rem)`, écart `--space-7` / `--space-8`. Le diagramme est collant (`top: --space-6`). Dessous, le nom, la ligne d'en-tête de partie sur filet de 2 px, le pitch, les deux actions côte à côte, puis la liste des coups.
 - **Liste des coups.** Grille à trois colonnes : année + notation (4.5rem), titre + coup clé, symbole d'évaluation aligné à droite (2.5rem), sur ligne de base commune.
-- **Page projet (lecture).** Lien retour, titre, résumé. Un en-tête PGN de quatre colonnes entre un filet épais et un filet fin. Puis le récit commenté : une colonne de symboles en marge (3rem), puis le texte à la mesure.
-- **Responsive.** Sous `56rem`, l'accueil passe à une colonne dans cet ordre : nom (le filet de 2 px reste, la ligne d'en-tête de partie disparaît : le pitch dit déjà l'école et l'employeur), pitch et actions, puis le bandeau de disponibilité sur son filet fin (il quitte la légende pour rester dans le premier écran), puis le diagramme réduit (22rem max), sans légende, puis les coups. Le tableau du parcours s'empile : la période à gauche (8.5rem), le rôle à droite, le lieu sous le rôle en encre atténuée. Sous `40rem`, l'en-tête PGN passe à deux colonnes et la marge des symboles à 1.75rem.
+- **Page projet (lecture).** Lien retour, titre, résumé. Un en-tête PGN entre un filet épais et un filet fin : année, technologies, puis liens s'il y en a. Puis la colonne commentée : une marge de symboles (3rem) et le texte à la mesure. Elle s'ouvre par le coup clé, noté par le symbole dans la marge, puis le visuel s'il existe, puis le récit.
+- **Responsive.** Sous `56rem`, l'accueil passe à une colonne dans cet ordre : nom (le filet de 2 px reste, la ligne d'en-tête de partie disparaît : le pitch dit déjà l'école et l'employeur), pitch et actions, puis le bandeau de disponibilité sur son filet fin (il quitte la légende pour rester dans le premier écran), puis le diagramme réduit (22rem max), sans légende, puis les coups. Le tableau du parcours s'empile : la période à gauche (8.5rem), le rôle à droite, le lieu sous le rôle en encre atténuée. Sous `40rem`, l'en-tête PGN passe à la ligne et la marge des symboles à 1.75rem.
 
 ### Named Rules
 
@@ -297,7 +297,7 @@ Des rectangles d'encre, francs et sans rayon.
 
 ### Liste des coups (signature)
 
-Chaque projet mis en avant est un coup candidat des blancs, joué depuis la même position. Tous portent donc le même numéro de coup, comme les variantes d'un livre commenté (`23.Fxh7`, `23.Td1`, `23.Cg5`). La colonne de gauche donne l'année en encre atténuée et la notation en 700. Au centre, le titre en Title et le coup clé en encre atténuée (« Coup clé : … »). À droite, le symbole d'évaluation en rouge. Toute la ligne est un lien. Au survol ou au focus, elle s'inverse (`--color-invert-bg` / `--color-invert-ink`), le texte atténué hérite de la couleur et le symbole passe en `mark-on-invert`. Une légende en Meta explique les symboles utilisés (`!` coup clé, `!?` pari réfléchi, `!!` coup brillant, en bleu). Leur sens définitif est fixé en F06. Avec `:has()`, la pièce du projet survolé joue son coup sur le diagramme et ses deux cases se marquent (voir Motion, effet 2).
+Chaque projet mis en avant est un coup candidat des blancs, joué depuis la même position. Tous portent donc le même numéro de coup, comme les variantes d'un livre commenté (`23.Fxh7`, `23.Td1`, `23.Cg5`). La colonne de gauche donne l'année en encre atténuée et la notation en 700. Au centre, le titre en Title et le coup clé en encre atténuée (« Coup clé : … »). À droite, le symbole d'évaluation en rouge. Toute la ligne est un lien. Au survol ou au focus, elle s'inverse (`--color-invert-bg` / `--color-invert-ink`), le texte atténué hérite de la couleur et le symbole passe en `mark-on-invert`. Une légende en Meta explique les symboles utilisés (`!` bon coup, `!?` pari réfléchi, `!!` coup brillant, en bleu) ; « coup clé » ne désigne que la phrase du projet. Sur `/projects`, la même ligne liste tous les projets, sans notation : sous le titre, le résumé puis les technologies en texte, séparées par « · ». Avec `:has()`, la pièce du projet survolé joue son coup sur le diagramme et ses deux cases se marquent (voir Motion, effet 2).
 
 ### Diagramme et bandeau de disponibilité
 
@@ -309,7 +309,7 @@ Il se lit comme une grille de tournoi. En-têtes en Label sur filet de 2 px, lig
 
 ### En-tête PGN et récit commenté (page projet)
 
-Les métadonnées forment une liste de définitions sur quatre colonnes : libellé en Meta atténuée, valeur en 600. Dans le récit, les intertitres sont en Title. Le symbole d'évaluation se place dans la colonne de marge, au niveau de l'intertitre qu'il note. Le coup clé est isolé entre deux filets fins, en `--text-lg` 600.
+Les métadonnées forment une liste de définitions en ligne (année, technologies en puces, liens) : libellé en Meta atténuée, valeur en 600. Le coup clé est isolé entre deux filets fins, en `--text-lg` 600 ; le symbole d'évaluation se place dans la colonne de marge, à son niveau : il note le coup clé, pas un intertitre. Le visuel, s'il existe, suit à la largeur de la mesure. Dans le récit, les intertitres sont en Title.
 
 ### États à construire en F04 (non livrés)
 
