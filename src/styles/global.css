@@ -21,6 +21,11 @@
   --color-square-light: #ffffff;
   --color-square-dark: #c9c6be;
   --color-board-edge: var(--color-ink);
+  --color-invert-bg: var(--color-ink);
+  --color-invert-ink: var(--color-paper);
+  --color-mark-on-invert: #ff5a6a;
+  --color-brilliant: #0077b6;
+  --color-brilliant-on-invert: #5cc8ff;
 
   /* Typographie */
   --font-sans: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
@@ -84,6 +89,9 @@
     --color-rule-soft: #36342f;
     --color-mark: #ff5a6a;
     --color-mark-ink: #161513;
+    --color-mark-on-invert: #c8102e;
+    --color-brilliant: #5cc8ff;
+    --color-brilliant-on-invert: #0077b6;
     /* La planche reste claire et tonale en sombre (DESIGN.md, Printed Negative Rule). */
     --color-square-light: #e6e3dc;
     --color-square-dark: #b3afa5;
