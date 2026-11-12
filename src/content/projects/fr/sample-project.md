@@ -24,24 +24,28 @@ move:
 
 ## Contexte
 
-[provisoire] En 2026, je remplace mon ancien portfolio en Vue 3 par un site statique en Astro. J'en fais un banc d'essai : un code écrit en grande partie par Claude Code peut-il rester propre et lisible ?
+[provisoire] En 2026, je remplace mon ancien portfolio en Vue 3 par un site statique en Astro. J'en fais un banc d'essai : un code écrit en grande partie par Claude Code peut-il rester propre et lisible ?
 
 ## Le problème
 
-[provisoire] Ajouter un projet demandait de modifier 3 composants Vue. Et sans cadre, Claude ajoute vite une abstraction ou une dépendance dont le site n'a pas besoin.
+[provisoire] Ajouter un projet demandait de modifier 3 composants Vue.
 
 ## Ce que j'ai fait
 
-[provisoire] J'ai découpé le site en 12 features et confié chacune à Claude Code avec Spec Kit, en 4 étapes : spécification, plan, tâches, code. Une constitution de 9 principes, dont « site statique » et « zéro JavaScript client », est vérifiée à chaque plan. Je relis chacune des 4 étapes avant de lancer la suivante.
+[provisoire] J'ai découpé le site en 12 features et confié chacune à Claude Code avec Spec Kit, en 4 étapes : spécification, plan, tâches, code. Je relis chacune des 4 étapes avant de lancer la suivante.
+
+> ! [provisoire] Une constitution de 9 principes, dont « site statique » et « zéro JavaScript client », est vérifiée à chaque plan.
 
 ## Stack et pourquoi
 
-[provisoire] Astro génère des pages HTML sans JavaScript client, et TypeScript valide chaque fiche au build. Spec Kit donne à Claude le même cadre à chaque feature : la décision est écrite avant la première ligne de code.
+[provisoire] Astro génère des pages HTML, et TypeScript valide chaque fiche au build. Spec Kit donne à Claude le même cadre à chaque feature : la décision est écrite avant la première ligne de code.
 
 ## Résultat
 
-[provisoire] Ajouter un projet tient en 1 fichier Markdown, et l'accueil pèse moins de 200 ko. Lighthouse mobile donne 100 sur ses 4 notes pour l'accueil, la liste des projets et cette page.
+[provisoire] L'accueil, la liste des projets et cette page passent l'audit Lighthouse mobile.
+
+> [provisoire] 100 sur les 4 notes Lighthouse · 1 fichier Markdown par projet · un accueil sous 200 ko.
 
 ## Ce que j'en ai appris
 
-[provisoire] Avec Claude, la propreté du code se décide dans la spécification : une règle écrite 1 fois dans la constitution s'applique aux 12 features. Une spécification relue avant le code m'évite de reprendre une page 2 fois.
+[provisoire] Avec Claude, la propreté du code se décide dans la spécification : une règle écrite 1 fois dans la constitution s'applique aux 12 features. Une spécification relue avant le code m'évite de reprendre une page 2 fois.

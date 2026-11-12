@@ -11,19 +11,23 @@ coverAlt: '[draft] Grey sample image, 1600 by 900 pixels'
 
 ## The problem
 
-[draft] Adding a project meant editing 3 Vue components. And with no guardrails, Claude is quick to add an abstraction or a dependency the site does not need.
+[draft] Adding a project meant editing 3 Vue components.
 
 ## What I did
 
-[draft] I split the site into 12 features and gave each one to Claude Code through Spec Kit, in 4 steps: specification, plan, tasks, code. A constitution of 9 principles, including "static site" and "zero client JavaScript", is checked against every plan. I review each of the 4 steps before starting the next.
+[draft] I split the site into 12 features and gave each one to Claude Code through Spec Kit, in 4 steps: specification, plan, tasks, code. I review each of the 4 steps before starting the next.
+
+> ! [draft] A constitution of 9 principles, including "static site" and "zero client JavaScript", is checked against every plan.
 
 ## Stack and why
 
-[draft] Astro outputs HTML pages with no client JavaScript, and TypeScript validates every entry at build time. Spec Kit gives Claude the same frame for every feature: the decision is written down before the first line of code.
+[draft] Astro outputs HTML pages, and TypeScript validates every entry at build time. Spec Kit gives Claude the same frame for every feature: the decision is written down before the first line of code.
 
 ## Outcome
 
-[draft] Adding a project takes 1 Markdown file, and the home page weighs under 200 kB. Lighthouse mobile scores 100 in all 4 categories on the home page, the project list and this page.
+[draft] The home page, the project list and this page pass the Lighthouse mobile audit.
+
+> [draft] 100 in all 4 Lighthouse categories · 1 Markdown file per project · a home page under 200 kB.
 
 ## What I learned
 
