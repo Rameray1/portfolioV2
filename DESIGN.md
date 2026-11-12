@@ -2,7 +2,7 @@
 name: Ramazan Kus — portfolio
 description: La partie annotée. Un livre de parties commentées, imprimé en encre noire avec un seul rouge de commentateur.
 colors:
-  paper: '#ffffff'
+  paper: '#faf8f3'
   ink: '#141414'
   ink-muted: '#57554f'
   rule-soft: '#dcd9d2'
@@ -158,7 +158,7 @@ components:
 
 **Creative North Star: "La partie annotée"**
 
-Le portfolio se lit comme un livre de parties commentées, dans l'esprit de Chess Informator. Chaque projet est une partie. On la raconte par son coup critique (le problème) et par le choix fait, et un symbole d'évaluation la note, dans les couleurs des sites d'échecs : bleu pour un bon coup, violet pour un pari. La page est un papier blanc pur, imprimé en encre presque noire. Un seul rouge, celui du commentateur, marque l'état et la gaffe. Un bleu ciel, plus rare encore, ne marque que le coup brillant (`!!`). Le diagramme d'échiquier est une planche imprimée en gris pierre. Des filets épais ouvrent chaque partie, des filets fins séparent les coups.
+Le portfolio se lit comme un livre de parties commentées, dans l'esprit de Chess Informator. Chaque projet est une partie. On la raconte par son coup critique (le problème) et par le choix fait, et un symbole d'évaluation la note, dans les couleurs des sites d'échecs : bleu pour un bon coup, violet pour un pari. La page est un papier crème très léger (`#faf8f3`), imprimé en encre presque noire : un blanc pur ferait écran, et fatiguerait les yeux. Un seul rouge, celui du commentateur, marque l'état et la gaffe. Un bleu ciel, plus rare encore, ne marque que le coup brillant (`!!`). Le diagramme d'échiquier est une planche imprimée en gris pierre. Des filets épais ouvrent chaque partie, des filets fins séparent les coups.
 
 La densité est celle d'un livre de référence : des colonnes de texte serrées, une notation et des métadonnées en chiffres tabulaires, aucune décoration qui ne porte une information. La hiérarchie vient d'une seule famille grotesque à axe de chasse : étroite et très grasse pour les noms et les titres, normale pour le texte. Le thème sombre imprime le même livre en négatif, encre claire sur noir chaud. Le diagramme y reste une planche tonale, jamais un échiquier d'écran.
 
@@ -166,7 +166,7 @@ Refus confirmé par la direction : le hero centré suivi d'une rangée de cartes
 
 **Key Characteristics:**
 
-- Papier blanc, encre `#141414`, un seul rouge de commentateur.
+- Papier crème léger, encre `#141414`, un seul rouge de commentateur.
 - Une famille (Archivo) sur deux chasses : 72 % pour l'affichage, 100 % pour le texte.
 - Chiffres tabulaires partout, notation d'échecs et en-têtes de type PGN.
 - Filets de 2 px sous les en-têtes, filets fins de 1 px entre les lignes.
@@ -182,18 +182,18 @@ Une encre et un papier, plus un rouge rare qui ne parle que pour le commentateur
 ### Primary
 
 - **Rouge du commentateur** (`mark`; sombre : `mark-dark`) : symbole de la gaffe `??` (page 404), marqueur de trait et de disponibilité (le carré plein du bandeau), page courante de la navigation, case allumée sur le diagramme au survol d'un coup. Il sert aussi l'état système : anneau de focus (`2px`, décalage `3px`) et sélection de texte (texte `paper` sur fond rouge).
-- **Violet du pari** (`interesting`; sombre : `interesting-dark`) : le symbole `!?` et rien d'autre, comme sur Lichess. Le rouge rappellerait un mauvais coup. Prune sur papier (`#a3289a`, 6,31:1), rose-violet de Lichess en sombre (`#ea45d8`, 5,51:1). Sur ligne inversée (`interesting-on-invert`), les deux valeurs s'échangent (5,56:1 et 5,49:1).
+- **Violet du pari** (`interesting`; sombre : `interesting-dark`) : le symbole `!?` et rien d'autre, comme sur Lichess. Le rouge rappellerait un mauvais coup. Prune sur papier (`#a3289a`, 5,95:1), rose-violet de Lichess en sombre (`#ea45d8`, 5,51:1). Sur ligne inversée (`interesting-on-invert`), les deux valeurs s'échangent (5,56:1 et 5,49:1).
 
 ### Accent
 
-- **Bleu du bon coup** (`great`; sombre : `great-dark`) : le symbole `!` et rien d'autre, partout où il apparaît. Bleu marine sur papier (`#2a5384`, 7,87:1), bleu ardoise de chess.com en sombre (`#749bbf`, 6,24:1), assez loin du bleu du `!!` pour ne pas s'y confondre. Sur ligne inversée (`great-on-invert`), les deux valeurs s'échangent (6,3:1 et 6,85:1).
-- **Bleu du coup brillant** (`brilliant`; sombre : `brilliant-dark`) : le symbole `!!` et rien d'autre, dans la liste des coups, dans sa légende, sur le diagramme, dans la marge d'une page projet et dans le favicon. Sur papier blanc, il s'imprime en bleu profond (`#0077b6`, 4,87:1) : le bleu ciel pur ne tient pas le contraste sur blanc. En sombre, il devient le vrai bleu ciel (`#5cc8ff`, 9,7:1).
+- **Bleu du bon coup** (`great`; sombre : `great-dark`) : le symbole `!` et rien d'autre, partout où il apparaît. Bleu marine sur papier (`#2a5384`, 7,41:1), bleu ardoise de chess.com en sombre (`#749bbf`, 6,24:1), assez loin du bleu du `!!` pour ne pas s'y confondre. Sur ligne inversée (`great-on-invert`), les deux valeurs s'échangent (6,3:1 et 6,85:1).
+- **Bleu du coup brillant** (`brilliant`; sombre : `brilliant-dark`) : le symbole `!!` et rien d'autre, dans la liste des coups, dans sa légende, sur le diagramme, dans la marge d'une page projet et dans le favicon. Sur papier clair, il s'imprime en bleu profond (`#0077b6`, 4,59:1) : le bleu ciel pur ne tient pas le contraste sur un fond clair. En sombre, il devient le vrai bleu ciel (`#5cc8ff`, 9,7:1).
 - **Bleu sur ligne inversée** (`brilliant-on-invert`; sombre : `brilliant-on-invert-dark`) : le `!!` quand sa ligne est inversée. Comme les deux rouges, les deux bleus échangent leurs rôles entre clair et sombre. Sur la ligne inversée du thème sombre, le bleu profond tombe à 4,24:1 : c'est admis, car le symbole y est toujours en grand texte (seuil 3:1).
 - Jetons livrés en F06 dans `src/styles/global.css` (`--color-great`, `--color-great-on-invert`, `--color-brilliant`, `--color-brilliant-on-invert`).
 
 ### Neutral
 
-- **Papier** (`paper`; sombre : `paper-dark`, noir chaud) : fond de page. C'est aussi la couleur du texte posé sur le rouge et sur l'encre (boutons pleins, lignes inversées).
+- **Papier** (`paper`, crème léger ; sombre : `paper-dark`, noir chaud) : fond de page. C'est aussi la couleur du texte posé sur le rouge et sur l'encre (boutons pleins, lignes inversées).
 - **Encre** (`ink`; sombre : `ink-dark`) : texte, filets épais (`--color-rule`), fond des lignes inversées (`--color-invert-bg`), bord du diagramme (`--color-board-edge`), bouton plein.
 - **Encre atténuée** (`ink-muted`; sombre : `ink-muted-dark`) : années, ligne d'en-tête de partie, coup clé, légende, libellés PGN, coordonnées du diagramme, périodes du parcours.
 - **Filet doux** (`rule-soft`; sombre : `rule-soft-dark`) : filets de 1 px entre les coups et entre les lignes de tableau.
