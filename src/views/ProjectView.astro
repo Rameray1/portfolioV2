@@ -1,0 +1,254 @@
+---
+import { Picture } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EvalMark from '../components/EvalMark.astro';
+import type { Project } from '../lib/projects';
+import type { UiKey } from '../i18n/ui';
+import { getLocale, localizePath, useTranslations } from '../i18n/utils';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const { Content } = await render(project.entry);
+
+const fallback = project.untranslated && locale === 'en';
+const lang = fallback ? 'fr' : undefined;
+const links = (
+  [
+    ['projects.link.code', project.links.code],
+    ['projects.link.demo', project.links.demo],
+    ['projects.link.video', project.links.video],
+  ] satisfies [UiKey, string | undefined][]
+).flatMap(([key, href]) => (href ? [{ label: t(key), href }] : []));
+---
+
+<BaseLayout
+  title={project.title}
+  description={project.summary}
+  untranslated={project.untranslated}
+>
+  <a class="back" href={localizePath('/projects/', locale)}>
+    {t('projects.back')}
+  </a>
+  {fallback && <p class="notice">{t('projects.frenchOnlyNotice')}</p>}
+  {project.draft && <p class="notice">{t('projects.draft')}</p>}
+  <article>
+    <h1 lang={lang}>{project.title}</h1>
+    <p class="summary" lang={lang}>
+      {project.summary}
+    </p>
+
+    <dl>
+      <div>
+        <dt>{t('projects.year')}</dt>
+        <dd>{project.year}</dd>
+      </div>
+      <div class="tech">
+        <dt>{t('projects.tech')}</dt>
+        <dd>
+          <ul>
+            {project.tech.map((name) => (
+              <li>{name}</li>
+            ))}
+          </ul>
+        </dd>
+      </div>
+      {links.length > 0 && (
+        <div>
+          <dt>{t('projects.links')}</dt>
+          <dd class="links">
+            {links.map((link) => (
+              <a href={link.href}>{link.label}</a>
+            ))}
+          </dd>
+        </div>
+      )}
+    </dl>
+
+    <div class="annotated">
+      <span class="mark">
+        <EvalMark eval={project.eval} />
+      </span>
+      <p class="keymove">
+        <span class="visually-hidden">{t('projects.keyMove')} </span>
+        <span lang={lang}>{project.keyMove}</span>
+      </p>
+      {project.cover && (
+        <Picture
+          class="cover"
+          src={project.cover}
+          alt={project.coverAlt ?? ''}
+          lang={lang}
+          formats={['avif', 'webp']}
+          fallbackFormat="webp"
+          widths={[480, 720, 1440]}
+          sizes="(min-width: 48rem) 42rem, 100vw"
+          loading="lazy"
+        />
+      )}
+      <div class="story" lang={lang}>
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .back {
+    font-size: var(--text-sm);
+  }
+
+  .notice {
+    margin: var(--space-5) 0 0;
+    padding-top: var(--space-3);
+    border-top: var(--rule-thin) solid var(--color-rule);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+  }
+
+  /* Headline de DESIGN.md : interligne 0.98 et 18ch, sans jeton. */
+  h1 {
+    max-width: 18ch;
+    margin: var(--space-5) 0 0;
+    font-size: var(--text-headline);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: 0.98;
+    letter-spacing: var(--tracking-tight);
+    overflow-wrap: anywhere;
+  }
+
+  .summary {
+    max-width: 40ch;
+    margin: var(--space-5) 0 0;
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+  }
+
+  dl {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-7);
+    margin: var(--space-6) 0 0;
+    border-top: var(--rule-heavy) solid var(--color-rule);
+    border-bottom: var(--rule-thin) solid var(--color-rule);
+  }
+
+  dl > div {
+    padding-block: var(--space-3);
+  }
+
+  /* Les puces prennent la place restante ; 14rem avant de passer à la ligne. */
+  .tech {
+    flex: 1 1 14rem;
+  }
+
+  dt {
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+  }
+
+  dd {
+    margin: var(--space-1) 0 0;
+    font-weight: var(--weight-semibold);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    padding: var(--space-1) var(--space-3);
+    border: var(--rule-thin) solid var(--color-rule);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-regular);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-4);
+  }
+
+  /* Récit commenté de DESIGN.md : marge des symboles de 3rem. */
+  .annotated {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, var(--measure));
+    column-gap: var(--space-5);
+    margin-top: var(--space-7);
+  }
+
+  .annotated > :global(*) {
+    grid-column: 2;
+  }
+
+  .annotated > .mark {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    justify-self: end;
+    font-size: var(--text-2xl);
+    line-height: 1;
+  }
+
+  .keymove {
+    margin: 0;
+    padding-block: var(--space-4);
+    border-block: var(--rule-thin) solid var(--color-rule);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+  }
+
+  .annotated :global(.cover) {
+    width: 100%;
+    height: auto;
+    margin-top: var(--space-6);
+  }
+
+  .story {
+    margin-top: var(--space-6);
+  }
+
+  .story :global(h2) {
+    margin: var(--space-7) 0 0;
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-snug);
+  }
+
+  .story :global(:first-child) {
+    margin-top: 0;
+  }
+
+  .story :global(:is(p, ul, ol)) {
+    margin: var(--space-3) 0 0;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Marge des symboles de 1.75rem sous 40rem (DESIGN.md, Responsive). */
+  @media (max-width: 40rem) {
+    .annotated {
+      grid-template-columns: 1.75rem minmax(0, 1fr);
+      column-gap: var(--space-3);
+    }
+  }
+</style>

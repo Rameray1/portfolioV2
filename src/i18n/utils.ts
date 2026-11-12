@@ -23,20 +23,24 @@ export function isStatusPage(pathname: string): boolean {
   return /^(\/en)?\/404$/.test(strip(pathname));
 }
 
-// Routes dynamiques ([slug]) non listées : à traiter en F06.
-const routes = new Set(
-  Object.keys(import.meta.glob('/src/pages/**/*.astro'))
-    .filter((file) => !file.includes('['))
-    .map((file) =>
-      strip(
-        file
-          .replace(/^\/src\/pages/, '')
-          .replace(/\.astro$/, '')
-          .replace(/\/index$/, '') || '/',
-      ),
-    )
-    .filter((path) => !isStatusPage(path)),
+const pagePaths = Object.keys(import.meta.glob('/src/pages/**/*.astro')).map(
+  (file) =>
+    strip(
+      file
+        .replace(/^\/src\/pages/, '')
+        .replace(/\.astro$/, '')
+        .replace(/\/index$/, '') || '/',
+    ),
 );
+
+const routes = new Set(
+  pagePaths.filter((path) => !path.includes('[') && !isStatusPage(path)),
+);
+
+// Routes dynamiques : `/projects/[slug]` accepte tout chemin `/projects/x`.
+const dynamicRoutes = pagePaths
+  .filter((path) => path.includes('['))
+  .map((path) => new RegExp(`^${path.replace(/\[[^\]]+\]/g, '[^/]+')}$`));
 
 const otherLocale = (locale: Locale): Locale => (locale === 'fr' ? 'en' : 'fr');
 
@@ -45,7 +49,10 @@ export function alternatePath(
   locale: Locale,
 ): `/${string}` | undefined {
   const target = localizePath(pathname, otherLocale(locale));
-  return routes.has(strip(target)) ? target : undefined;
+  const path = strip(target);
+  const exists =
+    routes.has(path) || dynamicRoutes.some((route) => route.test(path));
+  return exists ? target : undefined;
 }
 
 export function switchPath(pathname: string, locale: Locale): `/${string}` {
