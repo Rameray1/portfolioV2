@@ -1,0 +1,426 @@
+---
+import { Picture } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EvalMark from '../components/EvalMark.astro';
+import ProjectList from '../components/ProjectList.astro';
+import type { Project } from '../lib/projects';
+import type { UiKey } from '../i18n/ui';
+import { getLocale, localizePath, useTranslations } from '../i18n/utils';
+
+interface Props {
+  project: Project;
+  next?: Project;
+}
+
+const { project, next } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const { Content } = await render(project.entry);
+
+const fallback = project.untranslated && locale === 'en';
+const lang = fallback ? 'fr' : undefined;
+const links = (
+  [
+    ['projects.link.code', project.links.code],
+    ['projects.link.demo', project.links.demo],
+    ['projects.link.video', project.links.video],
+  ] satisfies [UiKey, string | undefined][]
+).flatMap(([key, href]) => (href ? [{ label: t(key), href }] : []));
+const notices = [
+  fallback && t('projects.frenchOnlyNotice'),
+  project.draft && t('projects.draft'),
+].filter(Boolean);
+---
+
+<BaseLayout
+  title={project.title}
+  description={project.summary}
+  untranslated={project.untranslated}
+>
+  <a class="back" href={localizePath('/projects/', locale)}>
+    {t('projects.back')}
+  </a>
+  {notices.length > 0 && <p class="notice">{notices.join(' · ')}</p>}
+  <article>
+    <h1 lang={lang}>{project.title}</h1>
+    <p class="summary" lang={lang}>
+      {project.summary}
+    </p>
+
+    <dl>
+      <div>
+        <dt>{t('projects.year')}</dt>
+        <dd>{project.year}</dd>
+      </div>
+      <div>
+        <dt>{t('projects.tech')}</dt>
+        <dd>
+          <ul>
+            {project.tech.map((name) => (
+              <li>{name}</li>
+            ))}
+          </ul>
+        </dd>
+      </div>
+      {links.length > 0 && (
+        <div>
+          <dt>{t('projects.links')}</dt>
+          <dd class="links">
+            {links.map((link) => (
+              <a href={link.href}>{link.label}</a>
+            ))}
+          </dd>
+        </div>
+      )}
+    </dl>
+
+    <div class="annotated">
+      <div class="keyline">
+        <span class="mark">
+          <EvalMark eval={project.eval} />
+        </span>
+        <p class="keymove">
+          <span class="visually-hidden">{t('projects.keyMove')} </span>
+          <span lang={lang}>{project.keyMove}</span>
+        </p>
+      </div>
+      {project.cover && (
+        <Picture
+          class="cover"
+          src={project.cover}
+          alt={project.coverAlt ?? ''}
+          lang={lang}
+          formats={['avif', 'webp']}
+          fallbackFormat="webp"
+          widths={[480, 720, 1440]}
+          sizes="(min-width: 48rem) 42rem, 100vw"
+          loading="lazy"
+        />
+      )}
+      <div class="story" lang={lang}>
+        <Content />
+      </div>
+    </div>
+
+    <footer class="end">
+      {links.length > 0 && (
+        <p class="end-links">
+          {links.map((link) => (
+            <a href={link.href}>{link.label}</a>
+          ))}
+        </p>
+      )}
+      {next && (
+        <section aria-labelledby="next-game">
+          <h2 id="next-game">{t('projects.next')}</h2>
+          <ProjectList projects={[next]} detail legend={false} />
+        </section>
+      )}
+      <a class="back" href={localizePath('/projects/', locale)}>
+        {t('projects.back')}
+      </a>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .back {
+    font-size: var(--text-sm);
+  }
+
+  .notice {
+    margin: var(--space-5) 0 0;
+    padding-top: var(--space-3);
+    border-top: var(--rule-thin) solid var(--color-rule);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+  }
+
+  /* Headline de DESIGN.md : interligne 0.98 et 18ch, sans jeton. */
+  h1 {
+    max-width: 18ch;
+    margin: var(--space-5) 0 0;
+    font-size: var(--text-headline);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: 0.98;
+    letter-spacing: var(--tracking-tight);
+    overflow-wrap: anywhere;
+  }
+
+  .summary {
+    max-width: 40ch;
+    margin: var(--space-5) 0 0;
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+  }
+
+  dl {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-7);
+    margin: var(--space-6) 0 0;
+    border-top: var(--rule-heavy) solid var(--color-rule);
+    border-bottom: var(--rule-thin) solid var(--color-rule);
+  }
+
+  dl > div {
+    padding-block: var(--space-3);
+  }
+
+  dt {
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+  }
+
+  dd {
+    margin: var(--space-1) 0 0;
+    font-weight: var(--weight-semibold);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    padding: var(--space-1) var(--space-3);
+    border: var(--rule-thin) solid var(--color-rule);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-regular);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-4);
+  }
+
+  /* Récit commenté de DESIGN.md : marge des symboles de 3rem. */
+  .annotated {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, var(--measure));
+    column-gap: var(--space-5);
+    margin-top: var(--space-7);
+  }
+
+  .annotated > :global(*),
+  .keymove {
+    grid-column: 2;
+  }
+
+  /* Sur grand écran, le symbole et le coup clé se placent dans la grille du récit. */
+  .keyline {
+    display: contents;
+  }
+
+  .mark {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    justify-self: end;
+    font-size: var(--text-2xl);
+    line-height: 1;
+  }
+
+  .keymove {
+    margin: 0;
+    padding-block: var(--space-4);
+    border-block: var(--rule-thin) solid var(--color-rule);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+  }
+
+  .annotated :global(.cover) {
+    width: 100%;
+    height: auto;
+    margin-top: var(--space-6);
+  }
+
+  .story {
+    margin-top: var(--space-6);
+  }
+
+  /* Chaque partie du récit est un coup : filet doux au-dessus, titre en chasse étroite.
+     Interligne 1.1 du Section title de DESIGN.md, sans jeton. */
+  .story :global(h2) {
+    margin: var(--space-7) 0 0;
+    padding-top: var(--space-3);
+    border-top: var(--rule-thin) solid var(--color-rule-soft);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: 1.1;
+  }
+
+  .story > :global(:first-child) {
+    margin-top: 0;
+  }
+
+  .story :global(:is(p, ul, ol)) {
+    margin: var(--space-3) 0 0;
+  }
+
+  /* Image de preuve du récit, à la largeur de la mesure, légendée comme une figure de livre. */
+  .story :global(figure) {
+    margin: var(--space-6) 0 0;
+  }
+
+  .story :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  .story :global(figcaption) {
+    margin-top: var(--space-2);
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+    color: var(--color-ink-muted);
+  }
+
+  /* Note du commentateur (`> …` dans la fiche) : isolée entre deux filets, comme le coup
+     clé ; son symbole éventuel se place dans la marge. */
+  .story :global(.note) {
+    position: relative;
+    margin: var(--space-5) 0 0;
+    padding-block: var(--space-3);
+    border-block: var(--rule-thin) solid var(--color-rule);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+  }
+
+  .story :global(.note p) {
+    margin: 0;
+  }
+
+  .story :global(.note-mark) {
+    position: absolute;
+    right: calc(100% + var(--space-5));
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: 1;
+    color: var(--color-interesting);
+  }
+
+  .story :global(.note-mark[data-eval='!']) {
+    color: var(--color-great);
+  }
+
+  .story :global(.note-mark[data-eval='!!']) {
+    color: var(--color-brilliant);
+  }
+
+  .story :global(.visually-hidden) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .end {
+    margin-top: var(--space-8);
+    padding-top: var(--space-4);
+    border-top: var(--rule-heavy) solid var(--color-rule);
+  }
+
+  .end-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    margin: 0 0 var(--space-6);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+  }
+
+  .end h2 {
+    margin: 0;
+    padding-bottom: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-snug);
+  }
+
+  .end > .back {
+    display: inline-block;
+    margin-top: var(--space-5);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Au-dessus de 64rem, l'en-tête de partie passe dans une colonne de droite collante, comme
+     le diagramme de l'accueil ; colonne de 16 à 20rem, valeurs propres à cette page. */
+  @media (min-width: 64rem) {
+    article {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(16rem, 20rem);
+      column-gap: var(--space-8);
+      align-items: start;
+    }
+
+    article > :global(*) {
+      grid-column: 1;
+    }
+
+    article > dl {
+      grid-column: 2;
+      grid-row: 1 / span 4;
+      position: sticky;
+      top: var(--space-6);
+      flex-direction: column;
+      margin-top: var(--space-5);
+    }
+
+    dl > div + div {
+      border-top: var(--rule-thin) solid var(--color-rule-soft);
+    }
+  }
+
+  /* Sous 40rem, pas de marge : le texte reprend toute la largeur et le symbole passe à
+     droite du coup clé, comme dans la liste (DESIGN.md, Responsive). */
+  @media (max-width: 40rem) {
+    .annotated {
+      display: block;
+    }
+
+    .keyline {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding-block: var(--space-4);
+      border-block: var(--rule-thin) solid var(--color-rule);
+    }
+
+    .keymove {
+      flex: 1;
+      padding-block: 0;
+      border-block: 0;
+    }
+
+    .mark {
+      order: 1;
+    }
+
+    .story :global(.note-mark) {
+      position: static;
+      float: right;
+      margin-left: var(--space-3);
+    }
+  }
+</style>

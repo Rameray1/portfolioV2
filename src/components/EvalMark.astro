@@ -1,0 +1,52 @@
+---
+import type { Eval } from '../lib/projects';
+import type { UiKey } from '../i18n/ui';
+import { getLocale, useTranslations } from '../i18n/utils';
+
+interface Props {
+  eval: Eval;
+  legend?: boolean;
+}
+
+const { eval: symbol, legend = false } = Astro.props;
+const t = useTranslations(getLocale(Astro.currentLocale));
+
+const meanings = {
+  '!': 'eval.good',
+  '!?': 'eval.bet',
+  '!!': 'eval.brilliant',
+} satisfies Record<Eval, UiKey>;
+---
+
+<span class="eval" data-eval={symbol}>
+  <span class="symbol" aria-hidden="true">
+    {symbol}
+  </span>
+  <span class:list={{ 'visually-hidden': !legend }}>{t(meanings[symbol])}</span>
+</span>
+
+<style>
+  .symbol {
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: 1;
+    color: var(--eval-color, var(--color-interesting));
+  }
+
+  [data-eval='!'] .symbol {
+    color: var(--eval-color-great, var(--color-great));
+  }
+
+  [data-eval='!!'] .symbol {
+    color: var(--eval-color-brilliant, var(--color-brilliant));
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+</style>

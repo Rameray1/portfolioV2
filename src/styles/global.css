@@ -11,7 +11,7 @@
   color-scheme: light dark;
 
   /* Couleurs */
-  --color-paper: #ffffff;
+  --color-paper: #faf8f3;
   --color-ink: #141414;
   --color-ink-muted: #57554f;
   --color-rule: #141414;
@@ -21,6 +21,14 @@
   --color-square-light: #ffffff;
   --color-square-dark: #c9c6be;
   --color-board-edge: var(--color-ink);
+  --color-invert-bg: var(--color-ink);
+  --color-invert-ink: var(--color-paper);
+  --color-interesting: #a3289a;
+  --color-interesting-on-invert: #ea45d8;
+  --color-great: #2a5384;
+  --color-great-on-invert: #749bbf;
+  --color-brilliant: #0077b6;
+  --color-brilliant-on-invert: #5cc8ff;
 
   /* Typographie */
   --font-sans: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
@@ -84,6 +92,12 @@
     --color-rule-soft: #36342f;
     --color-mark: #ff5a6a;
     --color-mark-ink: #161513;
+    --color-interesting: #ea45d8;
+    --color-interesting-on-invert: #a3289a;
+    --color-great: #749bbf;
+    --color-great-on-invert: #2a5384;
+    --color-brilliant: #5cc8ff;
+    --color-brilliant-on-invert: #0077b6;
     /* La planche reste claire et tonale en sombre (DESIGN.md, Printed Negative Rule). */
     --color-square-light: #e6e3dc;
     --color-square-dark: #b3afa5;
