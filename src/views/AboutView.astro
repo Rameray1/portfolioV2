@@ -2,9 +2,8 @@
 import { Picture } from 'astro:assets';
 import { getEntry, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Availability from '../components/Availability.astro';
 import portrait from '../assets/about/portrait.jpg';
-import { campaign } from '../data/campaign';
+import { campaign, formatStart } from '../data/campaign';
 import { getLocale, useTranslations } from '../i18n/utils';
 
 const locale = getLocale(Astro.currentLocale);
@@ -15,6 +14,7 @@ if (!entry) {
   throw new Error(`src/content/pages/${locale}/about.md manquant`);
 }
 const { Content } = await render(entry);
+const { visible, status, start, place } = campaign.availability;
 ---
 
 <BaseLayout title={entry.data.title} description={entry.data.description}>
@@ -27,32 +27,50 @@ const { Content } = await render(entry);
       formats={['avif', 'webp']}
       fallbackFormat="webp"
       widths={[320, 640]}
-      sizes="20rem"
+      sizes="(max-width: 30rem) 100vw, 20rem"
       quality={60}
       loading="eager"
     />
-    <div class="text">
-      <div class="story">
-        <Content />
-      </div>
-      {campaign.availability.visible && (
-        <section class="seeking" aria-labelledby="seeking">
-          <h2 id="seeking">{t('about.seeking')}</h2>
-          <Availability />
-        </section>
-      )}
+    <div class="story">
+      <Content />
     </div>
+    {visible && (
+      <section class="seeking" aria-labelledby="seeking">
+        <h2 id="seeking">
+          <span class="trait" aria-hidden="true" />
+          {t('about.seeking')}
+        </h2>
+        <dl>
+          <div>
+            <dt>{t('availability.label')}</dt>
+            <dd>{status[locale]}</dd>
+          </div>
+          {start && (
+            <div>
+              <dt>{t('availability.start')}</dt>
+              <dd>{formatStart(start, locale)}</dd>
+            </div>
+          )}
+          <div>
+            <dt>{t('availability.terms')}</dt>
+            <dd>{place[locale]}</dd>
+          </div>
+        </dl>
+      </section>
+    )}
   </article>
 </BaseLayout>
 
 <style>
-  /* Photo plafonnée à 20rem partout : `sizes="20rem"` reste exact (FR-013a). */
+  /* La colonne vide de droite porte les deux filets jusqu'au bord de la page, comme
+     l'en-tête. */
   .about {
     display: grid;
-    grid-template-columns: 20rem minmax(0, var(--measure));
+    grid-template-columns: 20rem minmax(0, var(--measure)) 1fr;
     grid-template-areas:
-      'title title'
-      'photo text';
+      'title title title'
+      'photo story .'
+      'seeking seeking seeking';
     gap: var(--space-6) var(--space-8);
     align-items: start;
   }
@@ -77,8 +95,8 @@ const { Content } = await render(entry);
     height: auto;
   }
 
-  .text {
-    grid-area: text;
+  .story {
+    grid-area: story;
   }
 
   .story :global(p) {
@@ -90,24 +108,95 @@ const { Content } = await render(entry);
   }
 
   .seeking {
-    margin-top: var(--space-7);
+    grid-area: seeking;
+    margin-top: var(--space-5);
     padding-top: var(--space-5);
     border-top: var(--rule-heavy) solid var(--color-rule);
   }
 
   /* Section title de DESIGN.md : interligne 1.1, sans jeton. */
   h2 {
-    margin: 0 0 var(--space-4);
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    margin: 0 0 var(--space-3);
     font-size: var(--text-2xl);
     font-weight: var(--weight-black);
     font-stretch: var(--stretch-display);
     line-height: 1.1;
   }
 
+  /* En-tête de partie, comme sur la page projet. */
+  dl {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-7);
+    margin: 0;
+  }
+
+  dl > div {
+    padding-block: var(--space-3);
+  }
+
+  dt {
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+  }
+
+  dd {
+    margin: var(--space-1) 0 0;
+    font-weight: var(--weight-semibold);
+  }
+
+  /* Le trait de DESIGN.md : carré plein de 0.75rem, comme dans le bandeau de l'accueil. */
+  .trait {
+    flex: none;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: var(--color-mark);
+  }
+
+  /* Au-dessus de 80rem, l'en-tête de partie occupe la colonne de droite, à côté du récit. */
+  @media (min-width: 80rem) {
+    .about {
+      grid-template-columns: 20rem minmax(0, var(--measure)) minmax(16rem, 1fr);
+      grid-template-areas:
+        'title title title'
+        'photo story seeking';
+    }
+
+    .seeking {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    h2 {
+      font-size: var(--text-xl);
+    }
+
+    dl {
+      flex-direction: column;
+      border-top: var(--rule-heavy) solid var(--color-rule);
+      border-bottom: var(--rule-thin) solid var(--color-rule);
+    }
+
+    dl > div + div {
+      border-top: var(--rule-thin) solid var(--color-rule-soft);
+    }
+  }
+
   @media (max-width: 56rem) {
     .about {
       grid-template-columns: minmax(0, 1fr);
-      grid-template-areas: 'title' 'photo' 'text';
+      grid-template-areas: 'title' 'photo' 'story' 'seeking';
+    }
+  }
+
+  /* Sur téléphone, la photo prend toute la largeur : son bord droit rejoint les filets. */
+  @media (max-width: 30rem) {
+    .about :global(.photo) {
+      max-width: none;
     }
   }
 </style>

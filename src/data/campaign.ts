@@ -33,8 +33,8 @@ export const campaign: Campaign = {
       en: 'Available for a developer internship abroad',
     },
     place: {
-      fr: 'Tous pays hors de France, 9 semaines minimum',
-      en: 'Any country outside France, 9 weeks minimum',
+      fr: 'Tous pays hors de France, 9\u00a0semaines minimum',
+      en: 'Any country outside France, 9\u00a0weeks minimum',
     },
   },
   actions: [
