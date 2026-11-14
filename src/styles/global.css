@@ -70,7 +70,7 @@
   --radius: 0;
 
   /* Mise en page */
-  --page-max: 80rem;
+  --page-max: 96rem;
   --gutter: clamp(1rem, 0.5rem + 2.5vw, 4.5rem);
   --measure: 68ch;
 
@@ -119,6 +119,8 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* Au-delà de 1600px, tout le système en rem grandit avec l'écran. */
+  font-size: clamp(16px, 0.75vw + 4px, 28px);
 }
 
 body {
