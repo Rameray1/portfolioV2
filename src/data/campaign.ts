@@ -11,7 +11,7 @@ export interface Action {
 export interface Availability {
   visible: boolean;
   status: Localized;
-  start: `${number}-${number}` | `${number}-${number}-${number}`;
+  start?: `${number}-${number}` | `${number}-${number}-${number}`;
   place: Localized;
 }
 
@@ -32,7 +32,6 @@ export const campaign: Campaign = {
       fr: '[provisoire] Disponible pour un stage',
       en: '[draft] Available for an internship',
     },
-    start: '2027-04',
     place: {
       fr: '[provisoire] en France et en Europe',
       en: '[draft] in France and Europe',
