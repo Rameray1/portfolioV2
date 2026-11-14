@@ -29,12 +29,12 @@ export const campaign: Campaign = {
   availability: {
     visible: true,
     status: {
-      fr: '[provisoire] Disponible pour un stage',
-      en: '[draft] Available for an internship',
+      fr: 'Disponible pour un stage de développement à l’étranger',
+      en: 'Available for a developer internship abroad',
     },
     place: {
-      fr: '[provisoire] en France et en Europe',
-      en: '[draft] in France and Europe',
+      fr: 'Tous pays hors de France, 9 semaines minimum',
+      en: 'Any country outside France, 9 weeks minimum',
     },
   },
   actions: [
