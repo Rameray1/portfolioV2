@@ -2,12 +2,15 @@
 name: Ramazan Kus — portfolio
 description: La partie annotée. Un livre de parties commentées, imprimé en encre noire avec un seul rouge de commentateur.
 colors:
-  paper: '#ffffff'
+  paper: '#faf8f3'
   ink: '#141414'
   ink-muted: '#57554f'
   rule-soft: '#dcd9d2'
   mark: '#c8102e'
-  mark-on-invert: '#ff5a6a'
+  interesting: '#a3289a'
+  interesting-on-invert: '#ea45d8'
+  great: '#2a5384'
+  great-on-invert: '#749bbf'
   brilliant: '#0077b6'
   brilliant-on-invert: '#5cc8ff'
   square-light: '#ffffff'
@@ -17,7 +20,10 @@ colors:
   ink-muted-dark: '#aaa69d'
   rule-soft-dark: '#36342f'
   mark-dark: '#ff5a6a'
-  mark-on-invert-dark: '#c8102e'
+  interesting-dark: '#ea45d8'
+  interesting-on-invert-dark: '#a3289a'
+  great-dark: '#749bbf'
+  great-on-invert-dark: '#2a5384'
   brilliant-dark: '#5cc8ff'
   brilliant-on-invert-dark: '#0077b6'
   square-light-dark: '#e6e3dc'
@@ -122,10 +128,15 @@ components:
     backgroundColor: '{colors.ink}'
     textColor: '{colors.paper}'
   eval-symbol:
-    textColor: '{colors.mark}'
+    textColor: '{colors.interesting}'
     typography: '{typography.eval}'
   eval-symbol-on-invert:
-    textColor: '{colors.mark-on-invert}'
+    textColor: '{colors.interesting-on-invert}'
+  eval-symbol-great:
+    textColor: '{colors.great}'
+    typography: '{typography.eval}'
+  eval-symbol-great-on-invert:
+    textColor: '{colors.great-on-invert}'
   eval-symbol-brilliant:
     textColor: '{colors.brilliant}'
     typography: '{typography.eval}'
@@ -147,7 +158,7 @@ components:
 
 **Creative North Star: "La partie annotée"**
 
-Le portfolio se lit comme un livre de parties commentées, dans l'esprit de Chess Informator. Chaque projet est une partie. On la raconte par son coup critique (le problème) et par le choix fait, et un symbole d'évaluation rouge la note. La page est un papier blanc pur, imprimé en encre presque noire. Un seul rouge, celui du commentateur, porte le jugement. Un bleu ciel, plus rare encore, ne marque que le coup brillant (`!!`), comme le veut la convention des sites d'échecs. Le diagramme d'échiquier est une planche imprimée en gris pierre. Des filets épais ouvrent chaque partie, des filets fins séparent les coups.
+Le portfolio se lit comme un livre de parties commentées, dans l'esprit de Chess Informator. Chaque projet est une partie. On la raconte par son coup critique (le problème) et par le choix fait, et un symbole d'évaluation la note, dans les couleurs des sites d'échecs : bleu pour un bon coup, violet pour un pari. La page est un papier crème très léger (`#faf8f3`), imprimé en encre presque noire : un blanc pur ferait écran, et fatiguerait les yeux. Un seul rouge, celui du commentateur, marque l'état et la gaffe. Un bleu ciel, plus rare encore, ne marque que le coup brillant (`!!`). Le diagramme d'échiquier est une planche imprimée en gris pierre. Des filets épais ouvrent chaque partie, des filets fins séparent les coups.
 
 La densité est celle d'un livre de référence : des colonnes de texte serrées, une notation et des métadonnées en chiffres tabulaires, aucune décoration qui ne porte une information. La hiérarchie vient d'une seule famille grotesque à axe de chasse : étroite et très grasse pour les noms et les titres, normale pour le texte. Le thème sombre imprime le même livre en négatif, encre claire sur noir chaud. Le diagramme y reste une planche tonale, jamais un échiquier d'écran.
 
@@ -155,13 +166,13 @@ Refus confirmé par la direction : le hero centré suivi d'une rangée de cartes
 
 **Key Characteristics:**
 
-- Papier blanc, encre `#141414`, un seul rouge de commentateur.
+- Papier crème léger, encre `#141414`, un seul rouge de commentateur.
 - Une famille (Archivo) sur deux chasses : 72 % pour l'affichage, 100 % pour le texte.
 - Chiffres tabulaires partout, notation d'échecs et en-têtes de type PGN.
 - Filets de 2 px sous les en-têtes, filets fins de 1 px entre les lignes.
 - Zéro rayon, zéro ombre portée. Au survol, la ligne s'inverse.
-- Signature : le symbole d'évaluation rouge. Au survol d'un coup, sa case s'allume sur le diagramme, en CSS seul.
-- Un seul bleu, réservé au coup brillant `!!`.
+- Signature : le symbole d'évaluation, en bleu ou en violet. Au survol d'un coup, sa case s'allume sur le diagramme, en CSS seul.
+- Deux bleus, réservés aux bons coups, comme sur chess.com : bleu foncé pour `!`, bleu ciel pour `!!`.
 - Le mouvement imite le commentateur : un coup joué, puis noté. Les projets mis en avant sont trois coups candidats des blancs depuis la même position : au survol, la pièce joue le coup. En CSS seul (voir Motion).
 
 ## Colors
@@ -170,18 +181,19 @@ Une encre et un papier, plus un rouge rare qui ne parle que pour le commentateur
 
 ### Primary
 
-- **Rouge du commentateur** (`mark`; sombre : `mark-dark`) : symboles d'évaluation (`!`, `!?`), marqueur de trait et de disponibilité (le carré plein du bandeau), page courante de la navigation, case allumée sur le diagramme au survol d'un coup. Il sert aussi l'état système : anneau de focus (`2px`, décalage `3px`) et sélection de texte (texte `paper` sur fond rouge).
-- **Rouge sur ligne inversée** (`mark-on-invert`; sombre : `mark-on-invert-dark`) : le symbole d'évaluation quand sa ligne est inversée au survol ou au focus. Les deux rouges échangent leurs rôles entre clair et sombre, et chacun garde au moins 4,5:1 sur son fond.
+- **Rouge du commentateur** (`mark`; sombre : `mark-dark`) : symbole de la gaffe `??` (page 404), marqueur de trait et de disponibilité (le carré plein du bandeau), page courante de la navigation, case allumée sur le diagramme au survol d'un coup. Il sert aussi l'état système : anneau de focus (`2px`, décalage `3px`) et sélection de texte (texte `paper` sur fond rouge).
+- **Violet du pari** (`interesting`; sombre : `interesting-dark`) : le symbole `!?` et rien d'autre, comme sur Lichess. Le rouge rappellerait un mauvais coup. Prune sur papier (`#a3289a`, 5,95:1), rose-violet de Lichess en sombre (`#ea45d8`, 5,51:1). Sur ligne inversée (`interesting-on-invert`), les deux valeurs s'échangent (5,56:1 et 5,49:1).
 
 ### Accent
 
-- **Bleu du coup brillant** (`brilliant`; sombre : `brilliant-dark`) : le symbole `!!` et rien d'autre, dans la liste des coups, dans sa légende, sur le diagramme, dans la marge d'une page projet et dans le favicon. Sur papier blanc, il s'imprime en bleu profond (`#0077b6`, 4,87:1) : le bleu ciel pur ne tient pas le contraste sur blanc. En sombre, il devient le vrai bleu ciel (`#5cc8ff`, 9,7:1).
+- **Bleu du bon coup** (`great`; sombre : `great-dark`) : le symbole `!` et rien d'autre, partout où il apparaît. Bleu marine sur papier (`#2a5384`, 7,41:1), bleu ardoise de chess.com en sombre (`#749bbf`, 6,24:1), assez loin du bleu du `!!` pour ne pas s'y confondre. Sur ligne inversée (`great-on-invert`), les deux valeurs s'échangent (6,3:1 et 6,85:1).
+- **Bleu du coup brillant** (`brilliant`; sombre : `brilliant-dark`) : le symbole `!!` et rien d'autre, dans la liste des coups, dans sa légende, sur le diagramme, dans la marge d'une page projet et dans le favicon. Sur papier clair, il s'imprime en bleu profond (`#0077b6`, 4,59:1) : le bleu ciel pur ne tient pas le contraste sur un fond clair. En sombre, il devient le vrai bleu ciel (`#5cc8ff`, 9,7:1).
 - **Bleu sur ligne inversée** (`brilliant-on-invert`; sombre : `brilliant-on-invert-dark`) : le `!!` quand sa ligne est inversée. Comme les deux rouges, les deux bleus échangent leurs rôles entre clair et sombre. Sur la ligne inversée du thème sombre, le bleu profond tombe à 4,24:1 : c'est admis, car le symbole y est toujours en grand texte (seuil 3:1).
-- Jetons à ajouter dans `src/styles/global.css` en F11 (`--color-brilliant`, `--color-brilliant-on-invert`).
+- Jetons livrés en F06 dans `src/styles/global.css` (`--color-great`, `--color-great-on-invert`, `--color-brilliant`, `--color-brilliant-on-invert`).
 
 ### Neutral
 
-- **Papier** (`paper`; sombre : `paper-dark`, noir chaud) : fond de page. C'est aussi la couleur du texte posé sur le rouge et sur l'encre (boutons pleins, lignes inversées).
+- **Papier** (`paper`, crème léger ; sombre : `paper-dark`, noir chaud) : fond de page. C'est aussi la couleur du texte posé sur le rouge et sur l'encre (boutons pleins, lignes inversées).
 - **Encre** (`ink`; sombre : `ink-dark`) : texte, filets épais (`--color-rule`), fond des lignes inversées (`--color-invert-bg`), bord du diagramme (`--color-board-edge`), bouton plein.
 - **Encre atténuée** (`ink-muted`; sombre : `ink-muted-dark`) : années, ligne d'en-tête de partie, coup clé, légende, libellés PGN, coordonnées du diagramme, périodes du parcours.
 - **Filet doux** (`rule-soft`; sombre : `rule-soft-dark`) : filets de 1 px entre les coups et entre les lignes de tableau.
@@ -189,9 +201,9 @@ Une encre et un papier, plus un rouge rare qui ne parle que pour le commentateur
 
 ### Named Rules
 
-**The Commentator's Red Rule.** Le rouge est réservé par principe au jugement et à l'état : symboles d'évaluation, marqueur de trait ou de disponibilité, page courante, case allumée, focus, sélection. Jamais sur un bouton, jamais en fond de survol, jamais pour décorer. Le test : si l'élément rouge ne note, ne signale ou ne localise rien, il passe en encre.
+**The Commentator's Red Rule.** Le rouge est réservé par principe à l'état et à la gaffe : symbole `??`, marqueur de trait ou de disponibilité, page courante, case allumée, focus, sélection. Jamais sur un bouton, jamais en fond de survol, jamais pour décorer. Le test : si l'élément rouge ne note, ne signale ou ne localise rien, il passe en encre.
 
-**The Brilliant Blue Rule.** Le bleu n'existe que pour `!!`. Pas de lien bleu, pas de focus bleu, pas de case bleue. Si le symbole n'est pas `!!`, il est rouge. Un projet `!!` est rare : au plus un parmi les coups mis en avant, sinon le bleu perd son sens.
+**The Brilliant Blue Rule.** Le bleu n'existe que pour les bons coups : bleu foncé pour `!`, bleu ciel pour `!!`. Pas de lien bleu, pas de focus bleu, pas de case bleue. Le `!?` est violet ; le rouge ne note jamais un projet. Un projet `!!` est rare : au plus un parmi les coups mis en avant, sinon le bleu perd son sens.
 
 **The Printed Negative Rule.** Le thème sombre est le même livre imprimé en négatif : les jetons s'échangent, la composition ne bouge pas. Il suit uniquement `prefers-color-scheme`, sans script ni attribut ; un forçage par `[data-theme]` n'arrivera qu'avec un bouton de thème (réserve de `ROADMAP.md`). Le diagramme reste une planche tonale claire, jamais inversée.
 
@@ -212,7 +224,7 @@ Les graisses passent par des jetons : `--weight-regular` (400), `--weight-semibo
 - **Lead** (400, `--text-xl` 22 → 28 px, interligne 1.3, 34–40ch) : pitch de l'accueil, résumé d'un projet.
 - **Title** (700, `--text-lg` 22 px, interligne 1.3) : titre d'un coup dans la liste, intertitres du récit, ligne du coup clé (600).
 - **Body** (400, `--text-base` 18 px, interligne 1.55, mesure `--measure` 68ch) : texte courant.
-- **Label** (700, `--text-sm` 15 px) : en-tête de liste (« Trois parties choisies »), en-têtes de tableau, notation (`1.e4`), titre du bandeau de disponibilité. La navigation utilise la même taille en 400, et 600 pour la page courante.
+- **Label** (700, `--text-sm` 15 px) : en-tête de liste (« Parties choisies »), en-têtes de tableau, notation (`1.e4`), titre du bandeau de disponibilité. La navigation utilise la même taille en 400, et 600 pour la page courante.
 - **Meta** (400, `--text-xs` 13 px) : légende des symboles, libellés PGN, coordonnées du diagramme.
 - **Eval** (800, 72 %, `--text-2xl`, interligne 1, rouge) : le symbole d'évaluation dans la marge. En légende, il descend à `--text-sm`.
 
@@ -228,8 +240,8 @@ Une page de livre centrée : conteneur de `--page-max` (80rem), gouttière fluid
 
 - **Accueil (ouverture).** Deux colonnes : texte `minmax(0, 1fr)`, diagramme `minmax(18rem, 30rem)`, écart `--space-7` / `--space-8`. Le diagramme est collant (`top: --space-6`). Dessous, le nom, la ligne d'en-tête de partie sur filet de 2 px, le pitch, les deux actions côte à côte, puis la liste des coups.
 - **Liste des coups.** Grille à trois colonnes : année + notation (4.5rem), titre + coup clé, symbole d'évaluation aligné à droite (2.5rem), sur ligne de base commune.
-- **Page projet (lecture).** Lien retour, titre, résumé. Un en-tête PGN de quatre colonnes entre un filet épais et un filet fin. Puis le récit commenté : une colonne de symboles en marge (3rem), puis le texte à la mesure.
-- **Responsive.** Sous `56rem`, l'accueil passe à une colonne dans cet ordre : nom (le filet de 2 px reste, la ligne d'en-tête de partie disparaît : le pitch dit déjà l'école et l'employeur), pitch et actions, puis le bandeau de disponibilité sur son filet fin (il quitte la légende pour rester dans le premier écran), puis le diagramme réduit (22rem max), sans légende, puis les coups. Le tableau du parcours s'empile : la période à gauche (8.5rem), le rôle à droite, le lieu sous le rôle en encre atténuée. Sous `40rem`, l'en-tête PGN passe à deux colonnes et la marge des symboles à 1.75rem.
+- **Page projet (lecture).** Au-dessus de `64rem`, deux colonnes comme l'accueil : la lecture à gauche, l'en-tête PGN à droite (16 à 20rem), collant (`top: --space-6`), ses entrées empilées et séparées par des filets doux. En dessous, une seule colonne. Lien retour, titre, résumé. Un en-tête PGN entre un filet épais et un filet fin : année, technologies, puis liens s'il y en a. Puis la colonne commentée : une marge de symboles (3rem) et le texte à la mesure. Elle s'ouvre par le coup clé, noté par le symbole dans la marge, puis le visuel s'il existe, puis le récit.
+- **Responsive.** Sous `56rem`, l'accueil passe à une colonne dans cet ordre : nom (le filet de 2 px reste, la ligne d'en-tête de partie disparaît : le pitch dit déjà l'école et l'employeur), pitch et actions, puis le bandeau de disponibilité sur son filet fin (il quitte la légende pour rester dans le premier écran), puis le diagramme réduit (22rem max), sans légende, puis les coups. Le tableau du parcours s'empile : la période à gauche (8.5rem), le rôle à droite, le lieu sous le rôle en encre atténuée. Sous `40rem`, l'en-tête PGN passe à la ligne et la marge des symboles disparaît : le texte reprend toute la largeur, et le symbole passe à droite du coup clé, comme dans la liste.
 
 ### Named Rules
 
@@ -262,7 +274,7 @@ Le mouvement imite le geste du commentateur : on joue le coup, puis on le note. 
 1. **Le coup brillant (accueil, signature).** Le coup du projet `!!` se joue tout seul à l'arrivée : sa pièce glisse de sa case de départ à sa case d'arrivée (`calc(var(--duration-move) * 2)`, `--ease-out`). Puis le symbole `!!` se pose en bleu à côté de la case d'arrivée : fondu et échelle de 1.15 à 1 (`--duration-stamp`), comme un tampon. Sur grand écran, où le diagramme est visible dès l'arrivée, l'animation part au chargement (décalage de 400 ms). Sous `56rem`, où le diagramme est sous le pitch, elle suit son entrée à l'écran (`animation-timeline: view()`, dans `@supports`). Le coup se joue une fois et la pièce reste sur la case d'arrivée : c'est le meilleur coup de la position. S'il n'y a aucun projet `!!` parmi les mis en avant, il n'y a pas de coup signature, et le diagramme reste immobile.
 2. **Les coups candidats (survol d'une ligne).** Au survol ou au focus d'une ligne de la liste des coups, la pièce du projet glisse de sa case de départ à sa case d'arrivée (`--duration-move`, `--ease-out`). La case d'arrivée s'allume d'un liseré rouge de 4 px et la case de départ d'un liseré rouge de 2 px, comme le dernier coup sur un échiquier en ligne. Quand on passe à une autre ligne, la pièce revient à sa case et la pièce de la nouvelle ligne joue son coup. Pendant ce temps, la pièce du coup `!!` revient sur sa case de départ, et elle rejoue son coup quand on quitte la liste. Ce ne sont que des coups des blancs, le camp de l'auteur : les noirs ne jouent jamais. Sous `prefers-reduced-motion`, aucune pièce ne bouge, seules les cases se marquent (changement de couleur en `--duration`). Sur écran tactile, sans survol, toucher une ligne ouvre directement le projet.
 3. **La partie qu'on ouvre (transition de page).** View transitions natives entre documents (`@view-transition { navigation: auto; }`). Le titre d'une ligne de la liste et le titre de la page projet partagent un `view-transition-name` par projet (`project-<slug>`) : le titre se déplace et grandit jusqu'à sa place. L'en-tête du site reste fixe (`view-transition-name: site-header`). Le reste de la page passe en fondu, en `--duration-page`.
-4. **La note du commentateur (page projet).** Le symbole d'évaluation du projet, dans la marge, se pose comme le tampon de l'effet 1, mais en simple fondu, sans échelle : il doit rester plus discret que la signature. Il arrive après la transition de page (décalage égal à `--duration-page`), jamais pendant. En rouge, ou en bleu si le projet est `!!`.
+4. **La note du commentateur (page projet).** Le symbole d'évaluation du projet, dans la marge, se pose comme le tampon de l'effet 1, mais en simple fondu, sans échelle : il doit rester plus discret que la signature. Il arrive après la transition de page (décalage égal à `--duration-page`), jamais pendant. Dans la couleur de son symbole : bleu foncé pour `!`, violet pour `!?`, bleu ciel pour `!!`.
 
 ### Named Rules
 
@@ -297,7 +309,7 @@ Des rectangles d'encre, francs et sans rayon.
 
 ### Liste des coups (signature)
 
-Chaque projet mis en avant est un coup candidat des blancs, joué depuis la même position. Tous portent donc le même numéro de coup, comme les variantes d'un livre commenté (`23.Fxh7`, `23.Td1`, `23.Cg5`). La colonne de gauche donne l'année en encre atténuée et la notation en 700. Au centre, le titre en Title et le coup clé en encre atténuée (« Coup clé : … »). À droite, le symbole d'évaluation en rouge. Toute la ligne est un lien. Au survol ou au focus, elle s'inverse (`--color-invert-bg` / `--color-invert-ink`), le texte atténué hérite de la couleur et le symbole passe en `mark-on-invert`. Une légende en Meta explique les symboles utilisés (`!` coup clé, `!?` pari réfléchi, `!!` coup brillant, en bleu). Leur sens définitif est fixé en F06. Avec `:has()`, la pièce du projet survolé joue son coup sur le diagramme et ses deux cases se marquent (voir Motion, effet 2).
+Chaque projet mis en avant est un coup candidat des blancs, joué depuis la même position. Tous portent donc le même numéro de coup, comme les variantes d'un livre commenté (`23.Fxh7`, `23.Td1`, `23.Cg5`). La colonne de gauche donne l'année en encre atténuée et la notation en 700. Au centre, le titre en Title et le coup clé en encre atténuée (« Coup clé : … »). À droite, le symbole d'évaluation dans sa couleur. Toute la ligne est un lien. Au survol ou au focus, elle s'inverse (`--color-invert-bg` / `--color-invert-ink`), le texte atténué hérite de la couleur et le symbole passe dans sa couleur sur ligne inversée (`great-on-invert`, `interesting-on-invert` ou `brilliant-on-invert`). Une légende en Meta explique les symboles utilisés (`!` bon coup en bleu foncé, `!?` pari réfléchi en violet, `!!` coup brillant en bleu ciel) ; « coup clé » ne désigne que la phrase du projet. Sur `/projects`, la même ligne liste tous les projets, sans notation : sous le titre, le résumé puis les technologies en texte, séparées par « · ». Avec `:has()`, la pièce du projet survolé joue son coup sur le diagramme et ses deux cases se marquent (voir Motion, effet 2).
 
 ### Diagramme et bandeau de disponibilité
 
@@ -309,7 +321,7 @@ Il se lit comme une grille de tournoi. En-têtes en Label sur filet de 2 px, lig
 
 ### En-tête PGN et récit commenté (page projet)
 
-Les métadonnées forment une liste de définitions sur quatre colonnes : libellé en Meta atténuée, valeur en 600. Dans le récit, les intertitres sont en Title. Le symbole d'évaluation se place dans la colonne de marge, au niveau de l'intertitre qu'il note. Le coup clé est isolé entre deux filets fins, en `--text-lg` 600.
+Les métadonnées forment une liste de définitions en ligne (année, technologies en puces, liens) : libellé en Meta atténuée, valeur en 600. Le coup clé est isolé entre deux filets fins, en `--text-lg` 600 ; le symbole d'évaluation se place dans la colonne de marge, à son niveau : il note le coup clé, pas un intertitre. Le visuel, s'il existe, suit à la largeur de la mesure. Dans le récit, chaque partie est un coup : un filet doux au-dessus de l'intertitre, l'intertitre en chasse étroite (800, 72 %, `--text-xl`). Une note du commentateur (une citation Markdown dans la fiche) s'isole entre deux filets fins, en `--text-lg` 600, comme le coup clé ; si elle commence par un symbole d'évaluation, ce symbole se place dans la marge. Une image de preuve du récit prend la largeur de la mesure, sans cadre, avec sa légende dessous en `--text-sm` atténué, comme une figure de livre. La page finit sur un filet épais : les liens du projet, la partie suivante en ligne de la liste des coups, et le lien vers tous les projets.
 
 ### États à construire en F04 (non livrés)
 
@@ -322,12 +334,12 @@ Ces deux états découlent du monde construit mais n'existent pas encore.
 
 ### Do:
 
-- **Do** réserver le rouge (`mark`) aux symboles d'évaluation, au trait et à la disponibilité, à la page courante, à la case allumée, au focus et à la sélection.
-- **Do** inverser la ligne au survol (encre pleine, texte papier) et passer alors le symbole en `mark-on-invert`.
+- **Do** réserver le rouge (`mark`) à la gaffe `??`, au trait et à la disponibilité, à la page courante, à la case allumée, au focus et à la sélection.
+- **Do** inverser la ligne au survol (encre pleine, texte papier) et passer alors le symbole dans sa couleur sur ligne inversée.
 - **Do** ouvrir chaque partie par un filet de 2 px et séparer les lignes par un filet de 1 px en `rule-soft`.
 - **Do** composer l'affichage en Archivo 800 à 72 % de chasse et le texte en Archivo à 100 %, chiffres tabulaires.
 - **Do** placer une espace fine insécable (U+202F) avant `:` et `;` en français.
-- **Do** réserver le bleu (`brilliant`) au seul symbole `!!`.
+- **Do** réserver les bleus aux symboles `!` (`great`) et `!!` (`brilliant`).
 - **Do** jouer le coup, puis poser le symbole, une seule fois, et afficher l'état final sous `prefers-reduced-motion`.
 - **Do** garder le diagramme en planche tonale dans le thème sombre (`#e6e3dc` / `#b3afa5`).
 - **Do** prendre chaque valeur dans les jetons de `src/styles/global.css` (constitution, principe VIII).
@@ -350,4 +362,4 @@ Le monde vient de l'imprimé, pas du web.
 - **Chess Informator** (Šahovski informator) : symboles d'évaluation, diagrammes, notation compacte. C'est la référence du monde.
 - **Les livres de parties commentées**, par exemple _Mes 60 meilleures parties_ de Bobby Fischer : une partie par chapitre, le récit autour du coup critique, les en-têtes de partie.
 - **lichess.org** : référence de qualité d'exécution seulement, pour la netteté du diagramme et le jeu de pièces cburnett, repris tel quel. Le marquage du dernier coup (case de départ et case d'arrivée) vient aussi de là.
-- **chess.com** : la convention du coup brillant `!!` en bleu, et rien d'autre.
+- **chess.com** : la convention des bons coups en bleu, `!` en bleu foncé et `!!` en bleu ciel, et rien d'autre.

@@ -15,9 +15,11 @@ interface Props {
   title: string;
   description: string;
   image?: { src: `/${string}`; alt: string };
+  // Contenu sans version anglaise : la page `/en` affiche le français.
+  untranslated?: boolean;
 }
 
-const { title, description, image } = Astro.props;
+const { title, description, image, untranslated = false } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 const pathname = Astro.url.pathname;
@@ -32,13 +34,17 @@ const absolute = (path: string) =>
   ).href;
 
 const documentTitle = title === site.name ? title : `${title} · ${site.name}`;
-const canonical = statusPage ? undefined : absolute(pathname);
+const fallback = untranslated && locale === 'en';
+const canonical = statusPage
+  ? undefined
+  : absolute(fallback ? localizePath(pathname, 'fr') : pathname);
 const robots = PUBLIC_NOINDEX
   ? 'noindex, nofollow'
-  : statusPage || isNoindexPath(pathname)
+  : statusPage || fallback || isNoindexPath(pathname)
     ? 'noindex'
     : undefined;
-const alternate = statusPage ? undefined : alternatePath(pathname, locale);
+const alternate =
+  statusPage || untranslated ? undefined : alternatePath(pathname, locale);
 const otherLocale: Locale = locale === 'fr' ? 'en' : 'fr';
 const alternates = alternate && {
   fr: absolute(localizePath(pathname, 'fr')),

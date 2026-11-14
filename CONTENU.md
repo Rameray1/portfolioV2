@@ -92,19 +92,36 @@ promesses restent : chaque promesse doit avoir **au moins une page publiée** qu
 Noms de champs en anglais. Une donnée non textuelle (date, stack, liens, image) n'existe qu'une
 fois ; seule la prose existe par langue.
 
-| Collection      | Source                                          | Champs                                                                                 |
-| --------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `projects`      | `src/content/projects/fr/<slug>.md`             | `title, year, summary, tech[], links{code,demo,video}, cover, featured, draft` + récit |
-| `projects` (EN) | `src/content/projects/en/<slug>.md` (même slug) | `title, summary` + récit — le reste vient de la version FR                             |
-| `experience`    | `src/data/experience.yaml`                      | `start, end?, title, place, detail` + `tech[], highlights[]` (prose `{ fr, en }`)      |
-| `education`     | `src/data/education.yaml`                       | `start, end?, title, place, detail` (même forme que `experience`)                      |
-| `skills`        | `src/data/skills.yaml`                          | `name, domain, level, since, projects[]` (au moins une référence vers `projects`)      |
-| `blog`          | `src/content/blog/<slug>.md`                    | `title, description, date, draft` + article                                            |
-| campagne        | `src/data/campaign.ts`                          | les 5 leviers (§7), bilingues                                                          |
-| navigation      | `src/data/nav.ts`                               | rubriques de la nav                                                                    |
+| Collection      | Source                                          | Champs                                                                                                                                         |
+| --------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `projects`      | `src/content/projects/fr/<slug>.md`             | `title, year, summary, keyMove, tech[], eval, links{code,demo,video}, cover, coverAlt, featured, draft, move{from,to,notation{fr,en}}` + récit |
+| `projects` (EN) | `src/content/projects/en/<slug>.md` (même slug) | `title, summary, keyMove, coverAlt` + récit — le reste vient de la version FR                                                                  |
+| `experience`    | `src/data/experience.yaml`                      | `start, end?, title, place, detail` + `tech[], highlights[]` (prose `{ fr, en }`)                                                              |
+| `education`     | `src/data/education.yaml`                       | `start, end?, title, place, detail` (même forme que `experience`)                                                                              |
+| `skills`        | `src/data/skills.yaml`                          | `name, domain, level, since, projects[]` (au moins une référence vers `projects`)                                                              |
+| `blog`          | `src/content/blog/<slug>.md`                    | `title, description, date, draft` + article                                                                                                    |
+| campagne        | `src/data/campaign.ts`                          | les 5 leviers (§7), bilingues                                                                                                                  |
+| navigation      | `src/data/nav.ts`                               | rubriques de la nav                                                                                                                            |
 
 Le récit d'un projet suit toujours : **contexte · problème · ce que j'ai fait · stack et
 pourquoi · résultat · ce que j'en ai appris.**
+
+`keyMove` est le coup clé : une phrase courte, le choix décisif du projet. `eval` est le
+symbole d'évaluation : `!` bon coup, `!?` pari réfléchi, `!!` coup brillant. `move` est le coup
+du projet sur le diagramme de l'accueil, obligatoire s'il est `featured`.
+
+Dans le récit, une citation Markdown (`> …`) devient une note du commentateur : la phrase à
+retenir d'une partie (le problème, une décision, le résultat chiffré). Si elle commence par
+`!` ou `!?`, ce symbole la note dans la marge. Une ou deux notes par fiche, de préférence sur
+la décision et sur le résultat chiffré. Une note ajoute un fait (un chiffre, une techno, une
+décision) et ne répète ni le paragraphe ni le coup clé. Le `!!` reste réservé au coup clé :
+jamais dans une note.
+
+Le visuel (`cover`) est unique et facultatif : il situe le projet. Les preuves en image (un
+schéma, une capture avant / après, un graphique) vont dans le récit, à côté de ce qu'elles
+prouvent : une à trois par fiche, avec une légende en titre de l'image
+(`![texte alternatif](../../../assets/projects/<fichier> "Légende")`). Le fichier image
+n'existe qu'une fois ; chaque langue écrit son texte alternatif et sa légende. Pas de galerie.
 
 ## 7. Cycle de vie du contenu
 

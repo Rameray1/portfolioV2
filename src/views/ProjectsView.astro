@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectList from '../components/ProjectList.astro';
+import { getProjects } from '../lib/projects';
+import { getLocale, useTranslations } from '../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const projects = await getProjects(locale);
+---
+
+<BaseLayout title={t('projects.title')} description={t('projects.description')}>
+  <h1>{t('projects.title')}</h1>
+  {projects.length > 0 ? (
+    <ProjectList projects={projects} detail />
+  ) : (
+    <p>{t('projects.empty')}</p>
+  )}
+</BaseLayout>
+
+<style>
+  h1 {
+    margin: 0 0 var(--space-6);
+    font-size: var(--text-headline);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  p {
+    margin: 0;
+    padding-top: var(--space-4);
+    border-top: var(--rule-heavy) solid var(--color-rule);
+  }
+</style>

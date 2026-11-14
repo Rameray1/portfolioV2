@@ -26,4 +26,5 @@ pnpm-debug.log*
 # impeccable: generated captures and decision sketches (regenerable)
 .impeccable/review/
 .impeccable/mocks/
+.impeccable/critique/
 .impeccable/config.local.json

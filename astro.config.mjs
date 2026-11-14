@@ -1,7 +1,9 @@
 // @ts-check
 import { defineConfig, envField } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import { isNoindexPath } from './src/data/seo.ts';
+import { satteri } from '@astrojs/markdown-satteri';
+import { projectMarkdown } from './src/lib/project-markdown.ts';
+import { isNoindexPath, isUntranslatedProjectPath } from './src/data/seo.ts';
 
 export default defineConfig({
   site: 'https://ramazankus.dev',
@@ -11,10 +13,14 @@ export default defineConfig({
     defaultLocale: 'fr',
     routing: { prefixDefaultLocale: false },
   },
+  markdown: { processor: satteri({ hastPlugins: [projectMarkdown] }) },
   integrations: [
     sitemap({
       i18n: { defaultLocale: 'fr', locales: { fr: 'fr', en: 'en' } },
-      filter: (page) => !isNoindexPath(new URL(page).pathname),
+      filter: (page) => {
+        const { pathname } = new URL(page);
+        return !isNoindexPath(pathname) && !isUntranslatedProjectPath(pathname);
+      },
     }),
   ],
   env: {

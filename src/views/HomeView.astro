@@ -4,14 +4,17 @@ import PersonSchema from '../components/PersonSchema.astro';
 import ActionLinks from '../components/ActionLinks.astro';
 import Availability from '../components/Availability.astro';
 import Diagram from '../components/Diagram.astro';
+import ProjectList from '../components/ProjectList.astro';
 import { campaign } from '../data/campaign';
 import { diagram } from '../data/diagram';
 import { site } from '../data/site';
+import { featuredProjects } from '../lib/projects';
 import { getLocale, useTranslations } from '../i18n/utils';
 
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 const pitch = campaign.pitch[locale];
+const featured = await featuredProjects(locale);
 ---
 
 <BaseLayout title={site.name} description={pitch}>
@@ -41,6 +44,12 @@ const pitch = campaign.pitch[locale];
         )}
       </figure>
     </aside>
+    {featured.length > 0 && (
+      <section class="featured" aria-labelledby="featured">
+        <h2 id="featured">{t('projects.featured')}</h2>
+        <ProjectList projects={featured} />
+      </section>
+    )}
   </section>
 </BaseLayout>
 
@@ -81,8 +90,22 @@ const pitch = campaign.pitch[locale];
   }
 
   .side {
+    grid-column: 2;
+    grid-row: 1 / span 2;
     position: sticky;
     top: var(--space-6);
+  }
+
+  .featured {
+    grid-column: 1;
+  }
+
+  h2 {
+    margin: 0;
+    padding-bottom: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-snug);
   }
 
   figure {
@@ -125,6 +148,8 @@ const pitch = campaign.pitch[locale];
     }
 
     .side {
+      grid-column: auto;
+      grid-row: auto;
       position: static;
       max-width: 22rem;
     }
