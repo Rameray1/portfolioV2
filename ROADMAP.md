@@ -226,7 +226,7 @@ src/content.config.ts : collections projects (src/content/projects/fr/) et proje
 
 ### ✍️ C1 – C3 · Contenu _(hors speckit)_
 
-- [ ] **C1 · Textes accueil et À propos** — FR, selon §3 et §9. `content: accueil et a propos`
+- [x] **C1 · Textes accueil et À propos** — FR, selon §3 et §9. `content: accueil et a propos`
 - [ ] **C2 · Fiches projets** — choisir 3 à 10 projets selon `CONTENU.md` §8. Une fiche par
       séance. `content: fiche <projet>`
 - [ ] **C2b · Position du diagramme** — une fois les projets mis en avant choisis : la position
