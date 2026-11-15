@@ -14,6 +14,10 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   markdown: { processor: satteri({ hastPlugins: [projectMarkdown] }) },
+  redirects: {
+    '/projects/sample-project': '/projects/portfolio/',
+    '/en/projects/sample-project': '/en/projects/portfolio/',
+  },
   integrations: [
     sitemap({
       i18n: { defaultLocale: 'fr', locales: { fr: 'fr', en: 'en' } },
