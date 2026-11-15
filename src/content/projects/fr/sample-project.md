@@ -15,11 +15,11 @@ cover: ../../../assets/projects/sample-project.png
 coverAlt: '[provisoire] Image d’exemple grise de 1600 par 900 pixels'
 featured: true
 move:
-  from: c2
-  to: c3
+  from: e1
+  to: e7
   notation:
-    fr: 4.c3
-    en: 4.c3
+    fr: 16.Txe7+
+    en: 16.Rxe7+
 ---
 
 ## Contexte
