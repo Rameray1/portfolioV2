@@ -2,7 +2,7 @@
 title: 'Meetz, events to join on a map'
 summary: 'A platform to create events and sign up for them, built by a team of 4 in my 1st year at IMT Mines Alès with Angular, Express and Prisma.'
 keyMove: 'Geocode addresses in the browser with Nominatim and cache the result, without changing the data model.'
-coverAlt: 'Meetz home page, with the headline “Rencontre des gens qui partagent tes passions”, an explore events button and a group photo'
+coverAlt: 'Meetz map view, with 8 event markers on a map of France and the category and distance filters on the left'
 ---
 
 ## Context
@@ -16,8 +16,6 @@ An event stores its location as a plain-text address. Showing it on a Leaflet ma
 ## What I did
 
 I wrote an Angular service that queries Nominatim, the OpenStreetMap geocoding API. Each address is requested only once, then kept in memory and in the browser's localStorage. The list then filters events within 5 to 100 km of a city, using the haversine formula.
-
-![Meetz map view, with 8 event markers on a map of France and the category and distance filters on the left](../../../assets/projects/meetz-map.png 'The Meetz map view, with addresses geocoded by Nominatim and the 5 to 100 km filter.')
 
 I also shipped event creation and editing, private events, and the organizer role, which an organizer can hand to 5 friends at most.
 

@@ -16,7 +16,7 @@ eval: '!?'
 links:
   code: https://github.com/Meetz-IMTA/Meetz
 cover: ../../../assets/projects/meetz.png
-coverAlt: 'Accueil de Meetz, avec le titre « Rencontre des gens qui partagent tes passions », un bouton Explorer les événements et une photo de groupe'
+coverAlt: 'Vue carte de Meetz, avec 8 marqueurs d’événements sur une carte de France et les filtres par catégorie et par distance à gauche'
 featured: true
 move:
   from: c3
@@ -37,8 +37,6 @@ Un événement enregistre son lieu comme une adresse en texte. Pour l'afficher s
 ## Ce que j'ai fait
 
 J'ai écrit un service Angular qui interroge Nominatim, l'API de géocodage d'OpenStreetMap. Chaque adresse n'est demandée qu'1 fois, puis gardée en mémoire et dans le localStorage du navigateur. La liste filtre ensuite les événements dans un rayon de 5 à 100 km autour d'une ville, avec la formule de haversine.
-
-![Vue carte de Meetz, avec 8 marqueurs d'événements sur une carte de France et les filtres par catégorie et par distance à gauche](../../../assets/projects/meetz-map.png 'La vue carte de Meetz, avec les adresses géocodées par Nominatim et le filtre de 5 à 100 km.')
 
 J'ai aussi livré la création et la modification d'un événement, les événements privés et le rôle d'organisateur, qu'un organisateur peut donner à 5 amis au plus.
 
