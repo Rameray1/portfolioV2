@@ -15,7 +15,7 @@ tech:
 eval: '!?'
 links:
   code: https://github.com/Meetz-IMTA/Meetz
-cover: ../../../assets/projects/meetz.png
+cover: ../../../assets/projects/meetz-map.png
 coverAlt: 'Vue carte de Meetz, avec 8 marqueurs d’événements sur une carte de France et les filtres par catégorie et par distance à gauche'
 featured: true
 move:
