@@ -1,17 +1,17 @@
 ---
 title: 'Sportify, sports predictions and a points shop'
-summary: 'A sports prediction site written by a team of 4 in PHP without a framework, as an open project during my computer science degree (BUT).'
-keyMove: 'Validate every shop purchase on the server, with 3 checks, before taking the points.'
+summary: 'A sports prediction site written by a team of 4 in PHP without a framework, as a free-topic project during my 3-year computer science degree (BUT).'
+keyMove: 'Validate every shop purchase on the server, with 3 checks, before deducting the points.'
 coverAlt: 'Sportify home page, with a green crest on the left and the sign-up and log-in buttons on the right'
 ---
 
 ## Context
 
-From September 2023 to January 2024, during my computer science degree (BUT), 4 of us built an open project. Sportify is a site for predicting match results, with a sports news feed. The team wrote everything in PHP 8.2, without a framework, on a MySQL database of 9 tables.
+From September 2023 to January 2024, during my computer science degree (BUT), 4 of us built a free-topic project. Sportify is a site for predicting match results, with a sports news feed. The team wrote everything in PHP 8.2, without a framework, on a MySQL database of 9 tables.
 
 ## The problem
 
-A winning prediction earns points, called Sporticoins, based on the stake and the odds. They needed a use, without letting a player buy the same item twice or spend points they do not have.
+A winning prediction earns points, called Sporticoins, based on the stake and the odds. The points needed a use, without letting a player buy the same item twice or spend points they do not have.
 
 ## What I did
 
@@ -27,7 +27,7 @@ PHP 8.2 without a framework was a team choice, so that we would write the router
 
 ## Outcome
 
-The site was handed in in January 2024, with 4 areas (predictions, news, shop and administration). A demo video is linked on this page.
+The site was submitted in January 2024, with 4 areas (predictions, news, shop and administration). A demo video is linked on this page.
 
 > 9 MySQL tables · 390 commits by 4 people · 3 checks per purchase.
 

@@ -1,12 +1,12 @@
 ---
 title: 'One-click shipment preparation for a factory'
 summary: 'A feature of Aquiweb, the production-tracking software built by Astrée Software, shipped during my apprenticeship for a food-industry client, in Java, Spring and Angular.'
-keyMove: 'Wrap the pallet move, the stock movement and its addition to the shipment in 1 single transaction.'
+keyMove: 'Wrap the pallet move, the stock movement and adding the pallet to the shipment in a single transaction.'
 ---
 
 ## Context
 
-Since August 2024 I have been an apprentice developer at Astrée Software. The company builds Aquiweb, a MES (software that tracks a factory's production in real time) used in more than 500 factories. My team has 4 developers and 1 agile coach. We tailor Aquiweb to each client assigned to us, in 2-week sprints tracked in Jira.
+Since August 2024 I have been an apprentice developer at Astrée Software. The company builds Aquiweb, an MES (software that tracks a factory's production in real time) used in more than 500 factories. My team has 4 developers and 1 agile coach. We tailor Aquiweb to each client assigned to us, in 2-week sprints tracked in Jira.
 
 ## The problem
 
@@ -38,4 +38,4 @@ The feature shipped to staging, the test environment where the client validates 
 
 ## What I learned
 
-The transaction was the only technical choice I weighed against another option, chaining the 3 writes separately. For everything else, I kept the first solution that worked. For my next stories, I first look for at least 2 ways to build each one, and I write in the merge request which one I picked and why.
+The transaction was the only technical choice I weighed against another option, chaining the 3 writes separately. For everything else, I kept the first solution that worked. For my next stories, I will first look for at least 2 ways to build each one, and I write in the merge request which one I picked and why.

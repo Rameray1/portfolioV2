@@ -11,7 +11,7 @@ From April to June 2026, in my 1st year of engineering school at IMT Mines Alès
 
 ## The problem
 
-An event stores its location as a plain-text address. Showing it on a Leaflet map and filtering by distance takes a latitude and a longitude.
+An event stores its location as a plain-text address. Showing it on a Leaflet map and filtering by distance requires a latitude and a longitude.
 
 ## What I did
 

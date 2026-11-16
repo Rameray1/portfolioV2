@@ -49,4 +49,4 @@ Ajouter un projet tient maintenant en 1 fichier Markdown, sans toucher à un com
 
 ## Ce que j'en ai appris
 
-Avec Claude, la propreté du code se décide dans la spécification. Une règle écrite 1 fois dans la constitution s'applique aux 12 features. Une spécification relue avant le code m'évite de reprendre une page 2 fois.
+Avec Claude, la propreté du code se décide dans la spécification. Une règle écrite 1 fois dans la constitution s'applique aux 12 features. Une spécification relue avant le code m'évite de réécrire une page après coup.
