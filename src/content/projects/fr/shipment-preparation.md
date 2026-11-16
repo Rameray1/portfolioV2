@@ -8,7 +8,7 @@ tech:
   - Spring
   - Angular
   - TypeScript
-  - SQL
+  - PostgreSQL
   - GitLab
   - Jira
 eval: '!'
