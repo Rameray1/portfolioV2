@@ -11,7 +11,7 @@ d'un commit par jour. Le cadrage (quoi raconter, à qui, quelles URL, quelles do
 | Portfolio complet   | après `F09`                                   |
 | Tâches hors speckit | étape 0, mise en ligne, contenu (`C1` → `C8`) |
 | Rythme              | 1 commit / jour · 6 à 8 semaines              |
-| Mise en ligne       | après F04 (en `noindex` jusqu'à C3)           |
+| Mise en ligne       | après F04 (en `noindex` jusqu'à C5)           |
 | Site                | 100 % statique, aucun serveur                 |
 | Remplace            | `../Portfolio` (Vue 3)                        |
 
@@ -166,7 +166,7 @@ src/components/Seo.astro (props title, description, image, noindex, alternates) 
 
 - [x] Brancher le dépôt sur un hébergeur statique (Netlify, Vercel ou Cloudflare Pages) :
       build `npm run build`, dossier `dist/`. Activer les aperçus par branche.
-- [x] `PUBLIC_NOINDEX=true` en production jusqu'à C3.
+- [x] `PUBLIC_NOINDEX=true` en production jusqu'à C5.
 - [x] Remplacer l'adresse provisoire `site` (`https://ramazankus.example`) de
       `astro.config.mjs` par le vrai domaine (`https://ramazankus.dev`).
 - [x] Servir la 404 anglaise (`dist/en/404/index.html`) avec un statut 404 sous `/en/*` :
@@ -235,9 +235,8 @@ src/content.config.ts : collections projects (src/content/projects/fr/) et proje
       brillant. De préférence une partie célèbre, peu de pièces, la case d'arrivée du `!!` loin
       du bord droit. Les trois coups doivent partir de pièces différentes. À faire avant F11.
       `content: position du diagramme`
-- [ ] **C3 · Étude de cas d'entreprise** — **anonymisée** (CONTENU.md §8). La fiche la
-      plus travaillée. Puis **lever `PUBLIC_NOINDEX`** : le site a enfin de quoi être trouvé.
-      `content: etude de cas de l'alternance`
+- [x] **C3 · Étude de cas d'entreprise** — **anonymisée** (CONTENU.md §8). La fiche la
+      plus travaillée. `content: etude de cas de l'alternance`
 
 ---
 
@@ -309,6 +308,8 @@ CvView.astro réutilisant src/lib/* (projets, dates) et les collections experien
       avec une preuve. `content: parcours et competences`
 - [ ] **C5 · Version anglaise** — accueil, À propos, parcours, compétences, CV, puis les fiches
       projets (réécrites, pas traduites). Une page par séance. `content(i18n): <page> en anglais`
+      Puis **lever `PUBLIC_NOINDEX`** : Google découvre le site complet, sans lien mort dans la
+      navigation.
 
 > ✅ **Ici, le portfolio est complet.** La suite l'enrichit, elle n'est pas nécessaire pour
 > postuler.
