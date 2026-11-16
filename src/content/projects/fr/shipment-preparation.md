@@ -7,6 +7,7 @@ tech:
   - Java
   - Spring
   - Angular
+  - TypeScript
   - SQL
   - GitLab
   - Jira
