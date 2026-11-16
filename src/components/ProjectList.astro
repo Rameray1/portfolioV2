@@ -179,10 +179,11 @@ const symbols = (['!', '!?', '!!'] satisfies Eval[]).filter((symbol) =>
     font-size: var(--text-sm);
   }
 
-  /* Colonnes resserrées sous 56rem : valeurs du prototype validé. */
+  /* Sous 56rem, seuls le symbole et l'écart se resserrent : une notation comme
+     « 16.Txe7+ » a besoin des 4.5rem de la première colonne. */
   @media (max-width: 56rem) {
     a {
-      grid-template-columns: 3.25rem minmax(0, 1fr) 2rem;
+      grid-template-columns: 4.5rem minmax(0, 1fr) 2rem;
       gap: var(--space-3);
     }
   }

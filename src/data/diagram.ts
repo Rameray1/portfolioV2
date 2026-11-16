@@ -11,12 +11,12 @@ export interface PlacedPiece {
   rank: number;
 }
 
-// Position provisoire jusqu'à C2b : champ « placement » d'une FEN, copiable depuis lichess.
+// Champ « placement » d'une FEN : ma partie contre R4GUL07 (chess.com, 2026), avant 16.Txe7+.
 export const diagram = {
-  fen: 'r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R',
+  fen: 'r3k2r/p1qnbpp1/1p1p1n2/1Bp2PB1/8/2N3Pp/PPP2P1P/R2QR1K1',
   alt: {
-    fr: '[provisoire] Diagramme : partie italienne après 1.e4 e5 2.Cf3 Cc6 3.Fc4 Fc5',
-    en: '[draft] Diagram: Italian Game after 1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5',
+    fr: 'Diagramme d’une de mes parties, avant le 16ᵉ coup des blancs, qui sacrifient la tour en e7',
+    en: 'Diagram from one of my games, before White’s 16th move, a rook sacrifice on e7',
   },
 } as const satisfies DiagramPosition;
 
