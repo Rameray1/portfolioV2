@@ -17,7 +17,7 @@ Adding a project meant editing 3 Vue components. The design lived in 8 CSS files
 
 I split the site into 12 base features and gave each one to Claude Code through Spec Kit, in 4 steps. I review each of the 4 steps before starting the next.
 
-![Diagram of the 4 Spec Kit steps with the file each one produces, a review between two steps, the constitution checked at the plan, and the check and build commands after the code](../../../assets/projects/portfolio-workflow.png 'The 4 Spec Kit steps, repeated for each of the 12 features. Every red tick is a review of mine.')
+![Diagram of the 4 Spec Kit steps with the file each one produces, a review between two steps, the constitution checked at the plan, and the check command after the code](../../../assets/projects/portfolio-workflow.png 'The 4 Spec Kit steps, repeated for each of the 12 features. Every red tick is a review of mine.')
 
 > ! A constitution of 9 principles, including "simplicity first" (KISS, YAGNI) and "verifiable quality", is checked against every plan.
 

@@ -33,7 +33,7 @@ Ajouter un projet demandait de modifier 3 composants Vue. Le design tenait dans 
 
 J'ai découpé le site en 12 features de base et confié chacune à Claude Code avec Spec Kit, en 4 étapes. Je relis chacune des 4 étapes avant de lancer la suivante.
 
-![Schéma des 4 étapes de Spec Kit avec le fichier produit par chacune, une relecture entre deux étapes, la constitution vérifiée au plan et les commandes check et build après le code](../../../assets/projects/portfolio-workflow.png 'Les 4 étapes de Spec Kit, répétées pour chacune des 12 features. Chaque coche rouge est une relecture de ma part.')
+![Schéma des 4 étapes de Spec Kit avec le fichier produit par chacune, une relecture entre deux étapes, la constitution vérifiée au plan et la commande check après le code](../../../assets/projects/portfolio-workflow.png 'Les 4 étapes de Spec Kit, répétées pour chacune des 12 features. Chaque coche rouge est une relecture de ma part.')
 
 > ! Une constitution de 9 principes, dont « simplicité d'abord » (KISS, YAGNI) et « qualité vérifiable », est vérifiée à chaque plan.
 
