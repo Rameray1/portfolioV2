@@ -1,10 +1,29 @@
 import { defineCollection } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { file, glob, type Loader } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 const text = z.string().trim().min(1);
 const webUrl = z.url({ protocol: /^https?$/ });
 const square = z.string().regex(/^[a-h][1-8]$/);
+
+const localized = z.strictObject({ fr: text, en: text });
+const month = z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/, 'attendu : AAAA-MM');
+
+// Même forme pour les expériences et les formations : le CV les relit telles quelles.
+const timelineEntry = z
+  .strictObject({
+    start: month,
+    end: month.optional(),
+    title: localized,
+    place: text,
+    detail: localized,
+    tech: z.array(text).default([]),
+    highlights: z.array(localized).default([]),
+  })
+  .refine((entry) => !entry.end || entry.end >= entry.start, {
+    message: '`end` ne peut pas précéder `start`',
+    path: ['end'],
+  });
 
 const pages = defineCollection({
   loader: glob({ pattern: '*/*.md', base: './src/content/pages' }),
@@ -68,4 +87,36 @@ const projectsEn = defineCollection({
   }),
 });
 
-export const collections = { pages, projects, projectsEn };
+// `file()` ne fait que journaliser un fichier absent ou illisible, et garde les
+// entrées du cache : ici, toute erreur du chargeur arrête le build.
+function strictFile(path: string): Loader {
+  const loader = file(path);
+  return {
+    ...loader,
+    load: (context) => {
+      const logger = Object.create(context.logger);
+      logger.error = (message: string) => {
+        throw new Error(message);
+      };
+      return loader.load({ ...context, logger });
+    },
+  };
+}
+
+const experience = defineCollection({
+  loader: strictFile('src/data/experience.yaml'),
+  schema: timelineEntry,
+});
+
+const education = defineCollection({
+  loader: strictFile('src/data/education.yaml'),
+  schema: timelineEntry,
+});
+
+export const collections = {
+  pages,
+  projects,
+  projectsEn,
+  experience,
+  education,
+};

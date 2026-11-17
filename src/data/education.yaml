@@ -1,0 +1,21 @@
+# Repris du CV (RamazanKus_CV_FR.tex et RamazanKus_CV.tex) ; mois confirmés par le mainteneur.
+imt-mines-ales:
+  start: 2025-09
+  title:
+    fr: Diplôme d’ingénieur en informatique, par apprentissage
+    en: Master’s-level engineering degree in Computer Science
+  place: IMT Mines Alès, Alès
+  detail:
+    fr: J’alterne les périodes à l’école et les périodes en entreprise chez Astrée Software.
+    en: IMT Mines Alès is a French engineering Grande École. I follow its work-study track, alternating periods at school with periods at Astrée Software.
+
+but-informatique:
+  start: 2022-09
+  end: 2025-08
+  title:
+    fr: BUT Informatique
+    en: Bachelor’s degree (BUT) in Computer Science
+  place: IUT Lyon 1, Lyon
+  detail:
+    fr: J’ai suivi le parcours Réalisation d’applications (conception, développement, validation), avec la 3ᵉ année en alternance.
+    en: I specialized in application design and development, and completed the third year as an apprentice.
