@@ -259,7 +259,7 @@ src/content.config.ts : collections projects (src/content/projects/fr/) et proje
 **Plan**
 
 ```
-Collections experience et education dans content.config.ts, loader file() sur src/data/experience.yaml et education.yaml ; champs de prose { fr, en }. Timeline.astro générique (ne connaît pas le type d'entrée). BackgroundView.astro : deux getCollection, fusion, tri par start décroissant. Dates formatées par Intl.DateTimeFormat selon la locale (src/lib/dates.ts).
+Collections experience et education dans content.config.ts, loader file() sur src/data/experience.yaml et education.yaml (tables indexées par identifiant, même schéma) ; champs de prose { fr, en }. src/lib/background.ts : deux getCollection, fusion, tri par start décroissant ; le CV le réutilise. BackgroundView.astro porte la frise (pas de Timeline.astro : un seul appelant). Dates formatées par Intl.DateTimeFormat selon la locale (src/lib/dates.ts).
 ```
 
 ### F08 · Compétences _(~2 séances)_
@@ -414,6 +414,8 @@ lychee (action GitHub) sur dist/ dans ci.yml, exclusions documentées. Bloc redi
 speckit.
 
 - Bouton de thème clair / sombre (aujourd'hui : thème du système)
+- Lien d'une étape du parcours vers le projet qui la prouve (champ facultatif `project` dans
+  `experience.yaml` et `education.yaml`), quand la page aura la place de l'accueillir
 - Pages `/tech/<tech>` et filtre de projets par technologie (utile au-delà de ~15 projets)
 - Tags, pagination, sommaire et articles liés pour le blog (utile au-delà de ~10 articles)
 - Recherche plein texte (Pagefind)

@@ -90,6 +90,12 @@ la CI est verte :
   langue = `href: { fr, en }` ; le CV passe alors en première action (bouton plein), l'email en
   seconde. Les projets mis en avant restent le drapeau `featured` de chaque projet (F06). La
   position du diagramme est une FEN dans `src/data/diagram.ts`.
+- **Parcours** : ajouter une étape = une entrée dans `src/data/experience.yaml` ou
+  `src/data/education.yaml` (champs de `CONTENU.md` §6). Dates au format `AAAA-MM`, sans `end`
+  tant que l'étape est en cours. Prose en `fr` et en `en`, sans date dans les textes. Chaque
+  fichier garde au moins une entrée.
+  `detail` dit la mission principale en une phrase, `highlights` le reste du rôle, sans
+  reprendre un projet déjà publié dans `/projects`.
 - **Projet** : ajouter un projet = une fiche `src/content/projects/fr/<slug>.md` (champs de
   `CONTENU.md` §6) et, s'il a un visuel, une image dans `src/assets/projects/`. La version
   anglaise `src/content/projects/en/<slug>.md` ne porte que la prose et peut venir plus tard :
