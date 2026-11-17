@@ -1,0 +1,385 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getBackground } from '../lib/background';
+import { formatMonth } from '../lib/dates';
+import { getLocale, useTranslations } from '../i18n/utils';
+import pawn from '../assets/pieces/bP.svg?url';
+import knight from '../assets/pieces/bN.svg?url';
+import pawnDark from '../assets/pieces/wP.svg?url';
+import knightDark from '../assets/pieces/wN.svg?url';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const entries = await getBackground(locale);
+// Le pion va à promotion (la formation), le cavalier est déjà en jeu (l'expérience).
+// Comme une figurine de notation, la pièce s'imprime à l'encre : la pièce noire du jeu
+// d'origine sur papier clair, la blanche en thème sombre.
+const pieces = {
+  education: { light: pawn, dark: pawnDark },
+  experience: { light: knight, dark: knightDark },
+};
+---
+
+<BaseLayout
+  title={t('background.title')}
+  description={t('background.description')}
+>
+  <h1>{t('background.title')}</h1>
+  <div class="head" aria-hidden="true">
+    <span>{t('background.col.period')}</span>
+    <span>{t('background.col.title')}</span>
+    <span>{t('background.col.place')}</span>
+  </div>
+  <ol>
+    {entries.map((entry) => (
+      <li>
+        <div class="when">
+          <p class="year" aria-hidden="true">
+            {entry.start.slice(0, 4)}
+          </p>
+          <p class="period">
+            {entry.start === entry.end ? (
+              <time datetime={entry.start}>
+                {formatMonth(entry.start, locale)}
+              </time>
+            ) : (
+              <>
+                <span>
+                  <time datetime={entry.start}>
+                    {formatMonth(entry.start, locale)}
+                  </time>
+                  {' –'}
+                </span>{' '}
+                <span>
+                  {entry.end ? (
+                    <time datetime={entry.end}>
+                      {formatMonth(entry.end, locale)}
+                    </time>
+                  ) : (
+                    <span class="now">
+                      <span class="trait" aria-hidden="true" />
+                      {t('background.present')}
+                    </span>
+                  )}
+                </span>
+              </>
+            )}
+          </p>
+          <p class="kind">{t(`background.${entry.kind}`)}</p>
+        </div>
+        <span class="node" aria-hidden="true">
+          <picture>
+            <source
+              srcset={pieces[entry.kind].dark}
+              media="(prefers-color-scheme: dark)"
+            />
+            <img
+              src={pieces[entry.kind].light}
+              alt=""
+              width="45"
+              height="45"
+              decoding="async"
+            />
+          </picture>
+        </span>
+        <h2>{entry.title}</h2>
+        <p class="place">{entry.place}</p>
+        <p class="detail">{entry.detail}</p>
+        {entry.tech.length > 0 && (
+          <ul class="tech" aria-label={t('projects.tech')}>
+            {entry.tech.map((name) => (
+              <li>{name}</li>
+            ))}
+          </ul>
+        )}
+        {entry.highlights.length > 0 && (
+          <ul class="highlights" aria-label={t('background.highlights')}>
+            {entry.highlights.map((highlight) => (
+              <li>{highlight}</li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))}
+  </ol>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin: 0 0 var(--space-6);
+    font-size: var(--text-headline);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  ol,
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  ol {
+    border-top: var(--rule-heavy) solid var(--color-rule);
+  }
+
+  /* Colonne des périodes : la largeur de « ■ aujourd’hui », la période tient sur deux
+     lignes. Sur mobile, seuls l'intitulé et le lieu restent à sa droite : la suite reprend toute
+     la largeur, pour qu'une étape tienne dans un écran. */
+  ol > li {
+    display: grid;
+    grid-template-columns: 6rem minmax(0, 1fr);
+    /* La seconde rangée absorbe la hauteur de la colonne des périodes : le lieu reste
+       collé à l'intitulé. */
+    grid-template-rows: auto 1fr;
+    column-gap: var(--space-3);
+    align-items: baseline;
+    padding-block: var(--space-4);
+    border-bottom: var(--rule-thin) solid var(--color-rule-soft);
+    --quiet: var(--color-ink-muted);
+    transition: color var(--duration) var(--ease-out);
+  }
+
+  ol > li > * {
+    grid-column: 1 / -1;
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  ol > li > .when {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    font-size: var(--text-sm);
+  }
+
+  .when p {
+    margin: 0;
+  }
+
+  /* L'année en chiffres d'affichage, comme le symbole d'évaluation de DESIGN.md. */
+  .year {
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: 1;
+  }
+
+  .period {
+    margin-top: var(--space-2);
+    color: var(--quiet);
+  }
+
+  /* Étape en cours : le trait de DESIGN.md, en plus petit dans une ligne de texte. */
+  .period .now {
+    display: inline;
+    font-weight: var(--weight-semibold);
+    color: var(--color-ink);
+    transition: color var(--duration) var(--ease-out);
+  }
+
+  .period .trait {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: var(--space-1);
+    background: var(--color-mark);
+  }
+
+  .period span {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .kind {
+    margin-top: var(--space-1);
+    font-weight: var(--weight-semibold);
+  }
+
+  /* La pièce de l'étape, au bout de la ligne de l'année sur mobile. */
+  ol > li > .node {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: end;
+    align-self: start;
+    --piece: 1.5rem;
+    margin-top: calc((var(--text-2xl) - var(--piece)) / 2);
+  }
+
+  .node img {
+    width: var(--piece);
+    height: var(--piece);
+    transition: transform var(--duration) var(--ease-out);
+  }
+
+  ol > li > h2 {
+    grid-column: 2;
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-snug);
+  }
+
+  /* L'école ou l'employeur : ce que le recruteur cherche en premier. */
+  ol > li > .place {
+    grid-column: 2;
+    align-self: start;
+    margin-top: var(--space-1);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+  }
+
+  ol > li > .detail {
+    max-width: var(--measure);
+    margin-top: var(--space-3);
+  }
+
+  /* Puces de stack de DESIGN.md. */
+  ol > li > .tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+  }
+
+  .tech li {
+    padding: var(--space-1) var(--space-3);
+    border: var(--rule-thin) solid currentColor;
+    line-height: var(--leading-snug);
+  }
+
+  ol > li > .highlights {
+    max-width: var(--measure);
+    margin-top: var(--space-3);
+    padding-left: var(--space-4);
+    font-size: var(--text-sm);
+    text-wrap: pretty;
+    list-style-type: '–  ';
+  }
+
+  .highlights li + li {
+    margin-top: var(--space-1);
+  }
+
+  .head {
+    display: none;
+  }
+
+  /* Au survol, l'étape lue reste à l'encre et les autres passent en encre atténuée.
+     Pas au toucher : l'état resterait collé après un appui. */
+  @media (hover: hover) {
+    ol:hover > li:not(:hover) {
+      color: var(--color-ink-muted);
+    }
+
+    ol:hover > li:not(:hover) .now {
+      color: inherit;
+    }
+
+    ol > li:hover {
+      --quiet: var(--color-ink);
+    }
+  }
+
+  /* La pièce de l'étape lue avance d'un pas, comme un coup sur le diagramme. */
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    ol > li:hover > .node img {
+      transform: translateY(calc(-1 * var(--space-1)));
+    }
+  }
+
+  /* Grille de tournoi : la période tient sur une ligne (« sept. 2024 – aujourd’hui »),
+     et un fil relie les étapes entre les années et les intitulés. */
+  @media (min-width: 56rem) {
+    .head,
+    ol > li {
+      grid-template-columns: 12.5rem 1.75rem minmax(0, 1fr) minmax(
+          10rem,
+          16rem
+        );
+      column-gap: var(--space-5);
+    }
+
+    .head {
+      display: grid;
+      padding-bottom: var(--space-2);
+      border-bottom: var(--rule-heavy) solid var(--color-rule);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-bold);
+    }
+
+    .head span:nth-child(2) {
+      grid-column: 3;
+    }
+
+    ol {
+      border-top: 0;
+    }
+
+    ol > li {
+      grid-template-rows: none;
+      padding-block: var(--space-5);
+    }
+
+    ol > li > *,
+    ol > li > h2 {
+      grid-column: 3;
+    }
+
+    ol > li > .when {
+      grid-row: 1 / span 6;
+    }
+
+    .period span {
+      display: inline;
+    }
+
+    ol > li > .node {
+      grid-column: 2;
+      grid-row: 1 / span 6;
+      justify-self: auto;
+      align-self: stretch;
+      position: relative;
+      --piece: 1.75rem;
+      margin-top: 0;
+    }
+
+    /* Le fil traverse la marge interne de la ligne pour rejoindre la pièce suivante. */
+    ol > li > .node::before {
+      content: '';
+      position: absolute;
+      top: calc(-1 * var(--space-5));
+      bottom: calc(-1 * var(--space-5) - var(--rule-thin));
+      left: calc(50% - var(--rule-thin) / 2);
+      border-left: var(--rule-thin) solid var(--color-rule);
+    }
+
+    ol > li:first-child > .node::before {
+      top: calc(var(--text-2xl) / 2);
+    }
+
+    ol > li:last-child > .node::before {
+      bottom: auto;
+      height: calc(var(--space-5) + var(--text-2xl) / 2);
+    }
+
+    /* La pièce interrompt le fil, à la hauteur de l'année. */
+    .node img {
+      position: relative;
+      margin-top: calc((var(--text-2xl) - var(--piece)) / 2 - var(--space-1));
+      padding-block: var(--space-1);
+      box-sizing: content-box;
+      background: var(--color-paper);
+    }
+
+    ol > li > .place {
+      grid-column: 4;
+      /* Un lieu sur deux lignes ne doit pas écarter l'intitulé de sa description. */
+      grid-row: 1 / span 6;
+      align-self: baseline;
+      margin-top: 0;
+      font-size: var(--text-base);
+    }
+  }
+</style>
