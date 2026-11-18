@@ -91,6 +91,13 @@ export const fr = {
 
 export type UiKey = keyof typeof fr;
 
+// Sens des symboles d'évaluation : `eval` d'un projet et notes du récit.
+export const evalKeys = {
+  '!': 'eval.good',
+  '!?': 'eval.bet',
+  '!!': 'eval.brilliant',
+} as const satisfies Record<string, UiKey>;
+
 export const en: Record<UiKey, string> = {
   skipLink: 'Skip to content',
   'nav.label': 'Main navigation',
