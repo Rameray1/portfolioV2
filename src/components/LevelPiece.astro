@@ -1,0 +1,34 @@
+---
+import { pieces, type PieceName } from '../lib/pieces';
+import type { Level } from '../lib/skill-scale';
+
+interface Props {
+  level: Level;
+}
+
+const byLevel: Record<Level, PieceName> = {
+  basics: 'pawn',
+  proficient: 'knight',
+  advanced: 'queen',
+};
+const piece = pieces[byLevel[Astro.props.level]];
+---
+
+<picture aria-hidden="true">
+  <source srcset={piece.dark} media="(prefers-color-scheme: dark)" />
+  <img src={piece.light} alt="" width="45" height="45" decoding="async" />
+</picture>
+
+<style>
+  /* 1.5rem, comme la pièce de la frise mobile ; centrée sur la hauteur d'x du mot qui suit. */
+  img {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: var(--space-2);
+    vertical-align: -0.45em;
+    /* Le parent fait avancer la pièce en posant --piece-step (survol d'une ligne). */
+    transform: translateY(var(--piece-step, 0));
+    transition: transform var(--duration) var(--ease-out);
+  }
+</style>

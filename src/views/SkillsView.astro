@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LevelPiece from '../components/LevelPiece.astro';
+import { getSkills } from '../lib/skills';
+import { LEVELS } from '../lib/skill-scale';
+import { getLocale, useTranslations } from '../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const domains = await getSkills(locale);
+const legend = [...LEVELS].reverse();
+---
+
+<BaseLayout title={t('skills.title')} description={t('skills.description')}>
+  <h1>{t('skills.title')}</h1>
+  <p class="intro">{t('skills.intro')}</p>
+
+  <section class="legend" aria-labelledby="levels">
+    <h2 id="levels">{t('skills.legend')}</h2>
+    <dl>
+      {legend.map((level) => (
+        <div>
+          <dt>
+            <LevelPiece level={level} />
+            {t(`skills.level.${level}`)}
+          </dt>
+          <dd>{t(`skills.level.${level}.definition`)}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  {domains.map(({ domain, skills }) => (
+    <section class="domain" aria-labelledby={`domain-${domain}`}>
+      <h2 id={`domain-${domain}`}>{t(`skills.domain.${domain}`)}</h2>
+      <ul>
+        {skills.map((skill) => (
+          <li>
+            <h3>{skill.name}</h3>
+            <p class="level">
+              <LevelPiece level={skill.level} />
+              {t(`skills.level.${skill.level}`)}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</BaseLayout>
+
+<style>
+  h1 {
+    margin: 0 0 var(--space-4);
+    font-size: var(--text-headline);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    text-wrap: balance;
+  }
+
+  p,
+  h2,
+  h3,
+  dl,
+  dd {
+    margin: 0;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .intro {
+    max-width: var(--measure);
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+    text-wrap: pretty;
+  }
+
+  .legend {
+    margin-top: var(--space-6);
+    padding-block: var(--space-3) var(--space-4);
+    border-block: var(--rule-thin) solid var(--color-rule-soft);
+  }
+
+  .legend h2 {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+  }
+
+  .legend dl {
+    display: grid;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+    font-size: var(--text-sm);
+  }
+
+  .legend dt {
+    display: inline;
+    font-weight: var(--weight-semibold);
+  }
+
+  .legend dd {
+    display: inline;
+    color: var(--color-ink-muted);
+  }
+
+  .legend dt::after {
+    /* Séparateur visuel, muet pour les lecteurs d'écran. */
+    content: '\00a0· ' / '';
+    font-weight: var(--weight-regular);
+    color: var(--color-ink-muted);
+  }
+
+  .domain {
+    margin-top: var(--space-8);
+  }
+
+  .domain h2 {
+    padding-bottom: var(--space-3);
+    border-bottom: var(--rule-heavy) solid var(--color-rule);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: 1.1;
+  }
+
+  .domain > ul > li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: var(--space-4);
+    row-gap: var(--space-1);
+    align-items: baseline;
+    padding-block: var(--space-4);
+    border-bottom: var(--rule-thin) solid var(--color-rule-soft);
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-snug);
+    overflow-wrap: anywhere;
+  }
+
+  .level {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    white-space: nowrap;
+  }
+</style>
