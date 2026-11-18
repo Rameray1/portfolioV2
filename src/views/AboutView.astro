@@ -1,18 +1,16 @@
 ---
 import { Picture } from 'astro:assets';
-import { getEntry, render } from 'astro:content';
+import { render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import portrait from '../assets/about/portrait.jpg';
 import { campaign, formatStart } from '../data/campaign';
+import { getAboutPage } from '../lib/pages';
 import { getLocale, useTranslations } from '../i18n/utils';
 
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 
-const entry = await getEntry('pages', `${locale}/about`);
-if (!entry) {
-  throw new Error(`src/content/pages/${locale}/about.md manquant`);
-}
+const entry = await getAboutPage(locale);
 const { Content } = await render(entry);
 const { visible, status, start, place } = campaign.availability;
 ---
