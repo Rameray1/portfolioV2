@@ -6,15 +6,28 @@ constitution fixe ce qui est non négociable et que chaque `/speckit-plan` doit 
 
 ## Core Principles
 
-### I. Simplicité d'abord (KISS, YAGNI)
+### I. Simplicité d'abord (KISS, YAGNI, SOLID)
 
 - Une feature, une dépendance ou une abstraction n'est ajoutée que pour un besoin présent,
   jamais « au cas où ». Une idée future va dans la réserve de `ROADMAP.md`.
 - On préfère, dans l'ordre : HTML/CSS natif, puis ce qu'Astro fournit, puis une dépendance.
 - Toute nouvelle dépendance npm MUST être justifiée dans le plan (besoin, poids, alternative
   native écartée et pourquoi).
+- Le code MUST appliquer SOLID là où il a un sens pour un site statique :
+  - **S** : un module, un composant ou une fonction a une seule responsabilité. Une vue
+    affiche, un module de `src/lib/` fournit la donnée, la validation est séparée de la mise
+    en forme.
+  - **O** : ajouter une valeur à une liste fermée ou une entrée à une collection ne demande
+    pas de modifier ceux qui la lisent.
+  - **L** et **I** : une interface ou les props d'un composant n'exposent que ce que
+    l'appelant utilise.
+  - **D** : une vue dépend des fonctions d'accès de `src/lib/` (`getProjects`, `getSkills`…),
+    jamais directement d'une collection ou d'un fichier de données.
+- SOLID ne justifie jamais une abstraction que KISS et YAGNI refusent : on extrait à la
+  deuxième utilisation réelle, pas avant.
 
-*Raison* : un site tenu seul pendant des années doit rester petit et compréhensible.
+*Raison* : un site tenu seul pendant des années doit rester petit et compréhensible, et
+chaque partie doit pouvoir changer sans toucher aux autres.
 
 ### II. Site statique, zéro JavaScript client par défaut
 
@@ -133,4 +146,4 @@ commun pèse sur toutes les pages.
 - Conformité : `/speckit-plan` et `/speckit-analyze` vérifient chaque feature contre ces
   principes ; une exception non justifiée bloque la feature.
 
-**Version**: 1.1.0 | **Ratified**: 2026-11-07 | **Last Amended**: 2026-11-11
+**Version**: 1.2.0 | **Ratified**: 2026-11-07 | **Last Amended**: 2026-11-18
