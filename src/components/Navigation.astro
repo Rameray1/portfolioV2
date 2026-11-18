@@ -1,12 +1,10 @@
 ---
 import { nav } from '../data/nav';
-import { getLocale, localizePath, useTranslations } from '../i18n/utils';
+import { getLocale, localizePath, strip, useTranslations } from '../i18n/utils';
 
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 
-const strip = (path: string) =>
-  path.length > 1 ? path.replace(/\/+$/, '') : path;
 const current = strip(Astro.url.pathname);
 
 const items = nav.map((item) => {

@@ -1,9 +1,14 @@
 ---
 // Le nom accessible commence par le texte visible (WCAG 2.5.3).
-import { getLocale, switchPath, useTranslations } from '../i18n/utils';
+import {
+  getLocale,
+  otherLocale,
+  switchPath,
+  useTranslations,
+} from '../i18n/utils';
 
 const locale = getLocale(Astro.currentLocale);
-const other = locale === 'fr' ? 'en' : 'fr';
+const other = otherLocale(locale);
 const t = useTranslations(locale);
 ---
 
