@@ -9,7 +9,6 @@ const square = z.string().regex(/^[a-h][1-8]$/);
 const localized = z.strictObject({ fr: text, en: text });
 const month = z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/, 'attendu : AAAA-MM');
 
-// Même forme pour les expériences et les formations : le CV les relit telles quelles.
 const timelineEntry = z
   .strictObject({
     start: month,
@@ -87,8 +86,7 @@ const projectsEn = defineCollection({
   }),
 });
 
-// `file()` ne fait que journaliser un fichier absent ou illisible, et garde les
-// entrées du cache : ici, toute erreur du chargeur arrête le build.
+// `file()` ne fait que journaliser un fichier absent ou illisible (et garde le cache).
 function strictFile(path: string): Loader {
   const loader = file(path);
   return {

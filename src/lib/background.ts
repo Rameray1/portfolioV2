@@ -17,11 +17,8 @@ export interface BackgroundEntry {
 
 async function load(kind: Kind): Promise<CollectionEntry<Kind>[]> {
   const entries = await getCollection(kind);
-  // Astro laisse la collection vide si le fichier est absent ou illisible.
   if (entries.length === 0) {
-    throw new Error(
-      `src/data/${kind}.yaml : aucune entrée (fichier vide, absent ou illisible)`,
-    );
+    throw new Error(`src/data/${kind}.yaml : aucune entrée`);
   }
   return entries;
 }
@@ -41,7 +38,7 @@ export async function getBackground(
     .sort(
       (a, b) =>
         b.entry.data.start.localeCompare(a.entry.data.start) ||
-        // Sans date de fin, l'entrée est en cours : elle passe avant les terminées.
+        // Sans `end`, l'étape est en cours : elle passe avant les terminées.
         (b.entry.data.end ?? '9999').localeCompare(
           a.entry.data.end ?? '9999',
         ) ||

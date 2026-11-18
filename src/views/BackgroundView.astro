@@ -11,9 +11,7 @@ import knightDark from '../assets/pieces/wN.svg?url';
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 const entries = await getBackground(locale);
-// Le pion va à promotion (la formation), le cavalier est déjà en jeu (l'expérience).
-// Comme une figurine de notation, la pièce s'imprime à l'encre : la pièce noire du jeu
-// d'origine sur papier clair, la blanche en thème sombre.
+// Pièces imprimées à l'encre, comme des figurines de notation (DESIGN.md).
 const pieces = {
   education: { light: pawn, dark: pawnDark },
   experience: { light: knight, dark: knightDark },
@@ -125,14 +123,12 @@ const pieces = {
     border-top: var(--rule-heavy) solid var(--color-rule);
   }
 
-  /* Colonne des périodes : la largeur de « ■ aujourd’hui », la période tient sur deux
-     lignes. Sur mobile, seuls l'intitulé et le lieu restent à sa droite : la suite reprend toute
-     la largeur, pour qu'une étape tienne dans un écran. */
+  /* 6rem : la largeur de « ■ aujourd’hui ». Sous l'intitulé, le texte reprend toute la
+     largeur, pour qu'une étape tienne dans un écran. */
   ol > li {
     display: grid;
     grid-template-columns: 6rem minmax(0, 1fr);
-    /* La seconde rangée absorbe la hauteur de la colonne des périodes : le lieu reste
-       collé à l'intitulé. */
+    /* La seconde rangée absorbe la hauteur des périodes : le lieu reste sous l'intitulé. */
     grid-template-rows: auto 1fr;
     column-gap: var(--space-3);
     align-items: baseline;
@@ -158,7 +154,6 @@ const pieces = {
     margin: 0;
   }
 
-  /* L'année en chiffres d'affichage, comme le symbole d'évaluation de DESIGN.md. */
   .year {
     font-size: var(--text-2xl);
     font-weight: var(--weight-black);
@@ -171,7 +166,7 @@ const pieces = {
     color: var(--quiet);
   }
 
-  /* Étape en cours : le trait de DESIGN.md, en plus petit dans une ligne de texte. */
+  /* Le trait de DESIGN.md, réduit pour une ligne de petit texte. */
   .period .now {
     display: inline;
     font-weight: var(--weight-semibold);
@@ -197,7 +192,7 @@ const pieces = {
     font-weight: var(--weight-semibold);
   }
 
-  /* La pièce de l'étape, au bout de la ligne de l'année sur mobile. */
+  /* Pièce de 1.5rem sur mobile, 1.75rem sur le fil (DESIGN.md). */
   ol > li > .node {
     grid-column: 1;
     grid-row: 1;
@@ -220,7 +215,6 @@ const pieces = {
     line-height: var(--leading-snug);
   }
 
-  /* L'école ou l'employeur : ce que le recruteur cherche en premier. */
   ol > li > .place {
     grid-column: 2;
     align-self: start;
@@ -234,7 +228,6 @@ const pieces = {
     margin-top: var(--space-3);
   }
 
-  /* Puces de stack de DESIGN.md. */
   ol > li > .tech {
     display: flex;
     flex-wrap: wrap;
@@ -266,8 +259,7 @@ const pieces = {
     display: none;
   }
 
-  /* Au survol, l'étape lue reste à l'encre et les autres passent en encre atténuée.
-     Pas au toucher : l'état resterait collé après un appui. */
+  /* Pas au toucher : l'état resterait collé après un appui. */
   @media (hover: hover) {
     ol:hover > li:not(:hover) {
       color: var(--color-ink-muted);
@@ -282,15 +274,13 @@ const pieces = {
     }
   }
 
-  /* La pièce de l'étape lue avance d'un pas, comme un coup sur le diagramme. */
   @media (hover: hover) and (prefers-reduced-motion: no-preference) {
     ol > li:hover > .node img {
       transform: translateY(calc(-1 * var(--space-1)));
     }
   }
 
-  /* Grille de tournoi : la période tient sur une ligne (« sept. 2024 – aujourd’hui »),
-     et un fil relie les étapes entre les années et les intitulés. */
+  /* 12.5rem : « sept. 2024 – ■ aujourd’hui » sur une ligne. */
   @media (min-width: 56rem) {
     .head,
     ol > li {
@@ -345,7 +335,7 @@ const pieces = {
       margin-top: 0;
     }
 
-    /* Le fil traverse la marge interne de la ligne pour rejoindre la pièce suivante. */
+    /* Le fil traverse la marge interne pour rejoindre la pièce suivante. */
     ol > li > .node::before {
       content: '';
       position: absolute;
@@ -364,7 +354,7 @@ const pieces = {
       height: calc(var(--space-5) + var(--text-2xl) / 2);
     }
 
-    /* La pièce interrompt le fil, à la hauteur de l'année. */
+    /* Le fond papier coupe le fil derrière la pièce. */
     .node img {
       position: relative;
       margin-top: calc((var(--text-2xl) - var(--piece)) / 2 - var(--space-1));
