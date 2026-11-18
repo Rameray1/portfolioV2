@@ -179,6 +179,15 @@ h3 {
   text-wrap: balance;
 }
 
+/* Headline de DESIGN.md : chaque vue pose ses marges, l'accueil sa taille display. */
+h1 {
+  font-size: var(--text-headline);
+  font-weight: var(--weight-black);
+  font-stretch: var(--stretch-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
 p {
   text-wrap: pretty;
 }
