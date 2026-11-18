@@ -98,7 +98,7 @@ fois ; seule la prose existe par langue.
 | `projects` (EN) | `src/content/projects/en/<slug>.md` (même slug) | `title, summary, keyMove, coverAlt` + récit — le reste vient de la version FR                                                                  |
 | `experience`    | `src/data/experience.yaml`                      | `start, end?, title, place, detail` + `tech[], highlights[]` (prose `{ fr, en }`)                                                              |
 | `education`     | `src/data/education.yaml`                       | `start, end?, title, place, detail` (même forme que `experience`)                                                                              |
-| `skills`        | `src/data/skills.yaml`                          | `name, domain, level, since, projects[]` (au moins une référence vers `projects`)                                                              |
+| `skills`        | `src/data/skills.yaml`                          | `name, domain, level, projects[]` (au moins une référence vers `projects`)                                                                     |
 | `blog`          | `src/content/blog/<slug>.md`                    | `title, description, date, draft` + article                                                                                                    |
 | campagne        | `src/data/campaign.ts`                          | les 5 leviers (§7), bilingues                                                                                                                  |
 | navigation      | `src/data/nav.ts`                               | rubriques de la nav                                                                                                                            |

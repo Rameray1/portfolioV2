@@ -3,18 +3,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { getBackground } from '../lib/background';
 import { formatMonth } from '../lib/dates';
 import { getLocale, useTranslations } from '../i18n/utils';
-import pawn from '../assets/pieces/bP.svg?url';
-import knight from '../assets/pieces/bN.svg?url';
-import pawnDark from '../assets/pieces/wP.svg?url';
-import knightDark from '../assets/pieces/wN.svg?url';
+import { pieces as figurines } from '../lib/pieces';
 
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 const entries = await getBackground(locale);
-// Pièces imprimées à l'encre, comme des figurines de notation (DESIGN.md).
 const pieces = {
-  education: { light: pawn, dark: pawnDark },
-  experience: { light: knight, dark: knightDark },
+  education: figurines.pawn,
+  experience: figurines.knight,
 };
 ---
 

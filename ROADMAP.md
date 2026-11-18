@@ -279,7 +279,7 @@ Collections experience et education dans content.config.ts, loader file() sur sr
 **Plan**
 
 ```
-Collection skills, loader file() sur src/data/skills.yaml, champ projects: z.array(reference('projects')).min(1). SkillGroup.astro. Regroupement par domaine dans le frontmatter de la vue (build-time, aucun JS client).
+Collection skills, loader strictFile() sur src/data/skills.yaml, champ projects: z.array(reference('projects')).min(1). reference() ne vérifie pas l'existence : getSkills (src/lib/skills.ts) fait échouer le build sur un projet absent, en brouillon ou cité deux fois, et regroupe par domaine pour la page et le CV. Domaines et niveaux dans src/lib/skill-scale.ts. SkillsView.astro, sans SkillGroup.astro (un seul appelant).
 ```
 
 ### F09 · CV en ligne et impression _(~2 séances)_
@@ -299,7 +299,7 @@ Collection skills, loader file() sur src/data/skills.yaml, champ projects: z.arr
 **Plan**
 
 ```
-CvView.astro réutilisant src/lib/* (projets, dates) et les collections experience, education, skills. Bloc @media print dans son <style> (@page A4, masquage Header/Footer, a[href]::after). PDF exporté à la main depuis le navigateur (Imprimer → PDF) dans public/cv-fr.pdf et public/cv-en.pdf, à refaire quand les données changent. Pas de script de génération.
+CvView.astro réutilisant src/lib/* (projets, dates) et les collections experience, education, skills (compétences via getSkills(locale)). Bloc @media print dans son <style> (@page A4, masquage Header/Footer, a[href]::after). PDF exporté à la main depuis le navigateur (Imprimer → PDF) dans public/cv-fr.pdf et public/cv-en.pdf, à refaire quand les données changent. Pas de script de génération.
 ```
 
 ### ✍️ C4 – C5 · Contenu _(hors speckit)_

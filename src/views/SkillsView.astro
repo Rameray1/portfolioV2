@@ -1,0 +1,263 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LevelPiece from '../components/LevelPiece.astro';
+import { getSkills } from '../lib/skills';
+import { LEVELS } from '../lib/skill-scale';
+import { getLocale, localizePath, useTranslations } from '../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const domains = await getSkills(locale);
+const legend = [...LEVELS].reverse();
+---
+
+<BaseLayout title={t('skills.title')} description={t('skills.description')}>
+  <h1>{t('skills.title')}</h1>
+  <p class="intro">{t('skills.intro')}</p>
+
+  <section class="legend" aria-labelledby="levels">
+    <h2 id="levels">{t('skills.legend')}</h2>
+    <dl>
+      {legend.map((level) => (
+        <div>
+          <dt>
+            <LevelPiece level={level} />
+            {t(`skills.level.${level}`)}
+          </dt>
+          <dd>{t(`skills.level.${level}.definition`)}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <div class="domains">
+    {domains.map(({ domain, skills }) => (
+      <section class="domain" aria-labelledby={`domain-${domain}`}>
+        <div class="head">
+          <h2 id={`domain-${domain}`}>{t(`skills.domain.${domain}`)}</h2>
+          <span aria-hidden="true">{t('skills.col.level')}</span>
+          <span aria-hidden="true">{t('skills.proofs')}</span>
+        </div>
+        <ul>
+          {skills.map((skill) => (
+            <li>
+              <h3>{skill.name}</h3>
+              <p class="level">
+                <LevelPiece level={skill.level} />
+                {t(`skills.level.${skill.level}`)}
+              </p>
+              <div class="proofs">
+                <p id={`proofs-${skill.id}`}>{t('skills.proofs')}</p>
+                <ul aria-labelledby={`proofs-${skill.id}`}>
+                  {skill.proofs.map((proof) => (
+                    <li>
+                      <a
+                        href={localizePath(`/projects/${proof.slug}/`, locale)}
+                      >
+                        {proof.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin: 0 0 var(--space-4);
+    font-size: var(--text-headline);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    text-wrap: balance;
+  }
+
+  p,
+  h2,
+  h3,
+  dl,
+  dd {
+    margin: 0;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .intro {
+    max-width: var(--measure);
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+    text-wrap: pretty;
+  }
+
+  .legend {
+    margin-top: var(--space-6);
+    padding-block: var(--space-3) var(--space-4);
+    border-block: var(--rule-thin) solid var(--color-rule-soft);
+  }
+
+  .legend h2 {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+  }
+
+  .legend dl {
+    display: grid;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+    font-size: var(--text-sm);
+  }
+
+  .legend dt {
+    display: inline;
+    font-weight: var(--weight-semibold);
+  }
+
+  .legend dd {
+    display: inline;
+    color: var(--color-ink-muted);
+  }
+
+  .legend dt::after {
+    /* Séparateur visuel, muet pour les lecteurs d'écran. */
+    content: '\00a0· ' / '';
+    font-weight: var(--weight-regular);
+    color: var(--color-ink-muted);
+  }
+
+  .domain {
+    margin-top: var(--space-8);
+  }
+
+  /* Sur mobile, le titre reste en haut de l'écran le long de son domaine : la page
+     ne se lit plus comme une seule liste. */
+  .head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding-block: var(--space-3);
+    border-bottom: var(--rule-heavy) solid var(--color-rule);
+    background: var(--color-paper);
+  }
+
+  .head h2 {
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: 1.1;
+  }
+
+  .head span {
+    display: none;
+  }
+
+  .domain > ul > li {
+    display: grid;
+    transition: color var(--duration) var(--ease-out);
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: var(--space-4);
+    row-gap: var(--space-1);
+    align-items: baseline;
+    padding-block: var(--space-4);
+    border-bottom: var(--rule-thin) solid var(--color-rule-soft);
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-snug);
+    overflow-wrap: anywhere;
+  }
+
+  .level {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    white-space: nowrap;
+  }
+
+  .proofs {
+    grid-column: 1 / -1;
+    margin-top: var(--space-2);
+    font-size: var(--text-sm);
+  }
+
+  .proofs p {
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+  }
+
+  /* 24 px de haut au moins par lien : cible tactile de WCAG 2.2 (2.5.8). */
+  .proofs li {
+    display: flex;
+    align-items: center;
+    min-height: var(--space-5);
+    text-wrap: pretty;
+  }
+
+  /* Comme sur le parcours : la ligne survolée reste à l’encre, sa pièce avance d’un pas,
+     les autres passent en encre atténuée. Pas d’inversion, la ligne n’est pas un lien ;
+     pas au toucher, l’état resterait collé après un appui. */
+  @media (hover: hover) {
+    .domains:has(li:hover) .domain > ul > li:not(:hover) {
+      color: var(--color-ink-muted);
+    }
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .domain > ul > li:hover {
+      --piece-step: calc(-1 * var(--space-1));
+    }
+  }
+
+  /* Un tableau par domaine, sur toute la largeur : le titre du domaine en tient la ligne
+     d'en-têtes, et les colonnes se partagent la place au lieu de la laisser à droite. */
+  @media (min-width: 56rem) {
+    .legend dl {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: var(--space-6);
+    }
+
+    .head,
+    .domain > ul > li {
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr) minmax(0, 4fr);
+      column-gap: var(--space-5);
+    }
+
+    .head {
+      display: grid;
+      align-items: baseline;
+      position: static;
+      padding-top: 0;
+    }
+
+    .head span {
+      display: block;
+      font-size: var(--text-sm);
+      font-weight: var(--weight-bold);
+    }
+
+    .proofs {
+      grid-column: auto;
+      margin-top: 0;
+    }
+
+    .proofs p {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+  }
+</style>
