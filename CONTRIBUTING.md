@@ -96,6 +96,12 @@ la CI est verte :
   fichier garde au moins une entrée.
   `detail` dit la mission principale en une phrase, `highlights` le reste du rôle, sans
   reprendre un projet déjà publié dans `/projects`.
+- **Compétence** : ajouter une compétence = une entrée dans `src/data/skills.yaml`, dont la
+  clé est un identifiant en anglais (`typescript`). `name` est une chaîne pour un nom propre,
+  `{ fr, en }` pour un nom commun. `domain` vaut `frontend`, `backend`, `data` ou `tools`,
+  `level` vaut `basics`, `proficient` ou `advanced`. `projects` cite au moins un projet publié
+  par son slug. Le build échoue sur un champ manquant ou inconnu, un projet absent, en brouillon ou cité deux fois, ou un nom déjà pris. Une
+  bibliothèque vue dans un seul projet reste dans les technologies du projet.
 - **Projet** : ajouter un projet = une fiche `src/content/projects/fr/<slug>.md` (champs de
   `CONTENU.md` §6) et, s'il a un visuel, une image dans `src/assets/projects/`. La version
   anglaise `src/content/projects/en/<slug>.md` ne porte que la prose et peut venir plus tard :

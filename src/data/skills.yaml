@@ -1,0 +1,101 @@
+typescript:
+  name: TypeScript
+  domain: frontend
+  level: proficient
+  projects: [meetz, shipment-preparation]
+
+angular:
+  name: Angular
+  domain: frontend
+  level: advanced
+  projects: [meetz, shipment-preparation]
+
+javascript:
+  name: JavaScript
+  domain: frontend
+  level: proficient
+  projects: [sportify]
+
+astro:
+  name: Astro
+  domain: frontend
+  level: proficient
+  projects: [portfolio]
+
+java:
+  name: Java
+  domain: backend
+  level: advanced
+  projects: [shipment-preparation]
+
+spring:
+  name: Spring
+  domain: backend
+  level: advanced
+  projects: [shipment-preparation]
+
+express:
+  name: Express
+  domain: backend
+  level: basics
+  projects: [meetz]
+
+prisma:
+  name: Prisma
+  domain: backend
+  level: basics
+  projects: [meetz]
+
+php:
+  name: PHP
+  domain: backend
+  level: basics
+  projects: [sportify]
+
+postgresql:
+  name: PostgreSQL
+  domain: data
+  level: proficient
+  projects: [shipment-preparation]
+
+mariadb:
+  name: MariaDB
+  domain: data
+  level: basics
+  projects: [meetz]
+
+mysql:
+  name: MySQL
+  domain: data
+  level: basics
+  projects: [sportify]
+
+docker:
+  name: Docker
+  domain: tools
+  level: basics
+  projects: [sportify, meetz]
+
+gitlab:
+  name: GitLab
+  domain: tools
+  level: proficient
+  projects: [shipment-preparation]
+
+jira:
+  name: Jira
+  domain: tools
+  level: proficient
+  projects: [shipment-preparation]
+
+claude-code:
+  name: Claude Code
+  domain: tools
+  level: proficient
+  projects: [portfolio]
+
+spec-kit:
+  name: Spec Kit
+  domain: tools
+  level: proficient
+  projects: [portfolio]

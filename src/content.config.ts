@@ -1,6 +1,7 @@
-import { defineCollection } from 'astro:content';
+import { defineCollection, reference } from 'astro:content';
 import { file, glob, type Loader } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { DOMAINS, LEVELS } from './lib/skill-scale';
 
 const text = z.string().trim().min(1);
 const webUrl = z.url({ protocol: /^https?$/ });
@@ -111,10 +112,22 @@ const education = defineCollection({
   schema: timelineEntry,
 });
 
+// Existence et brouillon des projets cités : vérifiés par `getSkills`, pas par `reference()`.
+const skills = defineCollection({
+  loader: strictFile('src/data/skills.yaml'),
+  schema: z.strictObject({
+    name: z.union([text, localized]),
+    domain: z.enum(DOMAINS),
+    level: z.enum(LEVELS),
+    projects: z.array(reference('projects')).min(1, 'au moins un projet'),
+  }),
+});
+
 export const collections = {
   pages,
   projects,
   projectsEn,
   experience,
   education,
+  skills,
 };

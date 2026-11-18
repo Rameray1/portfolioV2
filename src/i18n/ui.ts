@@ -64,6 +64,26 @@ export const fr = {
   'background.col.title': 'Intitulé',
   'background.col.place': 'Lieu',
   'background.highlights': 'Réalisations',
+  'skills.title': 'Compétences',
+  'skills.description':
+    'Les compétences de Ramazan Kus par domaine, chacune avec son niveau et les projets publiés qui la prouvent.',
+  'skills.intro':
+    'Chaque compétence renvoie aux projets qui la prouvent. Aucune n’est seulement déclarée.',
+  'skills.legend': 'Niveaux',
+  'skills.domain.frontend': 'Front-end',
+  'skills.domain.backend': 'Back-end',
+  'skills.domain.data': 'Données',
+  'skills.domain.tools': 'Outils et méthodes',
+  'skills.level.basics': 'Notions',
+  'skills.level.proficient': 'Autonome',
+  'skills.level.advanced': 'Avancé',
+  'skills.level.basics.definition':
+    'j’en ai les bases, sans pratique régulière',
+  'skills.level.proficient.definition': 'je livre avec, en cherchant au besoin',
+  'skills.level.advanced.definition':
+    'je le pratique au quotidien et j’en connais les pièges',
+  'skills.col.level': 'Niveau',
+  'skills.proofs': 'Preuves',
   'eval.good': 'bon coup',
   'eval.bet': 'pari réfléchi',
   'eval.brilliant': 'coup brillant',
@@ -131,6 +151,26 @@ export const en: Record<UiKey, string> = {
   'background.col.title': 'Title',
   'background.col.place': 'Place',
   'background.highlights': 'Achievements',
+  'skills.title': 'Skills',
+  'skills.description':
+    'Ramazan Kus’s skills by domain, each with its level and the published projects that prove it.',
+  'skills.intro':
+    'Every skill links to the projects that prove it. None is just a claim.',
+  'skills.legend': 'Levels',
+  'skills.domain.frontend': 'Front-end',
+  'skills.domain.backend': 'Back-end',
+  'skills.domain.data': 'Data',
+  'skills.domain.tools': 'Tools and methods',
+  'skills.level.basics': 'Basics',
+  'skills.level.proficient': 'Proficient',
+  'skills.level.advanced': 'Advanced',
+  'skills.level.basics.definition':
+    'I know the basics, without regular practice',
+  'skills.level.proficient.definition':
+    'I ship with it, looking things up when needed',
+  'skills.level.advanced.definition': 'I use it daily and know its pitfalls',
+  'skills.col.level': 'Level',
+  'skills.proofs': 'Proof',
   'eval.good': 'good move',
   'eval.bet': 'calculated bet',
   'eval.brilliant': 'brilliant move',
