@@ -123,10 +123,6 @@ html {
   font-size: clamp(16px, 0.75vw + 4px, 28px);
 }
 
-body {
-  margin: 0;
-}
-
 img,
 svg,
 video {
@@ -142,6 +138,7 @@ textarea {
 }
 
 body {
+  margin: 0;
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);

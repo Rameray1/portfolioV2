@@ -1,7 +1,6 @@
 // À garder aligné sur le bloc i18n de astro.config.mjs.
 export const locales = ['fr', 'en'] as const;
 export type Locale = (typeof locales)[number];
-export const defaultLocale: Locale = 'fr';
 
 // `langSwitch.*` nomment la langue cible, dans cette langue.
 export const fr = {

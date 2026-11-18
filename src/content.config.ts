@@ -60,7 +60,7 @@ const projects = defineCollection({
           .strictObject({
             from: square,
             to: square,
-            notation: z.strictObject({ fr: text, en: text }),
+            notation: localized,
           })
           .refine((move) => move.from !== move.to, {
             message: '`move.to` doit différer de `move.from`',

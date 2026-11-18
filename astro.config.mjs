@@ -7,7 +7,7 @@ import { isNoindexPath, isUntranslatedProjectPath } from './src/data/seo.ts';
 
 export default defineConfig({
   site: 'https://ramazankus.dev',
-  // À garder aligné sur `locales` et `defaultLocale` de src/i18n/ui.ts (et sur le sitemap).
+  // À garder aligné sur `locales` de src/i18n/ui.ts, le français par défaut (et sur le sitemap).
   i18n: {
     locales: ['fr', 'en'],
     defaultLocale: 'fr',
