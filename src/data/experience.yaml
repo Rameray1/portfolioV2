@@ -1,0 +1,30 @@
+astree-apprenticeship:
+  start: 2024-08
+  title:
+    fr: Développeur logiciel en alternance
+    en: Apprentice software developer
+  place: Astrée Software, Saint-Jean-Bonnefonds
+  detail:
+    fr: Je développe en Java, Spring et Angular des fonctionnalités propres à chaque client pour un MES, le logiciel qui pilote la production d’une usine.
+    en: I build client-specific features in Java, Spring and Angular for an MES, the software that runs production in a factory.
+  tech: [Java, Spring, Angular, TypeScript, PostgreSQL]
+  highlights:
+    - fr: Je présente aux clients les fonctionnalités livrées en réunion de revue, puis je traduis leurs retours en tâches de développement.
+      en: I present delivered features to clients in review meetings, then turn their feedback into development tasks.
+    - fr: Je travaille en équipe agile, de la planification des tâches aux tests unitaires et fonctionnels, avec GitLab pour la gestion de versions.
+      en: I work in an Agile team, from task planning to unit and functional tests, with GitLab for version control.
+
+astree-internship:
+  start: 2024-04
+  end: 2024-07
+  title:
+    fr: Testeur QA en stage
+    en: Intern QA tester
+  place: Astrée Software, Saint-Jean-Bonnefonds
+  detail:
+    fr: J’ai écrit les plans de test du MES et automatisé ses principaux scénarios utilisateur en tests de bout en bout avec Cypress.
+    en: I wrote the test plans for the MES and automated its main user scenarios as end-to-end tests with Cypress.
+  tech: [Cypress, TypeScript]
+  highlights:
+    - fr: J’ai analysé les exécutions de tests, puis signalé les anomalies à l’équipe de développement et suivi leur correction.
+      en: I analyzed test runs, then reported bugs to the development team and tracked them until they were fixed.
