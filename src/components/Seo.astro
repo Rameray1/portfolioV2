@@ -7,6 +7,7 @@ import {
   getLocale,
   isStatusPage,
   localizePath,
+  otherLocale,
   useTranslations,
 } from '../i18n/utils';
 import type { Locale } from '../i18n/ui';
@@ -14,12 +15,11 @@ import type { Locale } from '../i18n/ui';
 interface Props {
   title: string;
   description: string;
-  image?: { src: `/${string}`; alt: string };
   // Contenu sans version anglaise : la page `/en` affiche le français.
   untranslated?: boolean;
 }
 
-const { title, description, image, untranslated = false } = Astro.props;
+const { title, description, untranslated = false } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 const pathname = Astro.url.pathname;
@@ -45,13 +45,11 @@ const robots = PUBLIC_NOINDEX
     : undefined;
 const alternate =
   statusPage || untranslated ? undefined : alternatePath(pathname, locale);
-const otherLocale: Locale = locale === 'fr' ? 'en' : 'fr';
 const alternates = alternate && {
   fr: absolute(localizePath(pathname, 'fr')),
   en: absolute(localizePath(pathname, 'en')),
 };
-const ogImage = absolute(image?.src ?? `/og/default-${locale}.png`);
-const ogImageAlt = image?.alt ?? t('seo.ogImageAlt');
+const ogImage = absolute(`/og/default-${locale}.png`);
 ---
 
 <title>{documentTitle}</title>
@@ -72,10 +70,13 @@ const ogImageAlt = image?.alt ?? t('seo.ogImageAlt');
 {canonical && <meta property="og:url" content={canonical} />}
 <meta property="og:locale" content={ogLocales[locale]} />
 {alternates && (
-  <meta property="og:locale:alternate" content={ogLocales[otherLocale]} />
+  <meta
+    property="og:locale:alternate"
+    content={ogLocales[otherLocale(locale)]}
+  />
 )}
 <meta property="og:image" content={ogImage} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content={ogImageAlt} />
+<meta property="og:image:alt" content={t('seo.ogImageAlt')} />
 <meta name="twitter:card" content="summary_large_image" />

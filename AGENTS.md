@@ -3,6 +3,9 @@
 - **KISS / YAGNI first.** Build only what the current task needs: no extra feature, option,
   abstraction or dependency "just in case". Prefer native HTML/CSS, then Astro built-ins, then
   a dependency (justified). Future ideas go to the reserve at the end of `ROADMAP.md`.
+- **SOLID, without zeal** (constitution, principle I): a view displays, `src/lib/` provides
+  the data, and a view never reads a collection or a data file directly. Extract a function,
+  component or token at its second real use, never before.
 - **100 % static site**, zero client JavaScript by default (constitution, principles I–II).
 
 ## Project documents

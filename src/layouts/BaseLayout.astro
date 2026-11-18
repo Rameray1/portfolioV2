@@ -9,11 +9,10 @@ import { getLocale, useTranslations } from '../i18n/utils';
 interface Props {
   title: string;
   description: string;
-  image?: { src: `/${string}`; alt: string };
   untranslated?: boolean;
 }
 
-const { title, description, image, untranslated } = Astro.props;
+const { title, description, untranslated } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 ---
@@ -24,12 +23,7 @@ const t = useTranslations(locale);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
-    <Seo
-      title={title}
-      description={description}
-      image={image}
-      untranslated={untranslated}
-    />
+    <Seo title={title} description={description} untranslated={untranslated} />
     <link
       rel="preload"
       href={fontUrl}

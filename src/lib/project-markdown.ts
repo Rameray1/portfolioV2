@@ -1,6 +1,6 @@
 // Lu par astro.config.mjs : aucun import `astro:*` ici.
 import type { satteri } from '@astrojs/markdown-satteri';
-import { en, fr } from '../i18n/ui';
+import { en, evalKeys, fr } from '../i18n/ui';
 
 // Conventions d'écriture des fiches projet (`CONTENU.md` §6) :
 // - une citation (`> …`) devient une note du commentateur ; si elle commence par `!`, `!?` ou
@@ -29,12 +29,6 @@ interface Context {
   fileURL: URL | undefined;
 }
 
-const meanings = {
-  '!': 'eval.good',
-  '!?': 'eval.bet',
-  '!!': 'eval.brilliant',
-} as const;
-
 const element = (
   tagName: string,
   properties: Record<string, unknown>,
@@ -55,7 +49,7 @@ function annotate(paragraph: Element, dictionary: typeof fr): Element {
   const match =
     first?.type === 'text' && (first as Text).value.match(/^(!!|!\?|!)\s+/);
   if (!match) return paragraph;
-  const symbol = match[1] as keyof typeof meanings;
+  const symbol = match[1] as keyof typeof evalKeys;
   const colon = dictionary === fr ? ' : ' : ': ';
   return {
     ...paragraph,
@@ -66,7 +60,7 @@ function annotate(paragraph: Element, dictionary: typeof fr): Element {
         [{ type: 'text', value: symbol }],
       ),
       element('span', { className: ['visually-hidden'] }, [
-        { type: 'text', value: dictionary[meanings[symbol]] + colon },
+        { type: 'text', value: dictionary[evalKeys[symbol]] + colon },
       ]),
       { type: 'text', value: (first as Text).value.slice(match[0].length) },
       ...rest,

@@ -1,0 +1,24 @@
+---
+import { pieces, type PieceName } from '../lib/pieces';
+
+interface Props {
+  name: PieceName;
+  class?: string;
+}
+
+// `attrs` porte la classe de l'appelant et son attribut de portée : il stylise la pièce.
+const { name, ...attrs } = Astro.props;
+const piece = pieces[name];
+---
+
+<picture aria-hidden="true">
+  <source srcset={piece.dark} media="(prefers-color-scheme: dark)" />
+  <img
+    {...attrs}
+    src={piece.light}
+    alt=""
+    width="45"
+    height="45"
+    decoding="async"
+  />
+</picture>

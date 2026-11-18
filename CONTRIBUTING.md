@@ -82,7 +82,7 @@ la CI est verte :
   `.md`, zéro ligne de code.
 - **Site 100 % statique**, zéro JavaScript client par défaut. KISS / YAGNI : rien « au cas où ».
 - **SEO** : une page passe `title` et `description` à `BaseLayout` ; canonique, aperçu de
-  partage, liens alternatifs et plan du site en découlent. `image` est optionnelle. Page non
+  partage, liens alternatifs et plan du site en découlent. Page non
   indexable : son chemin dans `src/data/seo.ts`. Site entier : `PUBLIC_NOINDEX=true` chez
   l'hébergeur.
 - **Campagne** : changer d'objectif = modifier `src/data/campaign.ts` seulement (phrase

@@ -1,18 +1,17 @@
 ---
 import { Picture } from 'astro:assets';
-import { getEntry, render } from 'astro:content';
+import { render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import portrait from '../assets/about/portrait.jpg';
-import { campaign, formatStart } from '../data/campaign';
+import { campaign } from '../data/campaign';
+import { formatStart } from '../lib/dates';
+import { getAboutPage } from '../lib/pages';
 import { getLocale, useTranslations } from '../i18n/utils';
 
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 
-const entry = await getEntry('pages', `${locale}/about`);
-if (!entry) {
-  throw new Error(`src/content/pages/${locale}/about.md manquant`);
-}
+const entry = await getAboutPage(locale);
 const { Content } = await render(entry);
 const { visible, status, start, place } = campaign.availability;
 ---
@@ -80,11 +79,6 @@ const { visible, status, start, place } = campaign.availability;
     margin: 0;
     padding-bottom: var(--space-4);
     border-bottom: var(--rule-heavy) solid var(--color-rule);
-    font-size: var(--text-headline);
-    font-weight: var(--weight-black);
-    font-stretch: var(--stretch-display);
-    line-height: var(--leading-tight);
-    letter-spacing: var(--tracking-tight);
   }
 
   .about :global(.photo) {

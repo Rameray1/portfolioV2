@@ -2,16 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getBackground } from '../lib/background';
 import { formatMonth } from '../lib/dates';
+import Piece from '../components/Piece.astro';
 import { getLocale, useTranslations } from '../i18n/utils';
-import { pieces as figurines } from '../lib/pieces';
 
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 const entries = await getBackground(locale);
-const pieces = {
-  education: figurines.pawn,
-  experience: figurines.knight,
-};
+const pieceOf = { education: 'pawn', experience: 'knight' } as const;
 ---
 
 <BaseLayout
@@ -62,19 +59,7 @@ const pieces = {
           <p class="kind">{t(`background.${entry.kind}`)}</p>
         </div>
         <span class="node" aria-hidden="true">
-          <picture>
-            <source
-              srcset={pieces[entry.kind].dark}
-              media="(prefers-color-scheme: dark)"
-            />
-            <img
-              src={pieces[entry.kind].light}
-              alt=""
-              width="45"
-              height="45"
-              decoding="async"
-            />
-          </picture>
+          <Piece name={pieceOf[entry.kind]} class="piece" />
         </span>
         <h2>{entry.title}</h2>
         <p class="place">{entry.place}</p>
@@ -101,11 +86,6 @@ const pieces = {
 <style>
   h1 {
     margin: 0 0 var(--space-6);
-    font-size: var(--text-headline);
-    font-weight: var(--weight-black);
-    font-stretch: var(--stretch-display);
-    line-height: var(--leading-tight);
-    letter-spacing: var(--tracking-tight);
   }
 
   ol,
@@ -198,7 +178,7 @@ const pieces = {
     margin-top: calc((var(--text-2xl) - var(--piece)) / 2);
   }
 
-  .node img {
+  .node .piece {
     width: var(--piece);
     height: var(--piece);
     transition: transform var(--duration) var(--ease-out);
@@ -271,7 +251,7 @@ const pieces = {
   }
 
   @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-    ol > li:hover > .node img {
+    ol > li:hover > .node .piece {
       transform: translateY(calc(-1 * var(--space-1)));
     }
   }
@@ -351,7 +331,7 @@ const pieces = {
     }
 
     /* Le fond papier coupe le fil derrière la pièce. */
-    .node img {
+    .node .piece {
       position: relative;
       margin-top: calc((var(--text-2xl) - var(--piece)) / 2 - var(--space-1));
       padding-block: var(--space-1);

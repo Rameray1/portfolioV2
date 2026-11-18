@@ -1,7 +1,6 @@
 // À garder aligné sur le bloc i18n de astro.config.mjs.
 export const locales = ['fr', 'en'] as const;
 export type Locale = (typeof locales)[number];
-export const defaultLocale: Locale = 'fr';
 
 // `langSwitch.*` nomment la langue cible, dans cette langue.
 export const fr = {
@@ -90,6 +89,13 @@ export const fr = {
 } satisfies Record<string, string>;
 
 export type UiKey = keyof typeof fr;
+
+// Sens des symboles d'évaluation : `eval` d'un projet et notes du récit.
+export const evalKeys = {
+  '!': 'eval.good',
+  '!?': 'eval.bet',
+  '!!': 'eval.brilliant',
+} as const satisfies Record<string, UiKey>;
 
 export const en: Record<UiKey, string> = {
   skipLink: 'Skip to content',

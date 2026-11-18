@@ -1,14 +1,20 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import LevelPiece from '../components/LevelPiece.astro';
+import Piece from '../components/Piece.astro';
 import { getSkills } from '../lib/skills';
-import { LEVELS } from '../lib/skill-scale';
+import type { PieceName } from '../lib/pieces';
+import { LEVELS, type Level } from '../lib/skill-scale';
 import { getLocale, localizePath, useTranslations } from '../i18n/utils';
 
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 const domains = await getSkills(locale);
 const legend = [...LEVELS].reverse();
+const pieceOf: Record<Level, PieceName> = {
+  basics: 'pawn',
+  proficient: 'knight',
+  advanced: 'queen',
+};
 ---
 
 <BaseLayout title={t('skills.title')} description={t('skills.description')}>
@@ -21,7 +27,7 @@ const legend = [...LEVELS].reverse();
       {legend.map((level) => (
         <div>
           <dt>
-            <LevelPiece level={level} />
+            <Piece name={pieceOf[level]} class="piece" />
             {t(`skills.level.${level}`)}
           </dt>
           <dd>{t(`skills.level.${level}.definition`)}</dd>
@@ -43,7 +49,7 @@ const legend = [...LEVELS].reverse();
             <li>
               <h3>{skill.name}</h3>
               <p class="level">
-                <LevelPiece level={skill.level} />
+                <Piece name={pieceOf[skill.level]} class="piece" />
                 {t(`skills.level.${skill.level}`)}
               </p>
               <div class="proofs">
@@ -71,12 +77,6 @@ const legend = [...LEVELS].reverse();
 <style>
   h1 {
     margin: 0 0 var(--space-4);
-    font-size: var(--text-headline);
-    font-weight: var(--weight-black);
-    font-stretch: var(--stretch-display);
-    line-height: var(--leading-tight);
-    letter-spacing: var(--tracking-tight);
-    text-wrap: balance;
   }
 
   p,
@@ -185,6 +185,16 @@ const legend = [...LEVELS].reverse();
     white-space: nowrap;
   }
 
+  /* 1.5rem, comme la pièce de la frise mobile ; centrée sur la hauteur d'x du mot qui suit. */
+  .piece {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: var(--space-2);
+    vertical-align: -0.45em;
+    transition: transform var(--duration) var(--ease-out);
+  }
+
   .proofs {
     grid-column: 1 / -1;
     margin-top: var(--space-2);
@@ -214,8 +224,8 @@ const legend = [...LEVELS].reverse();
   }
 
   @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-    .domain > ul > li:hover {
-      --piece-step: calc(-1 * var(--space-1));
+    .domain > ul > li:hover .piece {
+      transform: translateY(calc(-1 * var(--space-1)));
     }
   }
 

@@ -16,7 +16,7 @@ export function localizePath(path: string, locale: Locale): `/${string}` {
   return bare === '/' ? '/en/' : `/en${bare}`;
 }
 
-const strip = (path: string) =>
+export const strip = (path: string) =>
   path.length > 1 ? path.replace(/\/+$/, '') : path;
 
 export function isStatusPage(pathname: string): boolean {
@@ -42,7 +42,8 @@ const dynamicRoutes = pagePaths
   .filter((path) => path.includes('['))
   .map((path) => new RegExp(`^${path.replace(/\[[^\]]+\]/g, '[^/]+')}$`));
 
-const otherLocale = (locale: Locale): Locale => (locale === 'fr' ? 'en' : 'fr');
+export const otherLocale = (locale: Locale): Locale =>
+  locale === 'fr' ? 'en' : 'fr';
 
 export function alternatePath(
   pathname: string,

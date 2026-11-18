@@ -48,26 +48,3 @@ export const campaign: Campaign = {
     },
   ],
 };
-
-// Formatée au build : une date invalide fait échouer la génération.
-export function formatStart(start: string, locale: Locale): string {
-  const match = /^(\d{4})-(\d{2})(?:-(\d{2}))?$/.exec(start);
-  const [year, month, day] = match
-    ? [Number(match[1]), Number(match[2]), match[3] ? Number(match[3]) : 1]
-    : [NaN, NaN, NaN];
-  const date = new Date(Date.UTC(year, month - 1, day));
-  if (
-    !match ||
-    date.getUTCFullYear() !== year ||
-    date.getUTCMonth() !== month - 1 ||
-    date.getUTCDate() !== day
-  ) {
-    throw new Error(`campaign.availability.start invalide : « ${start} »`);
-  }
-  return new Intl.DateTimeFormat(locale, {
-    year: 'numeric',
-    month: 'long',
-    day: match[3] ? 'numeric' : undefined,
-    timeZone: 'UTC',
-  }).format(date);
-}
