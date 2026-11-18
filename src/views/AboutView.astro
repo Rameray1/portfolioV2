@@ -3,7 +3,8 @@ import { Picture } from 'astro:assets';
 import { render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import portrait from '../assets/about/portrait.jpg';
-import { campaign, formatStart } from '../data/campaign';
+import { campaign } from '../data/campaign';
+import { formatStart } from '../lib/dates';
 import { getAboutPage } from '../lib/pages';
 import { getLocale, useTranslations } from '../i18n/utils';
 
