@@ -30,34 +30,4 @@ const actions = campaign.actions.map((action) => {
     flex-wrap: wrap;
     gap: var(--space-3);
   }
-
-  /* Hauteur minimale 3rem : valeur de DESIGN.md (Buttons). */
-  .button {
-    display: inline-flex;
-    align-items: center;
-    min-height: 3rem;
-    padding: var(--space-3) var(--space-5);
-    border: var(--rule-heavy) solid var(--color-ink);
-    border-radius: var(--radius);
-    font-size: var(--text-base);
-    font-weight: var(--weight-bold);
-    text-decoration: none;
-    transition:
-      background-color var(--duration) var(--ease-out),
-      color var(--duration) var(--ease-out);
-  }
-
-  .primary,
-  .secondary:hover,
-  .secondary:focus-visible {
-    background: var(--color-ink);
-    color: var(--color-paper);
-  }
-
-  .secondary,
-  .primary:hover,
-  .primary:focus-visible {
-    background: var(--color-paper);
-    color: var(--color-ink);
-  }
 </style>

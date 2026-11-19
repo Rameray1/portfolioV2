@@ -1,0 +1,588 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Availability from '../components/Availability.astro';
+import Piece from '../components/Piece.astro';
+import ProjectList from '../components/ProjectList.astro';
+import { getCv, type CvEntry, type CvLink } from '../lib/cv';
+import { getLocale, useTranslations } from '../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const cv = await getCv(locale);
+
+// Le lien vers le site ne sert qu'au PDF : sur la page, on y est déjà.
+const links = cv.links.filter(
+  (link): link is CvLink & { kind: 'linkedin' | 'github' } =>
+    link.kind !== 'website',
+);
+const site = new URL(import.meta.env.SITE).host;
+
+const timeline: {
+  id: string;
+  label: string;
+  piece: 'knight' | 'pawn';
+  entries: CvEntry[];
+}[] = [
+  {
+    id: 'cv-experience',
+    label: t('background.experience'),
+    piece: 'knight',
+    entries: cv.experience,
+  },
+  {
+    id: 'cv-education',
+    label: t('background.education'),
+    piece: 'pawn',
+    entries: cv.education,
+  },
+];
+---
+
+<BaseLayout title={t('cv.title')} description={t('cv.description')}>
+  <div class="cv">
+    <div class="intro">
+      <h1>{cv.name}</h1>
+      <p class="title">{cv.title}</p>
+    </div>
+
+    <aside class="info" aria-label={t('cv.contact')}>
+      <Availability />
+      <p class="download">
+        <a class="button primary" href={cv.pdf.href} download={cv.pdf.filename}>
+          {t('cv.download')}
+        </a>
+      </p>
+      <dl class="pgn">
+        <div>
+          <dt>{t('cv.email')}</dt>
+          <dd>
+            <a href={`mailto:${cv.email}`}>{cv.email}</a>
+          </dd>
+        </div>
+        {links.map((link) => (
+          <div>
+            <dt>{t(`cv.${link.kind}`)}</dt>
+            <dd>
+              <a href={link.href}>{link.label}</a>
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </aside>
+
+    <div class="profile">
+      <h2 class="visually-hidden">{t('cv.profile')}</h2>
+      <p class="pitch">{cv.profile.pitch}</p>
+    </div>
+
+    {timeline.map(
+      (group) =>
+        group.entries.length > 0 && (
+          <section class="part" aria-labelledby={group.id}>
+            <div class="head">
+              <h2 id={group.id}>{group.label}</h2>
+            </div>
+            <ol class="steps">
+              {group.entries.map((entry) => (
+                <li>
+                  <span class="node">
+                    <Piece name={group.piece} class="piece" />
+                  </span>
+                  <h3>{entry.title}</h3>
+                  <p class="when">
+                    {entry.from} –{' '}
+                    {entry.current ? (
+                      <span class="now">
+                        <span class="trait" aria-hidden="true" />
+                        {entry.to}
+                      </span>
+                    ) : (
+                      entry.to
+                    )}
+                  </p>
+                  <p class="place">{entry.place}</p>
+                  <p class="text">{entry.detail}</p>
+                  {entry.highlights.length > 0 && (
+                    <ul class="highlights">
+                      {entry.highlights.map((highlight) => (
+                        <li>{highlight}</li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </section>
+        ),
+    )}
+
+    {cv.projects.length > 0 && (
+      <section class="part" aria-labelledby="cv-projects">
+        <div class="head">
+          <h2 id="cv-projects">{t('cv.projects')}</h2>
+        </div>
+        <div class="projects" style={`--site: "${site}"`}>
+          <ProjectList projects={cv.projects} detail />
+        </div>
+      </section>
+    )}
+    {cv.skills.length > 0 && (
+      <section class="part" aria-labelledby="cv-skills">
+        <div class="head">
+          <h2 id="cv-skills">{t('cv.skills')}</h2>
+        </div>
+        <dl class="rows">
+          {cv.skills.map((group) => (
+            <div>
+              <dt>{group.domain}</dt>
+              <dd>{group.names.join(', ')}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    )}
+
+    <section class="part" aria-labelledby="cv-languages">
+      <div class="head">
+        <h2 id="cv-languages">{t('cv.languages')}</h2>
+      </div>
+      <dl class="rows">
+        {cv.languages.map((language) => (
+          <div>
+            <dt>{language.name}</dt>
+            <dd>{language.level}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  h1,
+  h2,
+  h3,
+  p,
+  ol,
+  ul,
+  dl,
+  dd {
+    margin: 0;
+  }
+
+  ol,
+  ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Sous 64rem, une seule colonne de 56rem : les dates restent à portée d'œil de leur
+     intitulé. La colonne d'infos se défait : disponibilité, PDF et contacts sous le nom. */
+  .cv {
+    display: flex;
+    flex-direction: column;
+    max-width: 56rem;
+  }
+
+  .info {
+    display: contents;
+  }
+
+  .info > :global(.availability) {
+    order: 1;
+    margin-top: var(--space-6);
+  }
+
+  .title {
+    margin-top: var(--space-3);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+  }
+
+  /* En-tête de partie, comme l'en-tête PGN d'une page projet : libellé, puis valeur. */
+  .pgn {
+    order: 3;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-7);
+    margin-top: var(--space-6);
+    border-top: var(--rule-heavy) solid var(--color-rule);
+    border-bottom: var(--rule-thin) solid var(--color-rule);
+  }
+
+  .pgn > div {
+    padding-block: var(--space-3);
+  }
+
+  .pgn dt {
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+  }
+
+  .pgn dd {
+    margin-top: var(--space-1);
+    font-weight: var(--weight-semibold);
+    overflow-wrap: anywhere;
+  }
+
+  /* Le bouton va de bord à bord, comme les filets des coordonnées. */
+  .download {
+    order: 2;
+    margin-top: var(--space-6);
+  }
+
+  .download .button {
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile {
+    order: 4;
+    margin-top: var(--space-7);
+  }
+
+  .pitch {
+    max-width: 40ch;
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+  }
+
+  /* Chaque rubrique est une partie : son titre reste en haut de l'écran tant qu'on la lit. */
+  .part {
+    order: 5;
+    margin-top: var(--space-8);
+  }
+
+  .head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding-block: var(--space-3);
+    border-bottom: var(--rule-heavy) solid var(--color-rule);
+    background: var(--color-paper);
+  }
+
+  h2 {
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: 1.1;
+  }
+
+  /* Les étapes du parcours : la pièce dans la marge, comme sur la frise. */
+  .steps > li {
+    display: grid;
+    grid-template-columns: 1.75rem minmax(0, 1fr);
+    grid-template-areas:
+      'piece title'
+      'piece when'
+      'piece place'
+      'piece text'
+      'piece list';
+    column-gap: var(--space-4);
+    padding-block: var(--space-5);
+    border-bottom: var(--rule-thin) solid var(--color-rule-soft);
+    --quiet: var(--color-ink-muted);
+    transition: color var(--duration) var(--ease-out);
+  }
+
+  .steps > li:last-child,
+  .rows > div:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  /* Pièce de 1.75rem, centrée sur la première ligne de l'intitulé. */
+  .node {
+    grid-area: piece;
+    margin-top: calc((var(--text-lg) * var(--leading-snug) - 1.75rem) / 2);
+  }
+
+  .node :global(.piece) {
+    display: block;
+    width: 1.75rem;
+    height: 1.75rem;
+    transition: transform var(--duration) var(--ease-out);
+  }
+
+  h3 {
+    grid-area: title;
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-snug);
+  }
+
+  .when {
+    grid-area: when;
+    margin-top: var(--space-1);
+    font-size: var(--text-sm);
+    color: var(--quiet);
+    white-space: nowrap;
+  }
+
+  /* L'étape en cours, comme sur le parcours : le trait réduit pour une ligne de petit texte. */
+  .now {
+    font-weight: var(--weight-semibold);
+    color: var(--color-ink);
+  }
+
+  .trait {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: var(--space-1);
+    background: var(--color-mark);
+  }
+
+  .place {
+    grid-area: place;
+    margin-top: var(--space-1);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+  }
+
+  .text {
+    grid-area: text;
+    margin-top: var(--space-3);
+  }
+
+  .highlights {
+    grid-area: list;
+    margin-top: var(--space-3);
+    padding-left: var(--space-4);
+    font-size: var(--text-sm);
+    text-wrap: pretty;
+    list-style-type: '–  ';
+  }
+
+  .highlights li + li {
+    margin-top: var(--space-1);
+  }
+
+  /* La liste des coups porte déjà son filet : la rubrique l'a tracé. */
+  .projects :global(ol) {
+    border-top: 0;
+  }
+
+  .rows > div {
+    display: grid;
+    gap: var(--space-1) var(--space-5);
+    padding-block: var(--space-4);
+    border-bottom: var(--rule-thin) solid var(--color-rule-soft);
+    transition: color var(--duration) var(--ease-out);
+  }
+
+  .rows dt {
+    font-weight: var(--weight-bold);
+  }
+
+  .rows dd {
+    text-wrap: balance;
+  }
+
+  /* Comme sur le parcours et les compétences : la ligne survolée reste à l'encre, les
+     autres s'atténuent. Pas d'inversion (la ligne n'est pas un lien), pas au toucher. */
+  @media (hover: hover) {
+    .steps:has(> li:hover) > li:not(:hover),
+    .rows:has(> div:hover) > div:not(:hover) {
+      color: var(--color-ink-muted);
+    }
+
+    .steps:has(> li:hover) > li:not(:hover) .now {
+      color: inherit;
+    }
+
+    .steps > li:hover {
+      --quiet: var(--color-ink);
+    }
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .steps > li:hover .node :global(.piece) {
+      transform: translateY(calc(-1 * var(--space-1)));
+    }
+  }
+
+  /* Dès qu'il y a la place : la période à droite de l'intitulé, et chaque domaine ou
+     langue sur une ligne, libellé dans une colonne de 12rem. */
+  @media (min-width: 40rem) {
+    .steps > li {
+      grid-template-columns: 1.75rem minmax(0, 1fr) auto;
+      grid-template-areas:
+        'piece title when'
+        'piece place place'
+        'piece text text'
+        'piece list list';
+    }
+
+    .when {
+      margin-top: 0;
+      padding-left: var(--space-4);
+    }
+
+    .rows > div {
+      grid-template-columns: 12rem minmax(0, 1fr);
+    }
+  }
+
+  /* Comme sur /skills : sur grand écran, le titre ne colle plus et perd sa marge du haut,
+     pour le même écart entre les rubriques sur les deux pages. */
+  @media (min-width: 56rem) {
+    .head {
+      position: static;
+      padding-top: 0;
+    }
+  }
+
+  /* Comme la page projet : la lecture à gauche, les infos à droite (20rem), collées en haut
+     de l'écran. Courtes, elles gardent PDF et contacts à portée de main. */
+  @media (min-width: 64rem) {
+    .cv {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 20rem;
+      column-gap: var(--space-8);
+      max-width: none;
+    }
+
+    .cv > :not(.info) {
+      grid-column: 1;
+    }
+
+    .info {
+      display: block;
+      grid-column: 2;
+      /* Toutes les lignes de la lecture : la colonne colle le long de la page. */
+      grid-row: 1 / span 8;
+      align-self: start;
+      position: sticky;
+      top: var(--space-6);
+    }
+
+    .info > :global(.availability) {
+      margin-top: 0;
+    }
+
+    .pgn {
+      flex-direction: column;
+    }
+
+    .pgn > div + div {
+      border-top: var(--rule-thin) solid var(--color-rule-soft);
+    }
+
+    .profile {
+      margin-top: var(--space-5);
+    }
+  }
+
+  @media print {
+    /* A4 : marges serrées pour tenir sur une page. */
+    @page {
+      size: A4;
+      margin: 12mm 14mm;
+    }
+
+    :global(html) {
+      font-size: 56%;
+    }
+
+    :global(body > header),
+    :global(body > footer),
+    :global(.skip-link),
+    .download,
+    .projects :global(.legend) {
+      display: none;
+    }
+
+    :global(#content) {
+      max-width: none;
+      padding: 0;
+    }
+
+    .cv {
+      max-width: none;
+    }
+
+    h1 {
+      font-size: var(--text-2xl);
+    }
+
+    .title {
+      margin-top: var(--space-1);
+      font-size: var(--text-base);
+    }
+
+    .pgn {
+      margin-top: var(--space-2);
+    }
+
+    .pgn > div {
+      padding-block: var(--space-1);
+    }
+
+    .profile {
+      margin-top: var(--space-3);
+    }
+
+    .pitch {
+      max-width: none;
+      font-size: var(--text-base);
+    }
+
+    .info > :global(.availability) {
+      margin-top: var(--space-2);
+    }
+
+    .part {
+      margin-top: var(--space-3);
+    }
+
+    .head {
+      position: static;
+      padding-block: 0 var(--space-1);
+      background: none;
+    }
+
+    h2 {
+      font-size: var(--text-lg);
+    }
+
+    .steps > li {
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        'title when'
+        'place place'
+        'text text'
+        'list list';
+      padding-block: var(--space-2);
+      break-inside: avoid;
+    }
+
+    /* La source de <picture> suit le thème du système, pas l'impression : une pièce
+       blanche sortirait sur papier. */
+    .node {
+      display: none;
+    }
+
+    .text,
+    .highlights {
+      margin-top: var(--space-1);
+    }
+
+    .projects :global(li) {
+      break-inside: avoid;
+    }
+
+    /* L'adresse du projet s'écrit sous son titre : un lien imprimé ne se clique pas. */
+    .projects :global(a)::after {
+      content: var(--site) attr(href);
+      grid-column: 2;
+      font-size: var(--text-xs);
+      color: var(--color-ink-muted);
+    }
+
+    .rows > div {
+      padding-block: var(--space-1);
+    }
+  }
+</style>

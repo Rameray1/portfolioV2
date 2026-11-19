@@ -4,6 +4,7 @@ export interface Contact {
   email: string;
   github: string;
   linkedin: string;
+  city: string;
 }
 
 export interface Site {
@@ -22,6 +23,7 @@ export const site = {
     email: 'rkus.contact@gmail.com',
     github: 'https://github.com/Rameray1',
     linkedin: 'https://www.linkedin.com/in/ramazan-kus/',
+    city: 'Alès, France',
   },
   person: {
     jobTitle: {

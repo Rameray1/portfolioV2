@@ -123,6 +123,16 @@ const skills = defineCollection({
   }),
 });
 
+const languages = defineCollection({
+  loader: strictFile('src/data/languages.yaml'),
+  // `file()` ne garantit pas l'ordre du fichier : le rang le fixe.
+  schema: z.strictObject({
+    rank: z.number().int().min(1),
+    name: localized,
+    level: localized,
+  }),
+});
+
 export const collections = {
   pages,
   projects,
@@ -130,4 +140,5 @@ export const collections = {
   experience,
   education,
   skills,
+  languages,
 };
