@@ -93,9 +93,3 @@ claude-code:
   domain: tools
   level: proficient
   projects: [portfolio]
-
-spec-kit:
-  name: Spec Kit
-  domain: tools
-  level: proficient
-  projects: [portfolio]
