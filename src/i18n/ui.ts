@@ -81,6 +81,9 @@ export const fr = {
   'skills.level.proficient.definition': 'je livre avec, en cherchant au besoin',
   'skills.level.advanced.definition':
     'je le pratique au quotidien et j’en connais les pièges',
+  'skills.level.expert': 'Expert',
+  'skills.level.expert.definition':
+    'je l’ai pratiqué dans des contextes variés, j’en connais les rouages et je peux former d’autres devs',
   'skills.col.level': 'Niveau',
   'skills.proofs': 'Preuves',
   'eval.good': 'bon coup',
@@ -175,6 +178,9 @@ export const en: Record<UiKey, string> = {
   'skills.level.proficient.definition':
     'I ship with it, looking things up when needed',
   'skills.level.advanced.definition': 'I use it daily and know its pitfalls',
+  'skills.level.expert': 'Expert',
+  'skills.level.expert.definition':
+    'I have used it in varied contexts, know how it works inside and can train other developers',
   'skills.col.level': 'Level',
   'skills.proofs': 'Proof',
   'eval.good': 'good move',
