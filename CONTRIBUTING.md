@@ -18,6 +18,10 @@ La présentation du projet est dans le [`README.md`](./README.md).
 - Node 22 : la version est fixée dans [`.nvmrc`](./.nvmrc). Avec nvm : `nvm use` (ou
   `nvm install` la première fois).
 - npm (fourni avec Node).
+- Tectonic, pour le CV PDF que `npm run build` compile : `brew install tectonic`. La CI et
+  Vercel l'installent avec [`scripts/install-tectonic.sh`](./scripts/install-tectonic.sh)
+  (version et empreinte fixées). Au premier build, Tectonic télécharge ses paquets LaTeX, puis
+  les garde en cache.
 
 ## Installation
 
@@ -47,8 +51,8 @@ formatage, `npm run format` corrige ; une erreur de type indique le fichier et l
 ## Intégration continue
 
 À chaque pull request vers `main` (et à chaque push sur `main`, merges compris), GitHub Actions
-([`.github/workflows/ci.yml`](./.github/workflows/ci.yml)) exécute `npm ci`, `npm run check`
-puis `npm run build`. Un échec passe le check `CI / check-and-build` au rouge.
+([`.github/workflows/ci.yml`](./.github/workflows/ci.yml)) exécute `npm ci`, installe Tectonic,
+`npm run check` puis `npm run build`. Un échec passe le check `CI / check-and-build` au rouge.
 
 `main` est protégée par le ruleset `main` (GitHub → **Settings** → **Rules** → **Rulesets**),
 sans contournement possible :
@@ -86,10 +90,10 @@ la CI est verte :
   indexable : son chemin dans `src/data/seo.ts`. Site entier : `PUBLIC_NOINDEX=true` chez
   l'hébergeur.
 - **Campagne** : changer d'objectif = modifier `src/data/campaign.ts` seulement (phrase
-  d'identité, disponibilité avec `visible` pour la masquer, les deux actions). Un CV par
-  langue = `href: { fr, en }` ; le CV passe alors en première action (bouton plein), l'email en
-  seconde. Les projets mis en avant restent le drapeau `featured` de chaque projet (F06). La
-  position du diagramme est une FEN dans `src/data/diagram.ts`.
+  d'identité, disponibilité avec `visible` pour la masquer, les deux actions). Aujourd'hui, le
+  CV (`href: { fr, en }`) en première action (bouton plein), l'email en seconde. Les projets
+  mis en avant restent le drapeau `featured` de chaque projet (F06). La position du
+  diagramme est une FEN dans `src/data/diagram.ts`.
 - **Parcours** : ajouter une étape = une entrée dans `src/data/experience.yaml` ou
   `src/data/education.yaml` (champs de `CONTENU.md` §6). Dates au format `AAAA-MM`, sans `end`
   tant que l'étape est en cours. Prose en `fr` et en `en`, sans date dans les textes. Chaque
@@ -99,9 +103,16 @@ la CI est verte :
 - **Compétence** : ajouter une compétence = une entrée dans `src/data/skills.yaml`, dont la
   clé est un identifiant en anglais (`typescript`). `name` est une chaîne pour un nom propre,
   `{ fr, en }` pour un nom commun. `domain` vaut `frontend`, `backend`, `data` ou `tools`,
-  `level` vaut `basics`, `proficient` ou `advanced`. `projects` cite au moins un projet publié
+  `level` vaut `basics`, `proficient`, `advanced` ou `expert`. `projects` cite au moins un projet publié
   par son slug. Le build échoue sur un champ manquant ou inconnu, un projet absent, en brouillon ou cité deux fois, ou un nom déjà pris. Une
   bibliothèque vue dans un seul projet reste dans les technologies du projet.
+- **CV** : `/cv` et les PDF `/cv-fr.pdf`, `/cv-en.pdf` n'ont aucune donnée propre. Ils lisent
+  le site, la campagne, le parcours, les compétences et les projets mis en avant. Seules les
+  langues ont leur fichier : ajouter une langue = une entrée dans `src/data/languages.yaml`
+  (`rank`, `name` et `level` en `{ fr, en }`). La mise en page du PDF est
+  `src/cv/template.tex`. Le build échoue si un PDF ne compile pas, déborde d'une page ou
+  contient un caractère absent de la police. En `npm run dev`, le PDF est compilé à chaque
+  téléchargement, avec la même vérification. Jamais de numéro de téléphone.
 - **Projet** : ajouter un projet = une fiche `src/content/projects/fr/<slug>.md` (champs de
   `CONTENU.md` §6) et, s'il a un visuel, une image dans `src/assets/projects/`. La version
   anglaise `src/content/projects/en/<slug>.md` ne porte que la prose et peut venir plus tard :
