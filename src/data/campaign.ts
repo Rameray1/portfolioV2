@@ -39,12 +39,12 @@ export const campaign: Campaign = {
   },
   actions: [
     {
-      label: { fr: 'M’écrire', en: 'Email me' },
-      href: `mailto:${site.contact.email}`,
+      label: { fr: 'Voir le CV', en: 'View my CV' },
+      href: { fr: '/cv', en: '/en/cv' },
     },
     {
-      label: { fr: 'LinkedIn', en: 'LinkedIn' },
-      href: site.contact.linkedin,
+      label: { fr: 'M’écrire', en: 'Email me' },
+      href: `mailto:${site.contact.email}`,
     },
   ],
 };
