@@ -13,7 +13,8 @@ const legend = [...LEVELS].reverse();
 const pieceOf: Record<Level, PieceName> = {
   basics: 'pawn',
   proficient: 'knight',
-  advanced: 'queen',
+  advanced: 'rook',
+  expert: 'queen',
 };
 ---
 
@@ -233,7 +234,7 @@ const pieceOf: Record<Level, PieceName> = {
      d'en-têtes, et les colonnes se partagent la place au lieu de la laisser à droite. */
   @media (min-width: 56rem) {
     .legend dl {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       column-gap: var(--space-6);
     }
 
