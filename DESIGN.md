@@ -266,7 +266,7 @@ Toutes les formes sont des angles droits (`--radius: 0`). Les boutons, les puces
 
 ## Motion
 
-Le mouvement imite le geste du commentateur : on joue le coup, puis on le note. Rien ne bouge en boucle, rien ne bouge pour remplir. Tout est en CSS, sans JavaScript. Ces effets sont à construire en F11.
+Le mouvement imite le geste du commentateur : on joue le coup, puis on le note. Rien ne bouge en boucle, rien ne bouge pour remplir. Tout est en CSS, sans JavaScript. Ces effets sont à construire en F10.
 
 **Jetons.** `--duration` (160 ms, états de survol et de focus, déjà livré), `--duration-page` (280 ms, transition de page), `--duration-move` (320 ms, trajet d'une pièce au survol ; le coup signature dure le double), `--duration-stamp` (240 ms, pose d'un symbole), `--ease-out` (déjà livré). Sous `prefers-reduced-motion: reduce`, toutes les durées valent 0.
 

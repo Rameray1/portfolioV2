@@ -82,7 +82,7 @@ Mettre en place les garde-fous du dépôt pour que tout code ajouté ensuite soi
 - Une commande formate tout le projet ; une commande vérifie le formatage et les types ; le build reste la commande existante.
 - À chaque push et chaque pull request sur GitHub, vérification et build sont exécutés ; un échec marque la PR en rouge.
 - Le README explique comment installer et lancer le projet, les commandes disponibles et le workflow speckit.
-Hors périmètre : déploiement, vérification des liens morts (F12).
+Hors périmètre : déploiement, vérification des liens morts (F11).
 ```
 
 **Plan**
@@ -197,7 +197,7 @@ Accueil et page À propos, en FR et EN, pilotés par les leviers de campagne (CO
 **Plan**
 
 ```
-src/data/campaign.ts typé (valeurs { fr, en }, availability.visible, actions: exactement 2). Composants Availability.astro (bandeau de l'accueil et « ce que je cherche » d'À propos), ActionLinks.astro ; l'ouverture vit dans HomeView, sans composant Hero. Vues HomeView.astro et AboutView.astro (pattern F03). Prose d'À propos en Markdown par langue (src/content/pages/{fr,en}/about.md, collection `pages`). Photo dans src/assets/, rendue avec <Picture> d'astro:assets (AVIF + WebP, < 50 ko). Diagram.astro : grille CSS de 64 cases, chaque pièce est un SVG séparé placé par sa case (custom properties --file / --rank), position en FEN dans src/data/diagram.ts (provisoire jusqu'à C2b). Le diagramme est ainsi prêt pour les animations de F11, sans les construire ici.
+src/data/campaign.ts typé (valeurs { fr, en }, availability.visible, actions: exactement 2). Composants Availability.astro (bandeau de l'accueil et « ce que je cherche » d'À propos), ActionLinks.astro ; l'ouverture vit dans HomeView, sans composant Hero. Vues HomeView.astro et AboutView.astro (pattern F03). Prose d'À propos en Markdown par langue (src/content/pages/{fr,en}/about.md, collection `pages`). Photo dans src/assets/, rendue avec <Picture> d'astro:assets (AVIF + WebP, < 50 ko). Diagram.astro : grille CSS de 64 cases, chaque pièce est un SVG séparé placé par sa case (custom properties --file / --rank), position en FEN dans src/data/diagram.ts (provisoire jusqu'à C2b). Le diagramme est ainsi prêt pour les animations de F10, sans les construire ici.
 ```
 
 ### F06 · Projets _(~4 séances)_
@@ -233,7 +233,7 @@ src/content.config.ts : collections projects (src/content/projects/fr/) et proje
       finale dans `src/data/diagram.ts`, où chaque projet mis en avant a un coup des blancs
       jouable (son `move`, tous au même numéro de coup) et où le projet `!!` a un vrai coup
       brillant. De préférence une partie célèbre, peu de pièces, la case d'arrivée du `!!` loin
-      du bord droit. Les trois coups doivent partir de pièces différentes. À faire avant F11.
+      du bord droit. Les trois coups doivent partir de pièces différentes. À faire avant F10.
       `content: position du diagramme`
 - [x] **C3 · Étude de cas d'entreprise** — **anonymisée** (CONTENU.md §8). La fiche la
       plus travaillée. `content: etude de cas de l'alternance`
@@ -318,42 +318,11 @@ getCv(locale) dans src/lib/cv.ts rassemble site, campagne, getBackground, featur
 
 ---
 
-## Phase 4 — Blog
+## Phase 4 — Finitions
 
-### F10 · Blog _(~3 séances)_
+### F10 · Transitions et micro-animations _(~2 séances)_
 
-**Dépend de** : F04.
-
-**Spec**
-
-```
-Un blog en français (non traduit), qui fait vivre le site entre deux projets.
-- Chaque article : titre, description, date, brouillon ou publié (même cycle de vie que les projets, CONTENU.md §7).
-- /blog liste les articles publiés du plus récent au plus ancien.
-- Page d'article lisible, avec des blocs de code colorés adaptés aux deux thèmes.
-- Un flux RSS complet est découvrable depuis toutes les pages.
-- Un article d'exemple démontre le tout ; les vrais articles sont rédigés hors speckit (C6).
-Hors périmètre : pagination, tags, sommaire, articles liés (à ajouter quand il y aura assez d'articles).
-```
-
-**Plan**
-
-```
-Collection blog (glob sur src/content/blog/*.md, schéma CONTENU.md §6). src/pages/blog/index.astro et src/pages/blog/[slug].astro + PostLayout.astro. Coloration Shiki intégrée à Astro avec deux thèmes (markdown.shikiConfig.themes { light, dark }) basculés par prefers-color-scheme. src/pages/rss.xml.js avec @astrojs/rss. <link rel="alternate" type="application/rss+xml"> dans BaseLayout. Markdown simple, pas de MDX.
-```
-
-### ✍️ C6 · Deux premiers articles _(hors speckit)_
-
-- [ ] Par exemple « De Vue à Astro, ce qui change » ou le récit d'un problème technique.
-      `content: premier article`
-
----
-
-## Phase 5 — Finitions
-
-### F11 · Transitions et micro-animations _(~2 séances)_
-
-**Dépend de** : F06 et C2b (et F10 s'il est fait avant).
+**Dépend de** : F06 et C2b.
 
 **Spec**
 
@@ -374,14 +343,14 @@ Les quatre effets de DESIGN.md (section Motion), et rien d'autre :
 Jetons dans global.css : --duration-page, --duration-move, --duration-stamp (les jetons bleus --color-brilliant sont livrés en F06). View transitions natives entre documents (@view-transition { navigation: auto; }), view-transition-name: site-header sur l'en-tête et project-<slug> sur les titres (liste et page). Le HTML place la pièce du !! sur sa case d'arrivée et les autres sur leur case de départ. Coup signature : @keyframes sur la pièce du !!, de sa case de départ vers la position du HTML ; au chargement au-dessus de 56rem, animation-timeline: view() en dessous, dans @supports. Coups au survol : une règle :has() par rang de la liste (3 au plus, nth-child) qui translate la pièce du coup (transform calculé depuis --file / --rank de départ et d'arrivée, transition en --duration-move) et ramène la pièce du !!, plus box-shadow inset sur les cases move.from / move.to. Sous reduced motion, seules les cases changent. Symbole de la page projet : animation-delay égal à --duration-page. Tous les mouvements sous @media (prefers-reduced-motion: no-preference). Pas de ClientRouter, pas d'IntersectionObserver.
 ```
 
-### ✍️ C7 · Domaine _(hors speckit · ~1 h)_
+### ✍️ C6 · Domaine _(hors speckit · ~1 h)_
 
 - [ ] Nom de domaine + HTTPS chez l'hébergeur, mise à jour de `site` dans `astro.config.mjs`.
       `ci: nom de domaine`
 
-### F12 · Qualité et exploitation _(~3 séances)_
+### F11 · Qualité et exploitation _(~3 séances)_
 
-**Dépend de** : C7 et toutes les features visuelles.
+**Dépend de** : C6 et toutes les features visuelles.
 
 **Spec**
 
@@ -391,7 +360,7 @@ Le site atteint les cibles de CONTENU.md §10 et reste propre dans le temps.
 - Les redirections des contenus retirés sont déclarées en un seul endroit.
 - Mesure d'audience respectueuse de la vie privée : sans cookie, sans bandeau de consentement.
 - En-têtes de sécurité de base appliqués par l'hébergeur.
-- Audit unique : Lighthouse ≥ 95 performance et 100 accessibilité, bonnes pratiques et SEO sur l'accueil, une page projet, un article et /en, en mobile ; navigation au clavier, contrastes AA dans les deux thèmes, hiérarchie de titres, textes alternatifs. Les écarts trouvés sont corrigés.
+- Audit unique : Lighthouse ≥ 95 performance et 100 accessibilité, bonnes pratiques et SEO sur l'accueil, une page projet et /en, en mobile ; navigation au clavier, contrastes AA dans les deux thèmes, hiérarchie de titres, textes alternatifs. Les écarts trouvés sont corrigés.
 ```
 
 **Plan**
@@ -399,6 +368,40 @@ Le site atteint les cibles de CONTENU.md §10 et reste propre dans le temps.
 ```
 lychee (action GitHub) sur dist/ dans ci.yml, exclusions documentées. Bloc redirects d'astro.config.mjs. Analytics sans cookie (Plausible, Umami ou Cloudflare Web Analytics) : un seul <script> dans BaseLayout, justifié dans le plan. En-têtes via public/_headers (ou la config de l'hébergeur) : X-Content-Type-Options, Referrer-Policy, frame-ancestors. Audit manuel avec Lighthouse et axe DevTools, corrections par composant. Pas de Lighthouse CI ni de CSP à hash.
 ```
+
+---
+
+## Phase 5 — Blog
+
+### F12 · Blog _(~3 séances)_
+
+**Dépend de** : F04. Repoussé en dernier : le site est complet sans lui, et un blog vide desservirait le portfolio.
+
+**Spec**
+
+```
+Un blog en français (non traduit), qui fait vivre le site entre deux projets.
+- Chaque article : titre, description, date, brouillon ou publié (même cycle de vie que les projets, CONTENU.md §7).
+- /blog liste les articles publiés du plus récent au plus ancien.
+- Page d'article lisible, avec des blocs de code colorés adaptés aux deux thèmes.
+- Un flux RSS complet est découvrable depuis toutes les pages.
+- Le lien « Blog » revient dans la navigation ; en anglais, il pointe vers /blog avec la mention (FR) (CONTENU.md §5).
+- Un article d'exemple démontre le tout ; les vrais articles sont rédigés hors speckit (C7).
+Hors périmètre : pagination, tags, sommaire, articles liés (à ajouter quand il y aura assez d'articles).
+```
+
+**Plan**
+
+```
+Collection blog (glob sur src/content/blog/*.md, schéma CONTENU.md §6). src/pages/blog/index.astro et src/pages/blog/[slug].astro + PostLayout.astro. Coloration Shiki intégrée à Astro avec deux thèmes (markdown.shikiConfig.themes { light, dark }) basculés par prefers-color-scheme. src/pages/rss.xml.js avec @astrojs/rss. <link rel="alternate" type="application/rss+xml"> dans BaseLayout. Markdown simple, pas de MDX.
+```
+
+### ✍️ C7 · Deux premiers articles _(hors speckit)_
+
+- [ ] Par exemple « De Vue à Astro, ce qui change » ou le récit d'un problème technique.
+      `content: premier article`
+
+---
 
 ### ✍️ C8 · Clôture _(hors speckit)_
 

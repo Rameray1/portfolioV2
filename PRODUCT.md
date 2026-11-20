@@ -101,7 +101,7 @@ Réutilisables depuis l'ancien portfolio (`../Portfolio`), confirmés :
 Absences à ne pas combler par invention :
 
 - Aucun témoignage, aucune recommandation, aucune presse, aucun chiffre public.
-- Pas encore d'étude de cas d'entreprise (C3), de fiches projets (C2) ni d'articles (C6).
+- Pas encore d'étude de cas d'entreprise (C3), de fiches projets (C2) ni d'articles (C7).
 - Aucun texte définitif : il est rédigé hors speckit (C1–C8).
 - Aucune capture de l'application d'entreprise, jamais.
 
