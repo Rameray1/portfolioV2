@@ -7,10 +7,9 @@ tech:
   - Angular
   - TypeScript
   - Express
+  - Node.js
   - Prisma
   - MariaDB
-  - Socket.IO
-  - Leaflet
   - Docker
 eval: '!?'
 links:
