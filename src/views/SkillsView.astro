@@ -4,7 +4,7 @@ import Piece from '../components/Piece.astro';
 import { getSkills } from '../lib/skills';
 import type { PieceName } from '../lib/pieces';
 import { LEVELS, type Level } from '../lib/skill-scale';
-import { getLocale, localizePath, useTranslations } from '../i18n/utils';
+import { getLocale, useTranslations } from '../i18n/utils';
 
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
@@ -58,11 +58,7 @@ const pieceOf: Record<Level, PieceName> = {
                 <ul aria-labelledby={`proofs-${skill.id}`}>
                   {skill.proofs.map((proof) => (
                     <li>
-                      <a
-                        href={localizePath(`/projects/${proof.slug}/`, locale)}
-                      >
-                        {proof.title}
-                      </a>
+                      <a href={proof.href}>{proof.title}</a>
                     </li>
                   ))}
                 </ul>
