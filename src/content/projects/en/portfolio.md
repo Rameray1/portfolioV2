@@ -1,5 +1,5 @@
 ---
-title: 'This portfolio, written with Claude and Spec Kit'
+title: 'My portfolio, written with Claude and Spec Kit'
 summary: 'A static Astro site in French and English, written with Claude Code inside a Spec Kit workflow, one feature at a time.'
 keyMove: 'Let Claude write code only after a specification and a plan I have reviewed, using Spec Kit.'
 coverAlt: 'Home page of the portfolio, with the pitch and 3 projects on the left, a chess diagram on the right'

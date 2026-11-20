@@ -1,5 +1,5 @@
 ---
-title: 'Ce portfolio, écrit avec Claude et Spec Kit'
+title: 'Mon portfolio, écrit avec Claude et Spec Kit'
 year: 2026
 summary: 'Un site statique Astro en français et en anglais, écrit avec Claude Code et cadré par Spec Kit, feature par feature.'
 keyMove: 'Ne laisser Claude écrire le code qu’après une spécification et un plan que j’ai relus, avec Spec Kit.'
