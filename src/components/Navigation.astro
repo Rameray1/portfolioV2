@@ -8,8 +8,7 @@ const t = useTranslations(locale);
 const current = strip(Astro.url.pathname);
 
 const items = nav.map((item) => {
-  const frenchOnly = 'frenchOnly' in item && item.frenchOnly;
-  const href = frenchOnly ? item.href : localizePath(item.href, locale);
+  const href = localizePath(item.href, locale);
   const path = strip(href);
   const ariaCurrent =
     current === path
@@ -17,18 +16,7 @@ const items = nav.map((item) => {
       : current.startsWith(`${path}/`)
         ? ('true' as const)
         : undefined;
-  // Insécable : la mention ne passe jamais seule à la ligne.
-  const marked = frenchOnly && locale !== 'fr';
-  const label = marked
-    ? `${t(item.key)}\u00a0${t('nav.frenchMark')}`
-    : t(item.key);
-  return {
-    label,
-    href,
-    ariaCurrent,
-    hreflang: marked ? ('fr' as const) : undefined,
-    ariaLabel: marked ? `${label}, ${t('nav.inFrench')}` : undefined,
-  };
+  return { label: t(item.key), href, ariaCurrent };
 });
 ---
 
@@ -36,12 +24,7 @@ const items = nav.map((item) => {
   <ul>
     {items.map((item) => (
       <li>
-        <a
-          href={item.href}
-          aria-current={item.ariaCurrent}
-          hreflang={item.hreflang}
-          aria-label={item.ariaLabel}
-        >
+        <a href={item.href} aria-current={item.ariaCurrent}>
           {item.label}
         </a>
       </li>

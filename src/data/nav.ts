@@ -5,7 +5,6 @@ type NavKey = Extract<UiKey, `nav.${string}`>;
 export interface NavItem {
   key: NavKey;
   href: `/${string}`;
-  frenchOnly?: true;
 }
 
 export const nav = [
@@ -14,5 +13,4 @@ export const nav = [
   { key: 'nav.background', href: '/background' },
   { key: 'nav.skills', href: '/skills' },
   { key: 'nav.cv', href: '/cv' },
-  { key: 'nav.blog', href: '/blog/', frenchOnly: true },
 ] as const satisfies readonly NavItem[];
