@@ -1,0 +1,85 @@
+% Mise en page du CV PDF, reprise du CV LaTeX du mainteneur (sans son contenu).
+% Le contenu vient des données du site : src/lib/cv-latex.ts remplace le marqueur du corps.
+% Compilé par Tectonic (XeTeX) à la fin du build : src/integrations/cv-pdf.ts.
+
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage[left=1.4cm, top=0.8cm, right=1.2cm, bottom=1cm]{geometry}
+\usepackage{enumitem}
+\usepackage{fontspec}
+
+% XeTeX écrit un texte Unicode extractible : pas de glyphtounicode (propre à pdfTeX).
+% Pagella reprend le Palatino du CV d'origine ; chargée par nom de fichier pour Tectonic.
+\setmainfont{texgyrepagella}[
+  Extension=.otf,
+  UprightFont=*-regular,
+  BoldFont=*-bold,
+  ItalicFont=*-italic,
+  BoldItalicFont=*-bolditalic,
+]
+
+\definecolor{darkblue}{RGB}{0,0,139}
+
+\pagestyle{empty}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=darkblue,
+  filecolor=darkblue,
+  urlcolor=darkblue,
+}
+\urlstyle{same}
+
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+\newcommand{\resumeItem}[2]{
+  \item{
+    \textbf{#1}{\hspace{0.5mm}#2 \vspace{-0.5mm}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#4}} \\
+        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeProject}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#3}} \\
+        \footnotesize{\textit{#2}} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand{\labelitemii}{$\vcenter{\hbox{\tiny$\circ$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm]}
+\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm,itemsep=0.5mm]}
+
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{2mm}}
+\newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-2mm}}
+
+% Une seule page : après le \clearpage final, le compteur vaut le nombre de pages plus un.
+\AtEndDocument{\clearpage\ifnum\value{page}>2 \errmessage{CV longer than one page}\fi}
+
+\begin{document}
+%% CONTENT %%
+\end{document}

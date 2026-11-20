@@ -77,7 +77,7 @@ promesses restent : chaque promesse doit avoir **au moins une page publiée** qu
 /projects/<slug>       une page par projet
 /background            formations + expériences, une seule frise
 /skills                par domaine, niveau, liens de preuve
-/cv                    généré depuis les mêmes données, imprimable
+/cv                    généré depuis les mêmes données, imprimable, PDF FR et EN
 /blog/ · /blog/<slug>  liste · article (FR uniquement)
 /404 · /rss.xml · /sitemap-index.xml
 /en/…                  miroir anglais (hors blog et rss)
@@ -99,9 +99,11 @@ fois ; seule la prose existe par langue.
 | `experience`    | `src/data/experience.yaml`                      | `start, end?, title, place, detail` + `tech[], highlights[]` (prose `{ fr, en }`)                                                              |
 | `education`     | `src/data/education.yaml`                       | `start, end?, title, place, detail` (même forme que `experience`)                                                                              |
 | `skills`        | `src/data/skills.yaml`                          | `name, domain, level, projects[]` (au moins une référence vers `projects`)                                                                     |
+| `languages`     | `src/data/languages.yaml`                       | `rank, name, level` (prose `{ fr, en }`), lues par le CV                                                                                       |
 | `blog`          | `src/content/blog/<slug>.md`                    | `title, description, date, draft` + article                                                                                                    |
 | campagne        | `src/data/campaign.ts`                          | les 5 leviers (§7), bilingues                                                                                                                  |
 | navigation      | `src/data/nav.ts`                               | rubriques de la nav                                                                                                                            |
+| identité        | `src/data/site.ts`                              | nom, titre, email, ville, GitHub, LinkedIn                                                                                                     |
 
 Le récit d'un projet suit toujours : **contexte · problème · ce que j'ai fait · stack et
 pourquoi · résultat · ce que j'en ai appris.**

@@ -83,7 +83,8 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (prefers-color-scheme: dark) {
+/* À l'écran seulement : une page imprimée sort toujours encre sur papier. */
+@media screen and (prefers-color-scheme: dark) {
   :root {
     --color-paper: #161513;
     --color-ink: #f1efea;
@@ -101,6 +102,12 @@
     /* La planche reste claire et tonale en sombre (DESIGN.md, Printed Negative Rule). */
     --color-square-light: #e6e3dc;
     --color-square-dark: #b3afa5;
+  }
+}
+
+@media print {
+  :root {
+    color-scheme: light;
   }
 }
 
@@ -187,6 +194,36 @@ h1 {
 
 p {
   text-wrap: pretty;
+}
+
+/* Boutons de DESIGN.md (accueil, CV) ; hauteur minimale 3rem. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3rem;
+  padding: var(--space-3) var(--space-5);
+  border: var(--rule-heavy) solid var(--color-ink);
+  border-radius: var(--radius);
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  text-decoration: none;
+  transition:
+    background-color var(--duration) var(--ease-out),
+    color var(--duration) var(--ease-out);
+}
+
+.button.primary,
+.button.secondary:hover,
+.button.secondary:focus-visible {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.button.secondary,
+.button.primary:hover,
+.button.primary:focus-visible {
+  background: var(--color-paper);
+  color: var(--color-ink);
 }
 
 /* Lu par les lecteurs d'écran, invisible à l'écran (HTML des fiches projet compris). */

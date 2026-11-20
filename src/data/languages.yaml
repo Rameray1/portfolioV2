@@ -1,0 +1,16 @@
+french:
+  rank: 1
+  name: { fr: Français, en: French }
+  level: { fr: langue maternelle, en: native }
+
+turkish:
+  rank: 2
+  name: { fr: Turc, en: Turkish }
+  level: { fr: langue maternelle, en: native }
+
+english:
+  rank: 3
+  name: { fr: Anglais, en: English }
+  level:
+    fr: courant, C1 – certifié TOEIC
+    en: fluent, C1 – TOEIC certified

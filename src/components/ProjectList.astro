@@ -20,7 +20,7 @@ const symbols = (['!', '!?', '!!'] satisfies Eval[]).filter((symbol) =>
 
 {projects.length > 0 && (
   <>
-    <ol>
+    <ol class:list={{ detail }}>
       {projects.map((project) => {
         const fallback = project.untranslated && locale === 'en';
         const lang = fallback ? 'fr' : undefined;
@@ -185,6 +185,11 @@ const symbols = (['!', '!?', '!!'] satisfies Eval[]).filter((symbol) =>
     a {
       grid-template-columns: 4.5rem minmax(0, 1fr) 2rem;
       gap: var(--space-3);
+    }
+
+    /* Sans notation, l'année seule tient en 3rem : le texte garde la place. */
+    .detail a {
+      grid-template-columns: 3rem minmax(0, 1fr) 2rem;
     }
   }
 </style>

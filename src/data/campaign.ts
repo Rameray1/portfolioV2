@@ -33,18 +33,18 @@ export const campaign: Campaign = {
       en: 'Available for a developer internship abroad',
     },
     place: {
-      fr: 'Tous pays hors de France, 9\u00a0semaines minimum',
-      en: 'Any country outside France, 9\u00a0weeks minimum',
+      fr: 'Été 2027, 9\u00a0semaines minimum, tous pays hors de France (citoyen de l’UE)',
+      en: 'Summer 2027, 9\u00a0weeks minimum, any country outside France (EU citizen)',
     },
   },
   actions: [
     {
-      label: { fr: 'M’écrire', en: 'Email me' },
-      href: `mailto:${site.contact.email}`,
+      label: { fr: 'Voir le CV', en: 'View my CV' },
+      href: { fr: '/cv', en: '/en/cv' },
     },
     {
-      label: { fr: 'LinkedIn', en: 'LinkedIn' },
-      href: site.contact.linkedin,
+      label: { fr: 'M’écrire', en: 'Email me' },
+      href: `mailto:${site.contact.email}`,
     },
   ],
 };

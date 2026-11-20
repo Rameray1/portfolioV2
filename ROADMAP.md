@@ -291,15 +291,17 @@ Collection skills, loader strictFile() sur src/data/skills.yaml, champ projects:
 ```
 /cv et /en/cv affichent un CV construit uniquement à partir des données existantes (campagne, expériences, formations, compétences, projets mis en avant) : aucune information n'est saisie deux fois.
 - Imprimé depuis le navigateur, il tient sur une page A4 propre : sans navigation, en thème clair, liens lisibles (URL visibles).
-- Aucun numéro de téléphone n'est publié.
-- Un PDF téléchargeable FR et EN est disponible depuis la page.
+- Un PDF FR et un PDF EN, mis en page comme un CV classique (une colonne, texte lisible par les logiciels de tri de candidatures), sont téléchargeables depuis la page. Ils sont produits à chaque build à partir des mêmes données que la page : ils ne peuvent pas être en retard sur le site.
+- Si le PDF ne peut pas être produit, le build échoue.
+- Le CV comporte une rubrique Langues ; les langues sont une donnée, saisie une seule fois.
+- Aucun numéro de téléphone n'est publié, ni sur la page, ni dans les PDF, ni dans le dépôt.
 - Le levier « CV » de la campagne pointe désormais vers /cv.
 ```
 
 **Plan**
 
 ```
-CvView.astro réutilisant src/lib/* (projets, dates) et les collections experience, education, skills (compétences via getSkills(locale)). Bloc @media print dans son <style> (@page A4, masquage Header/Footer, a[href]::after). PDF exporté à la main depuis le navigateur (Imprimer → PDF) dans public/cv-fr.pdf et public/cv-en.pdf, à refaire quand les données changent. Pas de script de génération.
+getCv(locale) dans src/lib/cv.ts rassemble site, campagne, getBackground, featuredProjects, getSkills et la collection languages (src/data/languages.yaml, champ rank pour l'ordre) ; CvView.astro et le rendu LaTeX lisent ce seul objet. Bloc @media print dans CvView (@page A4, en-tête et pied masqués, URL des projets écrites) ; le thème sombre de global.css passe sous @media screen. PDF : gabarit src/cv/template.tex, repris du CV LaTeX du mainteneur (macros, sans contenu ni téléphone), adapté à XeTeX (fontspec, TeX Gyre Pagella) ; src/lib/cv-latex.ts l'échappe et le remplit ; l'endpoint src/pages/[file].tex.ts écrit dist/cv-fr.tex et cv-en.tex ; l'intégration src/integrations/cv-pdf.ts les compile avec Tectonic dans astro:build:done (et à la demande en dev) et fait échouer le build sur une erreur, un caractère absent de la police ou une deuxième page. Page : lecture à gauche, colonne d'infos collante à droite (disponibilité, PDF, contacts) au-dessus de 64rem, une colonne en dessous. Tectonic : brew en local, scripts/install-tectonic.sh (version et SHA-256 fixés) en CI et dans l'installCommand de Vercel.
 ```
 
 ### ✍️ C4 – C5 · Contenu _(hors speckit)_

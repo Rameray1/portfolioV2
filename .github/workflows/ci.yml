@@ -23,5 +23,6 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
+      - run: sh scripts/install-tectonic.sh
       - run: npm run check
       - run: npm run build
