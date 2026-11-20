@@ -53,12 +53,12 @@ disponibilité.
 Une affirmation sans page qui la prouve est supprimée. Les projets changent avec le temps, les
 promesses restent : chaque promesse doit avoir **au moins une page publiée** qui la prouve.
 
-| Promesse                                        | Type de preuve                                        |
-| ----------------------------------------------- | ----------------------------------------------------- |
-| Je livre du logiciel métier en équipe           | une étude de cas d'entreprise (anonymisée)            |
-| Je résous des problèmes techniques non triviaux | un projet raconté par le problème et le choix fait    |
-| Je construis et tiens un site propre            | ce portfolio : Astro, specs, CI, Lighthouse           |
-| Mes compétences ne sont pas déclaratives        | chaque compétence pointe vers ses projets (`/skills`) |
+| Promesse                                        | Type de preuve                                                                  |
+| ----------------------------------------------- | ------------------------------------------------------------------------------- |
+| Je livre du logiciel métier en équipe           | une étude de cas d'entreprise (anonymisée)                                      |
+| Je résous des problèmes techniques non triviaux | un projet raconté par le problème et le choix fait                              |
+| Je construis et tiens un site propre            | ce portfolio : Astro, specs, CI, Lighthouse                                     |
+| Mes compétences ne sont pas déclaratives        | chaque compétence pointe vers ses projets ou ses étapes du parcours (`/skills`) |
 
 ## 5. Arborescence et conventions
 
@@ -98,7 +98,7 @@ fois ; seule la prose existe par langue.
 | `projects` (EN) | `src/content/projects/en/<slug>.md` (même slug) | `title, summary, keyMove, coverAlt` + récit — le reste vient de la version FR                                                                  |
 | `experience`    | `src/data/experience.yaml`                      | `start, end?, title, place, detail` + `tech[], highlights[]` (prose `{ fr, en }`)                                                              |
 | `education`     | `src/data/education.yaml`                       | `start, end?, title, place, detail` (même forme que `experience`)                                                                              |
-| `skills`        | `src/data/skills.yaml`                          | `name, domain, level, projects[]` (au moins une référence vers `projects`)                                                                     |
+| `skills`        | `src/data/skills.yaml`                          | `name, domain, level, projects[], background[]` (au moins une preuve : un projet ou une étape du parcours)                                     |
 | `languages`     | `src/data/languages.yaml`                       | `rank, name, level` (prose `{ fr, en }`), lues par le CV                                                                                       |
 | `blog`          | `src/content/blog/<slug>.md`                    | `title, description, date, draft` + article                                                                                                    |
 | campagne        | `src/data/campaign.ts`                          | les 5 leviers (§7), bilingues                                                                                                                  |

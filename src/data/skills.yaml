@@ -106,6 +106,12 @@ gitlab:
   level: proficient
   projects: [shipment-preparation]
 
+cypress:
+  name: Cypress
+  domain: tools
+  level: proficient
+  background: [astree-internship]
+
 jira:
   name: Jira
   domain: tools
