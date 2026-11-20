@@ -112,15 +112,21 @@ const education = defineCollection({
   schema: timelineEntry,
 });
 
-// Existence et brouillon des projets cités : vérifiés par `getSkills`, pas par `reference()`.
+// Preuves (projets, étapes du parcours) : existence et brouillon vérifiés par `getSkills`.
 const skills = defineCollection({
   loader: strictFile('src/data/skills.yaml'),
-  schema: z.strictObject({
-    name: z.union([text, localized]),
-    domain: z.enum(DOMAINS),
-    level: z.enum(LEVELS),
-    projects: z.array(reference('projects')).min(1, 'au moins un projet'),
-  }),
+  schema: z
+    .strictObject({
+      name: z.union([text, localized]),
+      domain: z.enum(DOMAINS),
+      level: z.enum(LEVELS),
+      projects: z.array(reference('projects')).default([]),
+      background: z.array(text).default([]),
+    })
+    .refine((skill) => skill.projects.length + skill.background.length > 0, {
+      message: 'au moins une preuve : un projet ou une étape du parcours',
+      path: ['projects'],
+    }),
 });
 
 const languages = defineCollection({

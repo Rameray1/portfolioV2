@@ -23,7 +23,7 @@ const pieceOf = { education: 'pawn', experience: 'knight' } as const;
   </div>
   <ol>
     {entries.map((entry) => (
-      <li>
+      <li id={entry.id}>
         <div class="when">
           <p class="year" aria-hidden="true">
             {entry.start.slice(0, 4)}
