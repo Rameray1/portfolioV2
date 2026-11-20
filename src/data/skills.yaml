@@ -22,6 +22,18 @@ astro:
   level: proficient
   projects: [portfolio]
 
+html:
+  name: HTML
+  domain: frontend
+  level: advanced
+  projects: [portfolio, meetz, sportify]
+
+css:
+  name: CSS
+  domain: frontend
+  level: proficient
+  projects: [portfolio, meetz, sportify]
+
 java:
   name: Java
   domain: backend
@@ -36,6 +48,12 @@ spring:
 
 express:
   name: Express
+  domain: backend
+  level: basics
+  projects: [meetz]
+
+nodejs:
+  name: Node.js
   domain: backend
   level: basics
   projects: [meetz]
@@ -75,6 +93,12 @@ docker:
   domain: tools
   level: basics
   projects: [sportify, meetz]
+
+git:
+  name: Git
+  domain: tools
+  level: advanced
+  projects: [portfolio, meetz, sportify]
 
 gitlab:
   name: GitLab
