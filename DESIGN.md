@@ -241,7 +241,7 @@ Les graisses passent par des jetons : `--weight-regular` (400), `--weight-semibo
 
 ## Layout
 
-Une page de livre centrée : conteneur de `--page-max` (80rem), gouttière fluide `--gutter` (`clamp(1rem, 0.5rem + 2.5vw, 4.5rem)`), mesure de lecture `--measure` (68ch). L'espacement suit une base de 4 px (`--space-1` à `--space-9` : 4, 8, 12, 16, 24, 32, 48, 64, 96 px). Les sections respirent en `--space-8` / `--space-9` sur l'axe vertical.
+Une page de livre centrée : conteneur de `--page-max` (96rem), gouttière fluide `--gutter` (`clamp(1rem, 0.5rem + 2.5vw, 4.5rem)`), mesure de lecture `--measure` (68ch). L'espacement suit une base de 4 px (`--space-1` à `--space-9` : 4, 8, 12, 16, 24, 32, 48, 64, 96 px). Les sections respirent en `--space-8` / `--space-9` sur l'axe vertical.
 
 - **Accueil (ouverture).** Deux colonnes : texte `minmax(0, 1fr)`, diagramme `minmax(18rem, 30rem)`, écart `--space-7` / `--space-8`. Le diagramme est collant (`top: --space-6`). Dessous, le nom, la ligne d'en-tête de partie sur filet de 2 px, le pitch, les deux actions côte à côte, puis la liste des coups.
 - **Liste des coups.** Grille à trois colonnes : année + notation (4.5rem), titre + coup clé, symbole d'évaluation aligné à droite (2.5rem), sur ligne de base commune.

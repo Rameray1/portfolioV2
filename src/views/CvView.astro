@@ -1,9 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Availability from '../components/Availability.astro';
+import Highlights from '../components/Highlights.astro';
 import Piece from '../components/Piece.astro';
 import ProjectList from '../components/ProjectList.astro';
+import Trait from '../components/Trait.astro';
 import { getCv, type CvEntry, type CvLink } from '../lib/cv';
+import { stepPiece, type PieceName } from '../lib/pieces';
 import { getLocale, useTranslations } from '../i18n/utils';
 
 const locale = getLocale(Astro.currentLocale);
@@ -20,19 +23,19 @@ const site = new URL(import.meta.env.SITE).host;
 const timeline: {
   id: string;
   label: string;
-  piece: 'knight' | 'pawn';
+  piece: PieceName;
   entries: CvEntry[];
 }[] = [
   {
     id: 'cv-experience',
     label: t('background.experience'),
-    piece: 'knight',
+    piece: stepPiece.experience,
     entries: cv.experience,
   },
   {
     id: 'cv-education',
     label: t('background.education'),
-    piece: 'pawn',
+    piece: stepPiece.education,
     entries: cv.education,
   },
 ];
@@ -93,7 +96,7 @@ const timeline: {
                     {entry.from} –{' '}
                     {entry.current ? (
                       <span class="now">
-                        <span class="trait" aria-hidden="true" />
+                        <Trait small />
                         {entry.to}
                       </span>
                     ) : (
@@ -102,13 +105,7 @@ const timeline: {
                   </p>
                   <p class="place">{entry.place}</p>
                   <p class="text">{entry.detail}</p>
-                  {entry.highlights.length > 0 && (
-                    <ul class="highlights">
-                      {entry.highlights.map((highlight) => (
-                        <li>{highlight}</li>
-                      ))}
-                    </ul>
-                  )}
+                  <Highlights items={entry.highlights} class="highlights" />
                 </li>
               ))}
             </ol>
@@ -166,7 +163,7 @@ const timeline: {
   ol,
   ul,
   dl,
-  dd {
+  .rows dd {
     margin: 0;
   }
 
@@ -199,29 +196,14 @@ const timeline: {
     font-weight: var(--weight-semibold);
   }
 
-  /* En-tête de partie, comme l'en-tête PGN d'une page projet : libellé, puis valeur. */
   .pgn {
     order: 3;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 var(--space-7);
     margin-top: var(--space-6);
     border-top: var(--rule-heavy) solid var(--color-rule);
     border-bottom: var(--rule-thin) solid var(--color-rule);
   }
 
-  .pgn > div {
-    padding-block: var(--space-3);
-  }
-
-  .pgn dt {
-    font-size: var(--text-xs);
-    color: var(--color-ink-muted);
-  }
-
   .pgn dd {
-    margin-top: var(--space-1);
-    font-weight: var(--weight-semibold);
     overflow-wrap: anywhere;
   }
 
@@ -320,18 +302,10 @@ const timeline: {
     white-space: nowrap;
   }
 
-  /* L'étape en cours, comme sur le parcours : le trait réduit pour une ligne de petit texte. */
+  /* L'étape en cours, comme sur le parcours. */
   .now {
     font-weight: var(--weight-semibold);
     color: var(--color-ink);
-  }
-
-  .trait {
-    display: inline-block;
-    width: 0.5rem;
-    height: 0.5rem;
-    margin-right: var(--space-1);
-    background: var(--color-mark);
   }
 
   .place {
@@ -349,14 +323,6 @@ const timeline: {
   .highlights {
     grid-area: list;
     margin-top: var(--space-3);
-    padding-left: var(--space-4);
-    font-size: var(--text-sm);
-    text-wrap: pretty;
-    list-style-type: '–  ';
-  }
-
-  .highlights li + li {
-    margin-top: var(--space-1);
   }
 
   /* La liste des coups porte déjà son filet : la rubrique l'a tracé. */

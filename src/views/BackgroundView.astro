@@ -2,13 +2,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getBackground } from '../lib/background';
 import { formatMonth } from '../lib/dates';
+import Highlights from '../components/Highlights.astro';
 import Piece from '../components/Piece.astro';
+import Trait from '../components/Trait.astro';
+import { stepPiece } from '../lib/pieces';
 import { getLocale, useTranslations } from '../i18n/utils';
 
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 const entries = await getBackground(locale);
-const pieceOf = { education: 'pawn', experience: 'knight' } as const;
 ---
 
 <BaseLayout
@@ -48,7 +50,7 @@ const pieceOf = { education: 'pawn', experience: 'knight' } as const;
                     </time>
                   ) : (
                     <span class="now">
-                      <span class="trait" aria-hidden="true" />
+                      <Trait small />
                       {t('background.present')}
                     </span>
                   )}
@@ -59,7 +61,7 @@ const pieceOf = { education: 'pawn', experience: 'knight' } as const;
           <p class="kind">{t(`background.${entry.kind}`)}</p>
         </div>
         <span class="node" aria-hidden="true">
-          <Piece name={pieceOf[entry.kind]} class="piece" />
+          <Piece name={stepPiece[entry.kind]} class="piece" />
         </span>
         <h2>{entry.title}</h2>
         <p class="place">{entry.place}</p>
@@ -71,13 +73,7 @@ const pieceOf = { education: 'pawn', experience: 'knight' } as const;
             ))}
           </ul>
         )}
-        {entry.highlights.length > 0 && (
-          <ul class="highlights" aria-label={t('background.highlights')}>
-            {entry.highlights.map((highlight) => (
-              <li>{highlight}</li>
-            ))}
-          </ul>
-        )}
+        <Highlights items={entry.highlights} class="highlights" />
       </li>
     ))}
   </ol>
@@ -146,20 +142,11 @@ const pieceOf = { education: 'pawn', experience: 'knight' } as const;
     grid-column: 1;
   }
 
-  /* Le trait de DESIGN.md, réduit pour une ligne de petit texte. */
   .period .now {
     display: inline;
     font-weight: var(--weight-semibold);
     color: var(--color-ink);
     transition: color var(--duration) var(--ease-out);
-  }
-
-  .period .trait {
-    display: inline-block;
-    width: 0.5rem;
-    height: 0.5rem;
-    margin-right: var(--space-1);
-    background: var(--color-mark);
   }
 
   .period span {
@@ -227,14 +214,6 @@ const pieceOf = { education: 'pawn', experience: 'knight' } as const;
   ol > li > .highlights {
     max-width: var(--measure);
     margin-top: var(--space-3);
-    padding-left: var(--space-4);
-    font-size: var(--text-sm);
-    text-wrap: pretty;
-    list-style-type: '–  ';
-  }
-
-  .highlights li + li {
-    margin-top: var(--space-1);
   }
 
   .head {

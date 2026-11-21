@@ -1,0 +1,36 @@
+---
+interface Props {
+  class?: string;
+  lang?: string;
+}
+
+// `attrs` porte la classe de l'appelant et son attribut de portée, comme pour Piece.
+const { class: className, ...attrs } = Astro.props;
+---
+
+<div {...attrs} class:list={['prose', className]}>
+  <slot />
+</div>
+
+<style>
+  /* Texte écrit en Markdown (récit d'un projet, mentions légales). Chaque partie s'ouvre
+     sur un filet doux et un titre en chasse étroite ; interligne 1.1 du Section title de
+     DESIGN.md, sans jeton. */
+  .prose :global(h2) {
+    margin: var(--space-7) 0 0;
+    padding-top: var(--space-3);
+    border-top: var(--rule-thin) solid var(--color-rule-soft);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-black);
+    font-stretch: var(--stretch-display);
+    line-height: 1.1;
+  }
+
+  .prose > :global(:first-child) {
+    margin-top: 0;
+  }
+
+  .prose :global(:is(p, ul, ol)) {
+    margin: var(--space-3) 0 0;
+  }
+</style>

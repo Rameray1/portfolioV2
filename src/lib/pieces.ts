@@ -1,18 +1,26 @@
-import blackPawn from '../assets/pieces/bP.svg?url';
-import blackKnight from '../assets/pieces/bN.svg?url';
-import blackQueen from '../assets/pieces/bQ.svg?url';
-import blackRook from '../assets/pieces/bR.svg?url';
-import whitePawn from '../assets/pieces/wP.svg?url';
-import whiteKnight from '../assets/pieces/wN.svg?url';
-import whiteQueen from '../assets/pieces/wQ.svg?url';
-import whiteRook from '../assets/pieces/wR.svg?url';
+// Adresse de chaque figurine par son code FEN (`wK`, `bP`…).
+export const pieceUrls: Record<string, string> = Object.fromEntries(
+  Object.entries(
+    import.meta.glob<string>('../assets/pieces/*.svg', {
+      eager: true,
+      query: '?url',
+      import: 'default',
+    }),
+  ).map(([path, url]) => [path.replace(/^.*\/(\w+)\.svg$/, '$1'), url]),
+);
 
 // Figurines imprimées à l'encre : noires sur papier clair, blanches en thème sombre (DESIGN.md).
 export const pieces = {
-  pawn: { light: blackPawn, dark: whitePawn },
-  knight: { light: blackKnight, dark: whiteKnight },
-  rook: { light: blackRook, dark: whiteRook },
-  queen: { light: blackQueen, dark: whiteQueen },
+  pawn: { light: pieceUrls.bP, dark: pieceUrls.wP },
+  knight: { light: pieceUrls.bN, dark: pieceUrls.wN },
+  rook: { light: pieceUrls.bR, dark: pieceUrls.wR },
+  queen: { light: pieceUrls.bQ, dark: pieceUrls.wQ },
 };
 
 export type PieceName = keyof typeof pieces;
+
+// La pièce d'une étape du parcours, sur la frise comme sur le CV.
+export const stepPiece = {
+  education: 'pawn',
+  experience: 'knight',
+} as const satisfies Record<string, PieceName>;

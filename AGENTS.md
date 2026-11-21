@@ -4,7 +4,8 @@
   abstraction or dependency "just in case". Prefer native HTML/CSS, then Astro built-ins, then
   a dependency (justified). Future ideas go to the reserve at the end of `ROADMAP.md`.
 - **SOLID, without zeal** (constitution, principle I): a view displays, `src/lib/` provides
-  the data, and a view never reads a collection or a data file directly. Extract a function,
+  the data, and a view never reads a collection or a YAML / Markdown file directly. The typed
+  constants of `src/data/*.ts` are read directly; `src/data/` holds data only, no logic. Extract a function,
   component or token at its second real use, never before.
 - **100 % static site**, zero client JavaScript by default (constitution, principles I–II).
 

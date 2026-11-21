@@ -26,7 +26,7 @@ export interface CvEntry {
 }
 
 // La page reprend la liste des coups (symbole, repli français) ; le PDF lit l'URL absolue.
-export type CvProject = Project & { url: string };
+type CvProject = Project & { url: string };
 
 export interface Cv {
   locale: Locale;

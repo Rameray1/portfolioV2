@@ -27,10 +27,12 @@ const timelineEntry = z
 
 const pages = defineCollection({
   loader: glob({ pattern: '*/*.md', base: './src/content/pages' }),
-  schema: z.object({
-    title: z.string().min(1),
-    description: z.string().min(1),
-    photoAlt: z.string().min(1),
+  schema: z.strictObject({
+    title: text,
+    description: text,
+    photoAlt: text.optional(),
+    summary: text.optional(),
+    updated: z.iso.date().optional(),
   }),
 });
 

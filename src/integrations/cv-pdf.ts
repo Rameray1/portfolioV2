@@ -6,9 +6,10 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
 import type { AstroIntegration } from 'astro';
+import { locales } from '../i18n/ui.ts';
 
 const run = promisify(execFile);
-const FILES = ['cv-fr', 'cv-en'];
+const FILES = locales.map((locale) => `cv-${locale}`);
 
 async function compile(dir: string, name: string) {
   const tex = join(dir, `${name}.tex`);

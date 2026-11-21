@@ -272,6 +272,43 @@ p {
   color: var(--color-ink);
 }
 
+/* En-tête de partie, comme l'en-tête PGN d'une partie d'échecs : libellé, puis valeur
+   (À propos, page projet, CV). Chaque vue pose ses filets et sa disposition. */
+.pgn {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-7);
+  margin: 0;
+}
+
+.pgn > div {
+  padding-block: var(--space-3);
+}
+
+.pgn dt {
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+}
+
+.pgn dd {
+  margin: var(--space-1) 0 0;
+  font-weight: var(--weight-semibold);
+}
+
+/* Couleur des symboles d'évaluation (EvalMark, notes des fiches projet). Une ligne
+   inversée ou la planche redéfinit --eval-color*. */
+[data-eval] {
+  color: var(--eval-color, var(--color-interesting));
+}
+
+[data-eval='!'] {
+  color: var(--eval-color-great, var(--color-great));
+}
+
+[data-eval='!!'] {
+  color: var(--eval-color-brilliant, var(--color-brilliant));
+}
+
 /* Lu par les lecteurs d'écran, invisible à l'écran (HTML des fiches projet compris). */
 .visually-hidden {
   position: absolute;

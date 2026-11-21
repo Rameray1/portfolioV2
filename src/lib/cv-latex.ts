@@ -48,7 +48,7 @@ function timeline(entries: CvEntry[]): string[] {
   return [
     '\\resumeSubHeadingListStart',
     ...entries.flatMap((entry) => [
-      `\\resumeSubheading{${latex(entry.title)}}{}{${latex(entry.place)}}{${latex(`${entry.from} – ${entry.to}`)}}`,
+      `\\resumeSubheading{${latex(entry.title)}}{${latex(entry.place)}}{${latex(`${entry.from} – ${entry.to}`)}}`,
       ...items([entry.detail, ...entry.highlights]),
     ]),
     '\\resumeSubHeadingListEnd',

@@ -22,7 +22,10 @@ constitution fixe ce qui est non négociable et que chaque `/speckit-plan` doit 
   - **L** et **I** : une interface ou les props d'un composant n'exposent que ce que
     l'appelant utilise.
   - **D** : une vue dépend des fonctions d'accès de `src/lib/` (`getProjects`, `getSkills`…),
-    jamais directement d'une collection ou d'un fichier de données.
+    jamais directement d'une collection ni d'un fichier YAML ou Markdown. Les constantes
+    typées de `src/data/*.ts` (`site`, `campaign`, `nav`, `diagram`) se lisent directement :
+    une fonction d'accès n'y ajouterait rien. `src/data/` ne contient que des données ; toute
+    logique vit dans `src/lib/`.
 - SOLID ne justifie jamais une abstraction que KISS et YAGNI refusent : on extrait à la
   deuxième utilisation réelle, pas avant.
 
@@ -146,4 +149,4 @@ commun pèse sur toutes les pages.
 - Conformité : `/speckit-plan` et `/speckit-analyze` vérifient chaque feature contre ces
   principes ; une exception non justifiée bloque la feature.
 
-**Version**: 1.2.0 | **Ratified**: 2026-11-07 | **Last Amended**: 2026-11-18
+**Version**: 1.2.1 | **Ratified**: 2026-11-07 | **Last Amended**: 2026-11-21

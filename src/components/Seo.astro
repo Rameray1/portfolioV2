@@ -1,7 +1,6 @@
 ---
 import { PUBLIC_NOINDEX } from 'astro:env/client';
 import { site } from '../data/site';
-import { isNoindexPath } from '../data/seo';
 import {
   alternatePath,
   getLocale,
@@ -40,7 +39,7 @@ const canonical = statusPage
   : absolute(fallback ? localizePath(pathname, 'fr') : pathname);
 const robots = PUBLIC_NOINDEX
   ? 'noindex, nofollow'
-  : statusPage || fallback || isNoindexPath(pathname)
+  : statusPage || fallback
     ? 'noindex'
     : undefined;
 const alternate =

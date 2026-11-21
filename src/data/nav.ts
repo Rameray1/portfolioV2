@@ -2,7 +2,7 @@ import type { UiKey } from '../i18n/ui';
 
 type NavKey = Extract<UiKey, `nav.${string}`>;
 
-export interface NavItem {
+interface NavItem {
   key: NavKey;
   href: `/${string}`;
 }

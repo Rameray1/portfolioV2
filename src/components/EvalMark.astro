@@ -12,8 +12,8 @@ const { eval: symbol, legend = false } = Astro.props;
 const t = useTranslations(getLocale(Astro.currentLocale));
 ---
 
-<span class="eval" data-eval={symbol}>
-  <span class="symbol" aria-hidden="true">
+<span>
+  <span class="symbol" data-eval={symbol} aria-hidden="true">
     {symbol}
   </span>
   <span class:list={{ 'visually-hidden': !legend }}>{t(evalKeys[symbol])}</span>
@@ -24,14 +24,5 @@ const t = useTranslations(getLocale(Astro.currentLocale));
     font-weight: var(--weight-black);
     font-stretch: var(--stretch-display);
     line-height: 1;
-    color: var(--eval-color, var(--color-interesting));
-  }
-
-  [data-eval='!'] .symbol {
-    color: var(--eval-color-great, var(--color-great));
-  }
-
-  [data-eval='!!'] .symbol {
-    color: var(--eval-color-brilliant, var(--color-brilliant));
   }
 </style>
