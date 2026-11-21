@@ -1,11 +1,11 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
-import type { Locale } from '../i18n/ui';
+import { locales, type Locale } from '../i18n/ui';
 import { getCv } from '../lib/cv';
 import { renderCvLatex } from '../lib/cv-latex';
 
 // Source du PDF : l'intégration cv-pdf compile ces fichiers puis les retire de dist/.
 export const getStaticPaths = (() =>
-  (['fr', 'en'] as const).map((locale) => ({
+  locales.map((locale) => ({
     params: { file: `cv-${locale}` },
     props: { locale },
   }))) satisfies GetStaticPaths;

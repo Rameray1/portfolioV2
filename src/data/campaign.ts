@@ -1,21 +1,21 @@
 import type { Locale } from '../i18n/ui';
 import { site } from './site';
 
-export type Localized = Record<Locale, string>;
+type Localized = Record<Locale, string>;
 
-export interface Action {
+interface Action {
   label: Localized;
   href: string | Localized;
 }
 
-export interface Availability {
+interface Availability {
   visible: boolean;
   status: Localized;
   start?: `${number}-${number}` | `${number}-${number}-${number}`;
   place: Localized;
 }
 
-export interface Campaign {
+interface Campaign {
   pitch: Localized;
   availability: Availability;
   actions: readonly [Action, Action];

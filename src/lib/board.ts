@@ -1,4 +1,3 @@
-import { parseFen } from '../data/diagram';
 import type { Eval } from './projects';
 
 export interface Move {
@@ -38,6 +37,30 @@ interface Board {
   stamps: BoardStamp[];
 }
 
+function parseFen(fen: string): BoardPiece[] {
+  const ranks = fen.split('/');
+  if (ranks.length !== 8) throw new Error(`FEN invalide : « ${fen} »`);
+
+  return ranks.flatMap((row, index) => {
+    const rank = 8 - index;
+    const pieces: BoardPiece[] = [];
+    let file = 1;
+    for (const char of row) {
+      if (/[1-8]/.test(char)) {
+        file += Number(char);
+      } else if (/[pnbrqk]/i.test(char)) {
+        const color = char === char.toUpperCase() ? 'w' : 'b';
+        pieces.push({ piece: color + char.toUpperCase(), file, rank });
+        file += 1;
+      } else {
+        throw new Error(`FEN invalide : « ${fen} »`);
+      }
+    }
+    if (file !== 9) throw new Error(`FEN invalide : « ${fen} »`);
+    return pieces;
+  });
+}
+
 const toSquare = (name: string) => ({
   file: name.charCodeAt(0) - 96,
   rank: Number(name[1]),
@@ -45,7 +68,7 @@ const toSquare = (name: string) => ({
 
 // La position reste celle de la FEN ; chaque coup ne se joue qu'au survol de sa ligne.
 export function playBoard(fen: string, moves: Move[]): Board {
-  const pieces: BoardPiece[] = parseFen(fen);
+  const pieces = parseFen(fen);
   const at = (name: string) => {
     const { file, rank } = toSquare(name);
     return pieces.find((piece) => piece.file === file && piece.rank === rank);

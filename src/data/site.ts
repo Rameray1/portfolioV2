@@ -1,13 +1,13 @@
 import type { Locale } from '../i18n/ui';
 
-export interface Contact {
+interface Contact {
   email: string;
   github: string;
   linkedin: string;
   city: string;
 }
 
-export interface Site {
+interface Site {
   name: string;
   contact: Contact;
   person: {
