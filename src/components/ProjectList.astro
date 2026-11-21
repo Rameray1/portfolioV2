@@ -21,12 +21,15 @@ const symbols = (['!', '!?', '!!'] satisfies Eval[]).filter((symbol) =>
 {projects.length > 0 && (
   <>
     <ol class:list={{ detail }}>
-      {projects.map((project) => {
+      {projects.map((project, index) => {
         const fallback = project.untranslated && locale === 'en';
         const lang = fallback ? 'fr' : undefined;
         return (
           <li>
-            <a href={localizePath(`/projects/${project.slug}/`, locale)}>
+            <a
+              href={localizePath(`/projects/${project.slug}/`, locale)}
+              data-play={!detail && project.move ? index + 1 : undefined}
+            >
               <span class="when">
                 {project.year}
                 {!detail && project.move && (

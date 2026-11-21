@@ -29,6 +29,12 @@
   --color-great-on-invert: #749bbf;
   --color-brilliant: #0077b6;
   --color-brilliant-on-invert: #5cc8ff;
+  /* La planche reste claire en sombre : les symboles et les liserés y gardent leurs
+     encres d'impression. */
+  --color-great-on-board: #2a5384;
+  --color-interesting-on-board: #a3289a;
+  --color-brilliant-on-board: #0077b6;
+  --color-mark-on-board: #c8102e;
 
   /* Typographie */
   --font-sans: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
@@ -80,6 +86,9 @@
 
   /* Mouvement */
   --duration: 160ms;
+  --duration-page: 280ms;
+  --duration-move: 320ms;
+  --duration-stamp: 240ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -114,6 +123,9 @@
 @media (prefers-reduced-motion: reduce) {
   :root {
     --duration: 0ms;
+    --duration-page: 0ms;
+    --duration-move: 0ms;
+    --duration-stamp: 0ms;
   }
 }
 
