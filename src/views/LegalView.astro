@@ -9,13 +9,14 @@ import { getLocale, useTranslations } from '../i18n/utils';
 
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
-const { entry, updated } = await getLegalPage(locale);
+const { entry, summary, updated } = await getLegalPage(locale);
 const { Content } = await render(entry);
 ---
 
 <BaseLayout title={entry.data.title} description={entry.data.description}>
   <article class="legal">
     <h1>{entry.data.title}</h1>
+    <p class="summary">{summary}</p>
     <dl class="pgn">
       <div>
         <dt>{t('legal.editor')}</dt>
@@ -78,11 +79,19 @@ const { Content } = await render(entry);
 
   .text {
     max-width: var(--measure);
-    margin-top: var(--space-7);
+    margin-top: var(--space-6);
   }
 
-  /* La note ouvre la lecture, à la hauteur de l'en-tête de partie. */
-  .text > :global(.note:first-child) {
+  /* Le résumé, comme sur la page projet. */
+  .summary {
+    max-width: 40ch;
+    margin: var(--space-5) 0 0;
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+  }
+
+  /* La mention de l'éditeur ouvre le texte, du bord gauche, sans colonne de libellés. */
+  .text > :global(p:first-child) {
     margin-top: 0;
   }
 
@@ -115,8 +124,7 @@ const { Content } = await render(entry);
   }
 
   /* Dès 40rem, le libellé dans une colonne de 12rem, comme sur le CV. Le filet court sous les
-     deux colonnes : l'écart est une marge interne du texte. La colonne porte aussi le symbole
-     de la note du commentateur. */
+     deux colonnes : l'écart est une marge interne du texte. */
   @media (min-width: 40rem) {
     .text {
       display: grid;
@@ -129,13 +137,12 @@ const { Content } = await render(entry);
       padding-left: var(--space-5);
     }
 
-    .text > :global(:is(h2, h3)) {
+    .text > :global(:is(h2, h3, p:first-child)) {
       padding-left: 0;
     }
 
-    .text > :global(.note) {
-      padding-left: 0;
-      margin-left: var(--space-5);
+    .text > :global(p:first-child) {
+      grid-column: 1 / -1;
     }
 
     .text > :global(h2) {
@@ -173,11 +180,11 @@ const { Content } = await render(entry);
 
     .pgn {
       grid-column: 2;
-      grid-row: 2;
+      grid-row: 2 / span 2;
       position: sticky;
       top: var(--space-6);
       flex-direction: column;
-      margin-top: var(--space-7);
+      margin-top: var(--space-5);
       border-top: var(--rule-heavy) solid var(--color-rule);
     }
 
@@ -185,9 +192,14 @@ const { Content } = await render(entry);
       border-top: var(--rule-thin) solid var(--color-rule-soft);
     }
 
-    .text {
+    .summary {
       grid-column: 1;
       grid-row: 2;
+    }
+
+    .text {
+      grid-column: 1;
+      grid-row: 3;
     }
   }
 </style>

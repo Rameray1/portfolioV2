@@ -27,6 +27,8 @@ export async function getAboutPage(locale: Locale) {
 
 export async function getLegalPage(locale: Locale) {
   const entry = await getPage('legal', locale);
-  const updated = required(entry.data.updated, 'updated', `${locale}/legal`);
-  return { entry, updated };
+  const file = `${locale}/legal`;
+  const summary = required(entry.data.summary, 'summary', file);
+  const updated = required(entry.data.updated, 'updated', file);
+  return { entry, summary, updated };
 }

@@ -1,10 +1,9 @@
 ---
 title: Legal notice
-description: Publisher, host, personal data and credits of Ramazan Kus's portfolio.
+description: Publisher, host, personal data and credits of Ramazan Kus’s portfolio.
+summary: 'No cookies, no ads, and nothing that passes through this site is sold.'
 updated: '2026-11-21'
 ---
-
-> ! No cookies, no ads, and nothing that passes through this site is sold.
 
 This site is published by a private individual, on a non-commercial basis (French law no. 2004-575 of 21 June 2004, article 1-1).
 

@@ -1,10 +1,9 @@
 ---
 title: Mentions légales
 description: Éditeur, hébergeur, données personnelles et crédits du portfolio de Ramazan Kus.
+summary: 'Aucun cookie, aucune publicité, et rien de ce qui passe par ce site n’est vendu.'
 updated: '2026-11-21'
 ---
-
-> ! Aucun cookie, aucune publicité, et rien de ce qui passe par ce site n'est vendu.
 
 Ce site est édité par un particulier, à titre non professionnel (loi n° 2004-575 du 21 juin 2004, article 1-1).
 
