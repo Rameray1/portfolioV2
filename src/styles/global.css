@@ -129,6 +129,40 @@
   }
 }
 
+/* Transitions natives entre pages : l'en-tête reste, le titre d'un projet passe de la
+   liste à sa page, le reste passe en fondu. Rien sous mouvement réduit. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-group(*) {
+    animation-duration: var(--duration-page);
+    animation-timing-function: var(--ease-out);
+  }
+
+  /* L'ancienne page s'efface avant que la nouvelle n'apparaisse : jamais deux pages
+     superposées à moitié. */
+  ::view-transition-old(root) {
+    animation-duration: calc(var(--duration-page) / 2);
+  }
+
+  ::view-transition-new(root) {
+    animation-delay: calc(var(--duration-page) / 4);
+    animation-duration: calc(var(--duration-page) * 3 / 4);
+  }
+
+  /* Le titre grandit sans se déformer : chaque capture garde ses proportions, suit la
+     hauteur du cadre et reste ancrée en haut à gauche. Le fondu entre les deux est bref,
+     pour ne jamais lire deux titres superposés. */
+  ::view-transition-old(*.project),
+  ::view-transition-new(*.project) {
+    block-size: 100%;
+    inline-size: auto;
+    animation-duration: calc(var(--duration-page) / 3);
+  }
+}
+
 *,
 *::before,
 *::after {

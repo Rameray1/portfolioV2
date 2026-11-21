@@ -7,9 +7,15 @@ interface Props {
   projects: Project[];
   detail?: boolean;
   legend?: boolean;
+  transition?: boolean;
 }
 
-const { projects, detail = false, legend = true } = Astro.props;
+const {
+  projects,
+  detail = false,
+  legend = true,
+  transition = true,
+} = Astro.props;
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 
@@ -37,7 +43,14 @@ const symbols = (['!', '!?', '!!'] satisfies Eval[]).filter((symbol) =>
                 )}
               </span>
               <span class="what">
-                <span class="title">
+                <span
+                  class="title"
+                  style={
+                    transition
+                      ? `view-transition-name: project-${project.slug}`
+                      : undefined
+                  }
+                >
                   <span lang={lang}>{project.title}</span>{' '}
                   {fallback && (
                     <span class="flag">{t('projects.frenchOnly')}</span>
@@ -134,6 +147,7 @@ const symbols = (['!', '!?', '!!'] satisfies Eval[]).filter((symbol) =>
 
   .title {
     display: block;
+    view-transition-class: project;
     font-size: var(--text-lg);
     font-weight: var(--weight-bold);
     line-height: var(--leading-snug);
