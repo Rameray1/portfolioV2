@@ -328,8 +328,8 @@ getCv(locale) dans src/lib/cv.ts rassemble site, campagne, getBackground, featur
 
 ```
 Les quatre effets de DESIGN.md (section Motion), et rien d'autre :
-- Accueil : le coup du projet !! se joue tout seul une fois, puis le symbole !! se pose en bleu à côté.
-- Survol ou focus d'un projet mis en avant : sa pièce joue son coup (blancs seulement) et ses cases de départ et d'arrivée se marquent ; elle revient quand on passe à un autre projet, et la pièce du !! revient le temps du survol.
+- Accueil : rien ne bouge au chargement ; le diagramme montre la position de référence.
+- Survol ou focus d'un projet mis en avant : sa pièce joue son coup (blancs seulement), ses cases de départ et d'arrivée se marquent, puis son symbole d'évaluation se pose à côté de la case d'arrivée ; elle revient quand on passe à un autre projet. Le coup !! se joue comme les autres.
 - Moins d'animations demandées : aucune pièce ne bouge, seules les cases se marquent.
 - Ouverture d'un projet : son titre passe de la liste à la page projet par une transition fluide ; l'en-tête reste fixe.
 - Page projet : le symbole d'évaluation se pose après la transition, jamais pendant.
@@ -340,7 +340,7 @@ Les quatre effets de DESIGN.md (section Motion), et rien d'autre :
 **Plan**
 
 ```
-Jetons dans global.css : --duration-page, --duration-move, --duration-stamp (les jetons bleus --color-brilliant sont livrés en F06). View transitions natives entre documents (@view-transition { navigation: auto; }), view-transition-name: site-header sur l'en-tête et project-<slug> sur les titres (liste et page). Le HTML place la pièce du !! sur sa case d'arrivée et les autres sur leur case de départ. Coup signature : @keyframes sur la pièce du !!, de sa case de départ vers la position du HTML ; au chargement au-dessus de 56rem, animation-timeline: view() en dessous, dans @supports. Coups au survol : une règle :has() par rang de la liste (3 au plus, nth-child) qui translate la pièce du coup (transform calculé depuis --file / --rank de départ et d'arrivée, transition en --duration-move) et ramène la pièce du !!, plus box-shadow inset sur les cases move.from / move.to. Sous reduced motion, seules les cases changent. Symbole de la page projet : animation-delay égal à --duration-page. Tous les mouvements sous @media (prefers-reduced-motion: no-preference). Pas de ClientRouter, pas d'IntersectionObserver.
+Jetons dans global.css : --duration-page, --duration-move, --duration-stamp, et les encres de la planche --color-great-on-board, --color-interesting-on-board, --color-brilliant-on-board et --color-mark-on-board, identiques dans les deux thèmes (les jetons bleus --color-brilliant sont livrés en F06). src/lib/board.ts : playBoard(fen, moves) garde la position de référence, numérote les pièces qui jouent, les pièces prises et les symboles à poser, et fait échouer le build sur un coup impossible. View transitions natives entre documents (@view-transition { navigation: auto; }), view-transition-name: site-header sur l'en-tête et project-<slug> sur les titres (liste et page). Coups au survol : les lignes de l'accueil portent data-play="N" ; une règle :root:has() par N allume un drapeau --on-N sur la planche, que lisent la pièce, ses cases, la pièce prise et le symbole du coup (transform en --duration-move, liserés en outline, symbole en --duration-stamp après --duration-move). Symbole de la page projet : animation-delay égal à --duration-page. Tous les mouvements sous @media screen and (prefers-reduced-motion: no-preference). Pas de ClientRouter, pas d'IntersectionObserver.
 ```
 
 ### ✍️ C6 · Domaine _(hors speckit · ~1 h)_
@@ -419,6 +419,12 @@ Collection blog (glob sur src/content/blog/*.md, schéma CONTENU.md §6). src/pa
 speckit.
 
 - Bouton de thème clair / sombre (aujourd'hui : thème du système)
+- Son des coups sur le diagramme (déplacement, prise, échec), avec un interrupteur son à côté
+  du bouton de thème. Essayé puis retiré en F10 : il demande le seul script du site, reste
+  muet avant un premier clic dans la page et absent sur mobile, et surprend sans interrupteur.
+  Acquis : sons de bois synthétisés en Web Audio (moins de 1 ko), audio débloqué au premier
+  `pointerdown` ou `keydown`, licences vérifiées (chess.com tous droits réservés, sons
+  « standard » de Lichess non libres)
 - Lien d'une étape du parcours vers le projet qui la prouve (champ facultatif `project` dans
   `experience.yaml` et `education.yaml`), quand la page aura la place de l'accueillir
 - Pages `/tech/<tech>` et filtre de projets par technologie (utile au-delà de ~15 projets)
