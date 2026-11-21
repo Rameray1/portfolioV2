@@ -17,12 +17,10 @@ const { Content } = await render(entry);
 <BaseLayout title={entry.data.title} description={entry.data.description}>
   <article class="legal">
     <h1>{entry.data.title}</h1>
-    <div class="keyline">
-      <p class="summary">{summary}</p>
-      <span class="mark">
-        <EvalMark eval="!" />
-      </span>
-    </div>
+    <p class="summary">
+      {summary}&nbsp;
+      <EvalMark eval="!" />
+    </p>
     <dl class="pgn">
       <div>
         <dt>{t('legal.editor')}</dt>
@@ -66,24 +64,7 @@ const { Content } = await render(entry);
     margin: 0;
   }
 
-  /* Le résumé est un bon coup : son symbole se pose à droite, comme dans la liste des
-     projets. */
-  .keyline {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: var(--space-4);
-    margin-top: var(--space-5);
-  }
-
-  .keyline .summary {
-    margin: 0;
-  }
-
-  .mark {
-    font-size: var(--text-2xl);
-    line-height: 1;
-  }
+  /* Le résumé est un bon coup : son symbole le suit, comme en notation (« 16.Txe7+! »). */
 
   .pgn {
     margin-top: var(--space-6);
@@ -107,6 +88,7 @@ const { Content } = await render(entry);
 
   .summary {
     max-width: 40ch;
+    margin: var(--space-5) 0 0;
     font-size: var(--text-xl);
     line-height: var(--leading-snug);
   }
@@ -213,7 +195,7 @@ const { Content } = await render(entry);
       border-top: var(--rule-thin) solid var(--color-rule-soft);
     }
 
-    .keyline {
+    .summary {
       grid-column: 1;
       grid-row: 2;
     }
