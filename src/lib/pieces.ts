@@ -15,6 +15,7 @@ export const pieces = {
   knight: { light: pieceUrls.bN, dark: pieceUrls.wN },
   rook: { light: pieceUrls.bR, dark: pieceUrls.wR },
   queen: { light: pieceUrls.bQ, dark: pieceUrls.wQ },
+  king: { light: pieceUrls.bK, dark: pieceUrls.wK },
 };
 
 export type PieceName = keyof typeof pieces;

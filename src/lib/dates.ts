@@ -32,3 +32,6 @@ export function formatDate(value: string, locale: Locale): string {
     timeZone: 'UTC',
   }).format(date);
 }
+
+// Jour du build, AAAA-MM-JJ : la date de mise à jour du site, jamais écrite à la main.
+export const buildDate = new Date().toISOString().slice(0, 10);

@@ -12,6 +12,8 @@ interface Site {
   contact: Contact;
   // Hébergeur, tel que Vercel le publie (https://vercel.com/legal/privacy-policy).
   host: { name: string; address: string; url: string };
+  // Slug de la fiche projet qui raconte ce site, citée par le pied de page.
+  project: string;
   person: {
     jobTitle: Record<Locale, string>;
     school: string;
@@ -32,6 +34,7 @@ export const site = {
     address: '440 N Barranca Avenue #4133, Covina, CA 91723, United States',
     url: 'https://vercel.com',
   },
+  project: 'portfolio',
   person: {
     jobTitle: {
       fr: 'Élève ingénieur en alternance',

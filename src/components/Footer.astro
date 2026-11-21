@@ -1,34 +1,60 @@
 ---
 import { site } from '../data/site';
+import Piece from './Piece.astro';
+import { buildDate, formatDate } from '../lib/dates';
+import { getProjects } from '../lib/projects';
 import { getLocale, localizePath, strip, useTranslations } from '../i18n/utils';
 
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 
-const current = strip(Astro.url.pathname);
-
-const links = [
+const contacts = [
   { label: t('footer.email'), href: `mailto:${site.contact.email}` },
-  { label: t('footer.github'), href: site.contact.github },
   { label: t('footer.linkedin'), href: site.contact.linkedin },
-  { label: t('footer.legal'), href: localizePath('/legal', locale) },
+  { label: t('footer.github'), href: site.contact.github },
 ];
+
+// Ce site est lui-même un projet publié : le pied de page renvoie à sa fiche.
+const self = (await getProjects(locale)).find(
+  (project) => project.slug === site.project,
+);
+if (!self) {
+  throw new Error(
+    `src/data/site.ts : \`project\` cite « ${site.project} », absent des projets publiés`,
+  );
+}
+
+const legal = localizePath('/legal', locale);
+const onLegal = strip(Astro.url.pathname) === legal;
 ---
 
 <footer>
   <div class="bar">
-    <ul>
-      {links.map((link) => (
+    <ul class="contacts">
+      {contacts.map((contact) => (
         <li>
-          <a
-            href={link.href}
-            aria-current={current === link.href ? 'page' : undefined}
-          >
-            {link.label}
-          </a>
+          <a href={contact.href}>{contact.label}</a>
         </li>
       ))}
     </ul>
+    <div class="end">
+      <p class="colophon">
+        <Piece name="king" class="piece" />
+        <a href={localizePath(`/projects/${self.slug}/`, locale)}>
+          {t('footer.project')}
+        </a>
+        <span class="sep" aria-hidden="true">
+          {' · '}
+        </span>
+        <span class="date">
+          {t('footer.updated')}{' '}
+          <time datetime={buildDate}>{formatDate(buildDate, locale)}</time>
+        </span>
+      </p>
+      <a href={legal} aria-current={onLegal ? 'page' : undefined}>
+        {t('footer.legal')}
+      </a>
+    </div>
   </div>
 </footer>
 
@@ -37,32 +63,113 @@ const links = [
     border-top: var(--rule-heavy) solid var(--color-rule);
   }
 
+  /* Les contacts, puis la ligne du site (sa fiche, sa date) et les mentions légales :
+     empilés au bord gauche sur téléphone, sur une seule ligne dès 64rem. */
   .bar {
+    display: grid;
+    gap: var(--space-5);
     max-width: var(--page-max);
     margin-inline: auto;
     padding-inline: var(--gutter);
     padding-block: var(--space-6);
   }
 
-  ul {
+  p {
+    margin: 0;
+  }
+
+  /* Les contacts sur une ligne, en gras comme les valeurs d'un en-tête de partie. */
+  .contacts {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-2) var(--space-5);
+    gap: var(--space-2) var(--space-6);
     margin: 0;
     padding: 0;
     list-style: none;
-    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
   }
 
-  a {
+  .contacts a {
     display: inline-block;
     padding-block: var(--space-1);
   }
 
+  .end {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-ink-muted);
+  }
+
+  .end a {
+    display: inline-block;
+    padding-block: var(--space-1);
+    color: var(--color-ink);
+  }
+
   /* Page courante, comme dans la navigation. */
-  a[aria-current] {
+  .end a[aria-current] {
     color: var(--color-mark);
     font-weight: var(--weight-semibold);
     text-decoration-thickness: var(--rule-heavy);
+  }
+
+  /* Le roi ouvre la ligne, dans le texte : une ligne suivante repart du bord gauche, comme
+     les mentions légales. 1.5rem, comme les pièces de /skills devant un petit texte, abaissé
+     de 0.4em pour se poser sur la ligne de base. */
+  .colophon :global(picture) {
+    display: inline-block;
+    margin-right: var(--space-2);
+    vertical-align: -0.4em;
+  }
+
+  .colophon :global(.piece) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  /* Sur téléphone, la date a sa ligne : jamais de « · » en bout de ligne. */
+  .sep {
+    display: none;
+  }
+
+  .date {
+    display: block;
+    margin-top: var(--space-1);
+  }
+
+  .date::first-letter {
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 64rem) {
+    .bar {
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      column-gap: var(--space-8);
+    }
+
+    .end {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+      column-gap: var(--space-6);
+    }
+
+    .sep {
+      display: inline;
+    }
+
+    .date {
+      display: inline;
+      margin-top: 0;
+    }
+
+    .date::first-letter {
+      text-transform: none;
+    }
   }
 </style>
