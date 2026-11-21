@@ -1,0 +1,33 @@
+---
+interface Props {
+  // Réduit pour une ligne de petit texte.
+  small?: boolean;
+  class?: string;
+}
+
+// `attrs` porte la classe de l'appelant et son attribut de portée, comme pour Piece.
+const { small = false, class: className, ...attrs } = Astro.props;
+---
+
+<span
+  {...attrs}
+  class:list={['trait', className, { small }]}
+  aria-hidden="true"
+></span>
+
+<style>
+  /* Le trait de DESIGN.md : carré plein de 0.75rem. */
+  .trait {
+    display: inline-block;
+    flex: none;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: var(--color-mark);
+  }
+
+  .small {
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: var(--space-1);
+  }
+</style>

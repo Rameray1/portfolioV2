@@ -1,0 +1,38 @@
+---
+import { getLocale, useTranslations } from '../i18n/utils';
+
+interface Props {
+  items: string[];
+  class?: string;
+}
+
+const { items, class: className, ...attrs } = Astro.props;
+const t = useTranslations(getLocale(Astro.currentLocale));
+---
+
+{items.length > 0 && (
+  <ul
+    {...attrs}
+    class:list={['highlights', className]}
+    aria-label={t('background.highlights')}
+  >
+    {items.map((item) => (
+      <li>{item}</li>
+    ))}
+  </ul>
+)}
+
+<style>
+  /* Réalisations d'une étape du parcours, sur la frise comme sur le CV. */
+  .highlights {
+    margin: 0;
+    padding-left: var(--space-4);
+    font-size: var(--text-sm);
+    text-wrap: pretty;
+    list-style-type: '–  ';
+  }
+
+  li + li {
+    margin-top: var(--space-1);
+  }
+</style>

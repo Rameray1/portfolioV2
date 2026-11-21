@@ -2,9 +2,9 @@
 import { Picture } from 'astro:assets';
 import { render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Trait from '../components/Trait.astro';
 import portrait from '../assets/about/portrait.jpg';
-import { campaign } from '../data/campaign';
-import { formatStart } from '../lib/dates';
+import { getAvailability } from '../lib/availability';
 import { getAboutPage } from '../lib/pages';
 import { getLocale, useTranslations } from '../i18n/utils';
 
@@ -13,7 +13,7 @@ const t = useTranslations(locale);
 
 const entry = await getAboutPage(locale);
 const { Content } = await render(entry);
-const { visible, status, start, place } = campaign.availability;
+const availability = getAvailability(locale);
 ---
 
 <BaseLayout title={entry.data.title} description={entry.data.description}>
@@ -33,26 +33,26 @@ const { visible, status, start, place } = campaign.availability;
     <div class="story">
       <Content />
     </div>
-    {visible && (
+    {availability && (
       <section class="seeking" aria-labelledby="seeking">
         <h2 id="seeking">
-          <span class="trait" aria-hidden="true" />
+          <Trait />
           {t('about.seeking')}
         </h2>
-        <dl>
+        <dl class="pgn">
           <div>
             <dt>{t('availability.label')}</dt>
-            <dd>{status[locale]}</dd>
+            <dd>{availability.status}</dd>
           </div>
-          {start && (
+          {availability.start && (
             <div>
               <dt>{t('availability.start')}</dt>
-              <dd>{formatStart(start, locale)}</dd>
+              <dd>{availability.start}</dd>
             </div>
           )}
           <div>
             <dt>{t('availability.terms')}</dt>
-            <dd>{place[locale]}</dd>
+            <dd>{availability.place}</dd>
           </div>
         </dl>
       </section>
@@ -118,36 +118,6 @@ const { visible, status, start, place } = campaign.availability;
     font-weight: var(--weight-black);
     font-stretch: var(--stretch-display);
     line-height: 1.1;
-  }
-
-  /* En-tête de partie, comme sur la page projet. */
-  dl {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 var(--space-7);
-    margin: 0;
-  }
-
-  dl > div {
-    padding-block: var(--space-3);
-  }
-
-  dt {
-    font-size: var(--text-xs);
-    color: var(--color-ink-muted);
-  }
-
-  dd {
-    margin: var(--space-1) 0 0;
-    font-weight: var(--weight-semibold);
-  }
-
-  /* Le trait de DESIGN.md : carré plein de 0.75rem, comme dans le bandeau de l'accueil. */
-  .trait {
-    flex: none;
-    width: 0.75rem;
-    height: 0.75rem;
-    background: var(--color-mark);
   }
 
   /* Au-dessus de 80rem, l'en-tête de partie occupe la colonne de droite, à côté du récit. */
