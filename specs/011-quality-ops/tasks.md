@@ -79,10 +79,10 @@ US1 (FR-007 to FR-009).
 **Independent Test**: quickstart §1 scenario 4, and opening `/projects/sample-project` and
 `/en/projects/sample-project`.
 
-- [ ] T008 [US4] In `astro.config.mjs`, check the `redirects` block against data-model « Redirect »: « One entry per language; target is an existing page of the same language; no chain ». Today `/projects/sample-project` → `/projects/portfolio/` and `/en/projects/sample-project` → `/en/projects/portfolio/` comply; add above the block one French comment line: un contenu retiré = une entrée par langue ici, vérifiée par lychee (constitution IX)
-- [ ] T009 [US4] Check `dist/projects/sample-project/index.html` and `dist/en/projects/sample-project/index.html`: `meta http-equiv="refresh" content="0;url=…"`, `link rel="canonical"` to the absolute target, `meta name="robots" content="noindex"`, `<a href>` to the target (research R4)
-- [ ] T010 [US4] Scratch check, quickstart §1 scenario 4: point the French redirect at `/projects/nope/`, build, run the T004 command; it fails on the redirect page. Revert
-- [ ] T011 [US4] Commit `chore: redirects stay in astro.config.mjs, checked by lychee` if T008 changed a line, else no commit (the story is satisfied by existing config plus US1)
+- [x] T008 [US4] In `astro.config.mjs`, check the `redirects` block against data-model « Redirect »: « One entry per language; target is an existing page of the same language; no chain ». Today `/projects/sample-project` → `/projects/portfolio/` and `/en/projects/sample-project` → `/en/projects/portfolio/` comply; add above the block one French comment line: un contenu retiré = une entrée par langue ici, vérifiée par lychee (constitution IX)
+- [x] T009 [US4] Check `dist/projects/sample-project/index.html` and `dist/en/projects/sample-project/index.html`: `meta http-equiv="refresh" content="0;url=…"`, `link rel="canonical"` to the absolute target, `meta name="robots" content="noindex"`, `<a href>` to the target (research R4)
+- [x] T010 [US4] Scratch check, quickstart §1 scenario 4: point the French redirect at `/projects/nope/`, build, run the T004 command; it fails on the redirect page. Revert
+- [x] T011 [US4] Commit `chore: redirects stay in astro.config.mjs, checked by lychee` if T008 changed a line, else no commit (the story is satisfied by existing config plus US1)
 
 **Checkpoint**: removing a project = 1 file deleted + 1 redirect per language, checked in CI.
 
