@@ -102,6 +102,37 @@ const { Content } = await render(entry);
     font-size: var(--text-2xl);
   }
 
+  /* Une pièce devant chaque titre, comme les niveaux de /skills : la tour garde les données,
+     le cavalier ouvre les crédits. Pièces imprimées à l'encre, blanches en thème sombre. */
+  .text > :global(h2) {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    --piece: url('../assets/pieces/bR.svg');
+  }
+
+  .text > :global(h2 ~ h2) {
+    --piece: url('../assets/pieces/bN.svg');
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .text > :global(h2) {
+      --piece: url('../assets/pieces/wR.svg');
+    }
+
+    .text > :global(h2 ~ h2) {
+      --piece: url('../assets/pieces/wN.svg');
+    }
+  }
+
+  .text > :global(h2)::before {
+    content: '';
+    flex: none;
+    width: 1.75rem;
+    height: 1.75rem;
+    background: var(--piece) center / contain no-repeat;
+  }
+
   /* Chaque rubrique est une ligne, comme les domaines et les langues du CV : libellé en gras,
      puis le texte, sous un filet doux. */
   .text > :global(h3) {
