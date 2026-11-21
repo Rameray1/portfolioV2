@@ -414,4 +414,18 @@ const notices = [
       margin-left: var(--space-3);
     }
   }
+
+  /* La note du commentateur se pose après la transition de page, jamais pendant. */
+  @keyframes note {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @media screen and (prefers-reduced-motion: no-preference) {
+    .mark {
+      animation: note var(--duration-stamp) var(--ease-out) var(--duration-page)
+        backwards;
+    }
+  }
 </style>
