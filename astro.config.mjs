@@ -37,6 +37,12 @@ export default defineConfig({
         access: 'public',
         default: false,
       }),
+      VERCEL_ENV: envField.enum({
+        context: 'server',
+        access: 'public',
+        values: ['production', 'preview', 'development'],
+        optional: true,
+      }),
     },
   },
 });
