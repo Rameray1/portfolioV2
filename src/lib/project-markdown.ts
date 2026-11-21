@@ -40,8 +40,9 @@ const elements = (node: Element) =>
 
 function dictionaryOf(ctx: Context): typeof fr | undefined {
   const path = ctx.fileURL?.pathname ?? '';
-  if (!path.includes('/content/projects/')) return undefined;
-  return path.includes('/content/projects/en/') ? en : fr;
+  const match = path.match(/\/content\/(?:projects|pages)\/(fr|en)\//);
+  if (!match) return undefined;
+  return match[1] === 'en' ? en : fr;
 }
 
 function annotate(paragraph: Element, dictionary: typeof fr): Element {
