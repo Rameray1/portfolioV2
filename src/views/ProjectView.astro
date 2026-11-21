@@ -43,7 +43,9 @@ const notices = [
   </a>
   {notices.length > 0 && <p class="notice">{notices.join(' · ')}</p>}
   <article>
-    <h1 lang={lang}>{project.title}</h1>
+    <h1 lang={lang} style={`view-transition-name: project-${project.slug}`}>
+      {project.title}
+    </h1>
     <p class="summary" lang={lang}>
       {project.summary}
     </p>
@@ -114,7 +116,13 @@ const notices = [
       {next && (
         <section aria-labelledby="next-game">
           <h2 id="next-game">{t('projects.next')}</h2>
-          <ProjectList projects={[next]} detail legend={false} />
+          {/* Sans nom de transition : seul le titre du projet quitté fait le trajet. */}
+          <ProjectList
+            projects={[next]}
+            detail
+            legend={false}
+            transition={false}
+          />
         </section>
       )}
       <a class="back" href={localizePath('/projects/', locale)}>
@@ -139,6 +147,7 @@ const notices = [
 
   /* Headline de DESIGN.md : interligne 0.98 et 18ch, sans jeton. */
   h1 {
+    view-transition-class: project;
     max-width: 18ch;
     margin: var(--space-5) 0 0;
     line-height: 0.98;
@@ -403,6 +412,20 @@ const notices = [
       position: static;
       float: right;
       margin-left: var(--space-3);
+    }
+  }
+
+  /* La note du commentateur se pose après la transition de page, jamais pendant. */
+  @keyframes note {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @media screen and (prefers-reduced-motion: no-preference) {
+    .mark {
+      animation: note var(--duration-stamp) var(--ease-out) var(--duration-page)
+        backwards;
     }
   }
 </style>

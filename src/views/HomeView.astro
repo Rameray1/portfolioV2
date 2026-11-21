@@ -15,6 +15,9 @@ const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 const pitch = campaign.pitch[locale];
 const featured = await featuredProjects(locale);
+const moves = featured.flatMap(({ move, eval: evaluation }) =>
+  move ? [{ from: move.from, to: move.to, eval: evaluation }] : [],
+);
 ---
 
 <BaseLayout title={site.name} description={pitch}>
@@ -36,7 +39,7 @@ const featured = await featuredProjects(locale);
     </div>
     <aside class="side" aria-label={t('availability.label')}>
       <figure>
-        <Diagram fen={diagram.fen} label={diagram.alt[locale]} />
+        <Diagram fen={diagram.fen} label={diagram.alt[locale]} moves={moves} />
         {campaign.availability.visible && (
           <figcaption>
             <Availability />

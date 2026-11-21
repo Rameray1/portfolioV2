@@ -1,12 +1,14 @@
 ---
-import { parseFen } from '../data/diagram';
+import EvalMark from './EvalMark.astro';
+import { playBoard, type Move } from '../lib/board';
 
 interface Props {
   fen: string;
   label: string;
+  moves?: Move[];
 }
 
-const { fen, label } = Astro.props;
+const { fen, label, moves = [] } = Astro.props;
 
 const pieceUrls = Object.fromEntries(
   Object.entries(
@@ -18,9 +20,11 @@ const pieceUrls = Object.fromEntries(
   ).map(([path, url]) => [path.replace(/^.*\/(\w+)\.svg$/, '$1'), url]),
 );
 
-const pieces = parseFen(fen);
+const { squares, pieces, stamps } = playBoard(fen, moves);
 const ranks = [8, 7, 6, 5, 4, 3, 2, 1];
 const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+const place = (file: number, rank: number) =>
+  `--file: ${file}; --rank: ${rank}`;
 ---
 
 <div class="frame">
@@ -30,15 +34,15 @@ const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
     ))}
   </div>
   <div class="board" role="img" aria-label={label}>
-    {ranks.flatMap((rank) =>
-      files.map((_, index) => (
-        <span
-          class:list={['square', { dark: (index + 1 + rank) % 2 === 0 }]}
-          style={`--file: ${index + 1}; --rank: ${rank}`}
-        />
-      )),
-    )}
-    {pieces.map(({ piece, file, rank }) => (
+    {squares.map(({ file, rank, dark, from, to }) => (
+      <span
+        class:list={['square', { dark }]}
+        style={place(file, rank)}
+        data-from={from}
+        data-to={to}
+      />
+    ))}
+    {pieces.map(({ piece, file, rank, move, dx, dy, takenBy }) => (
       <img
         class="piece"
         src={pieceUrls[piece]}
@@ -46,8 +50,20 @@ const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
         width="45"
         height="45"
         decoding="async"
-        style={`--file: ${file}; --rank: ${rank}`}
+        style={`${place(file, rank)}${move ? `; --dx: ${dx}; --dy: ${dy}` : ''}`}
+        data-move={move}
+        data-taken-by={takenBy}
       />
+    ))}
+    {stamps.map((stamp) => (
+      <span
+        class="stamp"
+        style={place(stamp.file, stamp.rank)}
+        data-move={stamp.move}
+        aria-hidden="true"
+      >
+        <EvalMark eval={stamp.eval} />
+      </span>
     ))}
   </div>
   <div class="files" aria-hidden="true">
@@ -72,16 +88,28 @@ const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
     grid-template-rows: repeat(8, minmax(0, 1fr));
     aspect-ratio: 1;
     border: var(--rule-heavy) solid var(--color-board-edge);
+    container-type: inline-size;
+    /* Une planche imprimée, comme une image : elle garde ses encres en contraste forcé. */
+    forced-color-adjust: none;
+    /* Une ligne de la liste (data-play) allume le coup de même numéro ; chaque case,
+       pièce ou symbole lit son drapeau dans --on (0 ou 1). */
+    --on-1: 0;
+    --on-2: 0;
+    --on-3: 0;
   }
 
   .square,
-  .piece {
+  .piece,
+  .stamp {
     grid-column: var(--file);
     grid-row: calc(9 - var(--rank));
   }
 
   .square {
     background: var(--color-square-light);
+    transition:
+      outline-width var(--duration) var(--ease-out),
+      outline-offset var(--duration) var(--ease-out);
   }
 
   .square.dark {
@@ -91,6 +119,141 @@ const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
   .piece {
     width: 100%;
     height: 100%;
+  }
+
+  :global(:root:has([data-play='1']:focus-visible)) .board {
+    --on-1: 1;
+  }
+
+  :global(:root:has([data-play='2']:focus-visible)) .board {
+    --on-2: 1;
+  }
+
+  :global(:root:has([data-play='3']:focus-visible)) .board {
+    --on-3: 1;
+  }
+
+  /* Survol seulement là où il existe : au toucher, la ligne ouvre le projet. */
+  @media (hover: hover) {
+    :global(:root:has([data-play='1']:hover)) .board {
+      --on-1: 1;
+    }
+
+    :global(:root:has([data-play='2']:hover)) .board {
+      --on-2: 1;
+    }
+
+    :global(:root:has([data-play='3']:hover)) .board {
+      --on-3: 1;
+    }
+  }
+
+  /* Enregistrés, ces drapeaux sont des nombres : sans cela, Chrome ne lance pas les
+     transitions des valeurs qui en dépendent (trajet, liseré, symbole, prise). */
+  @property --on {
+    syntax: '<number>';
+    inherits: false;
+    initial-value: 0;
+  }
+
+  @property --taken {
+    syntax: '<number>';
+    inherits: false;
+    initial-value: 0;
+  }
+
+  [data-move='1'],
+  [data-from='1'],
+  [data-to='1'] {
+    --on: var(--on-1);
+  }
+
+  [data-move='2'],
+  [data-from='2'],
+  [data-to='2'] {
+    --on: var(--on-2);
+  }
+
+  [data-move='3'],
+  [data-from='3'],
+  [data-to='3'] {
+    --on: var(--on-3);
+  }
+
+  [data-taken-by='1'] {
+    --taken: var(--on-1);
+  }
+
+  [data-taken-by='2'] {
+    --taken: var(--on-2);
+  }
+
+  [data-taken-by='3'] {
+    --taken: var(--on-3);
+  }
+
+  /* Liserés de DESIGN.md (4px à l'arrivée, 2px au départ), en contour pour rester
+     visibles en contraste forcé ; ils restent sous mouvement réduit. */
+  [data-to] {
+    outline: calc(var(--on) * 4px) solid var(--color-mark-on-board);
+    outline-offset: calc(var(--on) * -4px);
+  }
+
+  [data-from] {
+    outline: calc(var(--on) * 2px) solid var(--color-mark-on-board);
+    outline-offset: calc(var(--on) * -2px);
+  }
+
+  /* Le symbole du coup chevauche le coin haut-droit de sa case d'arrivée, sans sortir
+     de la planche en colonne h ou en 8ᵉ rangée ; sa taille suit la planche (6cqi, la
+     moitié d'une case), ses marges suivent le symbole (em). La planche reste claire en
+     sombre : les symboles y gardent leurs encres d'impression. */
+  .stamp {
+    justify-self: end;
+    align-self: start;
+    z-index: 1;
+    translate: calc(35% * min(1, 8 - var(--file)))
+      calc(-35% * min(1, 8 - var(--rank)));
+    padding: 0.1em 0.15em;
+    background: var(--color-square-light);
+    outline: var(--rule-thin) solid var(--color-square-dark);
+    font-size: max(var(--text-xs), 6cqi);
+    opacity: 0;
+    --eval-color: var(--color-interesting-on-board);
+    --eval-color-great: var(--color-great-on-board);
+    --eval-color-brilliant: var(--color-brilliant-on-board);
+  }
+
+  .stamp :global(.symbol) {
+    display: block;
+  }
+
+  /* La pièce glisse vers sa case d'arrivée. À mi-trajet, elle a fait 97 % du chemin
+     (--ease-out) : la pièce prise disparaît et le symbole se pose, comme un tampon. Les
+     deux reviennent dès que la ligne n'est plus active. */
+  @media screen and (prefers-reduced-motion: no-preference) {
+    .piece[data-move] {
+      transform: translate(
+        calc(var(--on) * var(--dx) * 100%),
+        calc(var(--on) * var(--dy) * 100%)
+      );
+      transition: transform var(--duration-move) var(--ease-out);
+    }
+
+    [data-taken-by] {
+      opacity: calc(1 - var(--taken));
+      transition: opacity 0s linear
+        calc(var(--taken) * var(--duration-move) / 2);
+    }
+
+    .stamp {
+      opacity: var(--on);
+      scale: calc(1.15 - var(--on) * 0.15);
+      transition-property: opacity, scale;
+      transition-duration: calc(var(--on) * var(--duration-stamp));
+      transition-timing-function: var(--ease-out);
+      transition-delay: calc(var(--on) * var(--duration-move) / 2);
+    }
   }
 
   .ranks,

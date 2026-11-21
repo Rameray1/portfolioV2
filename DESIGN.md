@@ -13,6 +13,10 @@ colors:
   great-on-invert: '#749bbf'
   brilliant: '#0077b6'
   brilliant-on-invert: '#5cc8ff'
+  great-on-board: '#2a5384'
+  interesting-on-board: '#a3289a'
+  brilliant-on-board: '#0077b6'
+  mark-on-board: '#c8102e'
   square-light: '#ffffff'
   square-dark: '#c9c6be'
   paper-dark: '#161513'
@@ -189,6 +193,7 @@ Une encre et un papier, plus un rouge rare qui ne parle que pour le commentateur
 - **Bleu du bon coup** (`great`; sombre : `great-dark`) : le symbole `!` et rien d'autre, partout où il apparaît. Bleu marine sur papier (`#2a5384`, 7,41:1), bleu ardoise de chess.com en sombre (`#749bbf`, 6,24:1), assez loin du bleu du `!!` pour ne pas s'y confondre. Sur ligne inversée (`great-on-invert`), les deux valeurs s'échangent (6,3:1 et 6,85:1).
 - **Bleu du coup brillant** (`brilliant`; sombre : `brilliant-dark`) : le symbole `!!` et rien d'autre, dans la liste des coups, dans sa légende, sur le diagramme, dans la marge d'une page projet et dans le favicon. Sur papier clair, il s'imprime en bleu profond (`#0077b6`, 4,59:1) : le bleu ciel pur ne tient pas le contraste sur un fond clair. En sombre, il devient le vrai bleu ciel (`#5cc8ff`, 9,7:1).
 - **Bleu sur ligne inversée** (`brilliant-on-invert`; sombre : `brilliant-on-invert-dark`) : le `!!` quand sa ligne est inversée. Comme les deux rouges, les deux bleus échangent leurs rôles entre clair et sombre. Sur la ligne inversée du thème sombre, le bleu profond tombe à 4,24:1 : c'est admis, car le symbole y est toujours en grand texte (seuil 3:1).
+- **Encres de la planche** (`great-on-board`, `interesting-on-board`, `brilliant-on-board`, `mark-on-board`) : le diagramme reste une planche claire dans les deux thèmes, donc les symboles posés sur le diagramme et les liserés du coup gardent leurs encres d'impression (`#2a5384`, `#a3289a`, `#0077b6`, `#c8102e`), sans échange en sombre. Le bleu ciel du thème sombre tomberait à 1,47:1 sur une case claire, le rouge clair à 1,39:1 sur une case foncée. Les symboles se posent sur une pastille de la couleur des cases claires : de 3,8:1 (`!!` en sombre) à 7,87:1 (`!` en clair), au-dessus du seuil de 3:1 du grand texte. Jetons livrés en F10.
 - Jetons livrés en F06 dans `src/styles/global.css` (`--color-great`, `--color-great-on-invert`, `--color-brilliant`, `--color-brilliant-on-invert`).
 
 ### Neutral
@@ -250,7 +255,7 @@ Une page de livre centrée : conteneur de `--page-max` (80rem), gouttière fluid
 
 ## Elevation & Depth
 
-Le système est plat, comme une page imprimée. Aucune ombre portée, aucun flou, aucune superposition de surfaces. La profondeur vient des filets et d'un seul effet d'état, l'inversion : la ligne survolée passe en encre pleine, son texte en papier. Les seules ombres du code sont des `box-shadow: inset` rouges qui marquent le coup sur le diagramme au survol : 4 px sur la case d'arrivée, 2 px sur la case de départ. Ce sont des liserés de marquage, pas une élévation.
+Le système est plat, comme une page imprimée. Aucune ombre portée, aucun flou, aucune superposition de surfaces. La profondeur vient des filets et d'un seul effet d'état, l'inversion : la ligne survolée passe en encre pleine, son texte en papier. Le coup survolé se marque sur le diagramme par des liserés rouges tracés en contour intérieur des cases (`outline` à décalage négatif, pas d'ombre) : 4 px sur la case d'arrivée, 2 px sur la case de départ. Ce sont des marques, pas une élévation, et elles restent visibles en contraste forcé.
 
 ### Named Rules
 
@@ -266,24 +271,24 @@ Toutes les formes sont des angles droits (`--radius: 0`). Les boutons, les puces
 
 ## Motion
 
-Le mouvement imite le geste du commentateur : on joue le coup, puis on le note. Rien ne bouge en boucle, rien ne bouge pour remplir. Tout est en CSS, sans JavaScript. Ces effets sont à construire en F10.
+Le mouvement imite le geste du commentateur : on joue le coup, puis on le note. Rien ne bouge en boucle, rien ne bouge pour remplir, rien ne bouge sans le lecteur. Tout est en CSS, sans JavaScript. Ces effets sont livrés en F10.
 
-**Jetons.** `--duration` (160 ms, états de survol et de focus, déjà livré), `--duration-page` (280 ms, transition de page), `--duration-move` (320 ms, trajet d'une pièce au survol ; le coup signature dure le double), `--duration-stamp` (240 ms, pose d'un symbole), `--ease-out` (déjà livré). Sous `prefers-reduced-motion: reduce`, toutes les durées valent 0.
+**Jetons.** `--duration` (160 ms, états de survol et de focus), `--duration-page` (280 ms, transition de page), `--duration-move` (320 ms, trajet d'une pièce), `--duration-stamp` (240 ms, pose d'un symbole), `--ease-out`. Sous `prefers-reduced-motion: reduce`, toutes les durées valent 0.
 
 ### Les quatre effets
 
-1. **Le coup brillant (accueil, signature).** Le coup du projet `!!` se joue tout seul à l'arrivée : sa pièce glisse de sa case de départ à sa case d'arrivée (`calc(var(--duration-move) * 2)`, `--ease-out`). Puis le symbole `!!` se pose en bleu à côté de la case d'arrivée : fondu et échelle de 1.15 à 1 (`--duration-stamp`), comme un tampon. Sur grand écran, où le diagramme est visible dès l'arrivée, l'animation part au chargement (décalage de 400 ms). Sous `56rem`, où le diagramme est sous le pitch, elle suit son entrée à l'écran (`animation-timeline: view()`, dans `@supports`). Le coup se joue une fois et la pièce reste sur la case d'arrivée : c'est le meilleur coup de la position. S'il n'y a aucun projet `!!` parmi les mis en avant, il n'y a pas de coup signature, et le diagramme reste immobile.
-2. **Les coups candidats (survol d'une ligne).** Au survol ou au focus d'une ligne de la liste des coups, la pièce du projet glisse de sa case de départ à sa case d'arrivée (`--duration-move`, `--ease-out`). La case d'arrivée s'allume d'un liseré rouge de 4 px et la case de départ d'un liseré rouge de 2 px, comme le dernier coup sur un échiquier en ligne. Quand on passe à une autre ligne, la pièce revient à sa case et la pièce de la nouvelle ligne joue son coup. Pendant ce temps, la pièce du coup `!!` revient sur sa case de départ, et elle rejoue son coup quand on quitte la liste. Ce ne sont que des coups des blancs, le camp de l'auteur : les noirs ne jouent jamais. Sous `prefers-reduced-motion`, aucune pièce ne bouge, seules les cases se marquent (changement de couleur en `--duration`). Sur écran tactile, sans survol, toucher une ligne ouvre directement le projet.
-3. **La partie qu'on ouvre (transition de page).** View transitions natives entre documents (`@view-transition { navigation: auto; }`). Le titre d'une ligne de la liste et le titre de la page projet partagent un `view-transition-name` par projet (`project-<slug>`) : le titre se déplace et grandit jusqu'à sa place. L'en-tête du site reste fixe (`view-transition-name: site-header`). Le reste de la page passe en fondu, en `--duration-page`.
-4. **La note du commentateur (page projet).** Le symbole d'évaluation du projet, dans la marge, se pose comme le tampon de l'effet 1, mais en simple fondu, sans échelle : il doit rester plus discret que la signature. Il arrive après la transition de page (décalage égal à `--duration-page`), jamais pendant. Dans la couleur de son symbole : bleu foncé pour `!`, violet pour `!?`, bleu ciel pour `!!`.
+1. **Les coups candidats (survol d'une ligne).** Au repos, le diagramme montre la position de référence et rien ne bouge. Au survol ou au focus d'une ligne de la liste des coups, la pièce du projet glisse de sa case de départ à sa case d'arrivée (`--duration-move`, `--ease-out`). La case d'arrivée s'allume d'un liseré rouge de 4 px et la case de départ d'un liseré rouge de 2 px, comme le dernier coup sur un échiquier en ligne. Une pièce prise disparaît quand la pièce qui la prend arrive. Quand on passe à une autre ligne, la pièce revient à sa case et la pièce de la nouvelle ligne joue son coup ; quand on quitte la liste, la position de référence revient. Le coup `!!` se joue comme les autres, seulement à la demande du lecteur. Ce ne sont que des coups des blancs, le camp de l'auteur : les noirs ne jouent jamais. Sous `prefers-reduced-motion`, aucune pièce ne bouge, seules les cases se marquent (le liseré s'épaissit en `--duration`). Sur écran tactile, sans survol, toucher une ligne ouvre directement le projet.
+2. **La note du coup (diagramme).** Une fois la pièce arrivée, le symbole d'évaluation du projet (`!`, `!?` ou `!!`) se pose à côté de la case d'arrivée : fondu et échelle de 1.15 à 1 (`--duration-stamp`, décalage égal à la moitié de `--duration-move`, quand la pièce touche sa case), comme un tampon. Il est posé sur une petite pastille claire qui chevauche le coin haut-droit de la case, sans jamais sortir de la planche, dans l'encre d'impression de son symbole (Accent, encres de la planche). Il s'efface aussitôt que la ligne n'est plus active. Sous `prefers-reduced-motion`, aucun symbole ne se pose : la note reste dans la liste.
+3. **La partie qu'on ouvre (transition de page).** View transitions natives entre documents (`@view-transition { navigation: auto; }`). Le titre d'une ligne de la liste et le titre de la page projet partagent un `view-transition-name` par projet (`project-<slug>`) : le titre se déplace et grandit jusqu'à sa place. L'en-tête du site reste fixe (`view-transition-name: site-header`). Le reste de la page passe en fondu, en `--duration-page` : l'ancienne page s'efface avant que la nouvelle n'apparaisse, jamais deux pages superposées. Le titre garde ses proportions en grandissant (`view-transition-class: project`), et le fondu entre ses deux captures dure un tiers de la transition.
+4. **La note du commentateur (page projet).** Le symbole d'évaluation du projet, dans la marge, se pose comme le tampon de l'effet 2, mais en simple fondu, sans échelle : il doit rester discret. Il arrive après la transition de page (décalage égal à `--duration-page`), jamais pendant. Dans la couleur de son symbole : bleu foncé pour `!`, violet pour `!?`, bleu ciel pour `!!`.
 
 ### Named Rules
 
 **The Move-Then-Note Rule.** Le symbole suit toujours le coup ou la transition, jamais en même temps. Deux mouvements ne se chevauchent pas.
 
-**The One Move Rule.** Un seul mouvement à la fois. Le seul mouvement qui part tout seul est le coup signature, joué une fois. Les autres coups ne se jouent qu'à la demande du lecteur (survol ou focus). Pas de boucle, pas d'apparition au défilement sur chaque section, pas de parallaxe, pas de pièce qui suit le curseur.
+**The One Move Rule.** Un seul mouvement à la fois, et seulement à la demande du lecteur (survol, focus ou navigation). Pas de mouvement au chargement, pas de boucle, pas d'apparition au défilement, pas de parallaxe, pas de pièce qui suit le curseur.
 
-**The Final State Rule.** L'état final est l'état du HTML. Le HTML écrit la position après le coup `!!` : l'animation signature part de la case de départ et finit sur cette position. Sans prise en charge du navigateur, ou sous `prefers-reduced-motion: reduce`, la page s'affiche directement dans cet état final : la pièce `!!` sur sa case d'arrivée, le symbole visible.
+**The Final State Rule.** L'état au repos est l'état du HTML : la position de référence, sans symbole sur le diagramme. Sans prise en charge du navigateur, ou sous `prefers-reduced-motion: reduce`, la page s'affiche dans cet état, et les coups se lisent dans la liste.
 
 ## Components
 
