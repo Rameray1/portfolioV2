@@ -113,7 +113,7 @@ production builds only).
 - [x] T015 [US3] In `src/layouts/BaseLayout.astro`, import `VERCEL_ENV` from `astro:env/server`; at the end of `<head>`, after `<slot name="head" />`, render only when `VERCEL_ENV === 'production'` the two tags of [contracts/operations.md §4](./contracts/operations.md): `<script defer src="/_vercel/insights/script.js"></script>` and `<script defer src="/_vercel/speed-insights/script.js"></script>`. Add `is:inline` if Astro would otherwise process them, so they stay plain external tags. One French comment: mesure d'audience et de performance de l'hébergeur, sans cookie, production seulement (constitution II, exception du plan). No inline code, no `@vercel/*` package (R9)
 - [x] T016 [US3] Run `npm run check && npm run build`: `dist/index.html` has no `_vercel` tag. Then `VERCEL_ENV=production npm run build`: both tags are in `dist/index.html` and `dist/en/index.html`, once each, in `<head>`; rebuild without the variable afterwards
 - [ ] T017 [US3] **Maintainer action**: in the Vercel project, enable Web Analytics and Speed Insights; note in `audit.md` (T019) the free Hobby quotas and whether bot filtering is on (research R6 « To verify when enabling »). Check that « Automatically expose System Environment Variables » is on, so `VERCEL_ENV` reaches the build
-- [ ] T018 [US3] Commit `feat(ops): cookieless audience and speed insights in production`, push; on the preview deployment, the page source has **no** `_vercel` tag (FR-012)
+- [x] T018 [US3] Commit `feat(ops): cookieless audience and speed insights in production`, push; on the preview deployment, the page source has **no** `_vercel` tag (FR-012)
 
 **Checkpoint**: the code is ready; counting starts at the first production deploy.
 
@@ -126,17 +126,17 @@ fixed where it lives (FR-017 to FR-020).
 
 **Independent Test**: quickstart §4.
 
-- [ ] T019 [US2] Create `specs/011-quality-ops/audit.md` per [contracts/operations.md §5](./contracts/operations.md): a scores table (page × performance / accessibility / best practices / SEO, mobile, before / after, date, Lighthouse version) and a gaps table (page, theme, language, tool, finding, fix file, commit, status). Record there the dead links fixed in T004 and the Vercel facts of T017
-- [ ] T020 [US2] Lighthouse, DevTools, mobile preset, cache disabled, on the **preview deployment** of the branch: `/`, `/projects/portfolio/`, `/en/`. Record performance, accessibility and best practices; one gap row per failing audit
-- [ ] T021 [US2] SEO: `PUBLIC_NOINDEX=false npm run build && npx astro preview`, Lighthouse SEO on the same three pages; record (target 100, research R7)
-- [ ] T022 [P] [US2] axe DevTools on every page type, FR and EN, light and dark: home, about, projects, project (`portfolio` and `shipment-preparation`), background, skills, CV page, 404. One gap row per issue
-- [ ] T023 [P] [US2] Keyboard only on the same pages: skip link reaches `#content`, order follows reading order, focus always visible in both themes, no trap, the home move rows and the language switcher reachable. One gap row per issue
-- [ ] T024 [P] [US2] Headings and images on the same pages: exactly one `h1`, no skipped level (DevTools or a headings bookmarklet); every `img` and `svg role="img"` has a fitting `alt` / label, decorative ones `alt=""` or `aria-hidden`. One gap row per issue
-- [ ] T025 [US2] Contrast AA in both themes for the states axe cannot see (hover, focus, visited, current page, availability banner, evaluation symbols): measure with DevTools; one gap row per failure
-- [ ] T026 [US2] Home weight on the preview, DevTools › Network, cache disabled: transferred < 200 kB; record it (the two scripts are added and measured in T033)
-- [ ] T027 [US2] For each open gap row, append below one task `T0xx [US2] Fix <finding> in <file>` and do it in the component, view or token that carries it (research R8); UI fixes load `impeccable` first, go through the i18n dictionary for any text, and are checked at 375 px and 1280 px in both themes. Close the row with the commit
-- [ ] T028 [US2] Re-run T020–T026 on the new preview; record the « after » scores; every gap row is closed (SC-003, SC-004, SC-005)
-- [ ] T029 [US2] Commit the fixes as `a11y: …` / `perf: …` (one per kind of fix, few and clear), and `audit.md` with the last of them
+- [x] T019 [US2] Create `specs/011-quality-ops/audit.md` per [contracts/operations.md §5](./contracts/operations.md): a scores table (page × performance / accessibility / best practices / SEO, mobile, before / after, date, Lighthouse version) and a gaps table (page, theme, language, tool, finding, fix file, commit, status). Record there the dead links fixed in T004 and the Vercel facts of T017
+- [x] T020 [US2] Lighthouse, DevTools, mobile preset, cache disabled, on the **preview deployment** of the branch: `/`, `/projects/portfolio/`, `/en/`. Record performance, accessibility and best practices; one gap row per failing audit
+- [x] T021 [US2] SEO: `PUBLIC_NOINDEX=false npm run build && npx astro preview`, Lighthouse SEO on the same three pages; record (target 100, research R7)
+- [x] T022 [P] [US2] axe DevTools on every page type, FR and EN, light and dark: home, about, projects, project (`portfolio` and `shipment-preparation`), background, skills, CV page, 404. One gap row per issue
+- [x] T023 [P] [US2] Keyboard only on the same pages: skip link reaches `#content`, order follows reading order, focus always visible in both themes, no trap, the home move rows and the language switcher reachable. One gap row per issue
+- [x] T024 [P] [US2] Headings and images on the same pages: exactly one `h1`, no skipped level (DevTools or a headings bookmarklet); every `img` and `svg role="img"` has a fitting `alt` / label, decorative ones `alt=""` or `aria-hidden`. One gap row per issue
+- [x] T025 [US2] Contrast AA in both themes for the states axe cannot see (hover, focus, visited, current page, availability banner, evaluation symbols): measure with DevTools; one gap row per failure
+- [x] T026 [US2] Home weight on the preview, DevTools › Network, cache disabled: transferred < 200 kB; record it (the two scripts are added and measured in T033)
+- [x] T027 [US2] For each open gap row, append below one task `T0xx [US2] Fix <finding> in <file>` and do it in the component, view or token that carries it (research R8); UI fixes load `impeccable` first, go through the i18n dictionary for any text, and are checked at 375 px and 1280 px in both themes. Close the row with the commit
+- [x] T028 [US2] Re-run T020–T026 on the new preview; record the « after » scores; every gap row is closed (SC-003, SC-004, SC-005)
+- [x] T029 [US2] Commit the fixes as `a11y: …` / `perf: …` (one per kind of fix, few and clear), and `audit.md` with the last of them
 
 **Checkpoint**: scores and accessibility grid at target on the branch.
 
@@ -144,9 +144,9 @@ fixed where it lives (FR-017 to FR-020).
 
 ## Phase 8: Polish & close
 
-- [ ] T030 If any UI fix was made in T027: `/impeccable audit` then `/impeccable polish` on the touched pages (AGENTS.md), captures at 375 px and 1280 px, light and dark, header and footer
-- [ ] T031 [P] In `ROADMAP.md`, tick F11 and check that its **Plan** block still matches what shipped (aligned in T001: `vercel.json` routes, two Vercel scripts, no npm package); in `CONTRIBUTING.md`, add one line to the commands table or the checks section: the link check runs in CI and locally with the T004 command
-- [ ] T032 `npm run format && npm run check && npm run build`, T004 command clean, commit `docs: close F11 in roadmap`, push; the PR stays a draft until the maintainer marks it ready
+- [x] T030 If any UI fix was made in T027: `/impeccable audit` then `/impeccable polish` on the touched pages (AGENTS.md), captures at 375 px and 1280 px, light and dark, header and footer
+- [x] T031 [P] In `ROADMAP.md`, tick F11 and check that its **Plan** block still matches what shipped (aligned in T001: `vercel.json` routes, two Vercel scripts, no npm package); in `CONTRIBUTING.md`, add one line to the commands table or the checks section: the link check runs in CI and locally with the T004 command
+- [x] T032 `npm run format && npm run check && npm run build`, T004 command clean, commit `docs: close F11 in roadmap`, push; the PR stays a draft until the maintainer marks it ready
 
 ### After merge (production)
 

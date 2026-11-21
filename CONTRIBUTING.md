@@ -52,7 +52,16 @@ formatage, `npm run format` corrige ; une erreur de type indique le fichier et l
 
 À chaque pull request vers `main` (et à chaque push sur `main`, merges compris), GitHub Actions
 ([`.github/workflows/ci.yml`](./.github/workflows/ci.yml)) exécute `npm ci`, installe Tectonic,
-`npm run check` puis `npm run build`. Un échec passe le check `CI / check-and-build` au rouge.
+`npm run check`, `npm run build`, puis vérifie les liens du site généré avec lychee
+(pages, ancres, fichiers et liens externes ; exclusions et relances dans
+[`lychee.toml`](./lychee.toml)). Un échec passe le check `CI / check-and-build` au rouge.
+
+Pour vérifier les liens en local (`brew install lychee`), après `npm run build` :
+
+```sh
+lychee --config lychee.toml --root-dir "$PWD/dist" \
+  --remap "https://ramazankus\.dev/(.*) file://$PWD/dist/\$1" 'dist/**/*.html' 'dist/sitemap-*.xml'
+```
 
 `main` est protégée par le ruleset `main` (GitHub → **Settings** → **Rules** → **Rulesets**),
 sans contournement possible :
