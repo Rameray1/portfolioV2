@@ -14,7 +14,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/markdown-satteri": "0.4.5",
+    "@astrojs/markdown-satteri": "0.4.10",
     "@astrojs/sitemap": "^3.7.6",
     "astro": "^7.4.13"
   },
@@ -22,6 +22,6 @@
     "@astrojs/check": "^0.9.12",
     "prettier": "^3.10.1",
     "prettier-plugin-astro": "^1.1.2",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   }
 }
