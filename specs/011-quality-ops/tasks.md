@@ -150,7 +150,7 @@ fixed where it lives (FR-017 to FR-020).
 
 ### After merge (production)
 
-- [ ] T033 On `https://ramazankus.dev`: quickstart §2 (headers), §3 steps 2–4 (both `_vercel` scripts in the source and answering 200, no cookie, no storage, no banner, site unchanged when they are blocked), §4 step 4 (home < 200 kB with the scripts), and Lighthouse performance mobile on `/` with the scripts (≥ 95, no layout shift from them, SC-006). Watch the first 10 link checks on `main` for transient external failures (SC-002); add an exclusion or a retry setting if one occurs. Record in `audit.md` in a follow-up `docs:` commit if anything differs
+- [x] T033 On `https://ramazankus.dev`: quickstart §2 (headers), §3 steps 2–4 (both `_vercel` scripts in the source and answering 200, no cookie, no storage, no banner, site unchanged when they are blocked), §4 step 4 (home < 200 kB with the scripts), and Lighthouse performance mobile on `/` with the scripts (≥ 95, no layout shift from them, SC-006). Watch the first 10 link checks on `main` for transient external failures (SC-002); add an exclusion or a retry setting if one occurs. Record in `audit.md` in a follow-up `docs:` commit if anything differs
 
 ---
 
