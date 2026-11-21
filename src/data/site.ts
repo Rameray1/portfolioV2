@@ -22,7 +22,7 @@ interface Site {
 export const site = {
   name: 'Ramazan Kus',
   contact: {
-    email: 'rkus.contact@gmail.com',
+    email: 'contact@ramazankus.dev',
     github: 'https://github.com/Rameray1',
     linkedin: 'https://www.linkedin.com/in/ramazan-kus/',
     city: 'Alès, France',
