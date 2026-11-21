@@ -193,8 +193,10 @@ et de la 404, en production ; les trois protections sont présentes partout.
   suit la redirection et juge la page d'arrivée.
 - Un lien vers une ancre d'une autre page du site (`/skills#…`) : l'ancre est vérifiée, pas
   seulement la page.
-- Les adresses construites par le site lui-même (canoniques, alternatives de langue, sitemap,
-  image de partage) sont vérifiées comme les autres liens.
+- Les adresses construites par le site lui-même : canoniques, alternatives de langue et
+  sitemap sont vérifiées comme les autres liens. L'outil ne lit ni les balises de partage
+  (`og:url`, `og:image`) ni les données structurées ; elles reprennent les mêmes adresses,
+  et l'image de partage a été vérifiée à la mise en ligne.
 - Un projet en brouillon n'est pas publié : aucun lien publié ne doit y mener.
 - Les adresses `mailto:` ne sont pas vérifiées : aucun moyen fiable de savoir si une boîte
   existe sans lui écrire.

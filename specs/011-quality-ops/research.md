@@ -28,7 +28,11 @@ Phase 0 of [plan.md](./plan.md). Facts checked on production (`ramazankus.dev`) 
 - **Rationale**: canonicals, language alternates, `og:image` and the sitemap use absolute
   URLs (F04). JSON-LD URLs sit inside a `<script>`, which lychee may not read; they are built
   from `Astro.site` and the same paths as the canonicals, so checking the canonicals covers
-  them (T004 confirms in verbose mode whether lychee extracts them). Checked against production, a page added in a PR would fail before it
+  them. Observed with lychee 0.24.2 (`--dump`): it reads `href` and `src` (canonicals,
+  alternates, links, images, sitemap) but not `<meta content>` nor JSON-LD, so `og:url`,
+  `og:image` and JSON-LD URLs are not checked; they come from `Astro.site` plus paths that
+  the checked links already cover, and the `og:image` files were checked at go-live
+  (LinkedIn Post Inspector). Checked against production, a page added in a PR would fail before it
   is deployed; excluded, a wrong alternate would slip through (spec, edge cases; FR-005 « no
   internal link is excluded »).
 - **Alternatives**: excluding `^https://ramazankus\.dev` (blind spot on F04 output); checking

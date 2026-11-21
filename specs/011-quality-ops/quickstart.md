@@ -19,7 +19,7 @@ Expected: 0 error. Then, one at a time, and revert after each:
 
 1. Add a link to `/projects/nope/` in a project file → fails, names the page and the link.
 2. Add `#nope` to an internal link → fails on the fragment.
-3. Add `https://does-not-exist.invalid/` → fails after the retries.
+3. Add `https://no-such-host-f11-check.dev/` (lychee skips reserved TLDs such as `.invalid` by default) → fails after the retries.
 4. Point the sample redirect at `/projects/nope/` → fails on the redirect page.
 5. Push the branch: the same check runs in CI and the PR shows it.
 
