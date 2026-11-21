@@ -37,7 +37,7 @@ const moves = featured.flatMap(({ move, eval: evaluation }) =>
         </div>
       )}
     </div>
-    <aside class="side" aria-label={t('availability.label')}>
+    <aside class="side">
       <figure>
         <Diagram fen={diagram.fen} label={diagram.alt[locale]} moves={moves} />
         {campaign.availability.visible && (

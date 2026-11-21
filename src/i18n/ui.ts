@@ -62,9 +62,9 @@ export const fr = {
   'background.highlights': 'Réalisations',
   'skills.title': 'Compétences',
   'skills.description':
-    'Les compétences de Ramazan Kus par domaine, chacune avec son niveau et les projets publiés qui la prouvent.',
+    'Les compétences de Ramazan Kus par domaine, chacune avec son niveau et les projets ou les étapes du parcours qui la prouvent.',
   'skills.intro':
-    'Chaque compétence renvoie aux projets qui la prouvent. Aucune n’est seulement déclarée.',
+    'Chaque compétence renvoie aux projets ou aux étapes du parcours qui la prouvent. Aucune n’est seulement déclarée.',
   'skills.legend': 'Niveaux',
   'skills.domain.frontend': 'Front-end',
   'skills.domain.backend': 'Back-end',
@@ -169,9 +169,9 @@ export const en: Record<UiKey, string> = {
   'background.highlights': 'Achievements',
   'skills.title': 'Skills',
   'skills.description':
-    'Ramazan Kus’s skills by domain, each with its level and the published projects that prove it.',
+    'Ramazan Kus’s skills by domain, each with its level and the projects or background steps that prove it.',
   'skills.intro':
-    'Every skill links to the projects that prove it. None is just a claim.',
+    'Every skill links to the projects or background steps that prove it. None is just a claim.',
   'skills.legend': 'Levels',
   'skills.domain.frontend': 'Front-end',
   'skills.domain.backend': 'Back-end',

@@ -50,7 +50,7 @@ const notices = [
       {project.summary}
     </p>
 
-    <dl>
+    <dl class="pgn">
       <div>
         <dt>{t('projects.year')}</dt>
         <dd>{project.year}</dd>
@@ -162,26 +162,9 @@ const notices = [
   }
 
   dl {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 var(--space-7);
-    margin: var(--space-6) 0 0;
+    margin-top: var(--space-6);
     border-top: var(--rule-heavy) solid var(--color-rule);
     border-bottom: var(--rule-thin) solid var(--color-rule);
-  }
-
-  dl > div {
-    padding-block: var(--space-3);
-  }
-
-  dt {
-    font-size: var(--text-xs);
-    color: var(--color-ink-muted);
-  }
-
-  dd {
-    margin: var(--space-1) 0 0;
-    font-weight: var(--weight-semibold);
   }
 
   ul {
@@ -316,15 +299,6 @@ const notices = [
     font-weight: var(--weight-black);
     font-stretch: var(--stretch-display);
     line-height: 1;
-    color: var(--color-interesting);
-  }
-
-  .story :global(.note-mark[data-eval='!']) {
-    color: var(--color-great);
-  }
-
-  .story :global(.note-mark[data-eval='!!']) {
-    color: var(--color-brilliant);
   }
 
   .end {

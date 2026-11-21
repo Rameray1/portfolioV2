@@ -7,14 +7,14 @@ import { DOMAINS, LEVELS, type Domain, type Level } from './skill-scale';
 
 const FILE = 'src/data/skills.yaml';
 
-export interface Skill {
+interface Skill {
   id: string;
   name: string;
   level: Level;
   proofs: { href: string; title: string }[];
 }
 
-export interface SkillDomain {
+interface SkillDomain {
   domain: Domain;
   skills: Skill[];
 }

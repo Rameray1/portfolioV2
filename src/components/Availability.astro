@@ -1,13 +1,14 @@
 ---
 import { getAvailability } from '../lib/availability';
 import { getLocale } from '../i18n/utils';
+import Trait from './Trait.astro';
 
 const availability = getAvailability(getLocale(Astro.currentLocale));
 ---
 
 {availability && (
   <p class="availability">
-    <span class="trait" aria-hidden="true" />
+    <Trait class="offset" />
     <span>
       <strong>{availability.status}</strong>
       {availability.detail}
@@ -25,12 +26,7 @@ const availability = getAvailability(getLocale(Astro.currentLocale));
     line-height: var(--leading-snug);
   }
 
-  /* Le trait de DESIGN.md : carré plein de 0.75rem. */
-  .trait {
-    flex: none;
-    width: 0.75rem;
-    height: 0.75rem;
-    background: var(--color-mark);
+  .offset {
     transform: translateY(0.05rem);
   }
 

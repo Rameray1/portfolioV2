@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import { satteri } from '@astrojs/markdown-satteri';
 import { projectMarkdown } from './src/lib/project-markdown.ts';
 import { cvPdf } from './src/integrations/cv-pdf.ts';
-import { isNoindexPath, isUntranslatedProjectPath } from './src/data/seo.ts';
+import { isUntranslatedProjectPath } from './src/lib/seo.ts';
 
 export default defineConfig({
   site: 'https://ramazankus.dev',
@@ -16,18 +16,12 @@ export default defineConfig({
   },
   markdown: { processor: satteri({ hastPlugins: [projectMarkdown] }) },
   // Un contenu retiré = une entrée par langue ici, cible vérifiée par lychee en CI.
-  redirects: {
-    '/projects/sample-project': '/projects/portfolio/',
-    '/en/projects/sample-project': '/en/projects/portfolio/',
-  },
+  redirects: {},
   integrations: [
     cvPdf(),
     sitemap({
       i18n: { defaultLocale: 'fr', locales: { fr: 'fr', en: 'en' } },
-      filter: (page) => {
-        const { pathname } = new URL(page);
-        return !isNoindexPath(pathname) && !isUntranslatedProjectPath(pathname);
-      },
+      filter: (page) => !isUntranslatedProjectPath(new URL(page).pathname),
     }),
   ],
   env: {

@@ -306,7 +306,7 @@ getCv(locale) dans src/lib/cv.ts rassemble site, campagne, getBackground, featur
 
 ### ✍️ C4 – C5 · Contenu _(hors speckit)_
 
-- [ ] **C4 · Données parcours et compétences** — entrées YAML réelles, 100 % des compétences
+- [x] **C4 · Données parcours et compétences** — entrées YAML réelles, 100 % des compétences
       avec une preuve. `content: parcours et competences`
 - [ ] **C5 · Version anglaise** — accueil, À propos, parcours, compétences, CV, puis les fiches
       projets (réécrites, pas traduites). Une page par séance. `content(i18n): <page> en anglais`
