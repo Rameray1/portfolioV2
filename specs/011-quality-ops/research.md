@@ -91,7 +91,7 @@ Phase 0 of [plan.md](./plan.md). Facts checked on production (`ramazankus.dev`) 
 - **Rationale**: the host is already Vercel, so no extra account, no third-party domain and
   no cookie: the service identifies a visit by a hash of the request, renewed daily, and
   stores nothing in the browser (Vercel docs). The script is served from the site's own
-  origin and is small (about 1 kB compressed), deferred, with no layout effect (FR-013,
+  origin and is small (2.1 kB compressed; Speed Insights 7.6 kB, measured in `audit.md`), deferred, with no layout effect (FR-013,
   SC-005). It reports pages, referrers and countries; the page language reads from the path
   (`/en/…`) (FR-011). Rendering it only for production builds keeps previews and `astro dev`
   out of the counts and avoids a 404 script in local Lighthouse runs (FR-012). Principle II:
