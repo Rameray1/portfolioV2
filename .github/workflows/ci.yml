@@ -26,3 +26,11 @@ jobs:
       - run: sh scripts/install-tectonic.sh
       - run: npm run check
       - run: npm run build
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --config lychee.toml
+            --root-dir ${{ github.workspace }}/dist
+            --remap 'https://ramazankus\.dev/(.*) file://${{ github.workspace }}/dist/$1'
+            'dist/**/*.html' 'dist/sitemap-*.xml'
+          fail: true

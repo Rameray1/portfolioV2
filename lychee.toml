@@ -1,0 +1,15 @@
+# Vérification des liens du site généré (F11). Les chemins absolus (--root-dir, cible de
+# --remap) sont passés en ligne de commande : voir ci.yml et CONTRIBUTING.md.
+
+include_fragments = "anchor-only"
+index_files = ["index.html"]
+max_retries = 3
+retry_wait_time = 5
+# 429 : le site limite les robots, la page existe.
+accept = ["200..=299", "429"]
+no_progress = true
+
+exclude = [
+  # LinkedIn répond 999 aux robots, la page existe.
+  '^https://www\.linkedin\.com/',
+]

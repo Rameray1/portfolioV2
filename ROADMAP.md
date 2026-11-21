@@ -345,7 +345,7 @@ Jetons dans global.css : --duration-page, --duration-move, --duration-stamp, et 
 
 ### ✍️ C6 · Domaine _(hors speckit · ~1 h)_
 
-- [ ] Nom de domaine + HTTPS chez l'hébergeur, mise à jour de `site` dans `astro.config.mjs`.
+- [x] Nom de domaine + HTTPS chez l'hébergeur, mise à jour de `site` dans `astro.config.mjs`.
       `ci: nom de domaine`
 
 ### F11 · Qualité et exploitation _(~3 séances)_
@@ -358,7 +358,7 @@ Jetons dans global.css : --duration-page, --duration-move, --duration-stamp, et 
 Le site atteint les cibles de CONTENU.md §10 et reste propre dans le temps.
 - La CI échoue si un lien interne ou externe du site généré est mort.
 - Les redirections des contenus retirés sont déclarées en un seul endroit.
-- Mesure d'audience respectueuse de la vie privée : sans cookie, sans bandeau de consentement.
+- Mesure d'audience et de performance réelle respectueuse de la vie privée : sans cookie, sans bandeau de consentement.
 - En-têtes de sécurité de base appliqués par l'hébergeur.
 - Audit unique : Lighthouse ≥ 95 performance et 100 accessibilité, bonnes pratiques et SEO sur l'accueil, une page projet et /en, en mobile ; navigation au clavier, contrastes AA dans les deux thèmes, hiérarchie de titres, textes alternatifs. Les écarts trouvés sont corrigés.
 ```
@@ -366,7 +366,7 @@ Le site atteint les cibles de CONTENU.md §10 et reste propre dans le temps.
 **Plan**
 
 ```
-lychee (action GitHub) sur dist/ dans ci.yml, exclusions documentées. Bloc redirects d'astro.config.mjs. Analytics sans cookie (Plausible, Umami ou Cloudflare Web Analytics) : un seul <script> dans BaseLayout, justifié dans le plan. En-têtes via public/_headers (ou la config de l'hébergeur) : X-Content-Type-Options, Referrer-Policy, frame-ancestors. Audit manuel avec Lighthouse et axe DevTools, corrections par composant. Pas de Lighthouse CI ni de CSP à hash.
+lychee (action GitHub) sur dist/ dans ci.yml, exclusions documentées dans lychee.toml, URL du domaine renvoyées vers dist/. Bloc redirects d'astro.config.mjs (meta refresh + canonique, vérifié par lychee). Vercel Web Analytics et Speed Insights, sans cookie : deux balises <script defer> dans BaseLayout, en production seulement, sans paquet npm, justifiées dans le plan. En-têtes dans la première entrée routes de vercel.json : X-Content-Type-Options, Referrer-Policy, frame-ancestors. Audit manuel avec Lighthouse et axe DevTools, corrections par composant. Pas de Lighthouse CI ni de CSP à hash.
 ```
 
 ---

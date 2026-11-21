@@ -15,6 +15,7 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   markdown: { processor: satteri({ hastPlugins: [projectMarkdown] }) },
+  // Un contenu retiré = une entrée par langue ici, cible vérifiée par lychee en CI.
   redirects: {
     '/projects/sample-project': '/projects/portfolio/',
     '/en/projects/sample-project': '/en/projects/portfolio/',
@@ -35,6 +36,12 @@ export default defineConfig({
         context: 'client',
         access: 'public',
         default: false,
+      }),
+      VERCEL_ENV: envField.enum({
+        context: 'server',
+        access: 'public',
+        values: ['production', 'preview', 'development'],
+        optional: true,
       }),
     },
   },
