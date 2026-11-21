@@ -308,7 +308,7 @@ getCv(locale) dans src/lib/cv.ts rassemble site, campagne, getBackground, featur
 
 - [x] **C4 · Données parcours et compétences** — entrées YAML réelles, 100 % des compétences
       avec une preuve. `content: parcours et competences`
-- [ ] **C5 · Version anglaise** — accueil, À propos, parcours, compétences, CV, puis les fiches
+- [x] **C5 · Version anglaise** — accueil, À propos, parcours, compétences, CV, puis les fiches
       projets (réécrites, pas traduites). Une page par séance. `content(i18n): <page> en anglais`
       Puis **lever `PUBLIC_NOINDEX`** : Google découvre le site complet, sans lien mort dans la
       navigation.
