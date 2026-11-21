@@ -53,6 +53,16 @@ No gap against the spec grid: nothing to fix (T027 adds no task).
 | Home diagram, dark theme, move hover | Red square liserés (`--color-mark-on-board` `#c8102e`) on a dark square (`#b3afa5`): 2.69:1, under the 3:1 of non-text contrast | Decorative: the active row is already marked in the list, the diagram alt describes the position, the marks repeat it |
 | Home diagram, dark theme, `!!` stamp | `--color-brilliant-on-board` `#0077b6` on the stamp chip (`#e6e3dc`): 3.8:1                                                     | Stamp is `aria-hidden`, its meaning is in the list, where the symbol is 9.7:1                                         |
 
+## Security headers (T013)
+
+Checked on the branch preview on 2026-11-21 (`vercel curl`, which passes Vercel deployment
+protection): `X-Content-Type-Options: nosniff`, `Referrer-Policy:
+strict-origin-when-cross-origin` and `Content-Security-Policy: frame-ancestors 'none'` on `/`,
+`/cv`, `/projects/portfolio/`, `/cv-fr.pdf`, `/projects/sample-project` (redirect page),
+`/nope` (404 kept) and `/en/nope` (404 kept). Vercel's own `/_vercel/…` script routes do not
+carry them: they are served by the host, outside `routes`. The preview page source has no
+`_vercel` tag (FR-012). No `Set-Cookie` on any of these responses.
+
 ## Vercel (T017)
 
 Both products were enabled in the Vercel project before F11. Checked on production on
