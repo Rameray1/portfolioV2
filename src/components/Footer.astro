@@ -1,13 +1,15 @@
 ---
 import { site } from '../data/site';
-import { getLocale, useTranslations } from '../i18n/utils';
+import { getLocale, localizePath, useTranslations } from '../i18n/utils';
 
-const t = useTranslations(getLocale(Astro.currentLocale));
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
 
 const links = [
   { label: t('footer.email'), href: `mailto:${site.contact.email}` },
   { label: t('footer.github'), href: site.contact.github },
   { label: t('footer.linkedin'), href: site.contact.linkedin },
+  { label: t('footer.legal'), href: localizePath('/legal', locale) },
 ];
 ---
 

@@ -30,7 +30,8 @@ const pages = defineCollection({
   schema: z.strictObject({
     title: text,
     description: text,
-    photoAlt: text,
+    photoAlt: text.optional(),
+    updated: z.iso.date().optional(),
   }),
 });
 

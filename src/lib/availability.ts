@@ -1,7 +1,7 @@
 import { campaign } from '../data/campaign';
 import type { Locale } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
-import { formatStart } from './dates';
+import { formatDate } from './dates';
 
 export interface Availability {
   status: string;
@@ -15,7 +15,7 @@ export function getAvailability(locale: Locale): Availability | undefined {
   const { visible, status, start, place } = campaign.availability;
   if (!visible) return undefined;
   const t = useTranslations(locale);
-  const date = start && formatStart(start, locale);
+  const date = start && formatDate(start, locale);
   return {
     status: status[locale],
     start: date,

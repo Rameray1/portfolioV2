@@ -79,6 +79,7 @@ promesses restent : chaque promesse doit avoir **au moins une page publiée** qu
 /skills                par domaine, niveau, liens de preuve
 /cv                    généré depuis les mêmes données, imprimable, PDF FR et EN
 /blog/ · /blog/<slug>  liste · article (FR uniquement)
+/legal                 mentions légales et données personnelles
 /404 · /rss.xml · /sitemap-index.xml
 /en/…                  miroir anglais (hors blog et rss)
 ```

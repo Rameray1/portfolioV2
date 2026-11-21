@@ -1,0 +1,87 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Prose from '../components/Prose.astro';
+import { site } from '../data/site';
+import { formatDate } from '../lib/dates';
+import { getLegalPage } from '../lib/pages';
+import { getLocale, useTranslations } from '../i18n/utils';
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const { entry, updated } = await getLegalPage(locale);
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  <article class="legal">
+    <h1>{entry.data.title}</h1>
+    <p class="updated">
+      {t('legal.updated')}{' '}
+      <time datetime={updated}>{formatDate(updated, locale)}</time>
+    </p>
+    <dl class="pgn">
+      <div>
+        <dt>{t('legal.editor')}</dt>
+        <dd>
+          {site.name}, {t('legal.editorStatus')}
+        </dd>
+      </div>
+      <div>
+        <dt>{t('legal.director')}</dt>
+        <dd>{site.name}</dd>
+      </div>
+      <div>
+        <dt>{t('legal.contact')}</dt>
+        <dd>
+          <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+        </dd>
+      </div>
+      <div>
+        <dt>{t('legal.host')}</dt>
+        <dd>
+          <a href={site.host.url}>{site.host.name}</a>, {site.host.address}
+        </dd>
+      </div>
+    </dl>
+    <Prose class="text">
+      <Content />
+    </Prose>
+  </article>
+</BaseLayout>
+
+<style>
+  /* Une page de lecture : tout tient dans la mesure du texte. */
+  .legal {
+    max-width: var(--measure);
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  .updated {
+    margin: var(--space-4) 0 0;
+    font-size: var(--text-sm);
+    color: var(--color-ink-muted);
+  }
+
+  .pgn {
+    flex-direction: column;
+    margin-top: var(--space-6);
+    border-top: var(--rule-heavy) solid var(--color-rule);
+    border-bottom: var(--rule-thin) solid var(--color-rule);
+  }
+
+  .pgn > div + div {
+    border-top: var(--rule-thin) solid var(--color-rule-soft);
+  }
+
+  .pgn dd {
+    overflow-wrap: anywhere;
+  }
+
+  .text {
+    margin-top: var(--space-7);
+  }
+</style>

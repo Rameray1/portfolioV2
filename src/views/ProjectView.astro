@@ -4,6 +4,7 @@ import { render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EvalMark from '../components/EvalMark.astro';
 import ProjectList from '../components/ProjectList.astro';
+import Prose from '../components/Prose.astro';
 import type { Project } from '../lib/projects';
 import type { UiKey } from '../i18n/ui';
 import { getLocale, localizePath, useTranslations } from '../i18n/utils';
@@ -100,9 +101,9 @@ const notices = [
           loading="lazy"
         />
       )}
-      <div class="story" lang={lang}>
+      <Prose class="story" lang={lang}>
         <Content />
-      </div>
+      </Prose>
     </div>
 
     <footer class="end">
@@ -233,26 +234,6 @@ const notices = [
 
   .story {
     margin-top: var(--space-6);
-  }
-
-  /* Chaque partie du récit est un coup : filet doux au-dessus, titre en chasse étroite.
-     Interligne 1.1 du Section title de DESIGN.md, sans jeton. */
-  .story :global(h2) {
-    margin: var(--space-7) 0 0;
-    padding-top: var(--space-3);
-    border-top: var(--rule-thin) solid var(--color-rule-soft);
-    font-size: var(--text-xl);
-    font-weight: var(--weight-black);
-    font-stretch: var(--stretch-display);
-    line-height: 1.1;
-  }
-
-  .story > :global(:first-child) {
-    margin-top: 0;
-  }
-
-  .story :global(:is(p, ul, ol)) {
-    margin: var(--space-3) 0 0;
   }
 
   /* Image de preuve du récit, à la largeur de la mesure, légendée comme une figure de livre. */

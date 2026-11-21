@@ -11,7 +11,7 @@ import { getLocale, useTranslations } from '../i18n/utils';
 const locale = getLocale(Astro.currentLocale);
 const t = useTranslations(locale);
 
-const entry = await getAboutPage(locale);
+const { entry, photoAlt } = await getAboutPage(locale);
 const { Content } = await render(entry);
 const availability = getAvailability(locale);
 ---
@@ -22,7 +22,7 @@ const availability = getAvailability(locale);
     <Picture
       class="photo"
       src={portrait}
-      alt={entry.data.photoAlt}
+      alt={photoAlt}
       formats={['avif', 'webp']}
       fallbackFormat="webp"
       widths={[320, 640]}

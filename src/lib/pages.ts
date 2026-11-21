@@ -1,12 +1,32 @@
 import { getEntry, type CollectionEntry } from 'astro:content';
 import type { Locale } from '../i18n/ui';
 
-export async function getAboutPage(
-  locale: Locale,
-): Promise<CollectionEntry<'pages'>> {
-  const entry = await getEntry('pages', `${locale}/about`);
+type Page = CollectionEntry<'pages'>;
+
+async function getPage(name: string, locale: Locale): Promise<Page> {
+  const entry = await getEntry('pages', `${locale}/${name}`);
   if (!entry) {
-    throw new Error(`src/content/pages/${locale}/about.md manquant`);
+    throw new Error(`src/content/pages/${locale}/${name}.md manquant`);
   }
   return entry;
+}
+
+// Champ facultatif dans le schéma commun, obligatoire pour cette page.
+function required<T>(value: T | undefined, field: string, file: string): T {
+  if (value === undefined) {
+    throw new Error(`src/content/pages/${file}.md : \`${field}\` manquant`);
+  }
+  return value;
+}
+
+export async function getAboutPage(locale: Locale) {
+  const entry = await getPage('about', locale);
+  const photoAlt = required(entry.data.photoAlt, 'photoAlt', `${locale}/about`);
+  return { entry, photoAlt };
+}
+
+export async function getLegalPage(locale: Locale) {
+  const entry = await getPage('legal', locale);
+  const updated = required(entry.data.updated, 'updated', `${locale}/legal`);
+  return { entry, updated };
 }
