@@ -1,7 +1,6 @@
 ---
 import { render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import EvalMark from '../components/EvalMark.astro';
 import Prose from '../components/Prose.astro';
 import { site } from '../data/site';
 import { formatDate } from '../lib/dates';
@@ -17,12 +16,7 @@ const { Content } = await render(entry);
 <BaseLayout title={entry.data.title} description={entry.data.description}>
   <article class="legal">
     <h1>{entry.data.title}</h1>
-    <div class="keyline">
-      <span class="mark">
-        <EvalMark eval="!" />
-      </span>
-      <p class="summary">{summary}</p>
-    </div>
+    <p class="summary">{summary}</p>
     <dl class="pgn">
       <div>
         <dt>{t('legal.editor')}</dt>
@@ -66,30 +60,6 @@ const { Content } = await render(entry);
     margin: 0;
   }
 
-  /* Le résumé est un bon coup : son symbole se place devant, dans une marge de 3rem, comme
-     le coup clé d'une page projet. */
-  .keyline {
-    display: grid;
-    grid-template-columns: 3rem minmax(0, 1fr);
-    column-gap: var(--space-5);
-    align-items: center;
-    margin-top: var(--space-5);
-  }
-
-  .mark {
-    justify-self: end;
-    font-size: var(--text-2xl);
-    line-height: 1;
-  }
-
-  /* Sous 40rem, la marge se resserre, comme celle de la page 404. */
-  @media (max-width: 40rem) {
-    .keyline {
-      grid-template-columns: 1.75rem minmax(0, 1fr);
-      column-gap: var(--space-2);
-    }
-  }
-
   .pgn {
     margin-top: var(--space-6);
     border-top: var(--rule-heavy) solid var(--color-rule);
@@ -110,9 +80,10 @@ const { Content } = await render(entry);
     margin-top: var(--space-6);
   }
 
+  /* Le résumé, comme sur la page projet. */
   .summary {
     max-width: 40ch;
-    margin: 0;
+    margin: var(--space-5) 0 0;
     font-size: var(--text-xl);
     line-height: var(--leading-snug);
   }
@@ -219,7 +190,7 @@ const { Content } = await render(entry);
       border-top: var(--rule-thin) solid var(--color-rule-soft);
     }
 
-    .keyline {
+    .summary {
       grid-column: 1;
       grid-row: 2;
     }
