@@ -77,3 +77,23 @@ Expected home weight with both scripts: about 112 kB, under the 200 kB budget (c
 after merge, T033). « Enable access to System Environment Variables » is on in the project
 settings, so `VERCEL_ENV` reaches the build. Hobby quotas and bot filtering were not shown
 in the dashboard pages checked; the measurement relies on the host's defaults (research R6).
+
+## Production after merge (T033)
+
+Checked on `ramazankus.dev` on 2026-11-21, after the merge of F11 (Lighthouse 12.8.2, mobile).
+
+| Page                   | Performance | Accessibility | Best practices | Transferred | LCP    | CLS | Console errors |
+| ---------------------- | ----------- | ------------- | -------------- | ----------- | ------ | --- | -------------- |
+| `/`                    | 100         | 100           | 100            | 112 kB      | 1.62 s | 0   | none           |
+| `/projects/portfolio/` | 100         | 100           | 100            | 170 kB      | 1.37 s | 0   | none           |
+| `/en/`                 | 100         | 100           | 100            | 112 kB      | 1.51 s | 0   | none           |
+
+- Both `/_vercel/…` scripts are in `<head>` of every page checked and answer 200 (2.2 kB and
+  7.9 kB transferred). The home stays under 200 kB with them (SC-005).
+- The three security headers are on `/`, `/projects/portfolio/`, `/cv-fr.pdf`,
+  `/projects/sample-project`, `/nope` and `/en/nope`; both 404s keep their status (SC-008).
+- After three pages in a fresh browser: 0 cookie, empty `localStorage` and `sessionStorage`
+  (SC-006). With both scripts blocked, the home renders and navigates the same (FR-013).
+- First CI run on `main` after the merge: lychee 855 links, 0 error. SC-002 stays a watch
+  over the next runs.
+- SEO is still 69 in production because of `noindex` (until C5).
