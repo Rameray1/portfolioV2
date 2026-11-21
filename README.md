@@ -5,10 +5,8 @@
 The source of my personal website. I'm a software engineering student at IMT Mines Alès,
 currently building Java/Spring and Angular applications at Astrée Software.
 
-> 🚧 **Work in progress**: the site is being rebuilt from scratch, one feature at a time.
-> Progress is tracked in [`ROADMAP.md`](./ROADMAP.md).
-
-<!-- TODO at launch: live site link + screenshot -->
+Live at **[ramazankus.dev](https://ramazankus.dev)**, in French and in English. What is
+left to build (a blog) is tracked in [`ROADMAP.md`](./ROADMAP.md).
 
 ## How it's built
 

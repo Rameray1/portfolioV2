@@ -147,7 +147,7 @@ and the PDF.
 - [x] T030 Run `/impeccable audit` on `/cv` and `/en/cv` and fix the findings in `src/views/CvView.astro`
 - [x] T031 Run `/impeccable polish` and apply it; redo the captures of T011 (375 px and 1280 px, both themes, header and footer)
 - [x] T032 Run Lighthouse mobile on `/cv` and `/en/cv` (≥ 95 / 100 / 100 / 100, 0 kB JS) and axe (0 violation); fix any issue
-- [ ] T033 Ask the maintainer to read both PDFs and confirm the layout matches their current CV closely enough. **Blocks the merge**: the PR stays a draft until then
+- [x] T033 Ask the maintainer to read both PDFs and confirm the layout matches their current CV closely enough. **Blocks the merge**: the PR stays a draft until then
 - [x] T034 Run `npm run format`, then `npm run check && npm run build`; both pass; push and check that CI and the Vercel preview serve `/cv-fr.pdf` and `/cv-en.pdf` (quickstart §5)
 
 ---

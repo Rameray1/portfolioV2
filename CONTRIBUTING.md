@@ -68,7 +68,8 @@ sans contournement possible :
 
 - passage obligatoire par une PR (aucune approbation requise, conversations résolues) ;
 - check `check-and-build` vert et branche à jour avec `main` avant de fusionner ;
-- fusion en _squash_ uniquement ;
+- fusion par commit de fusion uniquement (ni _squash_ ni _rebase_), pour garder un commit
+  par user story dans l'historique de `main` ;
 - suppression et force push interdits.
 
 ## Workflow speckit
@@ -95,9 +96,8 @@ la CI est verte :
   `.md`, zéro ligne de code.
 - **Site 100 % statique**, zéro JavaScript client par défaut. KISS / YAGNI : rien « au cas où ».
 - **SEO** : une page passe `title` et `description` à `BaseLayout` ; canonique, aperçu de
-  partage, liens alternatifs et plan du site en découlent. Page non
-  indexable : son chemin dans `src/data/seo.ts`. Site entier : `PUBLIC_NOINDEX=true` chez
-  l'hébergeur.
+  partage, liens alternatifs et plan du site en découlent. Site entier hors index :
+  `PUBLIC_NOINDEX=true` chez l'hébergeur.
 - **Campagne** : changer d'objectif = modifier `src/data/campaign.ts` seulement (phrase
   d'identité, disponibilité avec `visible` pour la masquer, les deux actions). Aujourd'hui, le
   CV (`href: { fr, en }`) en première action (bouton plein), l'email en seconde. Les projets
