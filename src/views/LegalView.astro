@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EvalMark from '../components/EvalMark.astro';
 import Prose from '../components/Prose.astro';
 import { site } from '../data/site';
 import { formatDate } from '../lib/dates';
@@ -16,7 +17,12 @@ const { Content } = await render(entry);
 <BaseLayout title={entry.data.title} description={entry.data.description}>
   <article class="legal">
     <h1>{entry.data.title}</h1>
-    <p class="summary">{summary}</p>
+    <div class="keyline">
+      <p class="summary">{summary}</p>
+      <span class="mark">
+        <EvalMark eval="!" />
+      </span>
+    </div>
     <dl class="pgn">
       <div>
         <dt>{t('legal.editor')}</dt>
@@ -55,16 +61,33 @@ const { Content } = await render(entry);
 </BaseLayout>
 
 <style>
-  /* Comme le titre de l'À propos : un filet de 2 px qui traverse la page. */
+  /* Titre, résumé et en-tête de partie comme sur la page projet. */
   h1 {
     margin: 0;
-    padding-bottom: var(--space-4);
-    border-bottom: var(--rule-heavy) solid var(--color-rule);
   }
 
-  /* En-tête de partie, comme sur la page projet : entre un filet épais et un filet fin. */
+  /* Le résumé est un bon coup : son symbole se pose à droite, comme dans la liste des
+     projets. */
+  .keyline {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-4);
+    margin-top: var(--space-5);
+  }
+
+  .keyline .summary {
+    margin: 0;
+  }
+
+  .mark {
+    font-size: var(--text-2xl);
+    line-height: 1;
+  }
+
   .pgn {
     margin-top: var(--space-6);
+    border-top: var(--rule-heavy) solid var(--color-rule);
     border-bottom: var(--rule-thin) solid var(--color-rule);
   }
 
@@ -82,10 +105,8 @@ const { Content } = await render(entry);
     margin-top: var(--space-6);
   }
 
-  /* Le résumé, comme sur la page projet. */
   .summary {
     max-width: 40ch;
-    margin: var(--space-5) 0 0;
     font-size: var(--text-xl);
     line-height: var(--leading-snug);
   }
@@ -175,24 +196,24 @@ const { Content } = await render(entry);
     }
 
     h1 {
-      grid-column: 1 / -1;
+      grid-column: 1;
+      grid-row: 1;
     }
 
     .pgn {
       grid-column: 2;
-      grid-row: 2 / span 2;
+      grid-row: 1 / span 3;
       position: sticky;
       top: var(--space-6);
       flex-direction: column;
-      margin-top: var(--space-5);
-      border-top: var(--rule-heavy) solid var(--color-rule);
+      margin-top: 0;
     }
 
     .pgn > div + div {
       border-top: var(--rule-thin) solid var(--color-rule-soft);
     }
 
-    .summary {
+    .keyline {
       grid-column: 1;
       grid-row: 2;
     }
