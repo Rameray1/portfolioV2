@@ -74,5 +74,6 @@ Both products were enabled in the Vercel project before F11. Checked on producti
 | `/_vercel/speed-insights/script.js` | 200    | 7.6 kB               | 20.3 kB | `max-age=2678400` | none   |
 
 Expected home weight with both scripts: about 112 kB, under the 200 kB budget (confirmed
-after merge, T033). Still to note from the dashboard: free Hobby quotas, bot filtering, and
-« Automatically expose System Environment Variables » (needed for `VERCEL_ENV`).
+after merge, T033). « Enable access to System Environment Variables » is on in the project
+settings, so `VERCEL_ENV` reaches the build. Hobby quotas and bot filtering were not shown
+in the dashboard pages checked; the measurement relies on the host's defaults (research R6).
