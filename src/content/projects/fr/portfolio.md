@@ -9,7 +9,7 @@ tech:
   - Spec Kit
 eval: '!!'
 links:
-  code: https://github.com/Rameray1/portfolioV2
+  code: https://github.com/ramazankus/portfolioV2
 cover: ../../../assets/projects/portfolio.png
 coverAlt: 'Accueil du portfolio, avec le pitch et 3 projets à gauche, un diagramme d’échecs à droite'
 featured: true

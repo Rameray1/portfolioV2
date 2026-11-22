@@ -26,7 +26,7 @@ La présentation du projet est dans le [`README.md`](./README.md).
 ## Installation
 
 ```sh
-git clone git@github.com:Rameray1/portfolioV2.git
+git clone git@github.com:ramazankus/portfolioV2.git
 cd portfolioV2
 nvm use
 npm install
