@@ -1,6 +1,6 @@
 # Portfolio V2
 
-[![CI](https://github.com/Rameray1/portfolioV2/actions/workflows/ci.yml/badge.svg)](https://github.com/Rameray1/portfolioV2/actions/workflows/ci.yml)
+[![CI](https://github.com/ramazankus/portfolioV2/actions/workflows/ci.yml/badge.svg)](https://github.com/ramazankus/portfolioV2/actions/workflows/ci.yml)
 
 The source of my personal website. I'm a software engineering student at IMT Mines Alès,
 currently building Java/Spring and Angular applications at Astrée Software.
@@ -31,7 +31,7 @@ left to build (a blog) is tracked in [`ROADMAP.md`](./ROADMAP.md).
 Requires Node 22 (see [`.nvmrc`](./.nvmrc)).
 
 ```sh
-git clone git@github.com:Rameray1/portfolioV2.git
+git clone git@github.com:ramazankus/portfolioV2.git
 cd portfolioV2
 npm install
 npm run dev       # http://localhost:4321

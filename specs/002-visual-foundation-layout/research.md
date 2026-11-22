@@ -134,7 +134,7 @@ contenu</a>`, visually hidden off-screen until `:focus`, then shown with `ink`/`
 
 - **Decision**: `src/data/site.ts` holds `name` and `contact { email, github, linkedin }`.
   The type has no phone field (FR-019). Values (from the old portfolio, confirmed by the
-  maintainer on 2026-11-08): `rkus.contact@gmail.com`, `https://github.com/Rameray1`,
+  maintainer on 2026-11-08): `rkus.contact@gmail.com`, `https://github.com/ramazankus`,
   `https://www.linkedin.com/in/ramazan-kus/`. Footer links show the labels « Email »,
   « GitHub », « LinkedIn » (as in the prototype), same tab, no `target="_blank"`.
 - **Alternatives**: put contacts in `campaign.ts` (they are not a campaign lever), hard-code in
