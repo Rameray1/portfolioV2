@@ -23,8 +23,8 @@ interface Campaign {
 
 export const campaign: Campaign = {
   pitch: {
-    fr: 'Élève ingénieur à IMT Mines Alès, en alternance chez Astrée Software, je développe des applications métier, du modèle de données à la mise en production.',
-    en: 'Software engineering student at IMT Mines Alès, building business applications at Astrée Software as an apprentice, from data model to production.',
+    fr: 'Élève ingénieur à IMT Mines Alès, en alternance chez Astrée Software, je développe des applications web full-stack, du modèle de données à la mise en production.',
+    en: 'Software engineering student at IMT Mines Alès and apprentice at Astrée Software, building full-stack web applications from data model to production.',
   },
   availability: {
     visible: true,

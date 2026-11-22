@@ -38,10 +38,10 @@ Hiérarchie actuelle (portée par la campagne, elle bougera) :
 ## 3. Message en une phrase
 
 > **FR** — Élève ingénieur à IMT Mines Alès, en alternance chez Astrée Software, je développe des
-> applications métier, du modèle de données à la mise en production.
+> applications web full-stack, du modèle de données à la mise en production.
 
-> **EN** — Software engineering student at IMT Mines Alès, building business applications at
-> Astrée Software as an apprentice, from data model to production.
+> **EN** — Software engineering student at IMT Mines Alès and apprentice at Astrée Software,
+> building full-stack web applications from data model to production.
 
 Un rôle + une école + une preuve, zéro adjectif, aucune technologie : la stack se montre dans les
 projets et sur `/skills`. Sert aussi de `description` de l'accueil et de
