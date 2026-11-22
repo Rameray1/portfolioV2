@@ -42,7 +42,7 @@ Computed at build time in `Navigation.astro` from `Astro.url.pathname` (research
 | ------------------ | -------- | ------------------------------------------ |
 | `name`             | `string` | `Ramazan Kus`                              |
 | `contact.email`    | `string` | `rkus.contact@gmail.com`                   |
-| `contact.github`   | `string` | `https://github.com/Rameray1`              |
+| `contact.github`   | `string` | `https://github.com/ramazankus`            |
 | `contact.linkedin` | `string` | `https://www.linkedin.com/in/ramazan-kus/` |
 
 - Typed with an interface that has **no phone field** (FR-019); `satisfies` keeps literals.

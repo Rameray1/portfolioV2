@@ -10,7 +10,7 @@ tech:
   - Docker
 eval: '!'
 links:
-  code: https://github.com/Rameray1/Sportify
+  code: https://github.com/ramazankus/Sportify
   video: https://youtu.be/BZSuxtxUq40
 cover: ../../../assets/projects/sportify.png
 coverAlt: 'Page d’accueil de Sportify, avec un écusson vert à gauche et les boutons S’inscrire et Se connecter à droite'

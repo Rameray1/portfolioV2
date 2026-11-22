@@ -98,7 +98,7 @@ No props. Rendered by `HomeView` with `slot="head"`. Output (French home):
   "affiliation": { "@type": "CollegeOrUniversity", "name": "IMT Mines Alès" },
   "worksFor": { "@type": "Organization", "name": "Astrée Software" },
   "sameAs": [
-    "https://github.com/Rameray1",
+    "https://github.com/ramazankus",
     "https://www.linkedin.com/in/ramazan-kus/"
   ]
 }
