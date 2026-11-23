@@ -313,7 +313,7 @@ Des rectangles d'encre, francs et sans rayon.
 - **Style :** barre de tête sur filet de 2 px. Le nom (700, `--text-base`) à gauche, les rubriques (`--text-sm`, sans soulignement) et `EN` (600) à droite.
 - **States :** au survol, soulignement de 2 px. La page courante (`aria-current="page"`, ou `"true"` sur une page placée sous la rubrique) est rouge, en 600, soulignée à 2 px. Survol et page courante partagent le même décalage (`--underline-offset-current`, 0.35em), pour que le trait ne saute pas d'un lien à l'autre.
 - **Source :** les rubriques viennent de `src/data/nav.ts`, une entrée par rubrique.
-- **Mobile :** sous 48rem, une seule ligne : le nom, « Menu » (600, `--text-sm`, chevron dessiné en CSS) et la langue. « Menu » est un `<details>` natif, sans JavaScript : il déplie les rubriques sous la barre, une par ligne entre filets doux, cibles de 44 px, et pousse le contenu sans le recouvrir. Au-delà de 48rem, la liste reste en ligne et « Menu » disparaît.
+- **Mobile :** sous 48rem, une seule ligne : le nom, la langue, puis le menu dans le coin droit (trois traits en SVG de 1.25rem, qui se croisent à l'ouverture, cible de 44 px centrée sur l'icône et débordant de 0.75rem dans la marge pour que l'icône reste calée sur les filets, « Menu » gardé pour les lecteurs d'écran). « EN » a aussi une cible de 44 px, texte centré, et environ 24 px de vide séparent « EN » des traits. Le menu est un `<details>` natif, sans JavaScript : il déplie les rubriques sous la barre, une par ligne entre filets doux, cibles de 44 px, et pousse le contenu sans le recouvrir. Au-delà de 48rem, la liste reste en ligne et les trois traits disparaissent.
 
 ### Liste des coups (signature)
 
