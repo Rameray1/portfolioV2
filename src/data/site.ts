@@ -25,7 +25,7 @@ export const site = {
   name: 'Ramazan Kus',
   contact: {
     email: 'contact@ramazankus.dev',
-    github: 'https://github.com/Rameray1',
+    github: 'https://github.com/ramazankus',
     linkedin: 'https://www.linkedin.com/in/ramazan-kus/',
     city: 'Alès, France',
   },
