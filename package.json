@@ -1,7 +1,7 @@
 {
   "name": "portfoliov2",
+  "private": true,
   "type": "module",
-  "version": "0.0.1",
   "engines": {
     "node": ">=22.23.4"
   },
